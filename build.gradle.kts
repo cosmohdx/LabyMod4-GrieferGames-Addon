@@ -7,7 +7,7 @@ plugins {
 group = "de.neocraftr.griefergames"
 version = "1.1.5"
 
-java.toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+java.toolchain.languageVersion.set(JavaLanguageVersion.of(21))
 
 labyMod {
     defaultPackageName = "de.neocraftr.griefergames"
@@ -76,7 +76,7 @@ fun configureRun(provider: net.labymod.gradle.core.minecraft.provider.VersionPro
 
     provider.javaVersion = when (gameVersion) {
         else -> {
-            JavaVersion.VERSION_17
+            JavaVersion.VERSION_21
         }
     }
 
