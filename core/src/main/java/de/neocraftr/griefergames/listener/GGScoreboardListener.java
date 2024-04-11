@@ -11,7 +11,6 @@ import net.labymod.api.client.scoreboard.TabList;
 import net.labymod.api.event.Subscribe;
 import net.labymod.api.event.client.gui.screen.playerlist.PlayerListUpdateEvent;
 import net.labymod.api.event.client.scoreboard.ScoreboardTeamUpdateEvent;
-import net.labymod.api.event.client.scoreboard.TabListUpdateEvent;
 import net.labymod.api.util.I18n;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
