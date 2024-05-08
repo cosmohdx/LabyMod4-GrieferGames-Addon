@@ -18,16 +18,7 @@ public class News extends ChatModule {
     if(event.isCancelled()) return;
     if (!griefergames.configuration().chatConfig().isHideNewsMessages()) return;
 
-    String plain = event.getMessage().getPlainText();
-    boolean isNewsSeperator = event.getMessage().getFormattedText().contains("§f§m------------§8 [ §6News§8 ] §f§m------------");
-
-    if (plain.contains("\\u2503") && plain.contains("\\u00BB")) {
-      isNewsMessage = false;
-    } else if (isNewsSeperator) {
-      isNewsMessage = !isNewsMessage;
+    if (event.getMessage().getFormattedText().contains("§f§m------------§8 [ §6News§8 ] §f§m------------\n\n"))
       event.setCancelled(true);
-    } else if (isNewsMessage) {
-      event.setCancelled(true);
-    }
   }
 }
