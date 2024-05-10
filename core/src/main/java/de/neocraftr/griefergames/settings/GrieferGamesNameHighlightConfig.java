@@ -11,7 +11,7 @@ import net.labymod.api.util.Color;
 
 public class GrieferGamesNameHighlightConfig extends Config {
 
-  @ParentSwitch
+  //@ParentSwitch
   private final ConfigProperty<Boolean> enabled = new ConfigProperty<Boolean>(true);
 
   @ColorPickerSetting

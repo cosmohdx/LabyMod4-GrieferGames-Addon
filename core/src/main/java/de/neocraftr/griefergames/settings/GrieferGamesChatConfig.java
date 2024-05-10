@@ -12,7 +12,7 @@ import net.labymod.api.configuration.settings.annotation.SettingSection;
 
 public class GrieferGamesChatConfig extends Config {
 
-  @ParentSwitch
+  //@ParentSwitch
   private final ConfigProperty<Boolean> enabled = new ConfigProperty<Boolean>(true);
 
   // ONLY 1.8

@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "de.neocraftr.griefergames"
-version = "1.1.5"
+version = "1.1.6"
 
 java.toolchain.languageVersion.set(JavaLanguageVersion.of(21))
 
@@ -33,7 +33,9 @@ labyMod {
                 "1.20.1",
                 "1.20.2",
                 "1.20.3",
-                "1.20.4"
+                "1.20.4",
+                "1.20.5",
+                "1.20.6"
         ) { version, provider ->
             configureRun(provider, version)
         }

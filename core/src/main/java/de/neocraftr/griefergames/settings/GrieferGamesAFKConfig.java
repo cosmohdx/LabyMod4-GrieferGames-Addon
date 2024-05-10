@@ -9,7 +9,7 @@ import net.labymod.api.configuration.loader.property.ConfigProperty;
 
 public class GrieferGamesAFKConfig extends Config {
 
-  @ParentSwitch
+  //ParentSwitch
   private final ConfigProperty<Boolean> enabled = new ConfigProperty<Boolean>(true);
 
   @SliderSetting(min = 1, max = 60)

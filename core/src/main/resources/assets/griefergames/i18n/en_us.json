@@ -40,8 +40,8 @@
             "name": "Manage filters",
             "description": "Manage the filters of the chat tab."
           },
-          "useChatIndicators": {
-            "name": "Use Chat-Indicators",
+          "chatIndicators": {
+            "name": "Beta: Use Chat-Indicators",
             "description": "Specifies whether the addon should use the chat indicators (unread messages) for the chat tab. Attention: If filters are set in the tab, they are then active for the addon's moved messages."
           }
         },

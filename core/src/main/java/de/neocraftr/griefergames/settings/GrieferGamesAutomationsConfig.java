@@ -15,7 +15,7 @@ import java.awt.*;
 
 public class GrieferGamesAutomationsConfig extends Config {
 
-  @ParentSwitch
+  //@ParentSwitch
   private final ConfigProperty<Boolean> enabled = new ConfigProperty<Boolean>(true);
 
   // 1.8

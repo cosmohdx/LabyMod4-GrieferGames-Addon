@@ -8,7 +8,7 @@ import net.labymod.api.configuration.loader.property.ConfigProperty;
 
 public class GrieferGamesChatTabConfig extends Config {
 
-  @ParentSwitch
+  //@ParentSwitch
   private final ConfigProperty<Boolean> enabled = new ConfigProperty<Boolean>(true);
 
   @TextFieldSetting
@@ -21,7 +21,7 @@ public class GrieferGamesChatTabConfig extends Config {
   private final ConfigProperty<Boolean> manageFilters = new ConfigProperty<Boolean>(true);
 
   @SwitchSetting
-  private final ConfigProperty<Boolean> useChatIndicators = new ConfigProperty<Boolean>(true);
+  private final ConfigProperty<Boolean> chatIndicators = new ConfigProperty<Boolean>(false);
 
   public boolean isEnabled() {
     return this.enabled.get();
@@ -40,7 +40,7 @@ public class GrieferGamesChatTabConfig extends Config {
   }
 
   public boolean isUseChatIndicators() {
-    return this.useChatIndicators.get();
+    return this.chatIndicators.get();
   }
 
 }
