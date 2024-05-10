@@ -7,7 +7,6 @@ import net.labymod.api.client.gui.screen.widget.widgets.input.TextFieldWidget.Te
 import net.labymod.api.client.gui.screen.widget.widgets.input.color.ColorPickerWidget.ColorPickerSetting;
 import net.labymod.api.client.gui.screen.widget.widgets.input.dropdown.DropdownWidget.DropdownSetting;
 import net.labymod.api.configuration.loader.Config;
-import net.labymod.api.configuration.loader.annotation.ParentSwitch;
 import net.labymod.api.configuration.loader.annotation.SpriteSlot;
 import net.labymod.api.configuration.loader.property.ConfigProperty;
 import net.labymod.api.configuration.settings.annotation.SettingSection;
@@ -16,6 +15,7 @@ import java.awt.*;
 public class GrieferGamesAutomationsConfig extends Config {
 
   //@ParentSwitch
+  @SwitchSetting
   private final ConfigProperty<Boolean> enabled = new ConfigProperty<Boolean>(true);
 
   // 1.8

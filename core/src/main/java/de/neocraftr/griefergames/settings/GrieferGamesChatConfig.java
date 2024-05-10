@@ -6,13 +6,13 @@ import net.labymod.api.client.gui.screen.widget.widgets.input.SwitchWidget.Switc
 import net.labymod.api.client.gui.screen.widget.widgets.input.TextFieldWidget.TextFieldSetting;
 import net.labymod.api.client.gui.screen.widget.widgets.input.dropdown.DropdownWidget.DropdownSetting;
 import net.labymod.api.configuration.loader.Config;
-import net.labymod.api.configuration.loader.annotation.ParentSwitch;
 import net.labymod.api.configuration.loader.property.ConfigProperty;
 import net.labymod.api.configuration.settings.annotation.SettingSection;
 
 public class GrieferGamesChatConfig extends Config {
 
   //@ParentSwitch
+  @SwitchSetting
   private final ConfigProperty<Boolean> enabled = new ConfigProperty<Boolean>(true);
 
   // ONLY 1.8
