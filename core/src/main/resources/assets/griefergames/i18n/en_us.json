@@ -90,6 +90,9 @@
         "nameHighlightConfig": {
           "name": "Highlight mentions",
           "description": "Highlight messages where your name is mentioned in color.",
+          "enabled": {
+            "name": "Highlight mentions"
+          },
           "mentionColor": {
             "name": "Mention color",
             "description": "Color in which messages where your name is mentioned are highlighted."

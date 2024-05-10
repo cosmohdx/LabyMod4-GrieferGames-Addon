@@ -89,6 +89,9 @@
         "nameHighlightConfig": {
           "name": "Erwähnungen markieren",
           "description": "Chatnachrichten in denen dein Name erwähnt wird farbig hervorheben.",
+          "enabled": {
+            "name": "Erwähnungen"
+          },
           "mentionColor": {
             "name": "Erwähnungen Farbe",
             "description": "Hintergrund Farbe mit welcher Erwähnungen hervorgehoben werden."
