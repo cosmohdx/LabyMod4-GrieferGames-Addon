@@ -10,6 +10,9 @@
       },
       "chatConfig": {
         "name": "Chat & Tablist",
+        "enabled": {
+          "name": "Chat & Tablist"
+        },
         "header": {
           "highlightMessages": {
             "name": "Nachrichten hervorheben"
@@ -27,6 +30,9 @@
         "tabConfig": {
           "name": "Chat-Tab",
           "description": "Einstellungen für den Chat-Tab",
+          "enabled": {
+            "name": "Chat-Tab"
+          },
           "chatTabName": {
             "name": "Name des Chat-Tabs",
             "description": "Legt den Namen für den Chattab fest, welcher durch das Addon verwendet wird."
@@ -167,6 +173,9 @@
       },
       "payment": {
         "name": "Bezahlungen",
+        "enabled": {
+          "name": "Bezahlungen"
+        },
         "header": {
           "payments": {
             "name": "Bezahlungen"
@@ -211,6 +220,9 @@
       },
       "automations": {
         "name": "Automatisierungen",
+        "enabled": {
+          "name": "Automatisierungen"
+        },
         "header": {
           "chatcolor": {
             "name": "Chatfarbe"
@@ -219,6 +231,9 @@
         "boosterConfig": {
           "name": "Booster (1.8)",
           "description": "Einstellungen für Booster-Automatisierung",
+          "enabled": {
+            "name": "Booster"
+          },
           "loadBoostersOnJoin": {
             "name": "Booster beim Beitreten laden",
             "description": "Läd automatisch die Booster beim Betreten des Servers."
@@ -255,6 +270,9 @@
         "afkConfig": {
           "name": "AFK",
           "description": "Einstellungen für AFK-Automatisierung",
+          "enabled": {
+            "name": "AFK"
+          },
           "afkTime": {
             "name": "AFK nach (in min)",
             "description": "Zeit, nach der dich das Addon als AFK erkennt."
@@ -279,6 +297,9 @@
       },
       "friends": {
         "name": "Freunde",
+        "enabled": {
+          "name": "Freunde"
+        },
         "labyChatShowSubServerEnabled": {
           "name": "CityBuild im LabyChat anzeigen",
           "description": "Zeigt all deinen Freunden im LabyChat an, auf welchem CityBuild Server du dich grade befindest."

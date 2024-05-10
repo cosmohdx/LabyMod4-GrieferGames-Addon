@@ -11,6 +11,9 @@
 
       "chatConfig": {
         "name": "Chat & Tablist",
+        "enabled": {
+          "name": "Chat & Tablist"
+        },
         "header": {
           "highlightMessages": {
             "name": "Highlight messages"
@@ -28,6 +31,9 @@
         "tabConfig": {
           "name": "Chat-Tab",
           "description": "Settings for the Chat-Tab",
+          "enabled": {
+            "name": "Chat-Tab"
+          },
           "chatTabName": {
             "name": "Name of Chat-Tabs",
             "description": "Sets the name of the chat tab created by the addon."
@@ -169,6 +175,9 @@
 
       "payment": {
         "name": "Payments",
+        "enabled": {
+          "name": "Payments"
+        },
         "header": {
           "payments": {
             "name": "Payments"
@@ -215,6 +224,9 @@
 
       "automations": {
         "name": "Automations",
+        "enabled": {
+          "name": "Automations"
+        },
         "header": {
           "chatcolor": {
             "name": "Chat color"
@@ -259,6 +271,9 @@
         "afkConfig": {
           "name": "AFK",
           "description": "Settings for AFK-Automations",
+          "enabled": {
+            "name": "AFK"
+          },
           "afkTime": {
             "name": "AFK after (in min)",
             "description": "Timer after which you will be marked as AFK."
@@ -284,6 +299,9 @@
 
       "friends": {
         "name": "Friends",
+        "enabled": {
+          "name": "Friends"
+        },
         "labyChatShowSubServerEnabled": {
           "name": "Show CityBuild in LabyChat",
           "description": "Let all your friends see your current CityBuild in the LabyChat."
