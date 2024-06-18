@@ -11,9 +11,10 @@ import net.labymod.api.event.Subscribe;
 import net.labymod.api.event.client.network.server.NetworkPayloadEvent;
 import net.labymod.api.event.client.network.server.NetworkPayloadEvent.Side;
 import net.labymod.core.main.LabyMod;
-import net.labymod.core.main.serverapi.model.LabyModSubtitle;
-import net.labymod.serverapi.protocol.model.display.Subtitle;
-import net.labymod.serverapi.protocol.payload.io.PayloadReader;
+import net.labymod.serverapi.api.model.component.ServerAPIComponent;
+import net.labymod.serverapi.api.payload.io.PayloadReader;
+import net.labymod.serverapi.core.model.display.Subtitle;
+
 import java.util.UUID;
 
 public class GGServerMessageListener {
@@ -55,9 +56,8 @@ public class GGServerMessageListener {
         JsonObject subtitleData = message.getAsJsonArray().get(0).getAsJsonObject();
 
         String text = Laby.labyAPI().minecraft().componentMapper().translateColorCodes(subtitleData.get("text").getAsString());
-        Component component = LegacyComponentSerializer.legacySection().deserialize(text);
 
-        Subtitle subtitle = new LabyModSubtitle(UUID.fromString(subtitleData.get("targetId").getAsString()), 1.2, component);
+        Subtitle subtitle = Subtitle.create(UUID.fromString(subtitleData.get("targetId").getAsString()), ServerAPIComponent.text(text), 1.2);
         LabyMod.references().subtitleService().addSubtitle(subtitle);
       }
     }
