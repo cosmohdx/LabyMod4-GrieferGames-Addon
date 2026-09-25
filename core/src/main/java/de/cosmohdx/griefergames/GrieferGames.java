@@ -6,12 +6,12 @@ import de.cosmohdx.griefergames.core.GrieferGamesConfig;
 import de.cosmohdx.griefergames.core.GrieferGamesController;
 import de.cosmohdx.griefergames.core.Helper;
 import de.cosmohdx.griefergames.core.generated.DefaultReferenceStorage;
-import de.cosmohdx.griefergames.feature.automation.DelayHudWidget;
-import de.cosmohdx.griefergames.feature.automation.GGTickListener;
-import de.cosmohdx.griefergames.feature.automation.WaitTime;
+import de.cosmohdx.griefergames.feature.afk.AfkListener;
+import de.cosmohdx.griefergames.feature.automation.AutoPortalListener;
 import de.cosmohdx.griefergames.feature.booster.BoosterChatModule;
 import de.cosmohdx.griefergames.feature.booster.BoosterController;
 import de.cosmohdx.griefergames.feature.booster.BoosterHudWidget;
+import de.cosmohdx.griefergames.feature.booster.BoosterListener;
 import de.cosmohdx.griefergames.feature.chat.AntiMagicClanTag;
 import de.cosmohdx.griefergames.feature.chat.AntiMagicPrefix;
 import de.cosmohdx.griefergames.feature.chat.BetterIgnoreList;
@@ -21,27 +21,31 @@ import de.cosmohdx.griefergames.feature.chat.GGKeyListener;
 import de.cosmohdx.griefergames.feature.chat.GGMessageReceiveListener;
 import de.cosmohdx.griefergames.feature.chat.GGMessageSendListener;
 import de.cosmohdx.griefergames.feature.chat.GGNameTagListener;
-import de.cosmohdx.griefergames.feature.chat.ItemRemover;
 import de.cosmohdx.griefergames.feature.chat.Mention;
-import de.cosmohdx.griefergames.feature.chat.MobRemover;
 import de.cosmohdx.griefergames.feature.chat.News;
-import de.cosmohdx.griefergames.feature.chat.Nickname;
-import de.cosmohdx.griefergames.feature.chat.NicknameHudWidget;
 import de.cosmohdx.griefergames.feature.chat.PlotChat;
 import de.cosmohdx.griefergames.feature.chat.PrivateMessage;
 import de.cosmohdx.griefergames.feature.chat.Realname;
 import de.cosmohdx.griefergames.feature.chat.Teleport;
 import de.cosmohdx.griefergames.feature.chat.Vote;
+import de.cosmohdx.griefergames.feature.delay.DelayHudWidget;
+import de.cosmohdx.griefergames.feature.delay.DelaySubServerListener;
+import de.cosmohdx.griefergames.feature.delay.WaitTime;
+import de.cosmohdx.griefergames.feature.fly.FlyHudWidget;
+import de.cosmohdx.griefergames.feature.friends.FriendsPresenceListener;
+import de.cosmohdx.griefergames.feature.itemremover.ItemRemover;
+import de.cosmohdx.griefergames.feature.mobremover.MobRemover;
+import de.cosmohdx.griefergames.feature.nickname.Nickname;
+import de.cosmohdx.griefergames.feature.nickname.NicknameHudWidget;
 import de.cosmohdx.griefergames.feature.payment.Bank;
 import de.cosmohdx.griefergames.feature.payment.FileManager;
 import de.cosmohdx.griefergames.feature.payment.IncomeHudWidget;
 import de.cosmohdx.griefergames.feature.payment.Payment;
-import de.cosmohdx.griefergames.feature.server.FlyHudWidget;
-import de.cosmohdx.griefergames.feature.server.GGScoreboardListener;
 import de.cosmohdx.griefergames.feature.server.GGServerJoinListener;
 import de.cosmohdx.griefergames.feature.server.GGServerQuitListener;
-import de.cosmohdx.griefergames.feature.server.GGSubServerChangeListener;
-import de.cosmohdx.griefergames.feature.server.SubServerHUDWidget;
+import de.cosmohdx.griefergames.feature.subserver.GGScoreboardListener;
+import de.cosmohdx.griefergames.feature.subserver.GGSubServerChangeListener;
+import de.cosmohdx.griefergames.feature.subserver.SubServerHUDWidget;
 import net.labymod.api.addon.LabyAddon;
 import net.labymod.api.client.chat.ChatMessage;
 import net.labymod.api.client.component.Component;
@@ -91,10 +95,14 @@ public class GrieferGames extends LabyAddon<GrieferGamesConfig> {
     registerListener(new GGMessageSendListener(this));
     registerListener(new GGMessageReceiveListener(this));
     registerListener(new GGKeyListener(this));
-    registerListener(new GGScoreboardListener(this));
-    registerListener(new GGSubServerChangeListener(this));
-    registerListener(new GGTickListener(this));
     registerListener(new GGNameTagListener(this));
+    registerListener(new GGScoreboardListener(this));
+    registerListener(new BoosterListener(this));
+    registerListener(new FriendsPresenceListener(this));
+    registerListener(new DelaySubServerListener(this));
+    registerListener(new GGSubServerChangeListener(this));
+    registerListener(new AutoPortalListener(this));
+    registerListener(new AfkListener(this));
 
     // Chat modules
     registerListener(new Blanks(this));
@@ -134,11 +142,28 @@ public class GrieferGames extends LabyAddon<GrieferGamesConfig> {
     logger().info(LOG_PREFIX+"Addon successfully enabled.");
   }
 
+  @Override
+  protected void onDeactivated() {
+    if (fileManager != null) {
+      fileManager.close();
+    }
+  }
+
+  @Override
+  protected void onActivated() {
+    if (fileManager != null) {
+      fileManager.open();
+    }
+  }
+
   public void schedule(Runnable runnable, long delay, TimeUnit unit) {
     scheduler.schedule(runnable, delay, unit);
   }
 
   public void sendToSecondChat(String msg) {
+    if (state.getSecondChat() == null) {
+      return;
+    }
     AdvancedChatMessage chatMessage = AdvancedChatMessage.chat(ChatMessage.builder()
         .component(Component.text(msg))
         .visibility(ChatVisibility.SHOWN)

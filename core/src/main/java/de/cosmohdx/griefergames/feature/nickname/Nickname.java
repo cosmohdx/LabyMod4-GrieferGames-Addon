@@ -1,4 +1,4 @@
-package de.cosmohdx.griefergames.feature.chat;
+package de.cosmohdx.griefergames.feature.nickname;
 
 import de.cosmohdx.griefergames.GrieferGames;
 import de.cosmohdx.griefergames.feature.chat.GGChatProcessEvent;

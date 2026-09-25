@@ -1,4 +1,4 @@
-package de.cosmohdx.griefergames.feature.server;
+package de.cosmohdx.griefergames.feature.fly;
 
 import de.cosmohdx.griefergames.GrieferGames;
 import net.labymod.api.Laby;

@@ -2,7 +2,6 @@ package de.cosmohdx.griefergames.feature.chat;
 
 import de.cosmohdx.griefergames.GrieferGames;
 import de.cosmohdx.griefergames.feature.chat.GGChatProcessEvent;
-import de.cosmohdx.griefergames.core.SubServerType;
 import net.labymod.api.Laby;
 import net.labymod.api.client.chat.advanced.IngameChatTab;
 import net.labymod.api.configuration.labymod.chat.AdvancedChatMessage;
@@ -32,15 +31,6 @@ public class GGMessageReceiveListener {
     } else if(processEvent.isSecondChat()) {
       griefergames.helper().displayInSecondChat(AdvancedChatMessage.chat(processEvent.getMessage()));
       if(!processEvent.isKeepInRegularChat()) event.setCancelled(true);
-    }
-
-    if(griefergames.state().getSubServerType() == SubServerType.REGULAR) {
-      if (event.chatMessage().getPlainText().equals("[Switcher] Daten heruntergeladen!")) {
-        if(griefergames.configuration().automations().boosterConfig().loadBoostersOnJoin()) {
-          griefergames.state().setHideBoosterMenu(true);
-          griefergames.sendMessage("/booster");
-        }
-      }
     }
   }
 

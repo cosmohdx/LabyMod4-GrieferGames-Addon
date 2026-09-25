@@ -1,4 +1,4 @@
-package de.cosmohdx.griefergames.feature.automation;
+package de.cosmohdx.griefergames.feature.delay;
 
 import de.cosmohdx.griefergames.GrieferGames;
 import net.labymod.api.client.gui.hud.hudwidget.text.TextHudWidget;

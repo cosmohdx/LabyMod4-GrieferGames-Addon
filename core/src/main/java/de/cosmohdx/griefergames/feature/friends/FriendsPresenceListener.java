@@ -1,29 +1,25 @@
-package de.cosmohdx.griefergames.feature.server;
+package de.cosmohdx.griefergames.feature.friends;
 
 import de.cosmohdx.griefergames.GrieferGames;
+import de.cosmohdx.griefergames.feature.subserver.GGSubServerChangeEvent;
 import net.labymod.api.Laby;
-import net.labymod.api.client.component.Component;
-import net.labymod.api.client.component.format.NamedTextColor;
 import net.labymod.api.client.network.server.ServerData;
 import net.labymod.api.event.Subscribe;
 import net.labymod.api.labyconnect.LabyConnectSession;
 import net.labymod.api.thirdparty.discord.DiscordActivity;
 import net.labymod.api.thirdparty.discord.DiscordApp;
-import net.labymod.api.util.I18n;
-import java.util.concurrent.TimeUnit;
 
-public class GGSubServerChangeListener {
+public class FriendsPresenceListener {
+
   private final GrieferGames griefergames;
 
-  public GGSubServerChangeListener(GrieferGames griefergames) {
+  public FriendsPresenceListener(GrieferGames griefergames) {
     this.griefergames = griefergames;
   }
 
   @Subscribe
   public void onSubServerChange(GGSubServerChangeEvent event) {
     String formattedServerName = griefergames.helper().formatServerName(event.subServerName());
-
-    griefergames.boosterController().resetBoosters();
 
     if (griefergames.configuration().friends().isEnabled()
         && griefergames.configuration().friends().discordShowSubServerEnabled().get()) {
@@ -45,32 +41,6 @@ public class GGSubServerChangeListener {
       ServerData serverData = Laby.labyAPI().serverController().getCurrentServerData();
       if (session != null && serverData != null) {
         session.sendCurrentServer(serverData, "GrieferGames " + formattedServerName, false);
-      }
-    }
-
-    if (griefergames.helper().isCityBuild(event.subServerName())) {
-      if (!griefergames.state().isCitybuildDelay()) {
-        griefergames.state().setWaitTime(System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(15));
-      }
-      griefergames.state().setCitybuildDelay(false);
-      if (griefergames.configuration().automations().isSendSubServerEnabled()) {
-        griefergames.displayAddonMessage(Component.text(
-            I18n.translate(griefergames.namespace() + ".messages.citybuildJoin")
-                .replace("{citybuild}", formattedServerName),
-            NamedTextColor.GRAY
-        ));
-      }
-    } else if (event.subServerName().equals("portal")) {
-      if (!griefergames.state().isCitybuildDelay()) {
-        griefergames.state().setWaitTime(System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(12));
-      }
-    } else if (event.subServerName().equals("skyblock")) {
-      if (!griefergames.state().isCitybuildDelay()) {
-        griefergames.state().setWaitTime(System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(15));
-      }
-    } else if (event.subServerName().equals("lobby")) {
-      if (griefergames.configuration().automations().isAutoPortalEnabled()) {
-        griefergames.schedule(() -> griefergames.sendMessage("/portal"), 500, TimeUnit.MILLISECONDS);
       }
     }
   }

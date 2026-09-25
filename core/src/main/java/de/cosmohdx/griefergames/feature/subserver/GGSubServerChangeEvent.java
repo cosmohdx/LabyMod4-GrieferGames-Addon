@@ -1,4 +1,4 @@
-package de.cosmohdx.griefergames.feature.server;
+package de.cosmohdx.griefergames.feature.subserver;
 
 import net.labymod.api.event.Event;
 

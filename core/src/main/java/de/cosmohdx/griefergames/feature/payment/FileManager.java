@@ -32,6 +32,9 @@ public class FileManager {
   }
 
   public void logTransaction(String player, double amount, TransactionType type) {
+    if (transactionsLogWriter == null) {
+      return;
+    }
     try {
       final String date = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(new Date());
       switch(type) {
@@ -54,6 +57,17 @@ public class FileManager {
     OperatingSystem.getPlatform().openFile(transactionsLogFile);
   }
 
+  public void open() {
+    if (transactionsLogWriter != null) {
+      return;
+    }
+    try {
+      transactionsLogWriter = new BufferedWriter(new FileWriter(transactionsLogFile, true));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
   public void close() {
     if (transactionsLogWriter == null) {
       return;
@@ -62,6 +76,8 @@ public class FileManager {
       transactionsLogWriter.close();
     } catch (IOException e) {
       e.printStackTrace();
+    } finally {
+      transactionsLogWriter = null;
     }
   }
 }

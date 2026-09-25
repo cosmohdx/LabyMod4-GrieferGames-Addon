@@ -1,4 +1,4 @@
-package de.cosmohdx.griefergames.feature.automation;
+package de.cosmohdx.griefergames.feature.afk;
 
 import de.cosmohdx.griefergames.core.GrieferGamesConfig;
 import net.labymod.api.client.gui.screen.widget.widgets.input.SliderWidget.SliderSetting;

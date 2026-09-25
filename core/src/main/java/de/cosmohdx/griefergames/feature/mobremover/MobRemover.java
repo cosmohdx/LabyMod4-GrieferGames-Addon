@@ -1,6 +1,7 @@
-package de.cosmohdx.griefergames.feature.chat;
+package de.cosmohdx.griefergames.feature.mobremover;
 
 import de.cosmohdx.griefergames.GrieferGames;
+import de.cosmohdx.griefergames.feature.chat.ChatModule;
 import de.cosmohdx.griefergames.feature.chat.GGChatProcessEvent;
 import de.cosmohdx.griefergames.core.SubServerType;
 import net.labymod.api.Laby;
