@@ -11,7 +11,9 @@ public class ItemListCommand extends Command {
 
   @Override
   public boolean execute(String prefix, String[] arguments) {
-    Laby.labyAPI().minecraft().minecraftWindow().displayScreen(new ItemListActivity());
+    Laby.labyAPI().minecraft().executeNextTick(() ->
+        Laby.labyAPI().minecraft().minecraftWindow().displayScreen(new ItemListActivity())
+    );
     return true;
   }
 }

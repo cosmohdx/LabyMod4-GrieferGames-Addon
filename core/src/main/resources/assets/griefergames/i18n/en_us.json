@@ -522,14 +522,15 @@
       }
     },
     "itemlist": {
-      "title": "Item list",
-      "search": "Search",
+      "title": "GrieferGames Item List",
+      "search": "Search items…",
       "all": "All",
-      "loading": "Loading list…",
-      "empty": "No items",
+      "loading": "Loading item list…",
+      "empty": "No matching items",
       "count": "{count} items",
-      "more": "Load more",
-      "close": "Close"
+      "more": "Load more items",
+      "close": "Close",
+      "network": "{network} network"
     },
     "region_type": {
       "citybuild": "Citybuild",

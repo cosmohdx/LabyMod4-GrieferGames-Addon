@@ -109,7 +109,7 @@ public final class ItemImages {
   }
 
   private String readResource(String fileName) {
-    String path = "/assets/griefergames/catalog/" + fileName;
+    String path = "/assets/griefergames/item_catalog/" + fileName;
     try (InputStream input = ItemImages.class.getResourceAsStream(path)) {
       if (input == null) {
         return null;
