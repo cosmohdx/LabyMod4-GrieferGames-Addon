@@ -6,16 +6,15 @@ import de.cosmohdx.griefergames.feature.automation.GrieferGamesAutomationsConfig
 import de.cosmohdx.griefergames.feature.booster.GrieferGamesBoosterToolsConfig;
 import de.cosmohdx.griefergames.feature.chat.GrieferGamesChatConfig;
 import de.cosmohdx.griefergames.feature.friends.GrieferGamesFriendsConfig;
+import de.cosmohdx.griefergames.feature.item.ItemTooltipConfig;
+import de.cosmohdx.griefergames.feature.item.VisualsConfig;
 import de.cosmohdx.griefergames.feature.itemlist.ItemListConfig;
 import de.cosmohdx.griefergames.feature.nearby.NearbyPlayersConfig;
 import de.cosmohdx.griefergames.feature.remover.RemoverConfig;
 import de.cosmohdx.griefergames.feature.payment.GrieferGamesPaymentsConfig;
 import de.cosmohdx.griefergames.feature.plotborder.PlotBorderConfig;
+import de.cosmohdx.griefergames.feature.wiki.WikiConfig;
 import net.labymod.api.addon.AddonConfig;
-import de.cosmohdx.griefergames.feature.wiki.WikiActivity;
-import net.labymod.api.Laby;
-import net.labymod.api.client.gui.screen.key.Key;
-import net.labymod.api.client.gui.screen.widget.widgets.input.KeybindWidget.KeyBindSetting;
 import net.labymod.api.client.gui.screen.widget.widgets.input.ButtonWidget.ButtonSetting;
 import net.labymod.api.client.gui.screen.widget.widgets.input.SwitchWidget.SwitchSetting;
 import net.labymod.api.configuration.loader.annotation.ConfigName;
@@ -23,6 +22,7 @@ import net.labymod.api.configuration.loader.annotation.SpriteSlot;
 import net.labymod.api.configuration.loader.annotation.SpriteTexture;
 import net.labymod.api.configuration.loader.property.ConfigProperty;
 import net.labymod.api.configuration.settings.annotation.SettingDevelopment;
+import net.labymod.api.configuration.settings.annotation.SettingExperimental;
 import net.labymod.api.models.OperatingSystem;
 import net.labymod.api.util.MethodOrder;
 
@@ -40,6 +40,12 @@ public class GrieferGamesConfig extends AddonConfig {
 
   @SpriteSlot(x = 2, y = 0)
   private final GrieferGamesChatConfig chat = new GrieferGamesChatConfig();
+
+  @SpriteSlot(x = 0, y = 2)
+  private final ItemTooltipConfig itemTooltip = new ItemTooltipConfig();
+
+  @SpriteSlot(x = 1, y = 2)
+  private final VisualsConfig visuals = new VisualsConfig();
 
   @SpriteSlot(x = 3, y = 0)
   private final GrieferGamesPaymentsConfig payment = new GrieferGamesPaymentsConfig();
@@ -65,27 +71,17 @@ public class GrieferGamesConfig extends AddonConfig {
   @SpriteSlot(x = 4, y = 1)
   private final NearbyPlayersConfig nearbyPlayers = new NearbyPlayersConfig();
 
+  @SettingExperimental
   @SpriteSlot(x = 5, y = 1)
   private final ItemListConfig itemList = new ItemListConfig();
+
+  @SettingExperimental
+  @SpriteSlot(x = 6, y = 1)
+  private final WikiConfig wiki = new WikiConfig();
 
   @SettingDevelopment
   @SpriteSlot(x = 1, y = 0)
   private final DevConfig dev = new DevConfig();
-
-  @SwitchSetting
-  private final ConfigProperty<Boolean> mapTooltipPreview = new ConfigProperty<>(true);
-
-  @SwitchSetting
-  private final ConfigProperty<Boolean> headTooltipPreview = new ConfigProperty<>(true);
-
-  @SwitchSetting
-  private final ConfigProperty<Boolean> headEnchantmentGlint = new ConfigProperty<>(true);
-
-  @SwitchSetting
-  private final ConfigProperty<Boolean> overstackingFix = new ConfigProperty<>(true);
-
-  @KeyBindSetting
-  private final ConfigProperty<Key> wikiKey = new ConfigProperty<>(Key.F9);
 
   // Link buttons stay below every feature config. New configs go above this
   // block, and openGithub keeps after = the last feature field.
@@ -103,13 +99,6 @@ public class GrieferGamesConfig extends AddonConfig {
     OperatingSystem.getPlatform().openUrl("https://discord.gg/EtgdTX9dKa");
   }
 
-  @SpriteSlot(x = 6, y = 1)
-  @MethodOrder(after = "openSupport")
-  @ButtonSetting
-  public void openWiki() {
-    Laby.labyAPI().minecraft().minecraftWindow().displayScreen(new WikiActivity());
-  }
-
   @Override
   public int getConfigVersion() {
     return GrieferGamesConfigMigration.CURRENT_VERSION;
@@ -122,6 +111,14 @@ public class GrieferGamesConfig extends AddonConfig {
 
   public GrieferGamesChatConfig chat() {
     return this.chat;
+  }
+
+  public ItemTooltipConfig itemTooltip() {
+    return this.itemTooltip;
+  }
+
+  public VisualsConfig visuals() {
+    return this.visuals;
   }
 
   public GrieferGamesPaymentsConfig payment() {
@@ -144,15 +141,6 @@ public class GrieferGamesConfig extends AddonConfig {
     return this.booster;
   }
 
-  public ConfigProperty<Boolean> mapTooltipPreview() { return this.mapTooltipPreview; }
-  public ConfigProperty<Boolean> headTooltipPreview() { return this.headTooltipPreview; }
-  public ConfigProperty<Boolean> headEnchantmentGlint() { return this.headEnchantmentGlint; }
-  public ConfigProperty<Boolean> overstackingFix() { return this.overstackingFix; }
-
-  public ConfigProperty<Key> wikiKey() {
-    return this.wikiKey;
-  }
-
   public GrieferGamesFriendsConfig friends() {
     return this.friends;
   }
@@ -167,6 +155,10 @@ public class GrieferGamesConfig extends AddonConfig {
 
   public ItemListConfig itemList() {
     return this.itemList;
+  }
+
+  public WikiConfig wiki() {
+    return this.wiki;
   }
 
   public DevConfig dev() {

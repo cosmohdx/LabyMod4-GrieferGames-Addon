@@ -202,6 +202,32 @@ class GrieferGamesConfigMigrationTest {
   }
 
   @Test
+  void groupsTooltipVisualsAndWiki() {
+    JsonObject root = JsonParser.parseString("""
+        {
+          "mapTooltipPreview": false,
+          "headTooltipPreview": true,
+          "headEnchantmentGlint": false,
+          "overstackingFix": true,
+          "wikiKey": "F8"
+        }
+        """).getAsJsonObject();
+
+    GrieferGamesConfigMigration.migrate(root, 3);
+
+    assertFalse(root.has("mapTooltipPreview"));
+    assertFalse(root.has("headTooltipPreview"));
+    assertFalse(root.has("headEnchantmentGlint"));
+    assertFalse(root.has("overstackingFix"));
+    assertFalse(root.has("wikiKey"));
+    assertFalse(root.getAsJsonObject("itemTooltip").get("mapTooltipPreview").getAsBoolean());
+    assertTrue(root.getAsJsonObject("itemTooltip").get("headTooltipPreview").getAsBoolean());
+    assertFalse(root.getAsJsonObject("visuals").get("headEnchantmentGlint").getAsBoolean());
+    assertTrue(root.getAsJsonObject("visuals").get("overstackingFix").getAsBoolean());
+    assertEquals("F8", root.getAsJsonObject("wiki").get("key").getAsString());
+  }
+
+  @Test
   void doesNotOverwriteANewerKey() {
     JsonObject root = JsonParser.parseString("""
         {

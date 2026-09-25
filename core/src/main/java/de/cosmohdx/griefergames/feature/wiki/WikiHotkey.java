@@ -17,8 +17,8 @@ public final class WikiHotkey {
   @Subscribe
   public void onKey(KeyEvent event) {
     if (event.state() != KeyEvent.State.PRESS || !this.addon.configuration().enabled().get()) return;
-    Key assigned = this.addon.configuration().wikiKey().get();
-    if (assigned == null || !assigned.equals(event.key())) return;
+    Key assigned = this.addon.configuration().wiki().key();
+    if (assigned.equals(Key.NONE) || !assigned.equals(event.key())) return;
     if (Laby.labyAPI().minecraft().minecraftWindow().isScreenOpened()) return;
     Laby.labyAPI().minecraft().minecraftWindow().displayScreen(new WikiActivity());
   }

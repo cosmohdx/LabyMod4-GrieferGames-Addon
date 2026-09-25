@@ -3,17 +3,15 @@
     "settings": {
       "name": "GrieferGames",
       "enabled": {
-        "name": "Addon Enabled"
-      },
-      "openWiki": {
-        "name": "Open wiki",
-        "text": "Open"
+        "name": "Addon Enabled",
+        "description": "Turns all addon features on or off."
       },
       "chat": {
         "name": "Chat",
         "description": "Messages, commands, and the second chat.",
         "enabled": {
-          "name": "Chat"
+          "name": "Chat",
+          "description": "Turns the chat features on or off."
         },
         "commands": {
           "name": "Commands",
@@ -47,7 +45,8 @@
           "name": "Second chat",
           "description": "A separate chat tab for selected messages.",
           "enabled": {
-            "name": "Second chat"
+            "name": "Second chat",
+            "description": "Turns the second chat on or off."
           },
           "chatTabName": {
             "name": "Chat tab name",
@@ -80,7 +79,8 @@
               "name": "Private messages",
               "description": "Show private messages in the second chat.",
               "showInSecondChat": {
-                "name": "Show private messages"
+                "name": "Show private messages",
+                "description": "Shows private messages in the second chat."
               },
               "sound": {
                 "name": "Private message sound",
@@ -105,7 +105,8 @@
               "name": "Plot chat",
               "description": "Show plot chat in the second chat.",
               "showInSecondChat": {
-                "name": "Show plot chat"
+                "name": "Show plot chat",
+                "description": "Shows plot chat in the second chat."
               },
               "patterns": {
                 "name": "Patterns",
@@ -116,7 +117,8 @@
               "name": "Remover",
               "description": "Show item and mob remover messages in the second chat.",
               "showInSecondChat": {
-                "name": "Show remover"
+                "name": "Show remover",
+                "description": "Shows item and mob remover messages in the second chat."
               },
               "patterns": {
                 "name": "Patterns",
@@ -127,7 +129,8 @@
               "name": "Payments",
               "description": "Show payments in the second chat.",
               "showInSecondChat": {
-                "name": "Show payments"
+                "name": "Show payments",
+                "description": "Shows payment messages in the second chat."
               },
               "patterns": {
                 "name": "Patterns",
@@ -138,7 +141,8 @@
               "name": "Bank",
               "description": "Show bank messages in the second chat.",
               "showInSecondChat": {
-                "name": "Show bank"
+                "name": "Show bank",
+                "description": "Shows bank messages in the second chat."
               },
               "patterns": {
                 "name": "Patterns",
@@ -163,9 +167,10 @@
         "mentions": {
           "name": "Mentions",
           "description": "Highlight messages that contain your name.",
-          "enabled": {
-            "name": "Mentions"
-          },
+            "enabled": {
+              "name": "Mentions",
+              "description": "Highlights messages that contain your name."
+            },
           "mentionColor": {
             "name": "Color",
             "description": "Background color used to highlight mentions."
@@ -236,9 +241,10 @@
         "chatTime": {
           "name": "Chat time",
           "description": "Add the current time to chat messages.",
-          "enabled": {
-            "name": "Show chat time"
-          },
+            "enabled": {
+              "name": "Show chat time",
+              "description": "Adds the current time to chat messages."
+            },
           "chatTimeAfterMessage": {
             "name": "After the message",
             "description": "Insert the time after the message."
@@ -252,9 +258,10 @@
       "payment": {
         "name": "Payments",
         "description": "Log, highlight, and notifications for payments.",
-        "enabled": {
-          "name": "Payments"
-        },
+          "enabled": {
+            "name": "Payments",
+            "description": "Turns the payment log, highlights, and notifications on or off."
+          },
         "header": {
           "payments": {
             "name": "Payments"
@@ -296,9 +303,10 @@
       "remover": {
         "name": "Remover",
         "description": "Timestamp and notification for the item and mob remover.",
-        "enabled": {
-          "name": "Remover"
-        },
+          "enabled": {
+            "name": "Remover",
+            "description": "Turns the remover timestamp and notification on or off."
+          },
         "lastTimeHover": {
           "name": "Timestamp",
           "description": "Show the timestamp when you hover a remover message."
@@ -311,9 +319,10 @@
       "automations": {
         "name": "Automations",
         "description": "Portal, subserver message, and chat color.",
-        "enabled": {
-          "name": "Automations"
-        },
+          "enabled": {
+            "name": "Automations",
+            "description": "Turns the portal, subserver message, and chat color on or off."
+          },
         "autoPortal": {
           "name": "Auto portal (1.8)",
           "description": "Join the portal room directly."
@@ -365,9 +374,10 @@
       "afk": {
         "name": "AFK",
         "description": "Nickname and automatic reply while you are AFK.",
-        "enabled": {
-          "name": "AFK"
-        },
+          "enabled": {
+            "name": "AFK",
+            "description": "Turns the nickname and automatic reply on or off."
+          },
         "afkTime": {
           "name": "AFK after (minutes)",
           "description": "Time after which the addon marks you as AFK."
@@ -392,9 +402,10 @@
       "booster": {
         "name": "Booster",
         "description": "Load boosters on join and hide the menu (1.8).",
-        "enabled": {
-          "name": "Booster"
-        },
+          "enabled": {
+            "name": "Booster",
+            "description": "Turns loading boosters and hiding the menu on or off."
+          },
         "loadBoostersOnJoin": {
           "name": "Load on join",
           "description": "Loads boosters automatically when you join the server."
@@ -407,9 +418,10 @@
       "friends": {
         "name": "Friends",
         "description": "Show others which CityBuild you are on.",
-        "enabled": {
-          "name": "Friends"
-        },
+          "enabled": {
+            "name": "Friends",
+            "description": "Turns sharing your CityBuild with friends on or off."
+          },
         "showSubServerInLabyChat": {
           "name": "Show CityBuild in LabyChat",
           "description": "Shows your friends in LabyChat which CityBuild you are on."
@@ -422,9 +434,10 @@
       "plotBorders": {
         "name": "Plot borders",
         "description": "Line grid around the plot on Nature and Extreme (1.8).",
-        "enabled": {
-          "name": "Plot borders"
-        },
+          "enabled": {
+            "name": "Plot borders",
+            "description": "Turns the line grid around plots on or off."
+          },
         "key": {
           "name": "Key",
           "description": "Toggles the grid, or holds it while the key is pressed."
@@ -457,9 +470,10 @@
       "nearbyPlayers": {
         "name": "Nearby players",
         "description": "Shows nearby players in the HUD. Off by default. No direction and no coordinates, distance only in rough steps. With the defaults, only players you can see directly, and only on citybuilds. Players behind walls appear only if you turn line of sight off – that can violate §2 (5) and (8). Use it only after GrieferGames support has allowed the feature.",
-        "enabled": {
-          "name": "Nearby players"
-        },
+          "enabled": {
+            "name": "Nearby players",
+            "description": "Turns the HUD list of nearby players on or off. Off by default."
+          },
         "radius": {
           "name": "Radius",
           "description": "Only players within this many blocks. Default 16, maximum 32."
@@ -498,10 +512,53 @@
         },
         "open": {
           "name": "Item list",
+          "description": "Opens the item list in game.",
           "text": "Open"
         },
         "source": {
-          "name": "Source"
+          "name": "Source",
+          "description": "Addresses the item list and categories are loaded from."
+        }
+      },
+      "itemTooltip": {
+        "name": "Item Tooltip",
+        "description": "Preview of maps and heads in the tooltip.",
+        "mapTooltipPreview": {
+          "name": "Show map in tooltip",
+          "description": "Shows a preview of the map in the tooltip."
+        },
+        "headTooltipPreview": {
+          "name": "Enlarge head in tooltip",
+          "description": "Shows the player head larger in the tooltip."
+        }
+      },
+      "visuals": {
+        "name": "Visual improvements",
+        "description": "Enchantment glint and the display of oversized stacks.",
+        "headEnchantmentGlint": {
+          "name": "Enchantment glint on heads, banners and chests",
+          "description": "Draws the enchantment glint on heads, banners, and chests."
+        },
+        "overstackingFix": {
+          "name": "Overstacking fix for newer versions",
+          "description": "Shows the real count when an item is stacked higher than the version allows. On plot axes the number comes from the lore."
+        }
+      },
+      "wiki": {
+        "name": "Wiki",
+        "description": "The GrieferGames wiki inside the game.",
+        "key": {
+          "name": "Hotkey",
+          "description": "Opens the wiki. No key is set by default."
+        },
+        "open": {
+          "name": "Wiki",
+          "description": "Opens the wiki in game.",
+          "text": "Open"
+        },
+        "source": {
+          "name": "Source",
+          "description": "Address the wiki is loaded from."
         }
       },
       "dev": {
@@ -518,26 +575,13 @@
       },
       "openGithub": {
         "name": "GitHub",
+        "description": "Opens the addon's GitHub repository.",
         "text": "Open"
       },
       "openSupport": {
         "name": "Support-Discord",
+        "description": "Opens the support Discord.",
         "text": "Open"
-      },
-      "mapTooltipPreview": {
-        "name": "Show map in tooltip"
-      },
-      "headTooltipPreview": {
-        "name": "Enlarge head in tooltip"
-      },
-      "headEnchantmentGlint": {
-        "name": "Enchantment glint on heads, banners and chests"
-      },
-      "overstackingFix": {
-        "name": "Overstacking fix for newer versions"
-      },
-      "wikiKey": {
-        "name": "Open wiki (hotkey)"
       }
     },
     "messages": {

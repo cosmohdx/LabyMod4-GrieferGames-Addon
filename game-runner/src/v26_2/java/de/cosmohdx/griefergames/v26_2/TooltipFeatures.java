@@ -12,18 +12,18 @@ public final class TooltipFeatures {
   }
   public static boolean mapTooltipPreviewEnabled() {
     var config = config();
-    return config != null && config.enabled().get() && config.mapTooltipPreview().get();
+    return config != null && config.enabled().get() && config.itemTooltip().mapTooltipPreview().get();
   }
   public static boolean headTooltipPreviewEnabled() {
     var config = config();
-    return config != null && config.enabled().get() && config.headTooltipPreview().get();
+    return config != null && config.enabled().get() && config.itemTooltip().headTooltipPreview().get();
   }
   public static boolean headEnchantmentGlintEnabled() {
     var config = config();
-    return config != null && config.enabled().get() && config.headEnchantmentGlint().get();
+    return config != null && config.enabled().get() && config.visuals().headEnchantmentGlint().get();
   }
   public static boolean overstackingFixEnabled() {
     var config = config();
-    return config != null && config.enabled().get() && config.overstackingFix().get();
+    return config != null && config.enabled().get() && config.visuals().overstackingFix().get();
   }
 }

@@ -1,6 +1,7 @@
 package de.cosmohdx.griefergames.feature.itemlist;
 
 import de.cosmohdx.griefergames.GrieferGames;
+import de.cosmohdx.griefergames.feature.wiki.WikiActivity;
 import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.gui.icon.Icon;
@@ -10,7 +11,6 @@ import net.labymod.api.event.Subscribe;
 import net.labymod.api.event.client.gui.screen.IngameMenuInitializeEvent;
 import net.labymod.api.event.client.input.KeyEvent;
 import net.labymod.api.event.client.input.KeyEvent.State;
-import net.labymod.api.models.OperatingSystem;
 
 public class ItemListMenuListener {
 
@@ -32,9 +32,9 @@ public class ItemListMenuListener {
         ItemListActivity::open
     );
     event.addLeftButton(
-        Component.translatable("griefergames.settings.openWiki.name"),
+        Component.translatable("griefergames.settings.wiki.name"),
         Icon.texture(ResourceLocation.create(namespace, "textures/wiki.png")),
-        () -> OperatingSystem.getPlatform().openUrl("https://wiki.griefergames.net/")
+        () -> Laby.labyAPI().minecraft().minecraftWindow().displayScreen(new WikiActivity())
     );
   }
 

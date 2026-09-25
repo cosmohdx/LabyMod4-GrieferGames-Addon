@@ -1,4 +1,4 @@
-package de.cosmohdx.griefergames.feature.itemlist;
+package de.cosmohdx.griefergames.feature.wiki;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -22,15 +22,15 @@ import net.labymod.api.configuration.settings.annotation.SettingWidget;
 import net.labymod.api.configuration.settings.widget.WidgetFactory;
 
 /**
- * Read-only source lines. No click, no copy.
+ * Read-only source line. No click, no copy.
  */
 @AutoWidget
 @SettingWidget
-public class ItemListSourceWidget extends VerticalListWidget<Widget> {
+public class WikiSourceWidget extends VerticalListWidget<Widget> {
 
   private static final int GRAY = 0xFFC6C6C6;
 
-  public ItemListSourceWidget() {
+  public WikiSourceWidget() {
   }
 
   @Override
@@ -38,7 +38,7 @@ public class ItemListSourceWidget extends VerticalListWidget<Widget> {
     super.initialize(parent);
     // reset() clears children before this widget is shown in the settings screen.
     this.setSize(SizeType.ACTUAL, WidgetSide.WIDTH, WidgetSize.percentage(100));
-    this.addChild(this.line(ItemImages.itemsUrl() + " & " + ItemImages.categoriesUrl()));
+    this.addChild(this.line(WikiSite.origin()));
   }
 
   private ComponentWidget line(String text) {
@@ -59,7 +59,7 @@ public class ItemListSourceWidget extends VerticalListWidget<Widget> {
   }
 
   @SettingFactory
-  public static class Factory implements WidgetFactory<Display, ItemListSourceWidget> {
+  public static class Factory implements WidgetFactory<Display, WikiSourceWidget> {
 
     @Override
     public Class<?>[] types() {
@@ -67,8 +67,8 @@ public class ItemListSourceWidget extends VerticalListWidget<Widget> {
     }
 
     @Override
-    public ItemListSourceWidget[] create(Setting setting, Display annotation, SettingAccessor accessor) {
-      return new ItemListSourceWidget[]{new ItemListSourceWidget()};
+    public WikiSourceWidget[] create(Setting setting, Display annotation, SettingAccessor accessor) {
+      return new WikiSourceWidget[]{new WikiSourceWidget()};
     }
   }
 }

@@ -3,17 +3,15 @@
     "settings": {
       "name": "GrieferGames",
       "enabled": {
-        "name": "Addon aktiviert"
-      },
-      "openWiki": {
-        "name": "Wiki öffnen",
-        "text": "Öffnen"
+        "name": "Addon aktiviert",
+        "description": "Schaltet alle Funktionen des Addons ein oder aus."
       },
       "chat": {
         "name": "Chat",
         "description": "Nachrichten, Befehle und der zweite Chat.",
         "enabled": {
-          "name": "Chat"
+          "name": "Chat",
+          "description": "Schaltet die Chat-Funktionen ein oder aus."
         },
         "commands": {
           "name": "Befehle",
@@ -47,7 +45,8 @@
           "name": "Zweiter Chat",
           "description": "Eigener Chat-Tab für ausgewählte Nachrichten.",
           "enabled": {
-            "name": "Zweiter Chat"
+            "name": "Zweiter Chat",
+            "description": "Schaltet den zweiten Chat ein oder aus."
           },
           "chatTabName": {
             "name": "Name des Chat-Tabs",
@@ -80,7 +79,8 @@
               "name": "Privatnachrichten",
               "description": "Private Nachrichten im zweiten Chat anzeigen.",
               "showInSecondChat": {
-                "name": "Privatnachrichten anzeigen"
+                "name": "Privatnachrichten anzeigen",
+                "description": "Zeigt private Nachrichten im zweiten Chat."
               },
               "sound": {
                 "name": "Sound bei Privatnachricht",
@@ -105,7 +105,8 @@
               "name": "Plot-Chat",
               "description": "Plot-Chat im zweiten Chat anzeigen.",
               "showInSecondChat": {
-                "name": "Plot-Chat anzeigen"
+                "name": "Plot-Chat anzeigen",
+                "description": "Zeigt den Plot-Chat im zweiten Chat."
               },
               "patterns": {
                 "name": "Muster",
@@ -116,7 +117,8 @@
               "name": "Remover",
               "description": "Item- und MobRemover-Nachrichten im zweiten Chat anzeigen.",
               "showInSecondChat": {
-                "name": "Remover anzeigen"
+                "name": "Remover anzeigen",
+                "description": "Zeigt Item- und MobRemover-Nachrichten im zweiten Chat."
               },
               "patterns": {
                 "name": "Muster",
@@ -127,7 +129,8 @@
               "name": "Bezahlungen",
               "description": "Bezahlungen im zweiten Chat anzeigen.",
               "showInSecondChat": {
-                "name": "Bezahlungen anzeigen"
+                "name": "Bezahlungen anzeigen",
+                "description": "Zeigt Zahlungsnachrichten im zweiten Chat."
               },
               "patterns": {
                 "name": "Muster",
@@ -138,7 +141,8 @@
               "name": "Bank",
               "description": "Banknachrichten im zweiten Chat anzeigen.",
               "showInSecondChat": {
-                "name": "Bank anzeigen"
+                "name": "Bank anzeigen",
+                "description": "Zeigt Banknachrichten im zweiten Chat."
               },
               "patterns": {
                 "name": "Muster",
@@ -163,9 +167,10 @@
         "mentions": {
           "name": "Erwähnungen",
           "description": "Nachrichten hervorheben, in denen dein Name vorkommt.",
-          "enabled": {
-            "name": "Erwähnungen"
-          },
+            "enabled": {
+              "name": "Erwähnungen",
+              "description": "Hebt Nachrichten hervor, in denen dein Name vorkommt."
+            },
           "mentionColor": {
             "name": "Farbe",
             "description": "Hintergrundfarbe, mit der Erwähnungen hervorgehoben werden."
@@ -236,9 +241,10 @@
         "chatTime": {
           "name": "Chatzeit",
           "description": "Uhrzeit an Chatnachrichten anfügen.",
-          "enabled": {
-            "name": "Chatzeit anzeigen"
-          },
+            "enabled": {
+              "name": "Chatzeit anzeigen",
+              "description": "Hängt die Uhrzeit an Chatnachrichten."
+            },
           "chatTimeAfterMessage": {
             "name": "Hinter der Nachricht",
             "description": "Die Uhrzeit hinter der Nachricht einfügen."
@@ -252,9 +258,10 @@
       "payment": {
         "name": "Bezahlungen",
         "description": "Protokoll, Markierung und Benachrichtigungen für Zahlungen.",
-        "enabled": {
-          "name": "Bezahlungen"
-        },
+          "enabled": {
+            "name": "Bezahlungen",
+            "description": "Schaltet Protokoll, Markierung und Benachrichtigungen für Zahlungen ein oder aus."
+          },
         "header": {
           "payments": {
             "name": "Bezahlungen"
@@ -296,9 +303,10 @@
       "remover": {
         "name": "Remover",
         "description": "Zeitstempel und Benachrichtigung für Item- und MobRemover.",
-        "enabled": {
-          "name": "Remover"
-        },
+          "enabled": {
+            "name": "Remover",
+            "description": "Schaltet Zeitstempel und Benachrichtigung für den Remover ein oder aus."
+          },
         "lastTimeHover": {
           "name": "Zeitstempel",
           "description": "Zeitstempel anzeigen, wenn du über eine Remover-Nachricht fährst."
@@ -311,9 +319,10 @@
       "automations": {
         "name": "Automatisierungen",
         "description": "Portal, Unterserver-Nachricht und Chatfarbe.",
-        "enabled": {
-          "name": "Automatisierungen"
-        },
+          "enabled": {
+            "name": "Automatisierungen",
+            "description": "Schaltet Portal, Unterserver-Nachricht und Chatfarbe ein oder aus."
+          },
         "autoPortal": {
           "name": "Auto-Portal (1.8)",
           "description": "Direkt in den Portalraum joinen."
@@ -365,9 +374,10 @@
       "afk": {
         "name": "AFK",
         "description": "Nickname und automatische Antwort, während du AFK bist.",
-        "enabled": {
-          "name": "AFK"
-        },
+          "enabled": {
+            "name": "AFK",
+            "description": "Schaltet Nickname und automatische Antwort ein oder aus."
+          },
         "afkTime": {
           "name": "AFK nach (Minuten)",
           "description": "Zeit, nach der dich das Addon als AFK erkennt."
@@ -392,9 +402,10 @@
       "booster": {
         "name": "Booster",
         "description": "Booster beim Beitreten laden und das Menü ausblenden (1.8).",
-        "enabled": {
-          "name": "Booster"
-        },
+          "enabled": {
+            "name": "Booster",
+            "description": "Schaltet das Laden der Booster und das Ausblenden des Menüs ein oder aus."
+          },
         "loadBoostersOnJoin": {
           "name": "Beim Beitreten laden",
           "description": "Lädt die Booster automatisch, wenn du den Server betrittst."
@@ -407,9 +418,10 @@
       "friends": {
         "name": "Freunde",
         "description": "Anderen zeigen, auf welchem CityBuild du bist.",
-        "enabled": {
-          "name": "Freunde"
-        },
+          "enabled": {
+            "name": "Freunde",
+            "description": "Schaltet die Anzeige deines CityBuilds für Freunde ein oder aus."
+          },
         "showSubServerInLabyChat": {
           "name": "CityBuild im LabyChat anzeigen",
           "description": "Zeigt deinen Freunden im LabyChat, auf welchem CityBuild du gerade bist."
@@ -422,9 +434,10 @@
       "plotBorders": {
         "name": "Plot-Grenzen",
         "description": "Linienraster um das Grundstück auf Nature und Extreme (1.8).",
-        "enabled": {
-          "name": "Plot-Grenzen"
-        },
+          "enabled": {
+            "name": "Plot-Grenzen",
+            "description": "Schaltet das Linienraster um Grundstücke ein oder aus."
+          },
         "key": {
           "name": "Taste",
           "description": "Schaltet das Raster um oder hält es, solange die Taste gedrückt ist."
@@ -457,9 +470,10 @@
       "nearbyPlayers": {
         "name": "Spieler in der Nähe",
         "description": "Zeigt nahe Spieler im HUD. Standardmäßig aus. Keine Richtung und keine Koordinaten, die Distanz nur grob. Mit den Voreinstellungen nur Spieler, die du direkt sehen kannst, und nur auf Citybuilds. Spieler hinter Wänden erscheinen nur, wenn du die Sichtlinie ausschaltest – das kann gegen §2 Abs. 5 und 8 verstoßen. Erst verwenden, wenn der GrieferGames-Support die Funktion freigegeben hat.",
-        "enabled": {
-          "name": "Spieler in der Nähe"
-        },
+          "enabled": {
+            "name": "Spieler in der Nähe",
+            "description": "Schaltet die Liste naher Spieler im HUD ein oder aus. Standardmäßig aus."
+          },
         "radius": {
           "name": "Radius",
           "description": "Nur Spieler innerhalb dieser Blockzahl. Voreinstellung 16, höchstens 32."
@@ -498,10 +512,53 @@
         },
         "open": {
           "name": "Itemliste",
+          "description": "Öffnet die Itemliste im Spiel.",
           "text": "Öffnen"
         },
         "source": {
-          "name": "Quelle"
+          "name": "Quelle",
+          "description": "Adressen, von denen die Itemliste und die Kategorien geladen werden."
+        }
+      },
+      "itemTooltip": {
+        "name": "Item Tooltip",
+        "description": "Vorschau von Karten und Köpfen im Tooltip.",
+        "mapTooltipPreview": {
+          "name": "Karte im Tooltip anzeigen",
+          "description": "Zeigt im Tooltip eine Vorschau der Karte."
+        },
+        "headTooltipPreview": {
+          "name": "Kopf im Tooltip vergrößern",
+          "description": "Zeigt den Spielerkopf im Tooltip größer an."
+        }
+      },
+      "visuals": {
+        "name": "Optische Verbesserungen",
+        "description": "Verzauberungsglanz und die Anzeige von übergroßen Stapeln.",
+        "headEnchantmentGlint": {
+          "name": "Verzauberungsglanz auf Köpfen, Bannern und Kisten",
+          "description": "Zeichnet den Verzauberungsglanz auf Köpfen, Bannern und Kisten."
+        },
+        "overstackingFix": {
+          "name": "Overstacking Fix für höhere Versionen",
+          "description": "Zeigt die echte Anzahl, wenn ein Gegenstand höher gestapelt ist, als die Version erlaubt. Bei Grundstücks-Äxten kommt die Zahl aus der Beschreibung."
+        }
+      },
+      "wiki": {
+        "name": "Wiki",
+        "description": "Das GrieferGames-Wiki im Spiel.",
+        "key": {
+          "name": "Hotkey",
+          "description": "Öffnet das Wiki. Standardmäßig ist keine Taste gesetzt."
+        },
+        "open": {
+          "name": "Wiki",
+          "description": "Öffnet das Wiki im Spiel.",
+          "text": "Öffnen"
+        },
+        "source": {
+          "name": "Quelle",
+          "description": "Adresse, von der das Wiki geladen wird."
         }
       },
       "dev": {
@@ -518,26 +575,13 @@
       },
       "openGithub": {
         "name": "GitHub",
+        "description": "Öffnet das GitHub-Repository des Addons.",
         "text": "Öffnen"
       },
       "openSupport": {
         "name": "Support-Discord",
+        "description": "Öffnet den Support-Discord.",
         "text": "Öffnen"
-      },
-      "mapTooltipPreview": {
-        "name": "Karte im Tooltip anzeigen"
-      },
-      "headTooltipPreview": {
-        "name": "Kopf im Tooltip vergrößern"
-      },
-      "headEnchantmentGlint": {
-        "name": "Verzauberungsglanz auf Köpfen, Bannern und Kisten"
-      },
-      "overstackingFix": {
-        "name": "Overstacking Fix für höhere Versionen"
-      },
-      "wikiKey": {
-        "name": "Wiki öffnen (Hotkey)"
       }
     },
     "messages": {
@@ -649,13 +693,16 @@
         "fly": "Flug",
         "mob": "Mob",
         "nameColor": {
-          "name": "Namen Farbe"
+          "name": "Namen Farbe",
+          "description": "Farbe des Booster-Namens in der HUD-Anzeige."
         },
         "durationColor": {
-          "name": "Dauer Farbe"
+          "name": "Dauer Farbe",
+          "description": "Farbe der Restzeit in der HUD-Anzeige."
         },
         "amplifierColor": {
-          "name": "Anzahl Farber"
+          "name": "Anzahl Farbe",
+          "description": "Farbe des Multiplikators in der HUD-Anzeige."
         }
       },
       "gg_subserver": {

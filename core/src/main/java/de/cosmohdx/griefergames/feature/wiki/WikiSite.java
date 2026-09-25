@@ -57,6 +57,10 @@ final class WikiSite {
 
   private WikiSite() {}
 
+  static String origin() {
+    return ORIGIN.toString();
+  }
+
   static void load(String route, Consumer<Result> callback) {
     String safe = safeRoute(route);
     if (safe == null) {

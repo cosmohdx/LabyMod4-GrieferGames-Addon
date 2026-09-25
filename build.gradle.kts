@@ -26,7 +26,7 @@ labyMod {
     addonInfo {
         namespace = "griefergames"
         displayName = "GrieferGames"
-        author = "Neocraftr, ByPander, CosmoHDx"
+        author = "CosmoHDx, Syntax"
         description = "This add-on adds many useful features for the GrieferGames.net server."
         minecraftVersion = "*"
         version = addonVersion

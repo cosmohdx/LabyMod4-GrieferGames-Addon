@@ -9,11 +9,12 @@ import java.util.Map;
  *
  * <p>Version 2 groups each feature into its own sub-config and moves second-chat routing
  * into per-category entries. Version 3 folds the item and mob removers into one feature
- * and one second-chat category. Values are copied; only the path changes.
+ * and one second-chat category. Version 4 moves tooltip, visual, and wiki settings
+ * into their own categories. Values are copied; only the path changes.
  */
 public final class GrieferGamesConfigMigration {
 
-  public static final int CURRENT_VERSION = 3;
+  public static final int CURRENT_VERSION = 4;
 
   private GrieferGamesConfigMigration() {
   }
@@ -27,6 +28,30 @@ public final class GrieferGamesConfigMigration {
     }
     if (usedVersion < 3) {
       migrateToVersion3(root);
+    }
+    if (usedVersion < 4) {
+      migrateToVersion4(root);
+    }
+  }
+
+  private static void migrateToVersion4(JsonObject root) {
+    moveGroup(root, "itemTooltip", "mapTooltipPreview", "headTooltipPreview");
+    moveGroup(root, "visuals", "headEnchantmentGlint", "overstackingFix");
+    if (root.has("wikiKey")) {
+      move(root, child(root, "wiki"), "wikiKey", "key");
+    }
+  }
+
+  private static void moveGroup(JsonObject root, String group, String... keys) {
+    JsonObject target = null;
+    for (String key : keys) {
+      if (!root.has(key)) {
+        continue;
+      }
+      if (target == null) {
+        target = child(root, group);
+      }
+      move(root, target, key);
     }
   }
 
