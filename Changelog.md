@@ -31,6 +31,16 @@ Das Booster-Menü öffnet sich nur, wenn diese Meldung ausbleibt.
 Die Restzeiten werden dann auf Citybuild aus dem Menü gelesen. 
 Das Menü lässt sich wie bisher ausblenden.
 
+### Kontostand und Bankguthaben
+
+Im HUD-Editor unter GrieferGames gibt es zwei neue Anzeigen: Kontostand und Bankguthaben. Sie zeigen den Betrag, den der Server schickt, zum Beispiel `$12,345.67`. Solange noch kein Betrag angekommen ist, bleiben sie aus. In den Einstellungen der Anzeige kannst du Cent ausblenden, große Beträge kürzen (zum Beispiel `1,25 Mio.`) und die Anzeige bei 0 verstecken.
+
+Der erste Betrag nach dem Joinen setzt nur den aktuellen Stand. Erst spätere Änderungen sind eine Differenz. Nach dem Verlassen des Servers beginnt das wieder von vorn.
+
+Unter Bezahlungen gibt es den Schalter „Zeitmessung loggen“. Er ist aus. Wenn du ihn einschaltest, schreibt das Addon ins Log, wann Kontostand oder Bankguthaben ankommen und wann eine Zahlungszeile im Chat ankommt. Damit lässt sich vergleichen, was zuerst da ist.
+
+Das Icon der Einnahmen-Anzeige wird wieder angezeigt.
+
 ### Block des Tages
 
 Im HUD-Editor unter GrieferGames gibt es die Anzeige Block des Tages. Sie zeigt den heutigen Block und daneben, wie oft du ihn in dieser Sitzung gesammelt hast, zum Beispiel `Diamond Ore (3)`. Wechselt der Block, beginnt der Zähler bei null.

@@ -283,6 +283,10 @@
           "name": "Vor Fake-Money warnen",
           "description": "Vor gefälschten Zahlungen durch den Supreme-Status warnen."
         },
+        "logBalanceTiming": {
+          "name": "Zeitmessung loggen",
+          "description": "Schreibt ins Log, wann Kontostand, Bankguthaben und Zahlungszeilen ankommen. Damit lässt sich die Reihenfolge vergleichen. Standardmäßig aus."
+        },
         "bankAchievement": {
           "name": "Bank-Benachrichtigung",
           "description": "Benachrichtigung für Bank-Transaktionen anzeigen."
@@ -473,6 +477,44 @@
     "hudWidget": {
       "gg_income": {
         "name": "Einnahmen"
+      },
+      "gg_balance": {
+        "name": "Kontostand",
+        "showCents": {
+          "name": "Cent anzeigen",
+          "description": "Zwei Nachkommastellen anzeigen."
+        },
+        "compact": {
+          "name": "Kompakte Anzeige",
+          "description": "Große Beträge kürzen, zum Beispiel 1,25 Mio."
+        },
+        "hideWhenZero": {
+          "name": "Bei 0 verstecken",
+          "description": "Die Anzeige ausblenden, wenn der Betrag 0 ist."
+        }
+      },
+      "gg_bank": {
+        "name": "Bankguthaben",
+        "showCents": {
+          "name": "Cent anzeigen",
+          "description": "Zwei Nachkommastellen anzeigen."
+        },
+        "compact": {
+          "name": "Kompakte Anzeige",
+          "description": "Große Beträge kürzen, zum Beispiel 1,25 Mio."
+        },
+        "hideWhenZero": {
+          "name": "Bei 0 verstecken",
+          "description": "Die Anzeige ausblenden, wenn der Betrag 0 ist."
+        }
+      },
+      "money": {
+        "decimal": ",",
+        "grouping": ".",
+        "thousand": "Tsd.",
+        "million": "Mio.",
+        "billion": "Mrd.",
+        "trillion": "Bio."
       },
       "gg_nickname": {
         "name": "Nickname",

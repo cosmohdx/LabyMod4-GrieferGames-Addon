@@ -44,6 +44,9 @@ import de.cosmohdx.griefergames.feature.payment.Bank;
 import de.cosmohdx.griefergames.feature.payment.FileManager;
 import de.cosmohdx.griefergames.feature.payment.IncomeHudWidget;
 import de.cosmohdx.griefergames.feature.payment.Payment;
+import de.cosmohdx.griefergames.feature.payment.balance.BalanceTracker;
+import de.cosmohdx.griefergames.feature.payment.hud.BalanceHudWidget;
+import de.cosmohdx.griefergames.feature.payment.hud.BankBalanceHudWidget;
 import de.cosmohdx.griefergames.feature.redstone.RedstoneHudWidget;
 import de.cosmohdx.griefergames.feature.redstone.RedstoneListener;
 import de.cosmohdx.griefergames.feature.server.GGServerJoinListener;
@@ -81,6 +84,7 @@ public class GrieferGames extends LabyAddon<GrieferGamesConfig> {
   private FileManager fileManager;
   private BoosterController boosterController;
   private PayloadReceiver payloadReceiver;
+  private BalanceTracker balanceTracker;
   private Remover remover;
   private BlockOfTheDay blockOfTheDay;
   private HudWidgetCategory hudWidgetCategory;
@@ -105,9 +109,11 @@ public class GrieferGames extends LabyAddon<GrieferGamesConfig> {
     controller = reference.getGrieferGamesController();
     boosterController = new BoosterController(this);
     payloadReceiver = new PayloadReceiver(this);
+    balanceTracker = new BalanceTracker(this);
 
     registerSettingCategory();
     registerListener(payloadReceiver);
+    registerListener(balanceTracker);
     registerListener(new RedstoneListener(this));
     new UserSubtitleListener(this);
     registerListener(new GGServerJoinListener(this));
@@ -151,6 +157,8 @@ public class GrieferGames extends LabyAddon<GrieferGamesConfig> {
     hudWidgetCategory = new HudWidgetCategory(this, namespace());
     labyAPI().hudWidgetRegistry().categoryRegistry().register(hudWidgetCategory);
     labyAPI().hudWidgetRegistry().register(new IncomeHudWidget(this));
+    labyAPI().hudWidgetRegistry().register(new BalanceHudWidget(this));
+    labyAPI().hudWidgetRegistry().register(new BankBalanceHudWidget(this));
     labyAPI().hudWidgetRegistry().register(new NicknameHudWidget(this));
     labyAPI().hudWidgetRegistry().register(new RedstoneHudWidget(this));
     labyAPI().hudWidgetRegistry().register(new DelayHudWidget(this));
@@ -231,6 +239,10 @@ public class GrieferGames extends LabyAddon<GrieferGamesConfig> {
 
   public PayloadReceiver payloads() {
     return payloadReceiver;
+  }
+
+  public BalanceTracker balances() {
+    return balanceTracker;
   }
 
   public Remover remover() {
