@@ -20,6 +20,7 @@ public class AddonState {
   private long waitTime;
   private boolean citybuildDelay;
   private boolean hideBoosterMenu;
+  private boolean redstoneActive;
 
   public boolean isOnGrieferGames() {
     return onGrieferGames;
@@ -117,5 +118,13 @@ public class AddonState {
 
   public void setHideBoosterMenu(boolean hideBoosterMenu) {
     this.hideBoosterMenu = hideBoosterMenu;
+  }
+
+  public boolean isRedstoneActive() {
+    return redstoneActive;
+  }
+
+  public void setRedstoneActive(boolean redstoneActive) {
+    this.redstoneActive = redstoneActive;
   }
 }
