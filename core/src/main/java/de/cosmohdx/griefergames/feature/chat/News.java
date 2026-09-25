@@ -1,0 +1,33 @@
+package de.cosmohdx.griefergames.feature.chat;
+
+import de.cosmohdx.griefergames.GrieferGames;
+import de.cosmohdx.griefergames.feature.chat.GGChatProcessEvent;
+import de.cosmohdx.griefergames.core.SubServerType;
+import net.labymod.api.event.Subscribe;
+
+public class News extends ChatModule {
+  private final GrieferGames griefergames;
+  private boolean isNewsMessage = false;
+
+  public News(GrieferGames griefergames) {
+    this.griefergames = griefergames;
+  }
+
+  @Subscribe
+  public void messageProcessEvent(GGChatProcessEvent event) {
+    if(event.isCancelled()) return;
+    if (!griefergames.configuration().chat().hideNewsMessages()) return;
+
+    String plain = event.getMessage().getPlainText();
+    boolean isNewsSeperator = event.getMessage().getFormattedText().contains("§f§m------------§8 [ §6News§8 ] §f§m------------");
+
+    if (plain.contains("\u2503") && plain.contains("\u00BB")) {
+      isNewsMessage = false;
+    } else if (isNewsSeperator) {
+      isNewsMessage = !isNewsMessage;
+      event.setCancelled(true);
+    } else if (isNewsMessage) {
+      event.setCancelled(true);
+    }
+  }
+}

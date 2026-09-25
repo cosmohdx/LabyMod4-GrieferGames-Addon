@@ -1,27 +1,22 @@
-version = "0.1.0"
-
-plugins {
-    id("java-library")
-}
+import net.labymod.labygradle.common.extension.LabyModAnnotationProcessorExtension.ReferenceType
 
 dependencies {
+    labyProcessor()
     api(project(":api"))
     labyApi("core")
-
-    // If you want to use external libraries, you can do that here.
-    // The dependencies that are specified here are loaded into your project but will also
-    // automatically be downloaded by labymod, but only if the repository is public.
-    // If it is private, you have to add and compile the dependency manually.
-    // You have to specify the repository, there are getters for maven central and sonatype, every
-    // other repository has to be specified with their url. Example:
-    // maven(mavenCentral(), "org.apache.httpcomponents:httpclient:4.5.13")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.12.2")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.12.2")
 }
 
-labyModProcessor {
-    referenceType = net.labymod.gradle.core.processor.ReferenceType.DEFAULT
+tasks.withType<org.gradle.api.tasks.testing.Test>().configureEach {
+    useJUnitPlatform()
 }
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_21
-    targetCompatibility = JavaVersion.VERSION_21
+tasks.named<org.gradle.api.tasks.compile.JavaCompile>("compileTestJava") {
+    // The LabyMod annotation processor is for addon main sources and rejects the test compile.
+    options.compilerArgs.add("-proc:none")
+}
+
+labyModAnnotationProcessor {
+    referenceType = ReferenceType.DEFAULT
 }
