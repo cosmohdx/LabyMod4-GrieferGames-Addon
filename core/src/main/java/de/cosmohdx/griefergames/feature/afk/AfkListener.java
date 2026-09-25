@@ -1,7 +1,6 @@
 package de.cosmohdx.griefergames.feature.afk;
 
 import de.cosmohdx.griefergames.GrieferGames;
-import de.cosmohdx.griefergames.core.SubServerType;
 import net.labymod.api.event.Phase;
 import net.labymod.api.event.Subscribe;
 import net.labymod.api.event.client.input.KeyEvent;
@@ -22,8 +21,7 @@ public class AfkListener {
   public void onTick(GameTickEvent event) {
     if (!griefergames.state().isOnGrieferGames()) return;
     if (event.phase() != Phase.POST) return;
-    if (griefergames.state().getSubServerType() != SubServerType.REGULAR
-        && griefergames.state().getSubServerType() != SubServerType.CLOUD) {
+    if (!griefergames.state().isNetworkKnown()) {
       return;
     }
     if (!griefergames.state().isAfk()
@@ -37,8 +35,7 @@ public class AfkListener {
   @Subscribe
   public void onKeyInput(KeyEvent event) {
     if (!griefergames.state().isOnGrieferGames()) return;
-    if (griefergames.state().getSubServerType() != SubServerType.CLOUD
-        && griefergames.state().getSubServerType() != SubServerType.REGULAR) {
+    if (!griefergames.state().isNetworkKnown()) {
       return;
     }
     if (event.state() != State.PRESS) return;

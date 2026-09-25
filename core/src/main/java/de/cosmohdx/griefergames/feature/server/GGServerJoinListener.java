@@ -1,6 +1,8 @@
 package de.cosmohdx.griefergames.feature.server;
 
 import de.cosmohdx.griefergames.GrieferGames;
+import de.cosmohdx.griefergames.core.SubServerType;
+import de.cosmohdx.griefergames.feature.subserver.NetworkTypeUpdater;
 import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.format.NamedTextColor;
@@ -22,6 +24,7 @@ public class GGServerJoinListener {
 
   @Subscribe
   public void onServerJoin(ServerJoinEvent event) {
+    NetworkTypeUpdater.apply(griefergames, SubServerType.UNKNOWN);
     if(event.serverData().address().getHost().toLowerCase().endsWith("griefergames.net") ||
         event.serverData().address().getHost().toLowerCase().endsWith("griefergames.de") ||
         event.serverData().address().getHost().toLowerCase().endsWith("griefergames.live")) {

@@ -7,7 +7,7 @@ public class AddonState {
 
   private boolean onGrieferGames;
   private String subServer = "";
-  private SubServerType subServerType = SubServerType.REGULAR;
+  private SubServerType subServerType = SubServerType.UNKNOWN;
   @Nullable
   private IngameChatTab secondChat;
 
@@ -43,11 +43,26 @@ public class AddonState {
   }
 
   public void setSubServerType(SubServerType subServerType) {
+    if (subServerType == null) {
+      return;
+    }
     this.subServerType = subServerType;
   }
 
   public boolean isSubServerType(SubServerType subServerType) {
     return this.subServerType == subServerType;
+  }
+
+  public boolean isLegacyNetwork() {
+    return this.subServerType == SubServerType.REGULAR;
+  }
+
+  public boolean isCloudNetwork() {
+    return this.subServerType == SubServerType.CLOUD;
+  }
+
+  public boolean isNetworkKnown() {
+    return this.isLegacyNetwork() || this.isCloudNetwork();
   }
 
   @Nullable
