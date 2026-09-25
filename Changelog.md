@@ -25,6 +25,10 @@ Das Booster-Menü öffnet sich nur, wenn diese Meldung ausbleibt.
 Die Restzeiten werden dann auf Citybuild aus dem Menü gelesen. 
 Das Menü lässt sich wie bisher ausblenden.
 
+### Block des Tages
+
+Im HUD-Editor unter GrieferGames gibt es die Anzeige Block des Tages. Sie zeigt den heutigen Block und daneben, wie oft du ihn in dieser Sitzung gesammelt hast, zum Beispiel `Diamond Ore (3)`. Wechselt der Block, beginnt der Zähler bei null.
+
 ### Sonstiges
 
 - Die Redstone-Anzeige im HUD funktioniert wieder.

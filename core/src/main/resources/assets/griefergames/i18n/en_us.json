@@ -516,6 +516,9 @@
       },
       "gg_entity_remover": {
         "name": "Mob remover"
+      },
+      "gg_block_of_the_day": {
+        "name": "Block of the Day"
       }
     },
     "region_type": {

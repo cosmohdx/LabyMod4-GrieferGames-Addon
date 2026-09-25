@@ -9,6 +9,8 @@ import de.cosmohdx.griefergames.core.Helper;
 import de.cosmohdx.griefergames.core.generated.DefaultReferenceStorage;
 import de.cosmohdx.griefergames.feature.afk.AfkListener;
 import de.cosmohdx.griefergames.feature.automation.AutoPortalListener;
+import de.cosmohdx.griefergames.feature.blockoftheday.BlockOfTheDay;
+import de.cosmohdx.griefergames.feature.blockoftheday.BlockOfTheDayHudWidget;
 import de.cosmohdx.griefergames.feature.booster.BoosterChatModule;
 import de.cosmohdx.griefergames.feature.booster.BoosterController;
 import de.cosmohdx.griefergames.feature.booster.BoosterHudWidget;
@@ -80,6 +82,7 @@ public class GrieferGames extends LabyAddon<GrieferGamesConfig> {
   private BoosterController boosterController;
   private PayloadReceiver payloadReceiver;
   private Remover remover;
+  private BlockOfTheDay blockOfTheDay;
   private HudWidgetCategory hudWidgetCategory;
   private final ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor(runnable -> {
     Thread thread = new Thread(runnable, "griefergames-addon");
@@ -133,6 +136,8 @@ public class GrieferGames extends LabyAddon<GrieferGamesConfig> {
     registerListener(new Realname(this));
     remover = new Remover(this);
     registerListener(remover);
+    blockOfTheDay = new BlockOfTheDay(this);
+    registerListener(blockOfTheDay);
     registerListener(new BetterIgnoreList(this));
     registerListener(new Mention(this));
     registerListener(new Nickname(this));
@@ -153,6 +158,7 @@ public class GrieferGames extends LabyAddon<GrieferGamesConfig> {
     labyAPI().hudWidgetRegistry().register(new SubServerHUDWidget(this));
     labyAPI().hudWidgetRegistry().register(RemoverHudWidget.items(this));
     labyAPI().hudWidgetRegistry().register(RemoverHudWidget.entities(this));
+    labyAPI().hudWidgetRegistry().register(new BlockOfTheDayHudWidget(this));
 
     if(labyAPI().labyModLoader().isAddonDevelopmentEnvironment()) {
       registerCommand(new GGMessageCommand(this));
@@ -228,6 +234,10 @@ public class GrieferGames extends LabyAddon<GrieferGamesConfig> {
 
   public Remover remover() {
     return remover;
+  }
+
+  public BlockOfTheDay blockOfTheDay() {
+    return blockOfTheDay;
   }
 
   public AddonState state() {
