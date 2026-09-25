@@ -51,6 +51,7 @@ Solange das Netz noch nicht erkannt ist (`SubServerType.UNKNOWN`), bleiben Funkt
 | Fly-HUD | ✓ | ✓ |
 | Delay-HUD | ✓ | ✓ |
 | Subserver-HUD | ✓ | ✓ |
+| Plot-Grenzen | ✓ | |
 | Spieler in der Nähe | ✓ | ✓ |
 
 ## Spieler in der Nähe

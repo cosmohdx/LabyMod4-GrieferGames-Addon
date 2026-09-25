@@ -419,11 +419,46 @@
           "description": "Shows your friends on Discord which CityBuild you are on."
         }
       },
-      "nearbyPlayers": {
-        "name": "Nearby players",
-        "description": "Shows nearby players in the HUD. Off by default. No direction and no coordinates, distance only in rough steps. With the defaults, only players you can see directly, and only on citybuilds. Players behind walls appear only if you turn line of sight off – that can violate §2 (5) and (8). Use it only after GrieferGames support has allowed the feature.",
+      "plotBorders": {
+        "name": "Plot borders",
+        "description": "Line grid around the plot on Nature and Extreme (1.8).",
         "enabled": {
-          "name": "Nearby players"
+          "name": "Plot borders"
+        },
+        "key": {
+          "name": "Key",
+          "description": "Toggles the grid, or holds it while the key is pressed."
+        },
+        "activation": {
+          "name": "Activation",
+          "description": "Toggle keeps the grid on until you press the key again. Hold shows it only while the key is pressed.",
+          "entries": {
+            "toggle": "Toggle",
+            "hold": "Hold"
+          }
+        },
+        "notify": {
+          "name": "Show notice",
+          "description": "Writes in chat when the grid is turned on or off."
+        },
+        "color": {
+          "name": "Color",
+          "description": "Color of the lines."
+        },
+        "lineSpacing": {
+          "name": "Line spacing",
+          "description": "Distance between lines, in blocks."
+        },
+        "heightRange": {
+          "name": "Height around the player",
+          "description": "How many blocks above and below you the grid is drawn."
+        },
+        "nearbyPlayers": {
+          "name": "Nearby players",
+          "description": "Shows nearby players in the HUD. Off by default. No direction and no coordinates, distance only in rough steps. With the defaults, only players you can see directly, and only on citybuilds. Players behind walls appear only if you turn line of sight off – that can violate §2 (5) and (8). Use it only after GrieferGames support has allowed the feature.",
+          "enabled": {
+            "name": "Nearby players"
+          }
         },
         "radius": {
           "name": "Radius",
@@ -476,7 +511,10 @@
       "citybuildJoin": "You are now on {citybuild}.",
       "afkMessage": "You are marked as AFK now.",
       "afkBackMessage": "You are marked as back now.",
-      "commandFailure": "Did you make a mistake? If not, send the message again."
+      "commandFailure": "Did you make a mistake? If not, send the message again.",
+      "plotBordersOn": "Plot borders enabled.",
+      "plotBordersOff": "Plot borders disabled.",
+      "plotBordersUnavailable": "Plot borders are not available on this server."
     },
 
     "notifications": {

@@ -418,11 +418,46 @@
           "description": "Zeigt deinen Freunden auf Discord, auf welchem CityBuild du gerade bist."
         }
       },
-      "nearbyPlayers": {
-        "name": "Spieler in der Nähe",
-        "description": "Zeigt nahe Spieler im HUD. Standardmäßig aus. Keine Richtung und keine Koordinaten, die Distanz nur grob. Mit den Voreinstellungen nur Spieler, die du direkt sehen kannst, und nur auf Citybuilds. Spieler hinter Wänden erscheinen nur, wenn du die Sichtlinie ausschaltest – das kann gegen §2 Abs. 5 und 8 verstoßen. Erst verwenden, wenn der GrieferGames-Support die Funktion freigegeben hat.",
+      "plotBorders": {
+        "name": "Plot-Grenzen",
+        "description": "Linienraster um das Grundstück auf Nature und Extreme (1.8).",
         "enabled": {
-          "name": "Spieler in der Nähe"
+          "name": "Plot-Grenzen"
+        },
+        "key": {
+          "name": "Taste",
+          "description": "Schaltet das Raster um oder hält es, solange die Taste gedrückt ist."
+        },
+        "activation": {
+          "name": "Aktivierung",
+          "description": "Umschalten lässt das Raster an, bis du die Taste erneut drückst. Halten zeigt es nur, solange die Taste gedrückt ist.",
+          "entries": {
+            "toggle": "Umschalten",
+            "hold": "Halten"
+          }
+        },
+        "notify": {
+          "name": "Hinweis anzeigen",
+          "description": "Schreibt in den Chat, wenn das Raster ein- oder ausgeschaltet wird."
+        },
+        "color": {
+          "name": "Farbe",
+          "description": "Farbe der Linien."
+        },
+        "lineSpacing": {
+          "name": "Linienabstand",
+          "description": "Abstand der Linien in Blöcken."
+        },
+        "heightRange": {
+          "name": "Höhe um den Spieler",
+          "description": "Wie viele Blöcke über und unter dir das Raster gezeichnet wird."
+        },
+        "nearbyPlayers": {
+          "name": "Spieler in der Nähe",
+          "description": "Zeigt nahe Spieler im HUD. Standardmäßig aus. Keine Richtung und keine Koordinaten, die Distanz nur grob. Mit den Voreinstellungen nur Spieler, die du direkt sehen kannst, und nur auf Citybuilds. Spieler hinter Wänden erscheinen nur, wenn du die Sichtlinie ausschaltest – das kann gegen §2 Abs. 5 und 8 verstoßen. Erst verwenden, wenn der GrieferGames-Support die Funktion freigegeben hat.",
+          "enabled": {
+            "name": "Spieler in der Nähe"
+          }
         },
         "radius": {
           "name": "Radius",
@@ -474,7 +509,10 @@
       "citybuildJoin": "Du bist nun auf {citybuild}.",
       "afkMessage": "Du wurdest als AFk erkannt.",
       "afkBackMessage": "Du wurdest als wieder zurück erkannt.",
-      "commandFailure": "Hast du dich vertippt? Wenn nicht, sende die Nachricht nochmal."
+      "commandFailure": "Hast du dich vertippt? Wenn nicht, sende die Nachricht nochmal.",
+      "plotBordersOn": "Plot-Grenzen eingeschaltet.",
+      "plotBordersOff": "Plot-Grenzen ausgeschaltet.",
+      "plotBordersUnavailable": "Plot-Grenzen sind auf diesem Server nicht verfügbar."
     },
     "notifications": {
       "generalError": "Ein Fehler ist aufgetreten, weitere Informationen im Chat.",
