@@ -101,6 +101,7 @@ public class GrieferGames extends LabyAddon<GrieferGamesConfig> {
     griefergames = this;
     fileManager = new FileManager(this);
     helper = new Helper(this);
+    registerListener(helper.secondChatTabs());
     controller = reference.getGrieferGamesController();
     boosterController = new BoosterController(this);
     payloadReceiver = new PayloadReceiver(this);

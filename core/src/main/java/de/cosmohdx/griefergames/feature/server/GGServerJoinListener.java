@@ -32,7 +32,7 @@ public class GGServerJoinListener {
       griefergames.state().setCitybuildDelay(false);
       griefergames.state().setNickname(null);
       griefergames.state().setHideBoosterMenu(false);
-      griefergames.helper().findSecondChat(griefergames.configuration().chat().chatTabName());
+      griefergames.helper().findSecondChat();
 
       // Warn user when advanced chat is disabled.
       if(!Laby.labyAPI().config().ingame().advancedChat().enabled().get()) {
