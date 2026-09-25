@@ -517,6 +517,16 @@
         "name": "Block des Tages"
       }
     },
+    "itemlist": {
+      "title": "Itemliste",
+      "search": "Suchen",
+      "all": "Alles",
+      "loading": "Liste wird geladen…",
+      "empty": "Keine Items",
+      "count": "{count} Items",
+      "more": "Mehr laden",
+      "close": "Schließen"
+    },
     "region_type": {
       "citybuild": "Citybuild",
       "farm": "Farmwelt",

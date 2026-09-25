@@ -521,6 +521,16 @@
         "name": "Block of the Day"
       }
     },
+    "itemlist": {
+      "title": "Item list",
+      "search": "Search",
+      "all": "All",
+      "loading": "Loading list…",
+      "empty": "No items",
+      "count": "{count} items",
+      "more": "Load more",
+      "close": "Close"
+    },
     "region_type": {
       "citybuild": "Citybuild",
       "farm": "Farmworld",

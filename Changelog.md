@@ -29,6 +29,10 @@ Das Menü lässt sich wie bisher ausblenden.
 
 Im HUD-Editor unter GrieferGames gibt es die Anzeige Block des Tages. Sie zeigt den heutigen Block und daneben, wie oft du ihn in dieser Sitzung gesammelt hast, zum Beispiel `Diamond Ore (3)`. Wechselt der Block, beginnt der Zähler bei null.
 
+### Itemliste
+
+Mit `/itemliste` öffnet sich eine Übersicht der öffentlichen Itemliste. Oben kann nach Namen gesucht und nach Kategorie gefiltert werden. Ein Klick auf ein Item zeigt Beschreibung und Bild. Die Liste und die Bilder werden beim Öffnen aktualisiert.
+
 ### Sonstiges
 
 - Die Redstone-Anzeige im HUD funktioniert wieder.

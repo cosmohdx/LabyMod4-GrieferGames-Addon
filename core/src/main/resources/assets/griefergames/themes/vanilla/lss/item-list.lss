@@ -1,0 +1,172 @@
+.item-list-title {
+  left: 50%;
+  top: 4%;
+  alignment-x: center;
+  text-color: white;
+  font-size: 1.5;
+}
+
+.item-list-search {
+  left: 5%;
+  top: 11%;
+  width: 58%;
+  height: 24;
+}
+
+.item-list-category {
+  left: 66%;
+  top: 11%;
+  width: 29%;
+  height: 24;
+}
+
+.item-list-status {
+  left: 5%;
+  top: 17%;
+  text-color: gray;
+}
+
+.item-list-scroll {
+  left: 5%;
+  top: 21%;
+  width: 90%;
+  height: 74%;
+  enable-scroll-content: true;
+}
+
+.item-list-sections {
+  width: 100%;
+  height: fit-content;
+  space-between-entries: 6;
+}
+
+.network-name {
+  height: 22;
+  text-color: white;
+  font-size: 1.15;
+}
+
+.network-empty {
+  height: 20;
+  text-color: gray;
+}
+
+.item-grid {
+  width: 100%;
+  height: fit-content;
+  tiles-per-line: 5;
+  tile-height: 118;
+  space-between-entries: 6;
+}
+
+.item-card {
+  width: 100%;
+  height: 100%;
+  background-color: #00000099;
+}
+
+.card-label {
+  right: 4;
+  top: 4;
+  width: 70%;
+  height: 14;
+  alignment-x: right;
+  overflow-strategy: clip;
+  text-color: white;
+  font-size: 0.65;
+}
+
+.card-image {
+  left: 8%;
+  top: 18;
+  width: 84%;
+  height: 52;
+  object-fit: contain;
+}
+
+.card-title {
+  left: 6%;
+  bottom: 6;
+  width: 88%;
+  height: 28;
+  alignment-x: center;
+  alignment-y: center;
+  overflow-strategy: wrap;
+  text-color: white;
+  font-size: 0.8;
+}
+
+.load-more {
+  left: 50%;
+  alignment-x: center;
+  width: 36%;
+  height: 24;
+}
+
+.detail-dimmer {
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000000aa;
+  priority-layer: very-front;
+}
+
+.detail-panel {
+  left: 50%;
+  top: 50%;
+  width: 46%;
+  height: 70%;
+  alignment-x: center;
+  alignment-y: center;
+  background-color: #1b1b1bf0;
+  priority-layer: very-front;
+}
+
+.detail-scroll {
+  left: 4%;
+  top: 4%;
+  width: 92%;
+  height: 78%;
+  enable-scroll-content: true;
+}
+
+.detail-content {
+  width: 100%;
+  height: fit-content;
+  space-between-entries: 8;
+}
+
+.detail-image {
+  width: 100%;
+  height: 120;
+  object-fit: contain;
+}
+
+.detail-title {
+  width: 100%;
+  text-color: white;
+  font-size: 1.3;
+  overflow-strategy: wrap;
+}
+
+.detail-description {
+  width: 100%;
+  text-color: white;
+  font-size: 1;
+  overflow-strategy: wrap;
+}
+
+.detail-credits {
+  width: 100%;
+  text-color: gray;
+  font-size: 0.85;
+  overflow-strategy: wrap;
+}
+
+.detail-close {
+  left: 4%;
+  bottom: 4%;
+  width: 92%;
+  height: 26;
+}
