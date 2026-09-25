@@ -61,8 +61,44 @@ public class GrieferGamesChatConfig extends FeatureConfig {
     return this.isEnabled() && this.commands.betterIgnoreList();
   }
 
+  public boolean splitLongMessages() {
+    return this.isEnabled() && this.commands.splitLongMessages();
+  }
+
+  public int splitMaxParts() {
+    return this.commands.splitMaxParts();
+  }
+
+  public float splitDelaySeconds() {
+    return this.commands.splitDelaySeconds();
+  }
+
+  public boolean splitConfirm() {
+    return this.splitLongMessages() && this.commands.splitConfirm();
+  }
+
+  public boolean splitPrivateMessages() {
+    return this.splitLongMessages() && this.commands.splitPrivateMessages();
+  }
+
   public boolean showPrefixInDisplayName() {
     return this.isEnabled() && this.display.showPrefixInDisplayName();
+  }
+
+  public boolean showMessageHeads() {
+    return this.isEnabled() && this.display.showMessageHeads();
+  }
+
+  public boolean messageHeadsGlobal() {
+    return this.showMessageHeads() && this.display.messageHeadsGlobal();
+  }
+
+  public boolean messageHeadsPrivate() {
+    return this.showMessageHeads() && this.display.messageHeadsPrivate();
+  }
+
+  public boolean messageHeadsPlot() {
+    return this.showMessageHeads() && this.display.messageHeadsPlot();
   }
 
   public String chatTabName() {

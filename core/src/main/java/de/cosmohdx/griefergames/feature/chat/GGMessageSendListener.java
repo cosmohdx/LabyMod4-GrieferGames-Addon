@@ -1,6 +1,7 @@
 package de.cosmohdx.griefergames.feature.chat;
 
 import de.cosmohdx.griefergames.GrieferGames;
+import de.cosmohdx.griefergames.core.OutgoingMessageQueue;
 import de.cosmohdx.griefergames.feature.automation.ChatColor;
 import de.cosmohdx.griefergames.core.SubServerType;
 import net.labymod.api.client.component.Component;
@@ -14,18 +15,30 @@ import java.awt.*;
 public class GGMessageSendListener {
 
     private final GrieferGames griefergames;
+    private final OutgoingMessageQueue outgoing;
+    private final LongMessageSendHandler longMessages;
     private String lastMessage = "";
 
-    public GGMessageSendListener(GrieferGames griefergames) {
+    public GGMessageSendListener(GrieferGames griefergames, OutgoingMessageQueue outgoing,
+        LongMessageSendHandler longMessages) {
         this.griefergames = griefergames;
+        this.outgoing = outgoing;
+        this.longMessages = longMessages;
     }
 
     @Subscribe
     public void onSend(ChatMessageSendEvent event) {
+        if (longMessages.consumeControlMessage(event, event.getMessage())) {
+            return;
+        }
+        if (outgoing.claimFollowUp(event.getMessage())) {
+            return;
+        }
         if (!griefergames.state().isOnGrieferGames()) {
             return;
         }
         String msg = event.getMessage();
+        String messageForSplit = msg;
 
           if (griefergames.configuration().chat().preventCommandFailure()) {
               if (msg.startsWith("7") && !msg.equalsIgnoreCase(lastMessage)) {
@@ -40,8 +53,10 @@ public class GGMessageSendListener {
         if (griefergames.state().getSubServerType() == SubServerType.REGULAR) {
             ChatColor autoColor = griefergames.configuration().automations().autoColor();
             if (autoColor != ChatColor.NONE && !msg.startsWith("/") && !msg.startsWith(".") && !msg.startsWith("-")) {
-                if (!msg.startsWith("&" + autoColor.getColorCode()))
-                    event.changeMessage("&" + autoColor.getColorCode() + msg);
+                if (!msg.startsWith("&" + autoColor.getColorCode())) {
+                    messageForSplit = "&" + autoColor.getColorCode() + msg;
+                    event.changeMessage(messageForSplit);
+                }
             }
         }
 
@@ -67,5 +82,6 @@ public class GGMessageSendListener {
                 }
             }
         }
+        longMessages.handleOutgoing(event, messageForSplit);
     }
 }

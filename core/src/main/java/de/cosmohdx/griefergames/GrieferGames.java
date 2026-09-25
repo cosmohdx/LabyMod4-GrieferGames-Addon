@@ -6,6 +6,7 @@ import de.cosmohdx.griefergames.core.GGMessageCommand;
 import de.cosmohdx.griefergames.core.GrieferGamesConfig;
 import de.cosmohdx.griefergames.core.GrieferGamesController;
 import de.cosmohdx.griefergames.core.Helper;
+import de.cosmohdx.griefergames.core.OutgoingMessageQueue;
 import de.cosmohdx.griefergames.core.generated.DefaultReferenceStorage;
 import de.cosmohdx.griefergames.feature.afk.AfkListener;
 import de.cosmohdx.griefergames.feature.automation.AutoPortalListener;
@@ -23,8 +24,11 @@ import de.cosmohdx.griefergames.feature.chat.ChatTime;
 import de.cosmohdx.griefergames.feature.chat.GGKeyListener;
 import de.cosmohdx.griefergames.feature.chat.GGMessageReceiveListener;
 import de.cosmohdx.griefergames.feature.chat.GGMessageSendListener;
+import de.cosmohdx.griefergames.feature.chat.LastConversationPartner;
+import de.cosmohdx.griefergames.feature.chat.LongMessageSendHandler;
 import de.cosmohdx.griefergames.feature.chat.GGNameTagListener;
 import de.cosmohdx.griefergames.feature.chat.Mention;
+import de.cosmohdx.griefergames.feature.chat.MessageHeads;
 import de.cosmohdx.griefergames.feature.chat.News;
 import de.cosmohdx.griefergames.feature.chat.PrivateMessage;
 import de.cosmohdx.griefergames.feature.chat.Realname;
@@ -112,7 +116,12 @@ public class GrieferGames extends LabyAddon<GrieferGamesConfig> {
     new UserSubtitleListener(this);
     registerListener(new GGServerJoinListener(this));
     registerListener(new GGServerQuitListener(this));
-    registerListener(new GGMessageSendListener(this));
+    OutgoingMessageQueue outgoingMessages = new OutgoingMessageQueue(message -> this.sendMessage(message));
+    registerListener(outgoingMessages);
+    LastConversationPartner conversationPartner = new LastConversationPartner();
+    LongMessageSendHandler longMessages = new LongMessageSendHandler(this, outgoingMessages, conversationPartner);
+    registerListener(longMessages);
+    registerListener(new GGMessageSendListener(this, outgoingMessages, longMessages));
     registerListener(new GGMessageReceiveListener(this));
     registerListener(new GGKeyListener(this));
     registerListener(new GGNameTagListener(this));
@@ -127,7 +136,7 @@ public class GrieferGames extends LabyAddon<GrieferGamesConfig> {
     // Chat modules
     registerListener(new SecondChatRouterListener(this));
     registerListener(new Blanks(this));
-    registerListener(new PrivateMessage(this));
+    registerListener(new PrivateMessage(this, conversationPartner));
     registerListener(new Payment(this));
     registerListener(new Bank(this));
     registerListener(new AntiMagicClanTag(this));
@@ -144,6 +153,7 @@ public class GrieferGames extends LabyAddon<GrieferGamesConfig> {
     registerListener(new Nickname(this));
     registerListener(new Teleport(this));
     registerListener(new BoosterChatModule(this));
+    registerListener(new MessageHeads(this));
     registerListener(new ChatTime(this));
     registerListener(new WaitTime(this));
 

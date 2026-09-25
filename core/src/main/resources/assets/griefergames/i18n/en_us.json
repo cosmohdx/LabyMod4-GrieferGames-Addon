@@ -33,6 +33,26 @@
           "betterIgnoreList": {
             "name": "Better ignore list (1.8)",
             "description": "Show the ignore list across several easier-to-read lines."
+          },
+          "splitLongMessages": {
+            "name": "Split long messages (1.8)",
+            "description": "Split messages that are too long, on spaces only. A few parts at most, with a pause between them."
+          },
+          "splitMaxParts": {
+            "name": "Maximum parts",
+            "description": "Messages that would need more parts are not sent."
+          },
+          "splitDelaySeconds": {
+            "name": "Delay between parts",
+            "description": "Wait time in seconds. At least 2.5."
+          },
+          "splitConfirm": {
+            "name": "Confirm before sending",
+            "description": "Shows a clickable line before several parts are sent."
+          },
+          "splitPrivateMessages": {
+            "name": "Split private messages",
+            "description": "Applies to /msg and /r. /r is not split when the partner is unknown."
           }
         },
         "display": {
@@ -41,6 +61,22 @@
           "showPrefixInDisplayName": {
             "name": "Show colored prefix above players",
             "description": "Show the name above players in their prefix colors."
+          },
+          "showMessageHeads": {
+            "name": "Head in front of messages (1.8)",
+            "description": "Shows the sender's tab-list head in front of player messages."
+          },
+          "messageHeadsGlobal": {
+            "name": "Head in public chat",
+            "description": "Citybuild and global chat."
+          },
+          "messageHeadsPrivate": {
+            "name": "Head in private messages",
+            "description": "The sender for incoming messages, the partner for outgoing ones."
+          },
+          "messageHeadsPlot": {
+            "name": "Head in plot chat",
+            "description": "Messages in plot chat."
           }
         },
         "secondChat": {
@@ -441,7 +477,13 @@
       "citybuildJoin": "You are now on {citybuild}.",
       "afkMessage": "You are marked as AFK now.",
       "afkBackMessage": "You are marked as back now.",
-      "commandFailure": "Did you make a mistake? If not, send the message again."
+      "commandFailure": "Did you make a mistake? If not, send the message again.",
+      "splitTooLong": "The message is too long and was not sent.",
+      "splitAborted": "The remaining parts were not sent.",
+      "splitConfirmPrompt": "The message will be sent in {parts} parts.",
+      "splitConfirmSend": "Send",
+      "splitConfirmCancel": "Cancel",
+      "splitSending": "Sending part {n}/{total}."
     },
 
     "notifications": {

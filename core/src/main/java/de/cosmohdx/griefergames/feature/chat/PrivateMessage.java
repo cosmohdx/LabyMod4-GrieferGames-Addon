@@ -18,6 +18,7 @@ import java.util.regex.Pattern;
 
 public class PrivateMessage extends ChatModule {
   private final GrieferGames griefergames;
+  private final LastConversationPartner partners;
   // Routing uses the same formats from SecondChatCategory. These copies still capture the sender.
   private final Pattern privateMessageRegex = Pattern.compile("\\[([A-Za-z\\-\\+]+) \\u2503 (~?\\!?\\w{1,16}) -> mir\\] (.*)$");
   private final Pattern privateMessageRegexCloud = Pattern.compile("\\[([A-Za-z\\-\\+]+) \\u2503 (~?\\!?\\w{1,16}) -> (mir|me)\\] (.*)$");
@@ -25,8 +26,9 @@ public class PrivateMessage extends ChatModule {
   private long lastAfkMessage = 0;
   private final String CHAT_MESSAGE_SEPERATOR = "»";
 
-  public PrivateMessage(GrieferGames griefergames) {
+  public PrivateMessage(GrieferGames griefergames, LastConversationPartner partners) {
     this.griefergames = griefergames;
+    this.partners = partners;
   }
 
   @Subscribe
@@ -42,6 +44,7 @@ public class PrivateMessage extends ChatModule {
     // Auto AFK message reply
     if (isIncomingPrivateMessage) {
       String playerName = privateMessage.group(2);
+      this.partners.remember(playerName);
       if (griefergames.configuration().afk().replyToMessages() && griefergames.state().isAfk() && lastAfkMessage + 1000 <= System.currentTimeMillis()) {
         String message = griefergames.configuration().afk().replyText();
         if (!message.isBlank()) {
@@ -68,6 +71,7 @@ public class PrivateMessage extends ChatModule {
     // Outgoing private message
     Matcher privateMessageSent = privateMessageSentRegex.matcher(griefergames.helper().removeLeadingMiscCodes(event.getMessage().getPlainText()));
     if (privateMessageSent.find()) {
+      this.partners.remember(privateMessageSent.group(3));
       if (griefergames.configuration().chat().clickToReply() && griefergames.state().isSubServerType(SubServerType.REGULAR)) {
         addReplyAction(event.getMessage().component(), "§6 -> ", "§6] ", privateMessageSent.group(3));
       }

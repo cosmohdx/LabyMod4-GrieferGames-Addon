@@ -32,6 +32,26 @@
           "betterIgnoreList": {
             "name": "Verbesserte Ignorierliste (1.8)",
             "description": "Die Ignorierliste wird übersichtlicher in mehreren Zeilen dargestellt."
+          },
+          "splitLongMessages": {
+            "name": "Lange Nachrichten aufteilen (1.8)",
+            "description": "Teilt zu lange Nachrichten an Leerzeichen. Höchstens ein paar Teile, mit Abstand dazwischen."
+          },
+          "splitMaxParts": {
+            "name": "Maximale Teile",
+            "description": "Mehr Teile werden nicht gesendet."
+          },
+          "splitDelaySeconds": {
+            "name": "Abstand zwischen Teilen",
+            "description": "Wartezeit in Sekunden. Mindestens 2,5."
+          },
+          "splitConfirm": {
+            "name": "Vor dem Senden bestätigen",
+            "description": "Zeigt eine klickbare Zeile, bevor mehrere Teile gesendet werden."
+          },
+          "splitPrivateMessages": {
+            "name": "Private Nachrichten aufteilen",
+            "description": "Gilt für /msg und /r. Ohne bekannten Partner wird /r nicht aufgeteilt."
           }
         },
         "display": {
@@ -40,6 +60,22 @@
           "showPrefixInDisplayName": {
             "name": "Farbigen Prefix über Spielern anzeigen",
             "description": "Zeigt den Namen über Spielern in den Farben ihres Prefix an."
+          },
+          "showMessageHeads": {
+            "name": "Kopf vor Nachrichten (1.8)",
+            "description": "Zeigt vor Spielernachrichten den Kopf aus der Tabliste."
+          },
+          "messageHeadsGlobal": {
+            "name": "Kopf im öffentlichen Chat",
+            "description": "Citybuild- und Global-Chat."
+          },
+          "messageHeadsPrivate": {
+            "name": "Kopf in Privatnachrichten",
+            "description": "Eingehend der Absender, ausgehend der Gesprächspartner."
+          },
+          "messageHeadsPlot": {
+            "name": "Kopf im Plot-Chat",
+            "description": "Nachrichten im Plot-Chat."
           }
         },
         "secondChat": {
@@ -439,7 +475,13 @@
       "citybuildJoin": "Du bist nun auf {citybuild}.",
       "afkMessage": "Du wurdest als AFk erkannt.",
       "afkBackMessage": "Du wurdest als wieder zurück erkannt.",
-      "commandFailure": "Hast du dich vertippt? Wenn nicht, sende die Nachricht nochmal."
+      "commandFailure": "Hast du dich vertippt? Wenn nicht, sende die Nachricht nochmal.",
+      "splitTooLong": "Die Nachricht ist zu lang und wurde nicht gesendet.",
+      "splitAborted": "Die restlichen Teile wurden nicht gesendet.",
+      "splitConfirmPrompt": "Die Nachricht wird in {parts} Teilen gesendet.",
+      "splitConfirmSend": "Senden",
+      "splitConfirmCancel": "Abbrechen",
+      "splitSending": "Teil {n}/{total} wird gesendet."
     },
     "notifications": {
       "generalError": "Ein Fehler ist aufgetreten, weitere Informationen im Chat.",
