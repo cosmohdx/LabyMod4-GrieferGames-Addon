@@ -26,4 +26,10 @@
 .wiki-divider { width: 100%; height: 12; text-color: gray; font-size: 0.7; }
 .wiki-status { left: 4%; bottom: 4%; width: 92%; height: 16; text-color: gray; font-size: 0.75; }
 
-.wiki-tab-label, .wiki-tab-active { left: 50%; top: 50%; width: 94%; height: 17; alignment-x: center; alignment-y: center; text-align: center; text-color: white; font-size: 0.82; }
+.wiki-tab-label, .wiki-tab-active { left: 50%; top: 50%; width: 94%; alignment-x: center; alignment-y: center; text-align: center; text-color: white; font-size: 0.82; }
+
+.wiki-team-card { width: 100%; height: 155; overflow: hidden; }
+.wiki-team-image { left: 8; top: 7; width: 86; height: 139; object-fit: contain; }
+.wiki-team-rank { left: 105; top: 8; right: 8; height: 17; text-color: gold; font-size: 0.78; overflow-strategy: clip; }
+.wiki-team-name { left: 105; top: 27; right: 8; height: 24; text-color: white; font-size: 1.05; overflow-strategy: clip; }
+.wiki-team-roles { left: 105; top: 55; right: 8; height: 93; text-color: #cfcfcf; font-size: 0.70; overflow-strategy: wrap; }

@@ -34,6 +34,33 @@ class WikiSiteTest {
     assertTrue(page.blocks().stream().anyMatch(block -> block.text().equals("  • Unterpunkt")));
   }
   @Test
+  void preservesInlineLinksAndTeamCards() throws Exception {
+    String html = """
+      <aside class="wiki-sidebar" data-tab-id="allgemein"><nav class="wiki-nav"><ul class="wiki-nav-root"></ul></nav></aside>
+      <main class="wiki-content"><h1 class="wiki-page-title">Team</h1><div class="wiki-markdown-body">
+      <p>Besuche den <a href="https://discord.com/channels/example">Discord-Channel</a> auf unserem
+      <a href="https://discord.gg/example">Discord-Server</a>.</p>
+      <div class="wiki-cards-grid"><div class="wiki-card"><div class="wiki-card-body">
+      <div class="wiki-card-field"><div class="wiki-card-field-label">Rang</div><div class="wiki-card-field-value"><strong>Owner</strong></div></div>
+      <div class="wiki-card-field"><div class="wiki-card-field-label">Teammitglied</div><div class="wiki-card-field-value">
+      <a href="https://profile.griefergames.live/minecraft/0c05471f-c555-4f4a-8c36-d55e7e116afc">AbgegrieftHD</a></div></div>
+      <div class="wiki-card-field"><div class="wiki-card-field-label">Zuständigkeit</div><div class="wiki-card-field-value">
+      <ul><li><p><strong>Global</strong></p><ul><li>Servernetzwerkleitung</li><li>Marketing</li></ul></li></ul>
+      </div></div></div></div></div></main>
+      """;
+    var blocks = WikiSite.parse(html).blocks();
+    assertEquals(2, blocks.size());
+    assertEquals(2, blocks.get(0).links().size());
+    assertTrue(blocks.get(0).text().contains("Discord-Channel"));
+    var card = blocks.get(1).card();
+    assertEquals(WikiSite.Kind.CARD, blocks.get(1).kind());
+    assertEquals("Owner", card.rank());
+    assertEquals("AbgegrieftHD", card.name());
+    assertEquals("https://mc-heads.net/body/0c05471f-c555-4f4a-8c36-d55e7e116afc/100", card.imageUrl());
+    assertTrue(card.responsibilities().contains("Servernetzwerkleitung"));
+  }
+
+  @Test
   void blocksUnsafeRoutes() {
     assertNull(WikiSite.safeRoute("/admin"));
     assertNull(WikiSite.safeRoute("/cloud/../secret"));

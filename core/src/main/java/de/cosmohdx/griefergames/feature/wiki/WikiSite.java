@@ -12,6 +12,8 @@ import java.nio.file.StandardCopyOption;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.function.Consumer;
@@ -20,6 +22,7 @@ import net.labymod.api.Laby;
 /** Reads the current server-rendered wiki, including its three sections and navigation. */
 final class WikiSite {
   private static final URI ORIGIN = URI.create("https://wiki.griefergames.net/");
+  private static final Pattern UUID = Pattern.compile("[0-9a-fA-F]{8}-[0-9a-fA-F-]{27,36}");
   private static final HttpClient HTTP = HttpClient.newBuilder()
       .connectTimeout(Duration.ofSeconds(8)).followRedirects(HttpClient.Redirect.NORMAL).build();
   private static final ExecutorService WORKER = Executors.newSingleThreadExecutor(task -> {
@@ -40,9 +43,14 @@ final class WikiSite {
     }
   }
 
-  enum Kind { HEADING, PARAGRAPH, IMAGE, HINT, CODE, LINK, TABLE_ROW, DIVIDER }
+  enum Kind { HEADING, PARAGRAPH, IMAGE, HINT, CODE, LINK, TABLE_ROW, DIVIDER, CARD }
   record Link(String title, String href) {}
-  record Block(Kind kind, String text, String target, List<Link> links, int level) {}
+  record Card(String rank, String name, String imageUrl, String responsibilities, String profileUrl) {}
+  record Block(Kind kind, String text, String target, List<Link> links, int level, Card card) {
+    Block(Kind kind, String text, String target, List<Link> links, int level) {
+      this(kind, text, target, links, level, null);
+    }
+  }
   record NavEntry(String title, String route, String section, String parentRoute, int depth, boolean children) {}
   record Page(String title, String description, Tab tab, List<NavEntry> navigation, List<Block> blocks) {}
   record Result(Page page, String error) {}
@@ -176,6 +184,14 @@ final class WikiSite {
 
   private static void readBlock(WikiHtml.Node node, List<Block> blocks) {
     String tag = node.tag;
+    if (node.hasClass("wiki-cards-grid")) {
+      for (WikiHtml.Node cardNode : node.children()) {
+        if (!cardNode.hasClass("wiki-card")) continue;
+        Card card = readCard(cardNode);
+        if (card != null) blocks.add(new Block(Kind.CARD, card.name(), "", List.of(), 0, card));
+      }
+      return;
+    }
     if (tag.matches("h[1-6]")) {
       blocks.add(new Block(Kind.HEADING, node.text().replaceFirst("^#\\s*", ""), "", List.of(),
           Integer.parseInt(tag.substring(1))));
@@ -247,6 +263,49 @@ final class WikiSite {
       return;
     }
     for (WikiHtml.Node child : node.children()) readBlock(child, blocks);
+  }
+
+  private static Card readCard(WikiHtml.Node cardNode) {
+    String rank = "";
+    String name = "";
+    String responsibilities = "";
+    String profile = "";
+    for (WikiHtml.Node field : cardNode.descendants("div")) {
+      if (!field.hasClass("wiki-card-field")) continue;
+      WikiHtml.Node label = field.firstClass("wiki-card-field-label");
+      WikiHtml.Node value = field.firstClass("wiki-card-field-value");
+      if (label == null || value == null) continue;
+      switch (label.text().toLowerCase(java.util.Locale.ROOT)) {
+        case "rang" -> rank = value.text();
+        case "teammitglied" -> {
+          name = value.text();
+          List<WikiHtml.Node> anchors = value.descendants("a");
+          if (!anchors.isEmpty()) profile = resolveLink(anchors.get(0).attr("href"));
+        }
+        case "zuständigkeit" -> responsibilities = cardResponsibilities(value);
+      }
+    }
+    if (name.isBlank()) return null;
+    Matcher uuid = UUID.matcher(profile == null ? "" : profile);
+    String image = uuid.find() ? "https://mc-heads.net/body/" + uuid.group() + "/100" : "";
+    return new Card(rank, name, image, responsibilities, profile);
+  }
+
+  private static String cardResponsibilities(WikiHtml.Node field) {
+    WikiHtml.Node list = field.first("ul");
+    if (list == null) return field.text();
+    List<String> sections = new ArrayList<>();
+    for (WikiHtml.Node group : list.children()) {
+      if (!group.tag.equals("li")) continue;
+      String area = group.textWithoutNestedLists();
+      List<String> tasks = new ArrayList<>();
+      for (WikiHtml.Node leaf : group.descendants("li")) {
+        String task = leaf.textWithoutNestedLists();
+        if (!task.isBlank()) tasks.add(task);
+      }
+      sections.add(area + (tasks.isEmpty() ? "" : ": " + String.join(" · ", tasks)));
+    }
+    return String.join("  |  ", sections);
   }
 
   private static void readList(WikiHtml.Node list, List<Block> blocks, int depth) {

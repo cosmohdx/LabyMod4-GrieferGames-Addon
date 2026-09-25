@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Set;
 import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
+import net.labymod.api.client.component.event.ClickEvent;
+import net.labymod.api.client.component.format.NamedTextColor;
+import net.labymod.api.client.component.format.TextDecoration;
 import net.labymod.api.client.gui.icon.Icon;
 import net.labymod.api.client.resources.ResourceLocation;
 import net.labymod.api.client.gui.screen.Parent;
@@ -23,6 +26,7 @@ import net.labymod.api.client.gui.screen.widget.attributes.ObjectFitType;
 @AutoActivity
 @Link("wiki.lss")
 public final class WikiActivity extends SimpleActivity {
+  private static WikiActivity current;
   private WikiSite.Tab tab = WikiSite.Tab.GENERAL;
   private WikiSite.Page page;
   private String route = WikiSite.Tab.GENERAL.route;
@@ -40,6 +44,7 @@ public final class WikiActivity extends SimpleActivity {
   @Override
   public void initialize(Parent parent) {
     this.closed = false;
+    current = this;
     super.initialize(parent);
     ComponentWidget brand = ComponentWidget.text("GRIEFERGAMES  /  WIKI");
     brand.addId("wiki-brand");
@@ -70,6 +75,7 @@ public final class WikiActivity extends SimpleActivity {
     this.clearNavigation();
     this.clearArticle();
     this.status = null;
+    if (current == this) current = null;
     super.onCloseScreen();
   }
 
@@ -87,6 +93,10 @@ public final class WikiActivity extends SimpleActivity {
       this.tabWidgets[index] = widget;
       this.document().addChildInitialized(widget);
     }
+  }
+
+  static void navigate(String route) {
+    if (current != null && !current.closed) current.showRoute(route);
   }
 
   private void showRoute(String next) {
@@ -158,7 +168,10 @@ public final class WikiActivity extends SimpleActivity {
       WikiPanelWidget row = new WikiPanelWidget(active ? 0xFF503522 : 0x00242424,
           active ? 0xFFED7900 : 0, 5);
       row.addId("wiki-row");
-      row.setPressable(() -> this.showRoute(entry.route()));
+      row.setPressable(() -> {
+        if (entry.children()) this.expanded.add(entry.route());
+        this.showRoute(entry.route());
+      });
       ComponentWidget label = ComponentWidget.text("  ".repeat(Math.min(entry.depth(), 4)) + entry.title());
       label.addId(active ? "wiki-row-active" : "wiki-row-label");
       row.addChild(label);
@@ -209,12 +222,16 @@ public final class WikiActivity extends SimpleActivity {
         image.addId("wiki-image");
         image.objectFit().set(ObjectFitType.CONTAIN);
         content.addChild(image);
+      } else if (block.kind() == WikiSite.Kind.CARD && block.card() != null) {
+        content.addChild(this.teamCard(block.card()));
       } else if (block.kind() == WikiSite.Kind.DIVIDER) {
         ComponentWidget divider = ComponentWidget.text("────────────────────────────");
         divider.addId("wiki-divider");
         content.addChild(divider);
       } else if (!block.text().isBlank()) {
-        ComponentWidget line = ComponentWidget.text(block.text());
+        ComponentWidget line = block.links().isEmpty()
+            ? ComponentWidget.text(block.text())
+            : ComponentWidget.component(this.linkedText(block));
         line.addId(switch (block.kind()) {
           case HEADING -> block.level() <= 2 ? "wiki-heading" : "wiki-subheading";
           case HINT -> "wiki-hint";
@@ -226,17 +243,54 @@ public final class WikiActivity extends SimpleActivity {
         if (block.kind() == WikiSite.Kind.LINK) line.setPressable(() -> this.follow(block.target()));
         content.addChild(line);
       }
-      for (WikiSite.Link link : block.links()) {
-        ComponentWidget button = ComponentWidget.text("› " + link.title());
-        button.addId("wiki-article-link");
-        button.setPressable(() -> this.follow(link.href()));
-        content.addChild(button);
-      }
     }
     this.clearArticle();
     this.article = new ScrollWidget(content);
     this.article.addId("wiki-article");
     this.document().addChildInitialized(this.article);
+  }
+
+  private Widget teamCard(WikiSite.Card card) {
+    WikiPanelWidget panel = new WikiPanelWidget(0xE8262626, 0xFF414141, 7);
+    panel.addId("wiki-team-card");
+    if (card.profileUrl() != null && !card.profileUrl().isBlank())
+      panel.setPressable(() -> this.follow(card.profileUrl()));
+    if (!card.imageUrl().isBlank()) {
+      IconWidget image = new IconWidget(Icon.url(card.imageUrl()));
+      image.addId("wiki-team-image");
+      image.objectFit().set(ObjectFitType.CONTAIN);
+      panel.addChild(image);
+    }
+    ComponentWidget rank = ComponentWidget.text(card.rank());
+    rank.addId("wiki-team-rank");
+    panel.addChild(rank);
+    ComponentWidget name = ComponentWidget.text(card.name());
+    name.addId("wiki-team-name");
+    panel.addChild(name);
+    ComponentWidget roles = ComponentWidget.text(card.responsibilities());
+    roles.addId("wiki-team-roles");
+    panel.addChild(roles);
+    return panel;
+  }
+
+  private Component linkedText(WikiSite.Block block) {
+    Component result = Component.empty();
+    String text = block.text();
+    int cursor = 0;
+    for (WikiSite.Link link : block.links()) {
+      if (link.title().isBlank()) continue;
+      int start = text.indexOf(link.title(), cursor);
+      if (start < 0) continue;
+      if (start > cursor) result = result.append(Component.text(text.substring(cursor, start)));
+      String target = link.href();
+      ClickEvent click = target.startsWith("/")
+          ? ClickEvent.runCommand("/ggwiki " + target) : ClickEvent.openUrl(target);
+      result = result.append(Component.text(link.title(), NamedTextColor.GOLD)
+          .decorate(TextDecoration.UNDERLINED).clickEvent(click));
+      cursor = start + link.title().length();
+    }
+    if (cursor < text.length()) result = result.append(Component.text(text.substring(cursor)));
+    return result;
   }
 
   private void follow(String target) {
