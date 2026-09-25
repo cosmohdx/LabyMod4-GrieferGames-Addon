@@ -44,7 +44,6 @@
 | CityBuild in LabyChat | ✓ | ✓ |
 | CityBuild in Discord | ✓ | ✓ |
 | Nickname-HUD | ✓ | |
-| Redstone-HUD (MysteryMod) | ✓ | ✓ |
 | Fly-HUD | ✓ | ✓ |
 | Delay-HUD | ✓ | ✓ |
 | Subserver-HUD | ✓ | ✓ |

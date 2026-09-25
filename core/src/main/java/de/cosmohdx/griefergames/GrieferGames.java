@@ -39,10 +39,8 @@ import de.cosmohdx.griefergames.feature.payment.Payment;
 import de.cosmohdx.griefergames.feature.server.FlyHudWidget;
 import de.cosmohdx.griefergames.feature.server.GGScoreboardListener;
 import de.cosmohdx.griefergames.feature.server.GGServerJoinListener;
-import de.cosmohdx.griefergames.feature.server.GGServerMessageListener;
 import de.cosmohdx.griefergames.feature.server.GGServerQuitListener;
 import de.cosmohdx.griefergames.feature.server.GGSubServerChangeListener;
-import de.cosmohdx.griefergames.feature.server.RedstoneHudWidget;
 import de.cosmohdx.griefergames.feature.server.SubServerHUDWidget;
 import net.labymod.api.addon.LabyAddon;
 import net.labymod.api.client.chat.ChatMessage;
@@ -78,7 +76,6 @@ public class GrieferGames extends LabyAddon<GrieferGamesConfig> {
   private HudWidgetCategory hudWidgetCategory = null;
   private String nickname = null;
   private double income = 0;
-  private boolean redstoneActive = false;
   private long waitTime = 0;
   private boolean citybuildDelay = false;
   private String subServer = "";
@@ -107,7 +104,6 @@ public class GrieferGames extends LabyAddon<GrieferGamesConfig> {
     registerListener(new GGMessageSendListener(this));
     registerListener(new GGMessageReceiveListener(this));
     registerListener(new GGKeyListener(this));
-    registerListener(new GGServerMessageListener(this));
     registerListener(new GGScoreboardListener(this));
     registerListener(new GGSubServerChangeListener(this));
     registerListener(new GGTickListener(this));
@@ -139,7 +135,6 @@ public class GrieferGames extends LabyAddon<GrieferGamesConfig> {
     labyAPI().hudWidgetRegistry().categoryRegistry().register(hudWidgetCategory);
     labyAPI().hudWidgetRegistry().register(new IncomeHudWidget(this));
     labyAPI().hudWidgetRegistry().register(new NicknameHudWidget(this));
-    labyAPI().hudWidgetRegistry().register(new RedstoneHudWidget(this));
     labyAPI().hudWidgetRegistry().register(new DelayHudWidget(this));
     labyAPI().hudWidgetRegistry().register(new FlyHudWidget(this));
     labyAPI().hudWidgetRegistry().register(new BoosterHudWidget(this));
@@ -235,13 +230,6 @@ public class GrieferGames extends LabyAddon<GrieferGamesConfig> {
   }
   public void addIncome(double income) {
     this.income += income;
-  }
-
-  public boolean isRedstoneActive() {
-    return redstoneActive;
-  }
-  public void setRedstoneActive(boolean redstoneActive) {
-    this.redstoneActive = redstoneActive;
   }
 
   public long getWaitTime() {

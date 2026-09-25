@@ -4,6 +4,7 @@ import de.cosmohdx.griefergames.GrieferGames;
 import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.format.NamedTextColor;
+import net.labymod.api.client.network.server.ServerData;
 import net.labymod.api.event.Subscribe;
 import net.labymod.api.labyconnect.LabyConnectSession;
 import net.labymod.api.thirdparty.discord.DiscordActivity;
@@ -39,11 +40,11 @@ public class GGSubServerChangeListener {
 
     if (griefergames.configuration().friends().isEnabled()
         && griefergames.configuration().friends().labyChatShowSubServerEnabled().get()
-        && Laby.references().labyConnect().isConnected()) {
+        && Laby.references().labyConnect().isAuthenticated()) {
       LabyConnectSession session = Laby.references().labyConnect().getSession();
-      if (session != null) {
-        // Public LabyConnect API no longer exposes the old server-status packet.
-        // Discord RPC still carries the current sub-server.
+      ServerData serverData = Laby.labyAPI().serverController().getCurrentServerData();
+      if (session != null && serverData != null) {
+        session.sendCurrentServer(serverData, "GrieferGames " + formattedServerName, false);
       }
     }
 

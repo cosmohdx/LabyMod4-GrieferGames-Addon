@@ -20,11 +20,11 @@ public class GGNameTagListener {
   public void onRender(PlayerNameTagRenderEvent event) {
     if (!griefergames.isOnGrieferGames()) return;
     if (!griefergames.configuration().chatConfig().isShowPrefixInDisplayName()) return;
-    NetworkPlayerInfo playerInfo = event.playerInfo();
+    NetworkPlayerInfo playerInfo = event.getPlayerInfo();
     if (playerInfo == null) return;
     if (event.tagType() != TagType.MAIN_TAG) return;
     if (playerInfo.displayName() instanceof TextComponent) {
-      event.setNameTag(removeMarker((TextComponent) event.playerInfo().displayName()));
+      event.setNameTag(removeMarker((TextComponent) playerInfo.displayName()));
     }
   }
 
