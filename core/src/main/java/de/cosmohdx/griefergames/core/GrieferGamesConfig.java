@@ -18,6 +18,7 @@ import net.labymod.api.configuration.loader.annotation.ConfigName;
 import net.labymod.api.configuration.loader.annotation.SpriteSlot;
 import net.labymod.api.configuration.loader.annotation.SpriteTexture;
 import net.labymod.api.configuration.loader.property.ConfigProperty;
+import net.labymod.api.configuration.settings.annotation.SettingDevelopment;
 import net.labymod.api.models.OperatingSystem;
 import net.labymod.api.util.MethodOrder;
 
@@ -63,10 +64,14 @@ public class GrieferGamesConfig extends AddonConfig {
   @SpriteSlot(x = 5, y = 1)
   private final ItemListConfig itemList = new ItemListConfig();
 
+  @SettingDevelopment
+  @SpriteSlot(x = 1, y = 0)
+  private final DevConfig dev = new DevConfig();
+
   // Link buttons stay below every feature config. New configs go above this
   // block, and openGithub keeps after = the last feature field.
   @SpriteSlot(x = 7, y = 0)
-  @MethodOrder(after = "itemList")
+  @MethodOrder(after = "dev")
   @ButtonSetting
   public void openGithub() {
     OperatingSystem.getPlatform().openUrl("https://github.com/cosmohdx/LabyMod4-GrieferGames-Addon");
@@ -134,5 +139,9 @@ public class GrieferGamesConfig extends AddonConfig {
 
   public ItemListConfig itemList() {
     return this.itemList;
+  }
+
+  public DevConfig dev() {
+    return this.dev;
   }
 }

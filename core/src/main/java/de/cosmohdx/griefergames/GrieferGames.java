@@ -208,14 +208,10 @@ public class GrieferGames extends LabyAddon<GrieferGamesConfig> {
   }
 
   public void sendToSecondChat(String msg) {
-    if (state.getSecondChat() == null) {
-      return;
-    }
-    AdvancedChatMessage chatMessage = AdvancedChatMessage.chat(ChatMessage.builder()
+    this.helper().displayInSecondChat(AdvancedChatMessage.chat(ChatMessage.builder()
         .component(Component.text(msg))
         .visibility(ChatVisibility.SHOWN)
-        .build());
-    state.getSecondChat().handleInput(chatMessage);
+        .build()));
   }
 
   public void displayAddonMessage(String message) {

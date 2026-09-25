@@ -11,6 +11,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import net.labymod.api.Laby;
+import net.labymod.api.client.chat.advanced.IngameChatTab;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.configuration.labymod.chat.AdvancedChatMessage;
 
@@ -53,8 +54,22 @@ public class Helper {
     if(griefergames.configuration().chat().useChatIndicators()) {
       griefergames.state().getSecondChat().handleInput(message);
     }else{
-      griefergames.state().getSecondChat().getMessages().add(0, message);
+      this.prependWithoutIndicator(griefergames.state().getSecondChat(), message);
     }
+  }
+
+  /**
+   * Inserts a line without going through LabyMod's tab input, so the unread badge does not move.
+   * The same history limit as {@code IngameChatTab#handleInput} still applies.
+   */
+  private void prependWithoutIndicator(IngameChatTab tab, AdvancedChatMessage message) {
+    Integer limit = tab.config().chatLimit().get();
+    if (limit != null) {
+      for (int i = tab.getMessages().size(); i >= limit; i--) {
+        tab.getMessages().remove(i - 1);
+      }
+    }
+    tab.getMessages().add(0, message);
   }
 
   /**

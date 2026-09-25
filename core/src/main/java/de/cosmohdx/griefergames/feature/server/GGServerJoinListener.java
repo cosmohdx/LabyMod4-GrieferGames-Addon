@@ -3,6 +3,7 @@ package de.cosmohdx.griefergames.feature.server;
 import de.cosmohdx.griefergames.GrieferGames;
 import de.cosmohdx.griefergames.core.SubServerType;
 import de.cosmohdx.griefergames.feature.subserver.NetworkTypeUpdater;
+import de.cosmohdx.griefergames.payload.PayloadDebug;
 import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.format.NamedTextColor;
@@ -25,9 +26,11 @@ public class GGServerJoinListener {
   @Subscribe
   public void onServerJoin(ServerJoinEvent event) {
     NetworkTypeUpdater.apply(griefergames, SubServerType.UNKNOWN);
-    if(event.serverData().address().getHost().toLowerCase().endsWith("griefergames.net") ||
-        event.serverData().address().getHost().toLowerCase().endsWith("griefergames.de") ||
-        event.serverData().address().getHost().toLowerCase().endsWith("griefergames.live")) {
+    String host = event.serverData().address().getHost().toLowerCase();
+    boolean onGrieferGames = host.endsWith("griefergames.net")
+        || host.endsWith("griefergames.de")
+        || host.endsWith("griefergames.live");
+    if (onGrieferGames) {
       griefergames.state().setOnGrieferGames(true);
       griefergames.state().setLastActivity(System.currentTimeMillis());
       griefergames.state().setAfk(false);
@@ -47,5 +50,8 @@ public class GGServerJoinListener {
             .icon(Icon.texture(ResourceLocation.create(griefergames.namespace(), "textures/error.png"))).build());
       }
     }
+    PayloadDebug.log(griefergames, onGrieferGames
+        ? "joined " + host + ", incoming payloads are accepted"
+        : "joined " + host + ", incoming payloads stay dropped");
   }
 }

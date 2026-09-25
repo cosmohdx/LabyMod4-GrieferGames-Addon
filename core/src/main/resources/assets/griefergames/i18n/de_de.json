@@ -488,11 +488,6 @@
       "itemList": {
         "name": "Itemliste",
         "description": "Übersicht der GrieferGames-Items.",
-        "header": {
-          "source": {
-            "name": "Quelle\nhttps://raw.githubusercontent.com/Syntax-Official/GGItems/main/Items.json\nhttps://raw.githubusercontent.com/Syntax-Official/GGItems/main/categories.json"
-          }
-        },
         "autoUpdate": {
           "name": "Automatische Updates",
           "description": "Lädt die Itemliste beim Öffnen neu. Sonst bleibt die mitgelieferte Liste."
@@ -504,6 +499,17 @@
         "open": {
           "name": "Itemliste",
           "text": "Öffnen"
+        },
+        "source": {
+          "name": "Quelle"
+        }
+      },
+      "dev": {
+        "name": "Entwicklung",
+        "description": "Nur im Entwicklungsclient.",
+        "logPayloads": {
+          "name": "Payloads loggen",
+          "description": "Schreibt ankommende Payloads ins Log, auch wenn sie vor dem Join verworfen werden."
         }
       },
       "openWebsite": {

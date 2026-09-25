@@ -262,13 +262,8 @@ public final class SecondChatTabs {
       return false;
     }
     if (chat.useChatIndicators()) {
-      if (filters.isEmpty()) {
-        return false;
-      }
-      if (chat.manageSecondChatFilters()) {
-        filters.clear();
-        return true;
-      }
+      // The legacy tag matches nothing, so handleInput would drop every line and the unread
+      // badge would stay at zero. User filters on this tab stay in place.
       return filters.removeIf(this::isLegacyFilter);
     }
     if (!chat.manageSecondChatFilters() || !filters.isEmpty()) {

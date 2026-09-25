@@ -69,7 +69,7 @@ public class PayloadReceiver {
 
   @Subscribe
   public void onNetworkPayload(NetworkPayloadEvent event) {
-    if (event.side() != Side.RECEIVE || !griefergames.state().isOnGrieferGames()) {
+    if (event.side() != Side.RECEIVE) {
       return;
     }
     ResourceLocation identifier = event.identifier();
@@ -80,7 +80,15 @@ public class PayloadReceiver {
       if (!sameChannel(channel.identifier(), identifier)) {
         continue;
       }
-      dispatch(channel, event.getPayload());
+      byte[] raw = event.getPayload();
+      if (!griefergames.state().isOnGrieferGames()) {
+        PayloadDebug.log(griefergames, "dropped " + channelName(channel)
+            + " id=" + PayloadLog.peekId(raw)
+            + " (" + (raw == null ? 0 : raw.length) + " bytes)"
+            + " because the client is not on GrieferGames yet");
+        return;
+      }
+      dispatch(channel, raw);
       return;
     }
   }
@@ -90,17 +98,23 @@ public class PayloadReceiver {
     try {
       decoded = channel.decode(raw);
     } catch (IOException | RuntimeException exception) {
+      String detail = channelName(channel);
+      if (PayloadDebug.active(griefergames)) {
+        detail += " (" + (raw == null ? 0 : raw.length) + " bytes, hex=" + PayloadLog.hexPrefix(raw) + ")";
+      }
       griefergames.logger().warn(
-          GrieferGames.LOG_PREFIX + "Could not decode payload on "
-              + channel.identifier().getNamespace() + ":" + channel.identifier().getPath(),
+          GrieferGames.LOG_PREFIX + "Could not decode payload on " + detail,
           exception
       );
       return;
     }
     if (decoded.isEmpty()) {
+      PayloadDebug.log(griefergames, "ignored " + channelName(channel)
+          + " id=" + PayloadLog.peekId(raw));
       return;
     }
     ClientPayload payload = decoded.get();
+    PayloadDebug.log(griefergames, channelName(channel) + " " + PayloadLog.describe(payload));
     logUnknownOnce(channel, payload);
     deliver(payload);
   }
@@ -113,6 +127,7 @@ public class PayloadReceiver {
     if (payload == null) {
       return;
     }
+    PayloadDebug.log(griefergames, "local " + PayloadLog.describe(payload));
     deliver(payload);
   }
 
@@ -144,6 +159,11 @@ public class PayloadReceiver {
               + ". Subscribe to UnknownPayload or MysteryModMessage, or register a codec."
       );
     }
+  }
+
+  private static String channelName(IncomingPayloadChannel channel) {
+    ResourceLocation identifier = channel.identifier();
+    return identifier.getNamespace() + ":" + identifier.getPath();
   }
 
   private static boolean sameChannel(ResourceLocation registered, ResourceLocation incoming) {

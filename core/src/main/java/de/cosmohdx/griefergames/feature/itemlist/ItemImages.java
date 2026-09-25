@@ -33,6 +33,14 @@ public final class ItemImages {
   private static final String ITEMS_FILE = "Items.json";
   private static final String CATEGORIES_FILE = "categories.json";
 
+  public static String itemsUrl() {
+    return SOURCE + ITEMS_FILE;
+  }
+
+  public static String categoriesUrl() {
+    return SOURCE + CATEGORIES_FILE;
+  }
+
   private final ItemCatalog catalog = new ItemCatalog();
   private final AtomicBoolean refreshRunning = new AtomicBoolean();
   private final HttpClient httpClient = HttpClient.newBuilder()

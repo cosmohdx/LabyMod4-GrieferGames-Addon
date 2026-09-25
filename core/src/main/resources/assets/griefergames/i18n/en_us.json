@@ -64,7 +64,7 @@
           },
           "chatIndicators": {
             "name": "Beta: Use chat indicators",
-            "description": "Show unread messages on the chat tab. Filters set on the tab then also apply to moved messages."
+            "description": "Show unread messages as a number on the chat tab. The number still counts when another tab filters the same lines. Filters on this tab still apply to moved messages."
           },
           "header": {
             "categories": {
@@ -489,11 +489,6 @@
       "itemList": {
         "name": "Item list",
         "description": "Overview of the GrieferGames items.",
-        "header": {
-          "source": {
-            "name": "Source\nhttps://raw.githubusercontent.com/Syntax-Official/GGItems/main/Items.json\nhttps://raw.githubusercontent.com/Syntax-Official/GGItems/main/categories.json"
-          }
-        },
         "autoUpdate": {
           "name": "Automatic updates",
           "description": "Refreshes the item list when it is opened. Otherwise the bundled list stays."
@@ -505,6 +500,17 @@
         "open": {
           "name": "Item list",
           "text": "Open"
+        },
+        "source": {
+          "name": "Source"
+        }
+      },
+      "dev": {
+        "name": "Development",
+        "description": "Development client only.",
+        "logPayloads": {
+          "name": "Log payloads",
+          "description": "Writes incoming payloads to the log, including ones dropped before the join flag is set."
         }
       },
       "openWebsite": {
