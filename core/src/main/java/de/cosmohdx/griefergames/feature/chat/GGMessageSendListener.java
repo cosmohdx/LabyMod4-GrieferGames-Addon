@@ -22,7 +22,7 @@ public class GGMessageSendListener {
 
     @Subscribe
     public void onSend(ChatMessageSendEvent event) {
-        if (!griefergames.isOnGrieferGames()) {
+        if (!griefergames.state().isOnGrieferGames()) {
             return;
         }
         String msg = event.getMessage();
@@ -37,7 +37,7 @@ public class GGMessageSendListener {
               }
           }
 
-        if (griefergames.getSubServerType() == SubServerType.REGULAR
+        if (griefergames.state().getSubServerType() == SubServerType.REGULAR
             && griefergames.configuration().automations().isEnabled()) {
             if (griefergames.configuration().automations().autoColor().get() != ChatColor.NONE && !msg.startsWith("/") && !msg.startsWith(".") && !msg.startsWith("-")) {
                 if (!msg.startsWith("&" + griefergames.configuration().automations().autoColor().get().getColorCode()))
@@ -45,7 +45,7 @@ public class GGMessageSendListener {
             }
         }
 
-        if (griefergames.getSubServerType() == SubServerType.CLOUD) {
+        if (griefergames.state().getSubServerType() == SubServerType.CLOUD) {
             if (griefergames.configuration().chatConfig().correctCommandCapitalisation().get()) {
                 if (msg.startsWith("/")) {
                     String[] parts = msg.split(" ");

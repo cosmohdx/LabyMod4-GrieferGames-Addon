@@ -28,15 +28,15 @@ public class IncomeHudWidget extends TextHudWidget<TextHudWidgetConfig> {
 
   @Override
   public void onTick(boolean isEditorContext) {
-    if(griefergames.getIncome() >= 0) {
-      line.updateAndFlush("$"+griefergames.getIncome());
+    if(griefergames.state().getIncome() >= 0) {
+      line.updateAndFlush("$"+griefergames.state().getIncome());
     } else {
-      line.updateAndFlush("§c$"+griefergames.getIncome());
+      line.updateAndFlush("§c$"+griefergames.state().getIncome());
     }
   }
 
   @Override
   public boolean isVisibleInGame() {
-    return griefergames.isOnGrieferGames() && griefergames.configuration().enabled().get() && griefergames.getIncome() != 0;
+    return griefergames.state().isOnGrieferGames() && griefergames.configuration().enabled().get() && griefergames.state().getIncome() != 0;
   }
 }

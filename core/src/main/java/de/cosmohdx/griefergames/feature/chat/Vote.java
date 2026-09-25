@@ -15,7 +15,7 @@ public class Vote extends ChatModule {
   @Subscribe
   public void messageProcessEvent(GGChatProcessEvent event) {
     if(event.isCancelled()) return;
-    if(!griefergames.isSubServerType(SubServerType.REGULAR)) return;
+    if(!griefergames.state().isSubServerType(SubServerType.REGULAR)) return;
     if (!griefergames.configuration().chatConfig().isHideVoteMessages()) return;
 
     String plain = event.getMessage().getPlainText();

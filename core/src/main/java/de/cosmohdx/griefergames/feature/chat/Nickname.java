@@ -17,14 +17,14 @@ public class Nickname {
 
   @Subscribe
   public void messageProcessEvent(GGChatProcessEvent event) {
-    if (griefergames.getSubServerType() == SubServerType.REGULAR) {
+    if (griefergames.state().getSubServerType() == SubServerType.REGULAR) {
       if (event.getMessage().getPlainText().isBlank()) return;
 
       Matcher nicknameMsg = nicknameMsgRegex.matcher(event.getMessage().getPlainText());
       if (nicknameMsg.find()) {
-        griefergames.setNickname(nicknameMsg.group(1));
+        griefergames.state().setNickname(nicknameMsg.group(1));
       } else if (event.getMessage().getPlainText().equalsIgnoreCase("[Nick] Dein Name wurde zurückgesetzt.")) {
-        griefergames.setNickname(null);
+        griefergames.state().setNickname(null);
       }
     }
   }

@@ -25,13 +25,13 @@ public class GGServerJoinListener {
     if(event.serverData().address().getHost().toLowerCase().endsWith("griefergames.net") ||
         event.serverData().address().getHost().toLowerCase().endsWith("griefergames.de") ||
         event.serverData().address().getHost().toLowerCase().endsWith("griefergames.live")) {
-      griefergames.setOnGrieferGames(true);
-      griefergames.setLastActivity(System.currentTimeMillis());
-      griefergames.setAfk(false);
-      griefergames.setWaitTime(0);
-      griefergames.setCitybuildDelay(false);
-      griefergames.setNickname(null);
-      griefergames.setHideBoosterMenu(false);
+      griefergames.state().setOnGrieferGames(true);
+      griefergames.state().setLastActivity(System.currentTimeMillis());
+      griefergames.state().setAfk(false);
+      griefergames.state().setWaitTime(0);
+      griefergames.state().setCitybuildDelay(false);
+      griefergames.state().setNickname(null);
+      griefergames.state().setHideBoosterMenu(false);
       griefergames.helper().findSecondChat(griefergames.configuration().chatConfig().getChatTabName());
 
       // Warn user when advanced chat is disabled.

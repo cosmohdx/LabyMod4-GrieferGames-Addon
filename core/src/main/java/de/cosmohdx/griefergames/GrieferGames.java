@@ -1,10 +1,10 @@
 package de.cosmohdx.griefergames;
 
+import de.cosmohdx.griefergames.core.AddonState;
 import de.cosmohdx.griefergames.core.GGMessageCommand;
 import de.cosmohdx.griefergames.core.GrieferGamesConfig;
 import de.cosmohdx.griefergames.core.GrieferGamesController;
 import de.cosmohdx.griefergames.core.Helper;
-import de.cosmohdx.griefergames.core.SubServerType;
 import de.cosmohdx.griefergames.core.generated.DefaultReferenceStorage;
 import de.cosmohdx.griefergames.feature.automation.DelayHudWidget;
 import de.cosmohdx.griefergames.feature.automation.GGTickListener;
@@ -44,14 +44,12 @@ import de.cosmohdx.griefergames.feature.server.GGSubServerChangeListener;
 import de.cosmohdx.griefergames.feature.server.SubServerHUDWidget;
 import net.labymod.api.addon.LabyAddon;
 import net.labymod.api.client.chat.ChatMessage;
-import net.labymod.api.client.chat.advanced.IngameChatTab;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.format.NamedTextColor;
 import net.labymod.api.client.gui.hud.binding.category.HudWidgetCategory;
 import net.labymod.api.client.options.ChatVisibility;
 import net.labymod.api.configuration.labymod.chat.AdvancedChatMessage;
 import net.labymod.api.models.addon.annotation.AddonMain;
-import org.jetbrains.annotations.Nullable;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -66,23 +64,12 @@ public class GrieferGames extends LabyAddon<GrieferGamesConfig> {
   public static final String LOG_PREFIX = "[GrieferGames-Addon] ";
 
   private static GrieferGames griefergames;
+  private final AddonState state = new AddonState();
   private Helper helper;
   private GrieferGamesController controller;
   private FileManager fileManager;
   private BoosterController boosterController;
-
-  private boolean onGrieferGames = false;
-  private IngameChatTab secondChat = null;
-  private HudWidgetCategory hudWidgetCategory = null;
-  private String nickname = null;
-  private double income = 0;
-  private long waitTime = 0;
-  private boolean citybuildDelay = false;
-  private String subServer = "";
-  private SubServerType subServerType = SubServerType.REGULAR;
-  private long lastActivity = 0;
-  private boolean afk = false;
-  private boolean hideBoosterMenu = false;
+  private HudWidgetCategory hudWidgetCategory;
   private final ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor(runnable -> {
     Thread thread = new Thread(runnable, "griefergames-addon");
     thread.setDaemon(true);
@@ -156,7 +143,7 @@ public class GrieferGames extends LabyAddon<GrieferGamesConfig> {
         .component(Component.text(msg))
         .visibility(ChatVisibility.SHOWN)
         .build());
-    secondChat.handleInput(chatMessage);
+    state.getSecondChat().handleInput(chatMessage);
   }
 
   public void displayAddonMessage(String message) {
@@ -191,98 +178,15 @@ public class GrieferGames extends LabyAddon<GrieferGamesConfig> {
     return boosterController;
   }
 
+  public AddonState state() {
+    return state;
+  }
 
   public String namespace() {
     return this.addonInfo().getNamespace();
   }
 
-  public boolean isOnGrieferGames() {
-    return onGrieferGames;
-  }
-  public void setOnGrieferGames(boolean onGrieferGames) {
-    this.onGrieferGames = onGrieferGames;
-  }
-
-  @Nullable
-  public IngameChatTab getSecondChat() {
-    return secondChat;
-  }
-  public void setSecondChat(@Nullable IngameChatTab secondChat) {
-    this.secondChat = secondChat;
-  }
-
   public HudWidgetCategory getHudWidgetCategory() {
     return hudWidgetCategory;
-  }
-
-  public String getNickname() {
-    return nickname;
-  }
-  public void setNickname(String nickname) {
-    this.nickname = nickname;
-  }
-
-  public double getIncome() {
-    return income;
-  }
-  public void setIncome(double income) {
-    this.income = income;
-  }
-  public void addIncome(double income) {
-    this.income += income;
-  }
-
-  public long getWaitTime() {
-    return waitTime;
-  }
-  public void setWaitTime(long waitTime) {
-    this.waitTime = waitTime;
-  }
-
-  public boolean isCitybuildDelay() {
-    return citybuildDelay;
-  }
-  public void setCitybuildDelay(boolean citybuildDelay) {
-    this.citybuildDelay = citybuildDelay;
-  }
-
-  public String getSubServer() {
-    return subServer;
-  }
-  public void setSubServer(String subServer) {
-    this.subServer = subServer;
-  }
-
-  public SubServerType getSubServerType() {
-    return subServerType;
-  }
-
-  public void setSubServerType(SubServerType subServerType) {
-    this.subServerType = subServerType;
-  }
-
-  public boolean isSubServerType(SubServerType subServerType) {
-    return this.subServerType == subServerType;
-  }
-
-  public long getLastActivity() {
-    return lastActivity;
-  }
-  public void setLastActivity(long lastActivity) {
-    this.lastActivity = lastActivity;
-  }
-
-  public boolean isAfk() {
-    return afk;
-  }
-  public void setAfk(boolean afk) {
-    this.afk = afk;
-  }
-
-  public boolean isHideBoosterMenu() {
-    return hideBoosterMenu;
-  }
-  public void setHideBoosterMenu(boolean hideBoosterMenu) {
-    this.hideBoosterMenu = hideBoosterMenu;
   }
 }

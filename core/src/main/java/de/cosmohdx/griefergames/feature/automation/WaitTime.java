@@ -19,13 +19,13 @@ public class WaitTime extends ChatModule {
 
   @Subscribe
   public void messageProcessEvent(GGChatProcessEvent event) {
-    if (griefergames.getSubServerType() == SubServerType.REGULAR) {
+    if (griefergames.state().getSubServerType() == SubServerType.REGULAR) {
       String plain = event.getMessage().getPlainText();
       if (plain.isBlank()) return;
 
       if (plain.startsWith("Der Server ist voll.") || plain.equalsIgnoreCase("Der Server ist gerade im Wartungsmodus.")) {
-        if (!griefergames.isCitybuildDelay()) {
-          griefergames.setWaitTime(System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(12));
+        if (!griefergames.state().isCitybuildDelay()) {
+          griefergames.state().setWaitTime(System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(12));
         }
       }
 
@@ -33,8 +33,8 @@ public class WaitTime extends ChatModule {
       if (matcher.find()) {
         try {
           long delay = TimeUnit.MINUTES.toMillis(Integer.parseInt(matcher.group(1)));
-          griefergames.setWaitTime(System.currentTimeMillis() + delay);
-          griefergames.setCitybuildDelay(true);
+          griefergames.state().setWaitTime(System.currentTimeMillis() + delay);
+          griefergames.state().setCitybuildDelay(true);
         } catch (NumberFormatException e) {
         }
       }

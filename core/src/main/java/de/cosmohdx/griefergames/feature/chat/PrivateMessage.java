@@ -41,7 +41,7 @@ public class PrivateMessage extends ChatModule {
     // Auto AFK message reply
     if (isIncomingPrivateMessage) {
       String playerName = privateMessage.group(2);
-      if (griefergames.configuration().automations().afkConfig().afkMsgReply().get() && griefergames.isAfk() && lastAfkMessage + 1000 <= System.currentTimeMillis()) {
+      if (griefergames.configuration().automations().afkConfig().afkMsgReply().get() && griefergames.state().isAfk() && lastAfkMessage + 1000 <= System.currentTimeMillis()) {
         String message = griefergames.configuration().automations().afkConfig().afkMsgText().get();
         if (!message.isBlank()) {
           griefergames.sendMessage("/msg " + playerName + " " + message);
@@ -54,7 +54,7 @@ public class PrivateMessage extends ChatModule {
     if (isIncomingPrivateMessage) {
       String playerName = privateMessage.group(2);
 
-      if (griefergames.configuration().chatConfig().isClickToReply() && griefergames.isSubServerType(SubServerType.REGULAR)) {
+      if (griefergames.configuration().chatConfig().isClickToReply() && griefergames.state().isSubServerType(SubServerType.REGULAR)) {
         addReplyAction(event.getMessage().component(), "§6[", "§6 -> ", playerName);
       }
 
@@ -71,7 +71,7 @@ public class PrivateMessage extends ChatModule {
     // Outgoing private message
     Matcher privateMessageSent = privateMessageSentRegex.matcher(griefergames.helper().removeLeadingMiscCodes(event.getMessage().getPlainText()));
     if (privateMessageSent.find()) {
-      if (griefergames.configuration().chatConfig().isClickToReply() && griefergames.isSubServerType(SubServerType.REGULAR)) {
+      if (griefergames.configuration().chatConfig().isClickToReply() && griefergames.state().isSubServerType(SubServerType.REGULAR)) {
         addReplyAction(event.getMessage().component(), "§6 -> ", "§6] ", privateMessageSent.group(3));
       }
 

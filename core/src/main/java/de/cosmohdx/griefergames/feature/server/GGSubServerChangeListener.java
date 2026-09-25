@@ -49,10 +49,10 @@ public class GGSubServerChangeListener {
     }
 
     if (griefergames.helper().isCityBuild(event.subServerName())) {
-      if (!griefergames.isCitybuildDelay()) {
-        griefergames.setWaitTime(System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(15));
+      if (!griefergames.state().isCitybuildDelay()) {
+        griefergames.state().setWaitTime(System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(15));
       }
-      griefergames.setCitybuildDelay(false);
+      griefergames.state().setCitybuildDelay(false);
       if (griefergames.configuration().automations().isSendSubServerEnabled()) {
         griefergames.displayAddonMessage(Component.text(
             I18n.translate(griefergames.namespace() + ".messages.citybuildJoin")
@@ -61,12 +61,12 @@ public class GGSubServerChangeListener {
         ));
       }
     } else if (event.subServerName().equals("portal")) {
-      if (!griefergames.isCitybuildDelay()) {
-        griefergames.setWaitTime(System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(12));
+      if (!griefergames.state().isCitybuildDelay()) {
+        griefergames.state().setWaitTime(System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(12));
       }
     } else if (event.subServerName().equals("skyblock")) {
-      if (!griefergames.isCitybuildDelay()) {
-        griefergames.setWaitTime(System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(15));
+      if (!griefergames.state().isCitybuildDelay()) {
+        griefergames.state().setWaitTime(System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(15));
       }
     } else if (event.subServerName().equals("lobby")) {
       if (griefergames.configuration().automations().isAutoPortalEnabled()) {

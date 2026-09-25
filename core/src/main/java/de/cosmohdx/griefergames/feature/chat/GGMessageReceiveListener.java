@@ -22,7 +22,7 @@ public class GGMessageReceiveListener {
 
   @Subscribe
   public void onMessage(ChatReceiveEvent event) {
-    if(!griefergames.isOnGrieferGames()) return;
+    if(!griefergames.state().isOnGrieferGames()) return;
     //System.out.println(GsonComponentSerializer.gson().serialize(event.message()));
 
     GGChatProcessEvent processEvent = new GGChatProcessEvent(event.chatMessage());
@@ -34,10 +34,10 @@ public class GGMessageReceiveListener {
       if(!processEvent.isKeepInRegularChat()) event.setCancelled(true);
     }
 
-    if(griefergames.getSubServerType() == SubServerType.REGULAR) {
+    if(griefergames.state().getSubServerType() == SubServerType.REGULAR) {
       if (event.chatMessage().getPlainText().equals("[Switcher] Daten heruntergeladen!")) {
         if(griefergames.configuration().automations().boosterConfig().loadBoostersOnJoin()) {
-          griefergames.setHideBoosterMenu(true);
+          griefergames.state().setHideBoosterMenu(true);
           griefergames.sendMessage("/booster");
         }
       }
@@ -57,7 +57,7 @@ public class GGMessageReceiveListener {
 
   @Subscribe
   public void onMessageCheckChat(AdvancedChatTabMessageEvent event) {
-    if(GrieferGames.get().getSecondChat() == null || !event.tab().equals(GrieferGames.get().getSecondChat())) {
+    if(GrieferGames.get().state().getSecondChat() == null || !event.tab().equals(GrieferGames.get().state().getSecondChat())) {
       return;
     }
     if(!griefergames.configuration().chatConfig().tabConfig().isUseChatIndicators()) {

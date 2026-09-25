@@ -15,21 +15,21 @@ public class GGTickListener {
 
   @Subscribe
   public void onTick(GameTickEvent event) {
-    if(!griefergames.isOnGrieferGames()) return;
+    if(!griefergames.state().isOnGrieferGames()) return;
     if(event.phase() == Phase.POST) {
-      if (griefergames.getSubServerType() == SubServerType.REGULAR || griefergames.getSubServerType() == SubServerType.CLOUD) {
+      if (griefergames.state().getSubServerType() == SubServerType.REGULAR || griefergames.state().getSubServerType() == SubServerType.CLOUD) {
         long now = System.currentTimeMillis();
-        if(!griefergames.isAfk() && griefergames.getLastActivity() + (griefergames.configuration().automations().afkConfig().afkTime().get() * 60000) < System.currentTimeMillis()
+        if(!griefergames.state().isAfk() && griefergames.state().getLastActivity() + (griefergames.configuration().automations().afkConfig().afkTime().get() * 60000) < System.currentTimeMillis()
           && griefergames.configuration().automations().afkConfig().isEnabled()) {
-          griefergames.setAfk(true);
+          griefergames.state().setAfk(true);
           griefergames.helper().performAfkActions(true);
         }
       }
-      if(griefergames.getSubServerType() == SubServerType.REGULAR) {
+      if(griefergames.state().getSubServerType() == SubServerType.REGULAR) {
         if(griefergames.configuration().automations().boosterConfig().isEnabled()) {
-          if(griefergames.configuration().automations().boosterConfig().isHideBoosterMenu() || griefergames.isHideBoosterMenu()) {
+          if(griefergames.configuration().automations().boosterConfig().isHideBoosterMenu() || griefergames.state().isHideBoosterMenu()) {
             if(griefergames.controller().hideBoosterMenu()) {
-              griefergames.setHideBoosterMenu(false);
+              griefergames.state().setHideBoosterMenu(false);
             }
           }
         }

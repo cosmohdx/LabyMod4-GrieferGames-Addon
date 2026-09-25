@@ -30,7 +30,7 @@ public class MobRemover extends ChatModule {
   @Subscribe
   public void messageProcessEvent(GGChatProcessEvent event) {
     if(event.isCancelled()) return;
-    if (griefergames.getSubServerType() == SubServerType.REGULAR) {
+    if (griefergames.state().getSubServerType() == SubServerType.REGULAR) {
       String plain = event.getMessage().getPlainText();
       if (plain.isBlank()) return;
 

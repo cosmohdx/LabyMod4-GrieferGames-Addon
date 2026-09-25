@@ -35,6 +35,6 @@ public class FlyHudWidget extends TextHudWidget<TextHudWidgetConfig> {
 
   @Override
   public boolean isVisibleInGame() {
-    return griefergames.isOnGrieferGames() && griefergames.configuration().enabled().get();
+    return griefergames.state().isOnGrieferGames() && griefergames.configuration().enabled().get();
   }
 }

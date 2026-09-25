@@ -25,7 +25,7 @@ public class GGScoreboardListener {
 
   @Subscribe
   public void onScoreboardTeams(ScoreboardTeamUpdateEvent event) {
-    if(!griefergames.isOnGrieferGames()) return;
+    if(!griefergames.state().isOnGrieferGames()) return;
     if(event.team().getTeamName() == null) return;
 
     if(event.team().getTeamName().equals("server_value")) {
@@ -33,27 +33,27 @@ public class GGScoreboardListener {
       String subServerName = griefergames.helper().componentToPlainText(event.team().getPrefix()).toLowerCase();
       if(subServerName.isBlank() || subServerName.contains("lade")) return;
 
-      griefergames.setSubServerType(SubServerType.REGULAR);
-      if(!griefergames.getSubServer().equals(subServerName)) {
-        griefergames.setSubServer(subServerName);
+      griefergames.state().setSubServerType(SubServerType.REGULAR);
+      if(!griefergames.state().getSubServer().equals(subServerName)) {
+        griefergames.state().setSubServer(subServerName);
         GGSubServerChangeEvent changeEvent = new GGSubServerChangeEvent(subServerName);
         Laby.labyAPI().eventBus().fire(changeEvent);
       }
     } else if(event.team().getTeamName().trim().equalsIgnoreCase("money_value") &&
-        event.team().getPrefix() != null && griefergames.getSubServerType() == SubServerType.CLOUD) {
+        event.team().getPrefix() != null && griefergames.state().getSubServerType() == SubServerType.CLOUD) {
       // Handle Cloud Minigame and Event Servers
       if(currentRegionType == null) return;
       if(currentRegionType == CloudRegionType.MINIGAME) {
         String minigameName = getNameFromTeamComponent(event.team().getPrefix());
-        if(minigameName != null && !griefergames.getSubServer().equals(minigameName)) {
-          griefergames.setSubServer(minigameName);
+        if(minigameName != null && !griefergames.state().getSubServer().equals(minigameName)) {
+          griefergames.state().setSubServer(minigameName);
           GGSubServerChangeEvent changeEvent = new GGSubServerChangeEvent(minigameName);
           Laby.labyAPI().eventBus().fire(changeEvent);
         }
       }else if(currentRegionType == CloudRegionType.EVENT) {
         String eventName = getNameFromTeamComponent(event.team().getPrefix());
-        if(eventName != null && !griefergames.getSubServer().equals(eventName)) {
-          griefergames.setSubServer(eventName);
+        if(eventName != null && !griefergames.state().getSubServer().equals(eventName)) {
+          griefergames.state().setSubServer(eventName);
           GGSubServerChangeEvent changeEvent = new GGSubServerChangeEvent(eventName);
           Laby.labyAPI().eventBus().fire(changeEvent);
         }
@@ -71,15 +71,15 @@ public class GGScoreboardListener {
     if(serverName == null) return;
     CloudRegionType regionType = CloudRegionType.getRegionType(serverName);
     if(regionType != null) {
-      griefergames.setSubServerType(SubServerType.CLOUD);
+      griefergames.state().setSubServerType(SubServerType.CLOUD);
       boolean skipUpdate = (currentRegionType == CloudRegionType.MINIGAME || regionType == CloudRegionType.EVENT) && regionType == currentRegionType;
       currentRegion = serverName;
       currentRegionType = regionType;
       String subServerName = I18n.translate("griefergames.region_type.with_name." + regionType.name().toLowerCase(),
           regionType.onlyName(serverName)
       );
-      if(!skipUpdate && !griefergames.getSubServer().equals(subServerName)) {
-        griefergames.setSubServer(subServerName);
+      if(!skipUpdate && !griefergames.state().getSubServer().equals(subServerName)) {
+        griefergames.state().setSubServer(subServerName);
           GGSubServerChangeEvent changeEvent = new GGSubServerChangeEvent(subServerName);
           Laby.labyAPI().eventBus().fire(changeEvent);
       }

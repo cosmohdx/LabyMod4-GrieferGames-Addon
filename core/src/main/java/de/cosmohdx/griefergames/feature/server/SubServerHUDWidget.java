@@ -26,22 +26,22 @@ public class SubServerHUDWidget extends TextHudWidget<TextHudWidgetConfig> {
   @Override
   public void load(TextHudWidgetConfig config) {
     super.load(config);
-    line = createLine(I18n.translate(griefergames.namespace() + ".hudWidget.gg_subserver.name"), griefergames.getSubServer().isBlank() ?
+    line = createLine(I18n.translate(griefergames.namespace() + ".hudWidget.gg_subserver.name"), griefergames.state().getSubServer().isBlank() ?
       "CB Jungle" : capitalizedSubserver());
   }
 
   @Override
   public void onTick(boolean isEditorContext) {
-    line.updateAndFlush(griefergames.getSubServer().isBlank() ? "CB Jungle" : capitalizedSubserver());
+    line.updateAndFlush(griefergames.state().getSubServer().isBlank() ? "CB Jungle" : capitalizedSubserver());
   }
 
   @Override
   public boolean isVisibleInGame() {
-    return griefergames.isOnGrieferGames() && griefergames.configuration().enabled().get();
+    return griefergames.state().isOnGrieferGames() && griefergames.configuration().enabled().get();
   }
 
   private String capitalizedSubserver() {
-    String subserver = griefergames.getSubServer();
+    String subserver = griefergames.state().getSubServer();
     if (subserver.startsWith("cb")) return subserver.toUpperCase();
     return griefergames.helper().capitalize(subserver);
   }

@@ -32,10 +32,10 @@ public class DelayHudWidget extends TextHudWidget<TextHudWidgetConfig> {
     if(isEditorContext) {
       line.updateAndFlush("10s");
     } else {
-      long remainingTime = griefergames.getWaitTime() - System.currentTimeMillis();
+      long remainingTime = griefergames.state().getWaitTime() - System.currentTimeMillis();
 
       if(remainingTime < 1) {
-        griefergames.setCitybuildDelay(false);
+        griefergames.state().setCitybuildDelay(false);
       }
 
       String formattedTime = "";
@@ -47,12 +47,12 @@ public class DelayHudWidget extends TextHudWidget<TextHudWidgetConfig> {
       } else {
         formattedTime = TimeUnit.MILLISECONDS.toSeconds(remainingTime) + "s";
       }
-      line.updateAndFlush((griefergames.isCitybuildDelay() ? "§c" : "") + formattedTime);
+      line.updateAndFlush((griefergames.state().isCitybuildDelay() ? "§c" : "") + formattedTime);
     }
   }
 
   @Override
   public boolean isVisibleInGame() {
-    return griefergames.isOnGrieferGames() && griefergames.configuration().enabled().get() && griefergames.getWaitTime() > System.currentTimeMillis() + 1000;
+    return griefergames.state().isOnGrieferGames() && griefergames.configuration().enabled().get() && griefergames.state().getWaitTime() > System.currentTimeMillis() + 1000;
   }
 }

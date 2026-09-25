@@ -26,7 +26,7 @@ public class BoosterChatModule extends ChatModule {
 
   @Subscribe
   public void messageProcessEvent(GGChatProcessEvent event) {
-    if (griefergames.getSubServerType() == SubServerType.REGULAR) {
+    if (griefergames.state().getSubServerType() == SubServerType.REGULAR) {
       String plain = event.getMessage().getPlainText();
 
       Matcher matcher = boosterInfoRegex.matcher(plain);

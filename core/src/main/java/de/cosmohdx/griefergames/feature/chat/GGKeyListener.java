@@ -25,19 +25,19 @@ public class GGKeyListener {
 
   @Subscribe
   public void onKeyInput(KeyEvent event) {
-    if(!griefergames.isOnGrieferGames()) return;
+    if(!griefergames.state().isOnGrieferGames()) return;
 
-    if (griefergames.getSubServerType() == SubServerType.CLOUD || griefergames.getSubServerType() == SubServerType.REGULAR) {
+    if (griefergames.state().getSubServerType() == SubServerType.CLOUD || griefergames.state().getSubServerType() == SubServerType.REGULAR) {
       if(event.state() == State.PRESS) {
-        griefergames.setLastActivity(System.currentTimeMillis());
-        if(griefergames.isAfk()) {
-          griefergames.setAfk(false);
+        griefergames.state().setLastActivity(System.currentTimeMillis());
+        if(griefergames.state().isAfk()) {
+          griefergames.state().setAfk(false);
           griefergames.helper().performAfkActions(false);
         }
       }
     }
 
-    if(griefergames.getSubServerType() == SubServerType.REGULAR) {
+    if(griefergames.state().getSubServerType() == SubServerType.REGULAR) {
       if(event.state() == State.PRESS) {
         if(griefergames.configuration().chatConfig().isAmpEnabled() &&
             event.key().getId() == Laby.labyAPI().minecraft().options().getInputMapping("key.playerlist").getKeyCode()) {

@@ -95,7 +95,7 @@ public class Helper {
         }
       }
 
-      griefergames.setSecondChat(secondChat);
+      griefergames.state().setSecondChat(secondChat);
     }
 
   /**
@@ -123,14 +123,14 @@ public class Helper {
    * @param message Message
    */
   public void displayInSecondChat(AdvancedChatMessage message) {
-    if(griefergames.getSecondChat() == null) {
+    if(griefergames.state().getSecondChat() == null) {
       return;
     }
     message.metadata().computeIfAbsent(griefergames.namespace(), k -> true);
     if(griefergames.configuration().chatConfig().tabConfig().isUseChatIndicators()) {
-      griefergames.getSecondChat().handleInput(message);
+      griefergames.state().getSecondChat().handleInput(message);
     }else{
-      griefergames.getSecondChat().getMessages().add(0, message);
+      griefergames.state().getSecondChat().getMessages().add(0, message);
     }
   }
 
@@ -221,7 +221,7 @@ public class Helper {
       if (afk) {
           griefergames.displayAddonMessage(Component.text(I18n.translate(griefergames.namespace() + ".messages.afkMessage"), NamedTextColor.GRAY));
 
-          if (griefergames.configuration().automations().afkConfig().afkNick().get() && isCityBuild(griefergames.getSubServer())) {
+          if (griefergames.configuration().automations().afkConfig().afkNick().get() && isCityBuild(griefergames.state().getSubServer())) {
               String nickname = griefergames.configuration().automations().afkConfig().afkNickname().get();
               if (nickname.isBlank()) {
                   nickname = GrieferGamesConfig.DEFAULT_AFK_NICKNAME;
@@ -235,7 +235,7 @@ public class Helper {
           }
       } else {
           griefergames.displayAddonMessage(Component.text(I18n.translate(griefergames.namespace() + ".messages.afkBackMessage"), NamedTextColor.GRAY));
-          if (griefergames.configuration().automations().afkConfig().afkNick().get() && isCityBuild(griefergames.getSubServer())) {
+          if (griefergames.configuration().automations().afkConfig().afkNick().get() && isCityBuild(griefergames.state().getSubServer())) {
               griefergames.sendMessage("/unnick");
           }
       }

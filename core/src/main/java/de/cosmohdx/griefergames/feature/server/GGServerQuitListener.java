@@ -13,9 +13,9 @@ public class GGServerQuitListener {
 
   @Subscribe
   public void onServerQuit(ServerDisconnectEvent event) {
-    if(griefergames.isOnGrieferGames()) {
-      griefergames.setOnGrieferGames(false);
-      griefergames.setSecondChat(null);
+    if(griefergames.state().isOnGrieferGames()) {
+      griefergames.state().setOnGrieferGames(false);
+      griefergames.state().setSecondChat(null);
     }
   }
 }

@@ -36,7 +36,7 @@ public class Payment extends ChatModule {
     if (!griefergames.configuration().payment().isEnabled()) {
       return;
     }
-    if (griefergames.getSubServerType() == SubServerType.REGULAR) {
+    if (griefergames.state().getSubServerType() == SubServerType.REGULAR) {
       if (event.getMessage().getPlainText().isBlank()) return;
       String plain = event.getMessage().getPlainText();
 
@@ -47,7 +47,7 @@ public class Payment extends ChatModule {
         double amount = getAmount(receiveMoneyMatcher.group(3));
 
         if (!event.getMessage().getFormattedText().contains("§f §ahat dir $")) {
-          griefergames.addIncome(amount);
+          griefergames.state().addIncome(amount);
 
           if (griefergames.configuration().payment().logTransactions().get()) {
             griefergames.fileManager().logTransaction(rank + " ┃ " + name, amount, TransactionType.RECEIVE);
@@ -86,7 +86,7 @@ public class Payment extends ChatModule {
         String name = payMoneyMatcher.group(2);
         double amount = getAmount(payMoneyMatcher.group(3));
 
-        griefergames.addIncome(amount * -1);
+        griefergames.state().addIncome(amount * -1);
 
         if (griefergames.configuration().payment().logTransactions().get()) {
           griefergames.fileManager().logTransaction(rank + " ┃ " + name, amount, TransactionType.PAY);
@@ -103,7 +103,7 @@ public class Payment extends ChatModule {
       if (earnMoneyMatcher.find()) {
         double amount = getAmount(earnMoneyMatcher.group(1));
 
-        griefergames.addIncome(amount);
+        griefergames.state().addIncome(amount);
 
         if (griefergames.configuration().payment().logTransactions().get()) {
           griefergames.fileManager().logTransaction(null, amount, TransactionType.MONEYDROP);

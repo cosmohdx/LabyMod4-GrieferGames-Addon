@@ -30,7 +30,7 @@ public class Bank extends ChatModule {
   public void messageProcessEvent(GGChatProcessEvent event) {
     if(event.isCancelled()) return;
     if (!griefergames.configuration().payment().isEnabled()) return;
-    if (griefergames.getSubServerType() == SubServerType.REGULAR) {
+    if (griefergames.state().getSubServerType() == SubServerType.REGULAR) {
       String plain = event.getMessage().getPlainText();
 
       if (plain.startsWith("[Bank] ")) {

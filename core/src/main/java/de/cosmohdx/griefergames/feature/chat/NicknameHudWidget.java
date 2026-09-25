@@ -28,8 +28,8 @@ public class NicknameHudWidget extends TextHudWidget<TextHudWidgetConfig> {
 
   @Override
   public void onTick(boolean isEditorContext) {
-    if(griefergames.getNickname() != null) {
-      line.updateAndFlush(griefergames.getNickname());
+    if(griefergames.state().getNickname() != null) {
+      line.updateAndFlush(griefergames.state().getNickname());
     } else {
       line.updateAndFlush(I18n.translate(griefergames.namespace()+".hudWidget.gg_nickname.defaultValue"));
     }
@@ -37,6 +37,6 @@ public class NicknameHudWidget extends TextHudWidget<TextHudWidgetConfig> {
 
   @Override
   public boolean isVisibleInGame() {
-    return griefergames.isOnGrieferGames() && griefergames.configuration().enabled().get() && griefergames.getNickname() != null;
+    return griefergames.state().isOnGrieferGames() && griefergames.configuration().enabled().get() && griefergames.state().getNickname() != null;
   }
 }

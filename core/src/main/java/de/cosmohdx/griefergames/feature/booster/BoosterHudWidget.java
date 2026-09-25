@@ -86,7 +86,7 @@ public class BoosterHudWidget extends SimpleHudWidget<BoosterHudWidget.BoosterHu
 
   @Override
   public boolean isVisibleInGame() {
-    return griefergames.isOnGrieferGames() && griefergames.configuration().enabled().get();
+    return griefergames.state().isOnGrieferGames() && griefergames.configuration().enabled().get();
   }
 
   public static class BoosterHudWidgetConfig extends HudWidgetConfig {
