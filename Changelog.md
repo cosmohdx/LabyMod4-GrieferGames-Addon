@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 1.2.0
 
 ### Zusammenfassung
 
@@ -41,8 +41,6 @@ Direkt nach dem Beitreten ist noch nicht klar, ob du auf einem Citybuild (1.8) o
 ### Plot-Grenzen
 
 Auf Nature und Extreme kannst du die Kanten des Grundstücks, auf dem du stehst, als Linienraster einblenden. Die Funktion ist standardmäßig aus. Unter Plot-Grenzen legst du Taste, Umschalten oder Halten, Farbe, Linienabstand und die Höhe um dich herum fest. Auf anderen Servern und auf der Cloud bleibt das Raster aus. Dort sagt der Chat, dass die Anzeige nicht verfügbar ist.
-
-## 1.2.0
 
 Das Addon läuft mit dem aktuellen LabyMod auf Minecraft 1.8.9 bis 26.3. Deine bisherigen Einstellungen bleiben erhalten und werden beim ersten Start in die neue Übersicht übernommen.
 

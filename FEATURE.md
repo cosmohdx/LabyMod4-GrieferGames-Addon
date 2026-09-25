@@ -53,6 +53,9 @@ Solange das Netz noch nicht erkannt ist (`SubServerType.UNKNOWN`), bleiben Funkt
 | Subserver-HUD | ✓ | ✓ |
 | Plot-Grenzen | ✓ | |
 | Spieler in der Nähe | ✓ | ✓ |
+| Block des Tages | ✓ | ✓ |
+| Itemliste (Beta) | ✓ | ✓ |
+| Wiki (Beta) | ✓ | ✓ |
 
 ## Spieler in der Nähe
 
@@ -63,6 +66,17 @@ Auf 1.8 zählen Citybuilds (`nature`, `extreme`, `evil`, `cb…`). Farmwelten (`
 Die Sichtlinie geht vom Auge zum Kopf oder zur Körpermitte. Blöcke mit Kollisionsform blockieren sie, so wie die Vanilla-Prüfung. Glas, Zäune und Laub blockieren deshalb je nach Version, sobald ihre Kollisionsform den Strahl trifft. Im Zweifel wird der Spieler nicht angezeigt. Spieler auf einem Reittier zählen mit, der eigene Spieler und die Spectator-Kamera nicht.
 
 Nicht veröffentlichen, bevor der GrieferGames-Support die Funktion freigegeben hat. Wird die Option „Sichtlinie aus“ abgelehnt, muss sie entfernt und fest auf an gesetzt werden.
+
+## Neuere Minecraft-Versionen
+
+Diese vier hängen nicht am Netz. Sie sind nur im Client für Minecraft 26.2 eingebaut und dort standardmäßig an. Auf 1.8.9 und den anderen Versionen fehlen sie.
+
+| Feature | 26.2 |
+|---|---|
+| Karte im Tooltip | ✓ |
+| Kopf im Tooltip vergrößern | ✓ |
+| Verzauberungsglanz auf Köpfen, Bannern und Kisten | ✓ |
+| Echte Anzahl bei zu hohen Stapeln | ✓ |
 
 ## Nicht in diesem Branch
 
