@@ -15,7 +15,7 @@ public class AutoPortalListener {
 
   @Subscribe
   public void onSubServerChange(GGSubServerChangeEvent event) {
-    if (event.subServerName().equals("lobby") && griefergames.configuration().automations().isAutoPortalEnabled()) {
+    if (event.subServerName().equals("lobby") && griefergames.configuration().automations().autoPortal()) {
       griefergames.schedule(() -> griefergames.sendMessage("/portal"), 500, TimeUnit.MILLISECONDS);
     }
   }

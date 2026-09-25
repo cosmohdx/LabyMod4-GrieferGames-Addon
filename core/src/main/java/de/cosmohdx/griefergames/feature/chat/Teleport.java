@@ -26,7 +26,7 @@ public class Teleport extends ChatModule {
   public void messageProcessEvent(GGChatProcessEvent event) {
     if(event.isCancelled()) return;
     if(!griefergames.state().isSubServerType(SubServerType.REGULAR)) return;
-    if (!griefergames.configuration().chatConfig().isHighlightTpa()) return;
+    if (!griefergames.configuration().chat().highlightTpa()) return;
     if (event.getMessage().getPlainText().isBlank()) return;
 
     Matcher tpaMesssage = tpaMesssageRegexp.matcher(event.getMessage().getPlainText());

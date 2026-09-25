@@ -1,31 +1,22 @@
 package de.cosmohdx.griefergames.feature.friends;
 
+import de.cosmohdx.griefergames.core.config.FeatureConfig;
 import net.labymod.api.client.gui.screen.widget.widgets.input.SwitchWidget.SwitchSetting;
-import net.labymod.api.configuration.loader.Config;
 import net.labymod.api.configuration.loader.property.ConfigProperty;
 
-public class GrieferGamesFriendsConfig extends Config {
-
-  //@ParentSwitch
-  @SwitchSetting
-  private final ConfigProperty<Boolean> enabled = new ConfigProperty<Boolean>(true);
+public class GrieferGamesFriendsConfig extends FeatureConfig {
 
   @SwitchSetting
-  private final ConfigProperty<Boolean> labyChatShowSubServerEnabled = new ConfigProperty<>(true);
+  private final ConfigProperty<Boolean> showSubServerInLabyChat = new ConfigProperty<>(true);
 
   @SwitchSetting
-  private final ConfigProperty<Boolean> discordShowSubServerEnabled = new ConfigProperty<>(true);
+  private final ConfigProperty<Boolean> showSubServerInDiscord = new ConfigProperty<>(true);
 
-
-  public boolean isEnabled() {
-    return enabled.get();
+  public boolean showSubServerInLabyChat() {
+    return this.isOn(this.showSubServerInLabyChat);
   }
 
-  public ConfigProperty<Boolean> labyChatShowSubServerEnabled() {
-    return labyChatShowSubServerEnabled;
-  }
-
-  public ConfigProperty<Boolean> discordShowSubServerEnabled() {
-    return discordShowSubServerEnabled;
+  public boolean showSubServerInDiscord() {
+    return this.isOn(this.showSubServerInDiscord);
   }
 }

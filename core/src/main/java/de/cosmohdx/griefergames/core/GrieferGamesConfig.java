@@ -1,8 +1,13 @@
 package de.cosmohdx.griefergames.core;
 
+import de.cosmohdx.griefergames.core.config.GrieferGamesConfigMigration;
+import de.cosmohdx.griefergames.feature.afk.GrieferGamesAFKConfig;
 import de.cosmohdx.griefergames.feature.automation.GrieferGamesAutomationsConfig;
+import de.cosmohdx.griefergames.feature.booster.GrieferGamesBoosterToolsConfig;
 import de.cosmohdx.griefergames.feature.chat.GrieferGamesChatConfig;
 import de.cosmohdx.griefergames.feature.friends.GrieferGamesFriendsConfig;
+import de.cosmohdx.griefergames.feature.itemremover.ItemRemoverConfig;
+import de.cosmohdx.griefergames.feature.mobremover.MobRemoverConfig;
 import de.cosmohdx.griefergames.feature.payment.GrieferGamesPaymentsConfig;
 import net.labymod.api.addon.AddonConfig;
 import net.labymod.api.client.gui.screen.widget.widgets.input.ButtonWidget.ButtonSetting;
@@ -22,22 +27,33 @@ public class GrieferGamesConfig extends AddonConfig {
       DEFAULT_AFK_NICKNAME = "AFK_%name%",
       DEFAULT_CHATTIME_FORMAT = "&8[&3{h}&7:&3{m}&7:&3{s}&8]";
 
-
   @SpriteSlot(x = 0, y = 0)
   @SwitchSetting
   private final ConfigProperty<Boolean> enabled = new ConfigProperty<>(true);
 
   @SpriteSlot(x = 2, y = 0)
-  private GrieferGamesChatConfig chatConfig = new GrieferGamesChatConfig();
+  private final GrieferGamesChatConfig chat = new GrieferGamesChatConfig();
 
   @SpriteSlot(x = 3, y = 0)
-  private GrieferGamesPaymentsConfig payment = new GrieferGamesPaymentsConfig();
+  private final GrieferGamesPaymentsConfig payment = new GrieferGamesPaymentsConfig();
+
+  @SpriteSlot(x = 2, y = 1)
+  private final ItemRemoverConfig itemRemover = new ItemRemoverConfig();
+
+  @SpriteSlot(x = 3, y = 1)
+  private final MobRemoverConfig mobRemover = new MobRemoverConfig();
 
   @SpriteSlot(x = 4, y = 0)
-  private GrieferGamesAutomationsConfig automations = new GrieferGamesAutomationsConfig();
+  private final GrieferGamesAutomationsConfig automations = new GrieferGamesAutomationsConfig();
+
+  @SpriteSlot(x = 1, y = 1)
+  private final GrieferGamesAFKConfig afk = new GrieferGamesAFKConfig();
+
+  @SpriteSlot(x = 0, y = 1)
+  private final GrieferGamesBoosterToolsConfig booster = new GrieferGamesBoosterToolsConfig();
 
   @SpriteSlot(x = 5, y = 0)
-  private GrieferGamesFriendsConfig friends = new GrieferGamesFriendsConfig();
+  private final GrieferGamesFriendsConfig friends = new GrieferGamesFriendsConfig();
 
   @SpriteSlot(x = 7, y = 0)
   @MethodOrder(after = "friends")
@@ -54,23 +70,44 @@ public class GrieferGamesConfig extends AddonConfig {
   }
 
   @Override
+  public int getConfigVersion() {
+    return GrieferGamesConfigMigration.CURRENT_VERSION;
+  }
+
+  @Override
   public ConfigProperty<Boolean> enabled() {
     return this.enabled;
   }
 
-  public GrieferGamesChatConfig chatConfig() {
-    return chatConfig;
+  public GrieferGamesChatConfig chat() {
+    return this.chat;
   }
 
   public GrieferGamesPaymentsConfig payment() {
-    return payment;
+    return this.payment;
+  }
+
+  public ItemRemoverConfig itemRemover() {
+    return this.itemRemover;
+  }
+
+  public MobRemoverConfig mobRemover() {
+    return this.mobRemover;
   }
 
   public GrieferGamesAutomationsConfig automations() {
-    return automations;
+    return this.automations;
+  }
+
+  public GrieferGamesAFKConfig afk() {
+    return this.afk;
+  }
+
+  public GrieferGamesBoosterToolsConfig booster() {
+    return this.booster;
   }
 
   public GrieferGamesFriendsConfig friends() {
-    return friends;
+    return this.friends;
   }
 }

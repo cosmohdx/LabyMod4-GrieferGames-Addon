@@ -27,8 +27,8 @@ public class AfkListener {
       return;
     }
     if (!griefergames.state().isAfk()
-        && griefergames.state().getLastActivity() + (griefergames.configuration().automations().afkConfig().afkTime().get() * 60000) < System.currentTimeMillis()
-        && griefergames.configuration().automations().afkConfig().isEnabled()) {
+        && griefergames.configuration().afk().isEnabled()
+        && griefergames.state().getLastActivity() + (griefergames.configuration().afk().afkTimeMinutes() * 60000L) < System.currentTimeMillis()) {
       griefergames.state().setAfk(true);
       actions.perform(true);
     }

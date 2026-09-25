@@ -1,6 +1,7 @@
 package de.cosmohdx.griefergames;
 
 import de.cosmohdx.griefergames.core.AddonState;
+import de.cosmohdx.griefergames.core.config.ConfigMigrationListener;
 import de.cosmohdx.griefergames.core.GGMessageCommand;
 import de.cosmohdx.griefergames.core.GrieferGamesConfig;
 import de.cosmohdx.griefergames.core.GrieferGamesController;
@@ -84,6 +85,11 @@ public class GrieferGames extends LabyAddon<GrieferGamesConfig> {
     thread.setDaemon(true);
     return thread;
   });
+
+  @Override
+  protected void preConfigurationLoad() {
+    registerListener(new ConfigMigrationListener());
+  }
 
   @Override
   protected void enable() {

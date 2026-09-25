@@ -21,8 +21,7 @@ public class FriendsPresenceListener {
   public void onSubServerChange(GGSubServerChangeEvent event) {
     String formattedServerName = griefergames.helper().formatServerName(event.subServerName());
 
-    if (griefergames.configuration().friends().isEnabled()
-        && griefergames.configuration().friends().discordShowSubServerEnabled().get()) {
+    if (griefergames.configuration().friends().showSubServerInDiscord()) {
       DiscordApp discordApp = Laby.references().discordApp();
       DiscordActivity previousActivity = discordApp.getDisplayedActivity();
       if (previousActivity != null) {
@@ -34,8 +33,7 @@ public class FriendsPresenceListener {
       }
     }
 
-    if (griefergames.configuration().friends().isEnabled()
-        && griefergames.configuration().friends().labyChatShowSubServerEnabled().get()
+    if (griefergames.configuration().friends().showSubServerInLabyChat()
         && Laby.references().labyConnect().isAuthenticated()) {
       LabyConnectSession session = Laby.references().labyConnect().getSession();
       ServerData serverData = Laby.labyAPI().serverController().getCurrentServerData();

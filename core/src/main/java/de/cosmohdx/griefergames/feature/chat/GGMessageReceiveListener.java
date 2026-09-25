@@ -50,7 +50,7 @@ public class GGMessageReceiveListener {
     if(GrieferGames.get().state().getSecondChat() == null || !event.tab().equals(GrieferGames.get().state().getSecondChat())) {
       return;
     }
-    if(!griefergames.configuration().chatConfig().tabConfig().isUseChatIndicators()) {
+    if(!griefergames.configuration().chat().useChatIndicators()) {
       return;
     }
     if(!event.message().metadata().has(griefergames.namespace())) {

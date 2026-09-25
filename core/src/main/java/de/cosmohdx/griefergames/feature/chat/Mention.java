@@ -4,7 +4,6 @@ import de.cosmohdx.griefergames.GrieferGames;
 import de.cosmohdx.griefergames.feature.chat.GGChatProcessEvent;
 import de.cosmohdx.griefergames.feature.chat.Sounds;
 import de.cosmohdx.griefergames.core.SubServerType;
-import de.cosmohdx.griefergames.feature.chat.GrieferGamesNameHighlightConfig;
 import net.labymod.api.Laby;
 import net.labymod.api.client.chat.ChatMessage;
 import net.labymod.api.client.component.Component;
@@ -27,10 +26,10 @@ public class Mention extends ChatModule {
   @Subscribe
   public void messageProcessEvent(GGChatProcessEvent event) {
     if(event.isCancelled()) return;
-    GrieferGamesNameHighlightConfig highlightConfig = griefergames.configuration().chatConfig().nameHighlightConfig();
-    if(!highlightConfig.isEnabled()) {
+    if (!griefergames.configuration().chat().mentionsEnabled()) {
       return;
     }
+    MentionConfig highlightConfig = griefergames.configuration().chat().mentions();
     if (event.getMessage().getPlainText().isBlank()) return;
 
     Matcher matcher = globalChatregex.matcher(griefergames.helper().removeLeadingMiscCodes(event.getMessage().getPlainText()));
@@ -43,15 +42,15 @@ public class Mention extends ChatModule {
     }
     String messageString = matcher.group(3).toLowerCase();
     if(!messageString.contains(Laby.labyAPI().getName().toLowerCase()) &&
-        (highlightConfig.getAdditionalHighlightText().isBlank() || !messageString.contains(highlightConfig.getAdditionalHighlightText().toLowerCase()))) {
+        (highlightConfig.additionalHighlightText().isBlank() || !messageString.contains(highlightConfig.additionalHighlightText().toLowerCase()))) {
       // Does not contain the name or the additional text
       return;
     }
 
-    event.getMessage().metadata().set(CHAT_METADATA_CUSTOM_BACKGROUND, highlightConfig.getMentionColor());
+    event.getMessage().metadata().set(CHAT_METADATA_CUSTOM_BACKGROUND, highlightConfig.mentionColor());
 
-    if (highlightConfig.getMentionSound() != Sounds.NONE) {
-      ResourceLocation resource = ResourceLocation.create("minecraft", highlightConfig.getMentionSound().path());
+    if (highlightConfig.mentionSound() != Sounds.NONE) {
+      ResourceLocation resource = ResourceLocation.create("minecraft", highlightConfig.mentionSound().path());
       Laby.labyAPI().minecraft().sounds().playSound(resource, 1f, 1f);
     }
   }

@@ -49,26 +49,26 @@ public class Payment extends ChatModule {
         if (!event.getMessage().getFormattedText().contains("§f §ahat dir $")) {
           griefergames.state().addIncome(amount);
 
-          if (griefergames.configuration().payment().logTransactions().get()) {
+          if (griefergames.configuration().payment().logTransactions()) {
             griefergames.fileManager().logTransaction(rank + " ┃ " + name, amount, TransactionType.RECEIVE);
           }
 
-          if (griefergames.configuration().payment().payChatRight().get()) {
+          if (griefergames.configuration().chat().routePayments()) {
             event.setSecondChat(true);
           }
 
-          if (griefergames.configuration().payment().payAchievement().get()) {
+          if (griefergames.configuration().payment().paymentNotification()) {
             sendPaymentNotification(TransactionType.RECEIVE, rank, name, amount);
           }
 
-          if (griefergames.configuration().payment().payHighlight().get()) {
+          if (griefergames.configuration().payment().highlightPayments()) {
             event.getMessage().component().append(Component.text(" \u2714", Style.builder()
               .color(NamedTextColor.GREEN)
               .hoverEvent(HoverEvent.showText(Component.text(I18n.translate(griefergames.namespace() + ".messages.verifiedPayment"), NamedTextColor.GREEN)))
               .build()));
           }
         } else {
-          if (griefergames.configuration().payment().fakeMoneyWarning().get()) {
+          if (griefergames.configuration().payment().fakeMoneyWarning()) {
             String warningMessage = "§e§l" + I18n.translate(griefergames.namespace() + ".messages.warning") + " §c"
               + I18n.translate(griefergames.namespace() + ".messages.fakeMoney")
               .replace("{player}", "§e" + rank + " ┃ " + name + "§c")
@@ -88,13 +88,13 @@ public class Payment extends ChatModule {
 
         griefergames.state().addIncome(amount * -1);
 
-        if (griefergames.configuration().payment().logTransactions().get()) {
+        if (griefergames.configuration().payment().logTransactions()) {
           griefergames.fileManager().logTransaction(rank + " ┃ " + name, amount, TransactionType.PAY);
         }
-        if (griefergames.configuration().payment().payChatRight().get()) {
+        if (griefergames.configuration().chat().routePayments()) {
           event.setSecondChat(true);
         }
-        if (griefergames.configuration().payment().payAchievement().get()) {
+        if (griefergames.configuration().payment().paymentNotification()) {
           sendPaymentNotification(TransactionType.PAY, rank, name, amount);
         }
       }
@@ -105,18 +105,18 @@ public class Payment extends ChatModule {
 
         griefergames.state().addIncome(amount);
 
-        if (griefergames.configuration().payment().logTransactions().get()) {
+        if (griefergames.configuration().payment().logTransactions()) {
           griefergames.fileManager().logTransaction(null, amount, TransactionType.MONEYDROP);
         }
-        if (griefergames.configuration().payment().payChatRight().get()) {
+        if (griefergames.configuration().chat().routePayments()) {
           event.setSecondChat(true);
         }
-        if (griefergames.configuration().payment().payAchievement().get()) {
+        if (griefergames.configuration().payment().paymentNotification()) {
           sendPaymentNotification(TransactionType.MONEYDROP, amount);
         }
       }
 
-      if (plain.startsWith("Kontostand: ") && griefergames.configuration().payment().payChatRight().get()) {
+      if (plain.startsWith("Kontostand: ") && griefergames.configuration().chat().routePayments()) {
         event.setSecondChat(true);
       }
     }

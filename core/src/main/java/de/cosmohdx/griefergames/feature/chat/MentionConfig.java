@@ -1,19 +1,13 @@
 package de.cosmohdx.griefergames.feature.chat;
 
-import de.cosmohdx.griefergames.feature.chat.Sounds;
-import net.labymod.api.client.gui.screen.widget.widgets.input.SwitchWidget.SwitchSetting;
+import de.cosmohdx.griefergames.core.config.FeatureConfig;
 import net.labymod.api.client.gui.screen.widget.widgets.input.TextFieldWidget.TextFieldSetting;
 import net.labymod.api.client.gui.screen.widget.widgets.input.color.ColorPickerWidget.ColorPickerSetting;
 import net.labymod.api.client.gui.screen.widget.widgets.input.dropdown.DropdownWidget.DropdownSetting;
-import net.labymod.api.configuration.loader.Config;
 import net.labymod.api.configuration.loader.property.ConfigProperty;
 import net.labymod.api.util.Color;
 
-public class GrieferGamesNameHighlightConfig extends Config {
-
-  //@ParentSwitch
-  @SwitchSetting
-  private final ConfigProperty<Boolean> enabled = new ConfigProperty<Boolean>(true);
+public class MentionConfig extends FeatureConfig {
 
   @ColorPickerSetting
   private final ConfigProperty<Color> mentionColor = new ConfigProperty<>(Color.ofRGB(121, 178, 255));
@@ -24,20 +18,15 @@ public class GrieferGamesNameHighlightConfig extends Config {
   @TextFieldSetting
   private final ConfigProperty<String> additionalHighlightText = new ConfigProperty<>("");
 
-  public boolean isEnabled() {
-    return enabled.get();
+  public Color mentionColor() {
+    return this.mentionColor.get();
   }
 
-  public Color getMentionColor() {
-    return mentionColor.get();
+  public Sounds mentionSound() {
+    return this.isEnabled() ? this.mentionSound.get() : Sounds.NONE;
   }
 
-  public Sounds getMentionSound() {
-    return mentionSound.get();
+  public String additionalHighlightText() {
+    return this.additionalHighlightText.get();
   }
-
-  public String getAdditionalHighlightText() {
-    return additionalHighlightText.get();
-  }
-
 }

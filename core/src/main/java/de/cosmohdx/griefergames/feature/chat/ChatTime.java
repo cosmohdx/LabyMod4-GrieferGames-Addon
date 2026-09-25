@@ -24,11 +24,11 @@ public class ChatTime extends ChatModule {
   @Subscribe
   public void messageProcessEvent(GGChatProcessEvent event) {
     if (event.isCancelled()) return;
-    if (!griefergames.configuration().chatConfig().isShowChatTime()) return;
+    if (!griefergames.configuration().chat().showChatTime()) return;
     if (event.getMessage().getPlainText().isBlank()) return;
 
     String[] time = LocalDateTime.now().format(formatter).split(":");
-    String timeMsg = griefergames.configuration().chatConfig().chatTimeFormat().get();
+    String timeMsg = griefergames.configuration().chat().chatTimeFormat();
     if (timeMsg.isBlank()) {
       timeMsg = GrieferGamesConfig.DEFAULT_CHATTIME_FORMAT;
     }
@@ -37,7 +37,7 @@ public class ChatTime extends ChatModule {
     timeMsg = timeMsg.replace("{m}", time[1]);
     timeMsg = timeMsg.replace("{s}", time[2]);
 
-    if (griefergames.configuration().chatConfig().chatTimeAfterMessage().get()) {
+    if (griefergames.configuration().chat().chatTimeAfterMessage()) {
       event.getMessage().component().append(Component.text("§r " + timeMsg));
     } else {
       List<Component> children = new ArrayList<>(event.getMessage().component().getChildren());

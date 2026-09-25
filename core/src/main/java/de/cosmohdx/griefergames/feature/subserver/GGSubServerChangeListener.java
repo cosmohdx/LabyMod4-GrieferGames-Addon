@@ -17,7 +17,7 @@ public class GGSubServerChangeListener {
   @Subscribe
   public void onSubServerChange(GGSubServerChangeEvent event) {
     if (!griefergames.helper().isCityBuild(event.subServerName())) return;
-    if (!griefergames.configuration().automations().isSendSubServerEnabled()) return;
+    if (!griefergames.configuration().automations().announceSubServer()) return;
 
     String formattedServerName = griefergames.helper().formatServerName(event.subServerName());
     griefergames.displayAddonMessage(Component.text(

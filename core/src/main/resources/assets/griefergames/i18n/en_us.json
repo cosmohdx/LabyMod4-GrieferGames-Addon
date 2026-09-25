@@ -9,175 +9,260 @@
         "name": "Auto Update"
       },
 
-      "chatConfig": {
-        "name": "Chat & Tablist",
+      "chat": {
+        "name": "Chat",
+        "description": "Messages, commands, and the second chat.",
         "enabled": {
-          "name": "Chat & Tablist"
+          "name": "Chat"
         },
-        "header": {
-          "highlightMessages": {
-            "name": "Highlight messages"
+        "commands": {
+          "name": "Commands",
+          "description": "Replies, typos, and the ignore list.",
+          "clickToReply": {
+            "name": "Click to reply (1.8)",
+            "description": "Click the name in a private message to reply quickly."
           },
-          "blockMessages": {
-            "name": "Block messages"
+          "preventCommandFailure": {
+            "name": "Block incorrect commands",
+            "description": "Block mistyped commands, for example 7p h or 7msg."
           },
-          "magicPrefix": {
-            "name": "Magic prefix"
+          "correctCommandCapitalisation": {
+            "name": "Correct command capitalisation (Cloud)",
+            "description": "For example '/P h' becomes '/p h'."
           },
-          "chatTime": {
-            "name": "Chat time"
+          "betterIgnoreList": {
+            "name": "Better ignore list (1.8)",
+            "description": "Show the ignore list across several easier-to-read lines."
           }
         },
-        "tabConfig": {
-          "name": "Chat-Tab",
-          "description": "Settings for the Chat-Tab",
+        "display": {
+          "name": "Display",
+          "description": "How names above players are shown.",
+          "showPrefixInDisplayName": {
+            "name": "Show colored prefix above players",
+            "description": "Show the name above players in their prefix colors."
+          }
+        },
+        "secondChat": {
+          "name": "Second chat",
+          "description": "A separate chat tab for selected messages.",
           "enabled": {
-            "name": "Chat-Tab"
+            "name": "Second chat"
           },
           "chatTabName": {
-            "name": "Name of Chat-Tabs",
-            "description": "Sets the name of the chat tab created by the addon."
+            "name": "Chat tab name",
+            "description": "Name of the tab the addon uses for the second chat."
           },
           "create": {
-            "name": "Create Chat-Tab",
-            "description": "Creates the chat tab by the addon."
+            "name": "Create chat tab",
+            "description": "Creates a chat tab using the name from 'Chat tab name'."
           },
           "manageFilters": {
             "name": "Manage filters",
-            "description": "Manage the filters of the chat tab."
+            "description": "The addon manages the filters of the chat tab."
           },
           "chatIndicators": {
-            "name": "Beta: Use Chat-Indicators",
-            "description": "Specifies whether the addon should use the chat indicators (unread messages) for the chat tab. Attention: If filters are set in the tab, they are then active for the addon's moved messages."
+            "name": "Beta: Use chat indicators",
+            "description": "Show unread messages on the chat tab. Filters set on the tab then also apply to moved messages."
+          },
+          "header": {
+            "categories": {
+              "name": "Categories"
+            },
+            "realname": {
+              "name": "Realname"
+            }
+          },
+          "categories": {
+            "name": "Categories",
+            "description": "Which messages go to the second chat.",
+            "privateMessages": {
+              "name": "Private messages",
+              "description": "Show private messages in the second chat.",
+              "showInSecondChat": {
+                "name": "Show private messages"
+              },
+              "sound": {
+                "name": "Private message sound",
+                "description": "Play a sound when you receive a private message.",
+                "entries": {
+                  "none": "None",
+                  "bass": "Bass",
+                  "bassdrum": "Bass drum",
+                  "harp": "Harp",
+                  "hat": "Hat",
+                  "pling": "Pling",
+                  "snare": "Snare",
+                  "pop": "Pop"
+                }
+              },
+              "patterns": {
+                "name": "Custom patterns",
+                "description": "Regular expressions for more private messages. They are saved, but not applied yet."
+              }
+            },
+            "plotChat": {
+              "name": "Plot chat",
+              "description": "Show plot chat in the second chat.",
+              "showInSecondChat": {
+                "name": "Show plot chat"
+              },
+              "patterns": {
+                "name": "Custom patterns",
+                "description": "Regular expressions for more plot messages. They are saved, but not applied yet."
+              }
+            },
+            "itemRemover": {
+              "name": "ItemRemover",
+              "description": "Show ItemRemover messages in the second chat.",
+              "showInSecondChat": {
+                "name": "Show ItemRemover"
+              },
+              "patterns": {
+                "name": "Custom patterns",
+                "description": "Regular expressions for more ItemRemover messages. They are saved, but not applied yet."
+              }
+            },
+            "mobRemover": {
+              "name": "MobRemover",
+              "description": "Show MobRemover messages in the second chat.",
+              "showInSecondChat": {
+                "name": "Show MobRemover"
+              },
+              "patterns": {
+                "name": "Custom patterns",
+                "description": "Regular expressions for more MobRemover messages. They are saved, but not applied yet."
+              }
+            },
+            "payments": {
+              "name": "Payments",
+              "description": "Show payments in the second chat.",
+              "showInSecondChat": {
+                "name": "Show payments"
+              },
+              "patterns": {
+                "name": "Custom patterns",
+                "description": "Regular expressions for more payment messages. They are saved, but not applied yet."
+              }
+            },
+            "bank": {
+              "name": "Bank",
+              "description": "Show bank messages in the second chat.",
+              "showInSecondChat": {
+                "name": "Show bank"
+              },
+              "patterns": {
+                "name": "Custom patterns",
+                "description": "Regular expressions for more bank messages. They are saved, but not applied yet."
+              }
+            }
+          },
+          "realname": {
+            "name": "Realname",
+            "description": "Where /realname is shown.",
+            "position": {
+              "name": "Show realname",
+              "description": "Show /realname in the second chat, the main chat, or both.",
+              "entries": {
+                "default": "Main chat",
+                "secondchat": "Second chat",
+                "both": "Both"
+              }
+            }
           }
         },
-        "clickToReply": {
-          "name": "Click to reply (1.8)",
-          "description": "Click on the name in any private message to quickly reply."
-        },
-        "preventCommandFailure": {
-          "name": "Block incorrect commands",
-          "description": "Block mistyped commands. e.g. 7p h or 7msg"
-        },
-        "correctCommandCapitalisation": {
-          "name": "Correct capitalisation in commands (Cloud)",
-          "description": "e.g. '/P h' -> '/p h'"
-        },
-        "betterIgnoreList": {
-          "name": "Better ignore list (1.8)",
-          "description": "Show ignore list in a easier to read format."
-        },
-        "showPrefixInDisplayName": {
-          "name": "Prefix colors above player",
-          "description": "Show the names above players in their correct prefix colors."
-        },
-        "plotChatRight": {
-          "name": "Plot chat right",
-          "description": "Display plot chat messages in the 2nd chat."
-        },
-        "privateChatRight": {
-          "name": "Private messages right",
-          "description": "Display private messages in the 2nd chat."
-        },
-        "privateChatSound": {
-          "name": "Private message sound",
-          "description": "Play sound when you receive a private message."
-        },
-        "realnamePosition": {
-          "name": "Show realname",
-          "description": "Show /realname in the 2nd or in both chats."
-        },
-        "nameHighlightConfig": {
-          "name": "Highlight mentions",
-          "description": "Highlight messages where your name is mentioned in color.",
+        "mentions": {
+          "name": "Mentions",
+          "description": "Highlight messages that contain your name.",
           "enabled": {
-            "name": "Highlight mentions"
+            "name": "Mentions"
           },
           "mentionColor": {
-            "name": "Mention color",
-            "description": "Color in which messages where your name is mentioned are highlighted."
+            "name": "Color",
+            "description": "Background color used to highlight mentions."
           },
           "mentionSound": {
-            "name": "Mention sound",
-            "description": "Sound which is played when somebody mentions your name in the chat."
+            "name": "Sound",
+            "description": "Play a sound when somebody mentions your name in chat.",
+            "entries": {
+              "none": "None",
+              "bass": "Bass",
+              "bassdrum": "Bass drum",
+              "harp": "Harp",
+              "hat": "Hat",
+              "pling": "Pling",
+              "snare": "Snare",
+              "pop": "Pop"
+            }
           },
           "additionalHighlightText": {
-            "name": "Additional searchtext",
-            "description": "Additional text which should be searched in the messages. e.g. 'Abge' in addition to the name AbgegrieftHD"
+            "name": "Additional search text",
+            "description": "Extra text to search for in messages, for example 'Abge' in addition to the name AbgegrieftHD."
           }
         },
-        "highlightTPA": {
-          "name": "Highlight TPA messages",
-          "description": "Hicghlight TPA and TPAHERE messages in different colors."
+        "teleport": {
+          "name": "Teleport",
+          "description": "Highlight TPA messages.",
+          "highlightTPA": {
+            "name": "Highlight TPA messages",
+            "description": "Mark TPA and TPAHERE messages in different colors."
+          }
         },
-        "itemRemoverChatRight": {
-          "name": "ItemRemover right (1.8)",
-          "description": "Display ItemRemover messages in the 2nd chat."
+        "filters": {
+          "name": "Filters",
+          "description": "Remove messages from the chat.",
+          "hideVoteMessages": {
+            "name": "Hide vote messages",
+            "description": "Hide vote messages in the chat."
+          },
+          "hideNewsMessages": {
+            "name": "Hide news",
+            "description": "Hide GrieferGames news in the chat."
+          },
+          "hideBlankLines": {
+            "name": "Remove blank lines",
+            "description": "Remove blank lines in the chat and block /clearchat."
+          },
+          "hideSupremeBlankLines": {
+            "name": "Remove Supreme blank lines",
+            "description": "Remove blank lines from Supreme players, for example »."
+          }
         },
-        "itemRemoverLastTimeHover": {
-          "name": "ItemRemover timestamp (1.8)",
-          "description": "Show timestamp when hovering a ItemRemover message."
+        "magic": {
+          "name": "Magic characters",
+          "description": "Replace unreadable clan tags and prefixes.",
+          "ampClantagEnabled": {
+            "name": "Replace magic clan tags",
+            "description": "Replace magic characters in clan tags with readable text."
+          },
+          "ampEnabled": {
+            "name": "Replace magic prefixes",
+            "description": "Make names with a magic prefix readable and mark them."
+          },
+          "ampReplacement": {
+            "name": "New chat prefix",
+            "description": "Prefix used to mark names that had a magic prefix."
+          }
         },
-        "itemRemoverNotification": {
-          "name": "ItemRemover notification (1.8)",
-          "description": "Show ItemRemover notifications on the upper right part of the screen."
-        },
-        "mobRemoverChatRight": {
-          "name": "MobRemover right (1.8)",
-          "description": "Display MobRemover messages in the 2nd chat."
-        },
-        "mobRemoverLastTimeHover": {
-          "name": "MobRemover timestamp (1.8)",
-          "description": "Show timestamp when hovering a MobRemover message."
-        },
-        "mobRemoverNotification": {
-          "name": "MobRemover notification (1.8)",
-          "description": "Show MobRemover notifications on the upper right part of the screen."
-        },
-        "hideVoteMessages": {
-          "name": "Hide vote messages",
-          "description": "Hide vote messages from other players in the chat."
-        },
-        "hideNewsMessages": {
-          "name": "Hide news",
-          "description": "Hide GrieferGames News in the chat."
-        },
-        "hideBlankLines": {
-          "name": "Remove blank lines",
-          "description": "Remove blank lines in the chat and prevent /clearchat."
-        },
-        "hideSupremeBlankLines": {
-          "name": "Remove Supreme blank lines",
-          "description": "Remove blank lines from Supreme players. e.g. »"
-        },
-        "ampClantagEnabled": {
-          "name": "Replace magic clan tags",
-          "description": "Replace magic letters in clan tags with a readable font."
-        },
-        "ampEnabled": {
-          "name": "Replace magic prefix",
-          "description": "Make names of players with magic prefix readable and mark them."
-        },
-        "ampReplacement": {
-          "name": "New chat prefix",
-          "description": "Prefix that is used to mark players with a magic prefix."
-        },
-        "showChatTime": {
-          "name": "Display chat time",
-          "description": "Add the current time to all chat messages."
-        },
-        "chatTimeAfterMessage": {
-          "name": "Chat time after message",
-          "description": "Add the chat time after the message."
-        },
-        "chatTimeFormat": {
-          "name": "Chat time format",
-          "description": "Format used for the chat time."
+        "chatTime": {
+          "name": "Chat time",
+          "description": "Add the current time to chat messages.",
+          "enabled": {
+            "name": "Show chat time"
+          },
+          "chatTimeAfterMessage": {
+            "name": "After the message",
+            "description": "Insert the time after the message."
+          },
+          "chatTimeFormat": {
+            "name": "Format",
+            "description": "Format used for the chat time."
+          }
         }
       },
-
       "payment": {
         "name": "Payments",
+        "description": "Log, highlight, and notifications for payments.",
         "enabled": {
           "name": "Payments"
         },
@@ -189,23 +274,18 @@
             "name": "Bank"
           }
         },
-
         "logTransactions": {
           "name": "Log transactions",
-          "description": "Log all transactions in a log file."
+          "description": "Save every transaction in a log file."
         },
         "openTransactionsFile": {
-          "name": "Transactions file",
+          "name": "Transaction log",
           "text": "Open",
-          "description": "Open the transactions log file in your text editor."
-        },
-        "payChatRight": {
-          "name": "Payments right",
-          "description": "Display payments in the 2nd chat."
+          "description": "Open the transaction log in your text editor."
         },
         "payAchievement": {
-          "name": "Payment notification",
-          "description": "Show notifications for incoming payments on the upper right part of the screen."
+          "name": "Notification",
+          "description": "Show a notification for incoming payments."
         },
         "payHighlight": {
           "name": "Highlight payments",
@@ -213,108 +293,154 @@
         },
         "fakeMoneyWarning": {
           "name": "Warn about fake money",
-          "description": "Warn against fake payments with a Supreme status."
-        },
-        "bankChatRight": {
-          "name": "Bank right",
-          "description": "Display payments in the 2nd chat."
+          "description": "Warn about fake payments that use a Supreme status."
         },
         "bankAchievement": {
           "name": "Bank notification",
-          "description": "Show notifications for bank transactions on the upper right part of the screen."
+          "description": "Show a notification for bank transactions."
         }
       },
-
+      "itemRemover": {
+        "name": "ItemRemover",
+        "description": "Timestamp and notification for the ItemRemover (1.8).",
+        "enabled": {
+          "name": "ItemRemover"
+        },
+        "lastTimeHover": {
+          "name": "Timestamp (1.8)",
+          "description": "Show the timestamp when you hover an ItemRemover message."
+        },
+        "notification": {
+          "name": "Notification (1.8)",
+          "description": "Show the ItemRemover at the top right of the screen."
+        }
+      },
+      "mobRemover": {
+        "name": "MobRemover",
+        "description": "Timestamp and notification for the MobRemover (1.8).",
+        "enabled": {
+          "name": "MobRemover"
+        },
+        "lastTimeHover": {
+          "name": "Timestamp (1.8)",
+          "description": "Show the timestamp when you hover a MobRemover message."
+        },
+        "notification": {
+          "name": "Notification (1.8)",
+          "description": "Show the MobRemover at the top right of the screen."
+        }
+      },
       "automations": {
         "name": "Automations",
+        "description": "Portal, subserver message, and chat color.",
         "enabled": {
           "name": "Automations"
         },
-        "header": {
-          "chatcolor": {
-            "name": "Chat color"
-          }
-        },
-        "boosterConfig": {
-          "name": "Booster (1.8)",
-          "description": "Settings for Booster-Automations",
-          "loadBoostersOnJoin": {
-            "name": "Load booster on join",
-            "description": "Auto load boosters when you join the server."
-          },
-          "hideBoosterMenu": {
-            "name": "Hide booster menu ",
-            "description": "Hide the manu of the /booster command. Only show overview in the chat."
-          }
-        },
         "autoPortal": {
           "name": "Auto portal (1.8)",
-          "description": "Directly join to the portal room."
+          "description": "Join the portal room directly."
         },
         "sendSubServer": {
           "name": "Subserver change message",
-          "description": "Sends a message if you change the subserver (e.g. CB or Cloud region)."
+          "description": "Sends a message when you change the subserver (for example a CityBuild or a Cloud region)."
         },
-        "autoColor": {
-          "name": "Auto chatcolor (1.8)",
-          "description": "Automatically adds the set colorcode before every message that you send. (Can cause problems with commands of other addons or mods.)"
-        },
-        "autoColorCloud": {
-          "name": "Auto chatcolor (Cloud)",
-          "description": "Automatically adds the set colorcode before every message that you send. (Can cause problems with commands of other addons or mods.)"
-        },
-        "autoColorCloudColor": {
-          "name": "Chatcolor (Cloud)",
-          "description": "Color, in that you will be writing on the Cloud."
-        },
-        "colorGradiantCloud": {
-          "name": "Chatcolorgradiant (Cloud)",
-          "description": "Adds a color gradiant between to hexcolorcodes, like '##ff0000' and '##00ff00' in the message"
-        },
-        "afkConfig": {
-          "name": "AFK",
-          "description": "Settings for AFK-Automations",
-          "enabled": {
-            "name": "AFK"
+        "chatColor": {
+          "name": "Chat color",
+          "description": "Color for messages you send.",
+          "autoColor": {
+            "name": "Automatic chat color (1.8)",
+            "description": "Puts the color code in front of every message you send. This can interfere with commands from other addons or mods.",
+            "entries": {
+              "none": "None",
+              "aqua": "Aqua",
+              "blue": "Blue",
+              "green": "Green",
+              "red": "Red",
+              "yellow": "Yellow",
+              "gold": "Gold",
+              "purple": "Purple",
+              "gray": "Gray",
+              "darkGray": "Dark gray",
+              "darkBlue": "Dark blue",
+              "darkGreen": "Dark green",
+              "darkAqua": "Dark aqua",
+              "darkRed": "Dark red",
+              "darkPurple": "Dark purple",
+              "black": "Black",
+              "white": "White"
+            }
           },
-          "afkTime": {
-            "name": "AFK after (in min)",
-            "description": "Timer after which you will be marked as AFK."
+          "autoColorCloud": {
+            "name": "Automatic chat color (Cloud)",
+            "description": "Puts the color in front of every message you send. This can interfere with commands from other addons or mods."
           },
-          "afkNick": {
-            "name": "Nick when AFK",
-            "description": "Automatically set a nickname, when you ware detected as AFK and remove after you are back."
+          "autoColorCloudColor": {
+            "name": "Chat color (Cloud)",
+            "description": "Color your messages use on the Cloud."
           },
-          "afkNickname": {
-            "name": "Nickname (4-16 characters)",
-            "description": "Nickname while you are AFK."
-          },
-          "afkMsgReply": {
-            "name": "Reply to private messages",
-            "description": "Automatically reply to private messages with a predefined text while you are AFK."
-          },
-          "afkMsgText": {
-            "name": "Reply text",
-            "description": "Text that should be replied to private messages, while you are AFK."
+          "colorGradientCloud": {
+            "name": "Chat color gradient (Cloud)",
+            "description": "Inserts a gradient between two hex colors, for example '##ff0000' and '##00ff00'."
           }
         }
       },
-
+      "afk": {
+        "name": "AFK",
+        "description": "Nickname and automatic reply while you are AFK.",
+        "enabled": {
+          "name": "AFK"
+        },
+        "afkTime": {
+          "name": "AFK after (minutes)",
+          "description": "Time after which the addon marks you as AFK."
+        },
+        "afkNick": {
+          "name": "Set nickname",
+          "description": "Sets a nickname when you are marked AFK and removes it when you are back."
+        },
+        "afkNickname": {
+          "name": "AFK nickname (4–16 characters)",
+          "description": "Your nickname while you are AFK."
+        },
+        "afkMsgReply": {
+          "name": "Reply to private messages",
+          "description": "Automatically replies with a fixed text while you are AFK."
+        },
+        "afkMsgText": {
+          "name": "Reply text",
+          "description": "Text of the automatic reply to private messages."
+        }
+      },
+      "booster": {
+        "name": "Booster",
+        "description": "Load boosters on join and hide the menu (1.8).",
+        "enabled": {
+          "name": "Booster"
+        },
+        "loadBoostersOnJoin": {
+          "name": "Load on join",
+          "description": "Loads boosters automatically when you join the server."
+        },
+        "hideBoosterMenu": {
+          "name": "Hide menu",
+          "description": "Blocks the /booster menu. The overview stays in chat."
+        }
+      },
       "friends": {
         "name": "Friends",
+        "description": "Show others which CityBuild you are on.",
         "enabled": {
           "name": "Friends"
         },
-        "labyChatShowSubServerEnabled": {
+        "showSubServerInLabyChat": {
           "name": "Show CityBuild in LabyChat",
-          "description": "Let all your friends see your current CityBuild in the LabyChat."
+          "description": "Shows your friends in LabyChat which CityBuild you are on."
         },
-        "discordShowSubServerEnabled":{
+        "showSubServerInDiscord": {
           "name": "Show CityBuild in Discord",
-          "description": "Let all your friends on Discord see your current CityBuild."
+          "description": "Shows your friends on Discord which CityBuild you are on."
         }
       },
-
       "openWebsite": {
         "name": "Website",
         "text": "Open"
@@ -325,7 +451,7 @@
       },
       "openSupport": {
         "name": "Support-Discord",
-        "text": "Öffnen"
+        "text": "Open"
       }
     },
 

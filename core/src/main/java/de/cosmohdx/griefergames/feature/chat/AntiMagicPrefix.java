@@ -25,7 +25,7 @@ public class AntiMagicPrefix extends ChatModule {
   @Subscribe
   public void messageProcessEvent(GGChatProcessEvent event) {
     if (event.isCancelled()) return;
-    if (!griefergames.configuration().chatConfig().isAmpEnabled()) return;
+    if (!griefergames.configuration().chat().replaceMagicPrefixes()) return;
 
     if (event.getMessage().getFormattedText().contains("§k")) {
       // Check if player message
@@ -44,7 +44,7 @@ public class AntiMagicPrefix extends ChatModule {
         }
         if (msg == null) return;
 
-        String ampReplacement = griefergames.configuration().chatConfig().getAmpReplacement();
+        String ampReplacement = griefergames.configuration().chat().magicPrefixReplacement();
         if (ampReplacement.isBlank()) {
           ampReplacement = GrieferGamesConfig.DEFAULT_AMP_REPLACEMENT;
         }

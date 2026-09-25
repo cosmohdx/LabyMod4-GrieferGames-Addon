@@ -34,13 +34,13 @@ public class Bank extends ChatModule {
       String plain = event.getMessage().getPlainText();
 
       if (plain.startsWith("[Bank] ")) {
-        if (griefergames.configuration().payment().bankChatRight().get()) {
+        if (griefergames.configuration().chat().routeBank()) {
           event.setSecondChat(true);
         }
 
         boolean deposit;
         if ((deposit = plain.endsWith("auf dein Bankkonto eingezahlt.")) || plain.endsWith("von deinem Bankkonto abgehoben.")) {
-          if (griefergames.configuration().payment().bankAchievement().get()) {
+          if (griefergames.configuration().payment().bankNotification()) {
             String message = I18n.translate(griefergames.namespace() + ".notifications.bank." + (deposit ? "deposit" : "withdraw"));
             message = message.replace("{amount}", "$" + moneyFormat.format(getMoneyBank(plain)));
 

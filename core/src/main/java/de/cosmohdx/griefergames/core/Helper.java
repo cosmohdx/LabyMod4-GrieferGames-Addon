@@ -47,7 +47,7 @@ public class Helper {
    * @param name Name of the second chat tab
    */
   public void findSecondChat(String name) {
-      if(!griefergames.configuration().chatConfig().isEnabled() || !griefergames.configuration().chatConfig().tabConfig().isEnabled()) {
+      if(!griefergames.configuration().chat().isEnabled() || !griefergames.configuration().chat().secondChat().isEnabled()) {
         return;
       }
       IngameChatTab secondChat = null;
@@ -60,14 +60,14 @@ public class Helper {
           }
       }
 
-      if (secondChat == null && griefergames.configuration().chatConfig().tabConfig().isCreate()) {
+      if (secondChat == null && griefergames.configuration().chat().createSecondChat()) {
           secondChat = createNewSecondChat(name);
       }
 
       if(secondChat != null) {
-        if(griefergames.configuration().chatConfig().tabConfig().isUseChatIndicators()) {
+        if(griefergames.configuration().chat().useChatIndicators()) {
           if(!secondChat.config().filters().get().isEmpty()) {
-            if (griefergames.configuration().chatConfig().tabConfig().isManageFilters()) {
+            if (griefergames.configuration().chat().manageSecondChatFilters()) {
               // Remove all filters
               secondChat.config().filters().get().removeIf(it -> true);
             } else {
@@ -81,7 +81,7 @@ public class Helper {
               }
             }
           }
-        }else if(griefergames.configuration().chatConfig().tabConfig().isManageFilters()){
+        }else if(griefergames.configuration().chat().manageSecondChatFilters()){
           if (secondChat.config().filters().get().isEmpty()) {
             // Create dummy filter to prevent LabyMod from sending alle messages to the second chat
             ChatFilter defaultChatFilter = new ChatFilter();
@@ -124,7 +124,7 @@ public class Helper {
       return;
     }
     message.metadata().computeIfAbsent(griefergames.namespace(), k -> true);
-    if(griefergames.configuration().chatConfig().tabConfig().isUseChatIndicators()) {
+    if(griefergames.configuration().chat().useChatIndicators()) {
       griefergames.state().getSecondChat().handleInput(message);
     }else{
       griefergames.state().getSecondChat().getMessages().add(0, message);

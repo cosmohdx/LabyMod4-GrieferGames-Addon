@@ -1,17 +1,13 @@
 package de.cosmohdx.griefergames.feature.afk;
 
 import de.cosmohdx.griefergames.core.GrieferGamesConfig;
+import de.cosmohdx.griefergames.core.config.FeatureConfig;
 import net.labymod.api.client.gui.screen.widget.widgets.input.SliderWidget.SliderSetting;
 import net.labymod.api.client.gui.screen.widget.widgets.input.SwitchWidget.SwitchSetting;
 import net.labymod.api.client.gui.screen.widget.widgets.input.TextFieldWidget.TextFieldSetting;
-import net.labymod.api.configuration.loader.Config;
 import net.labymod.api.configuration.loader.property.ConfigProperty;
 
-public class GrieferGamesAFKConfig extends Config {
-
-  //@ParentSwitch
-  @SwitchSetting
-  private final ConfigProperty<Boolean> enabled = new ConfigProperty<Boolean>(true);
+public class GrieferGamesAFKConfig extends FeatureConfig {
 
   @SliderSetting(min = 1, max = 60)
   private final ConfigProperty<Integer> afkTime = new ConfigProperty<>(15);
@@ -28,28 +24,23 @@ public class GrieferGamesAFKConfig extends Config {
   @TextFieldSetting
   private final ConfigProperty<String> afkMsgText = new ConfigProperty<>("Ich bin momentan AFK ;)");
 
-  public boolean isEnabled() {
-    return enabled.get();
+  public int afkTimeMinutes() {
+    return this.afkTime.get();
   }
 
-  public ConfigProperty<Integer> afkTime() {
-    return afkTime;
+  public boolean changeNickname() {
+    return this.isOn(this.afkNick);
   }
 
-  public ConfigProperty<Boolean> afkNick() {
-    return afkNick;
+  public String nickname() {
+    return this.afkNickname.get();
   }
 
-  public ConfigProperty<String> afkNickname() {
-    return afkNickname;
+  public boolean replyToMessages() {
+    return this.isOn(this.afkMsgReply);
   }
 
-  public ConfigProperty<Boolean> afkMsgReply() {
-    return afkMsgReply;
+  public String replyText() {
+    return this.afkMsgText.get();
   }
-
-  public ConfigProperty<String> afkMsgText() {
-    return afkMsgText;
-  }
-
 }

@@ -1,235 +1,177 @@
 package de.cosmohdx.griefergames.feature.chat;
 
-import de.cosmohdx.griefergames.core.GrieferGamesConfig;
-import de.cosmohdx.griefergames.feature.chat.RealnamePosition;
-import de.cosmohdx.griefergames.feature.chat.Sounds;
-import net.labymod.api.client.gui.screen.widget.widgets.input.SwitchWidget.SwitchSetting;
-import net.labymod.api.client.gui.screen.widget.widgets.input.TextFieldWidget.TextFieldSetting;
-import net.labymod.api.client.gui.screen.widget.widgets.input.dropdown.DropdownWidget.DropdownSetting;
-import net.labymod.api.configuration.loader.Config;
-import net.labymod.api.configuration.loader.property.ConfigProperty;
-import net.labymod.api.configuration.settings.annotation.SettingSection;
+import de.cosmohdx.griefergames.core.config.FeatureConfig;
 
-public class GrieferGamesChatConfig extends Config {
+public class GrieferGamesChatConfig extends FeatureConfig {
 
-  //@ParentSwitch
-  @SwitchSetting
-  private final ConfigProperty<Boolean> enabled = new ConfigProperty<Boolean>(true);
+  private final ChatCommandsConfig commands = new ChatCommandsConfig();
+  private final ChatDisplayConfig display = new ChatDisplayConfig();
+  private final SecondChatConfig secondChat = new SecondChatConfig();
+  private final MentionConfig mentions = new MentionConfig();
+  private final TeleportConfig teleport = new TeleportConfig();
+  private final ChatFiltersConfig filters = new ChatFiltersConfig();
+  private final MagicPrefixConfig magic = new MagicPrefixConfig();
+  private final ChatTimeConfig chatTime = new ChatTimeConfig();
 
-  // ONLY 1.8
-  @SwitchSetting
-  private final ConfigProperty<Boolean> clickToReply = new ConfigProperty<>(true);
-
-  @SwitchSetting
-  private final ConfigProperty<Boolean> preventCommandFailure = new ConfigProperty<>(true);
-
-  @SwitchSetting
-  private final ConfigProperty<Boolean> correctCommandCapitalisation = new ConfigProperty<>(true);
-
-  // Only 1.8
-  @SwitchSetting
-  private final ConfigProperty<Boolean> betterIgnoreList = new ConfigProperty<>(true);
-
-  @SwitchSetting
-  private final ConfigProperty<Boolean> showPrefixInDisplayName = new ConfigProperty<>(true);
-
-  @SettingSection("highlightMessages")
-
-  private GrieferGamesChatTabConfig tabConfig = new GrieferGamesChatTabConfig();
-
-  @SwitchSetting
-  private final ConfigProperty<Boolean> plotChatRight = new ConfigProperty<>(true);
-
-  @SwitchSetting
-  private final ConfigProperty<Boolean> privateChatRight = new ConfigProperty<>(true);
-
-  @DropdownSetting
-  private final ConfigProperty<Sounds> privateChatSound = new ConfigProperty<>(Sounds.POP);
-
-  // 1.8
-  @DropdownSetting
-  private final ConfigProperty<RealnamePosition> realnamePosition = new ConfigProperty<>(
-      RealnamePosition.DEFAULT);
-
-  private final GrieferGamesNameHighlightConfig nameHighlightConfig = new GrieferGamesNameHighlightConfig();
-
-  @SwitchSetting
-  private final ConfigProperty<Boolean> highlightTPA = new ConfigProperty<>(true);
-
-  @SwitchSetting
-  private final ConfigProperty<Boolean> itemRemoverChatRight = new ConfigProperty<>(false);
-
-  @SwitchSetting
-  private final ConfigProperty<Boolean> itemRemoverLastTimeHover = new ConfigProperty<>(true);
-
-  @SwitchSetting
-  private final ConfigProperty<Boolean> itemRemoverNotification = new ConfigProperty<>(true);
-
-  @SwitchSetting
-  private final ConfigProperty<Boolean> mobRemoverChatRight = new ConfigProperty<>(false);
-
-  @SwitchSetting
-  private final ConfigProperty<Boolean> mobRemoverLastTimeHover = new ConfigProperty<>(true);
-
-  @SwitchSetting
-  private final ConfigProperty<Boolean> mobRemoverNotification = new ConfigProperty<>(true);
-
-  @SettingSection("blockMessages")
-
-  @SwitchSetting
-  private final ConfigProperty<Boolean> hideVoteMessages = new ConfigProperty<>(false);
-
-  @SwitchSetting
-  private final ConfigProperty<Boolean> hideNewsMessages = new ConfigProperty<>(false);
-
-  @SwitchSetting
-  private final ConfigProperty<Boolean> hideBlankLines = new ConfigProperty<>(true);
-
-  @SwitchSetting
-  private final ConfigProperty<Boolean> hideSupremeBlankLines = new ConfigProperty<>(true);
-
-  @SettingSection("magicPrefix")
-
-  @SwitchSetting
-  private final ConfigProperty<Boolean> ampClantagEnabled = new ConfigProperty<>(true);
-
-  @SwitchSetting
-  private final ConfigProperty<Boolean> ampEnabled = new ConfigProperty<>(true);
-
-  @TextFieldSetting
-  private final ConfigProperty<String> ampReplacement = new ConfigProperty<>(GrieferGamesConfig.DEFAULT_AMP_REPLACEMENT);
-
-  @SettingSection("chatTime")
-
-  @SwitchSetting
-  private final ConfigProperty<Boolean> showChatTime = new ConfigProperty<>(false);
-
-  @SwitchSetting
-  private final ConfigProperty<Boolean> chatTimeAfterMessage = new ConfigProperty<>(false);
-
-  @TextFieldSetting
-  private final ConfigProperty<String> chatTimeFormat = new ConfigProperty<>(GrieferGamesConfig.DEFAULT_CHATTIME_FORMAT);
-
-  public boolean isEnabled() {
-    return enabled.get();
+  public ChatCommandsConfig commands() {
+    return this.commands;
   }
 
-  public boolean isPreventCommandFailure() {
-    return enabled.get() && preventCommandFailure.get();
+  public ChatDisplayConfig display() {
+    return this.display;
   }
 
-  public ConfigProperty<Boolean> correctCommandCapitalisation() {
-    return correctCommandCapitalisation;
+  public SecondChatConfig secondChat() {
+    return this.secondChat;
   }
 
-  public boolean isBetterIgnoreList() {
-    return enabled.get() && betterIgnoreList.get();
+  public MentionConfig mentions() {
+    return this.mentions;
   }
 
-  public boolean isShowPrefixInDisplayName() {
-    return enabled.get() && showPrefixInDisplayName.get();
+  public TeleportConfig teleport() {
+    return this.teleport;
   }
 
-  public GrieferGamesChatTabConfig tabConfig() {
-    return tabConfig;
+  public ChatFiltersConfig filters() {
+    return this.filters;
   }
 
-  public String getChatTabName() {
-    return tabConfig.getChatTabName();
+  public MagicPrefixConfig magic() {
+    return this.magic;
   }
 
-  public boolean isPlotChatRight() {
-    return enabled.get() && plotChatRight.get();
+  public ChatTimeConfig chatTime() {
+    return this.chatTime;
   }
 
-  public boolean isClickToReply() {
-    return enabled.get() && clickToReply.get();
+  public boolean clickToReply() {
+    return this.isEnabled() && this.commands.clickToReply();
   }
 
-  public boolean isPrivateChatRight() {
-    return enabled.get() && privateChatRight.get();
+  public boolean preventCommandFailure() {
+    return this.isEnabled() && this.commands.preventCommandFailure();
   }
 
-  public Sounds getPrivateChatSound() {
-    if(!enabled.get()) return Sounds.NONE;
-    return privateChatSound.get();
+  public boolean correctCommandCapitalisation() {
+    return this.isEnabled() && this.commands.correctCommandCapitalisation();
   }
 
-  public RealnamePosition getRealnamePosition() {
-    if(!enabled.get()) return RealnamePosition.DEFAULT;
-    return realnamePosition.get();
+  public boolean betterIgnoreList() {
+    return this.isEnabled() && this.commands.betterIgnoreList();
   }
 
-  public GrieferGamesNameHighlightConfig nameHighlightConfig() {
-    return nameHighlightConfig;
+  public boolean showPrefixInDisplayName() {
+    return this.isEnabled() && this.display.showPrefixInDisplayName();
   }
 
-  public boolean isHighlightTpa() {
-    return enabled.get() && highlightTPA.get();
+  public String chatTabName() {
+    return this.secondChat.chatTabName();
   }
 
-  public boolean isRemoverChatRight() {
-    return enabled.get() && itemRemoverChatRight.get();
+  public boolean createSecondChat() {
+    return this.isEnabled() && this.secondChat.createTab();
   }
 
-  public boolean isRemoverLastTimeHover() {
-    return enabled.get() && itemRemoverLastTimeHover.get();
+  public boolean manageSecondChatFilters() {
+    return this.isEnabled() && this.secondChat.manageFilters();
   }
 
-  public boolean isRemoverNotification() {
-    return enabled.get() && itemRemoverNotification.get();
+  public boolean useChatIndicators() {
+    return this.isEnabled() && this.secondChat.chatIndicators();
   }
 
-  public boolean isMobRemoverChatRight() {
-    return enabled.get() && mobRemoverChatRight.get();
+  public RealnamePosition realnamePosition() {
+    if (!this.isEnabled() || !this.secondChat.isEnabled()) {
+      return RealnamePosition.DEFAULT;
+    }
+    return this.secondChat.realname().position();
   }
 
-  public boolean isMobRemoverLastTimeHover() {
-    return enabled.get() && mobRemoverLastTimeHover.get();
+  public boolean routePrivateMessages() {
+    return this.route(this.secondChat.categories().privateMessages());
   }
 
-  public boolean isMobRemoverNotification() {
-    return enabled.get() && mobRemoverNotification.get();
+  public boolean routePlotChat() {
+    return this.route(this.secondChat.categories().plotChat());
   }
 
-  public boolean isHideVoteMessages() {
-    return enabled.get() && hideVoteMessages.get();
+  public boolean routeItemRemover() {
+    return this.route(this.secondChat.categories().itemRemover());
   }
 
-  public boolean isHideNewsMessages() {
-    return enabled.get() && hideNewsMessages.get();
+  public boolean routeMobRemover() {
+    return this.route(this.secondChat.categories().mobRemover());
   }
 
-  public boolean isHideBlankLines() {
-    return enabled.get() && hideBlankLines.get();
+  public boolean routePayments() {
+    return this.route(this.secondChat.categories().payments());
   }
 
-  public boolean isHideSupremeBlankLines() {
-    return enabled.get() && hideSupremeBlankLines.get();
+  public boolean routeBank() {
+    return this.route(this.secondChat.categories().bank());
   }
 
-  public boolean isAmpClantagEnabled() {
-    return enabled.get() && ampClantagEnabled.get();
+  public Sounds privateMessageSound() {
+    if (!this.isEnabled()) {
+      return Sounds.NONE;
+    }
+    return this.secondChat.categories().privateMessages().sound();
   }
 
-  public boolean isAmpEnabled() {
-    return enabled.get() && ampEnabled.get();
+  public boolean mentionsEnabled() {
+    return this.isEnabled() && this.mentions.isEnabled();
   }
 
-  public String getAmpReplacement() {
-    if(!enabled.get()) return "";
-    return ampReplacement.get();
+  public boolean highlightTpa() {
+    return this.isEnabled() && this.teleport.highlightTpa();
   }
 
-  public boolean isShowChatTime() {
-    return enabled.get() && showChatTime.get();
+  public boolean hideVoteMessages() {
+    return this.isEnabled() && this.filters.hideVoteMessages();
   }
 
-  public ConfigProperty<Boolean> chatTimeAfterMessage() {
-    return chatTimeAfterMessage;
+  public boolean hideNewsMessages() {
+    return this.isEnabled() && this.filters.hideNewsMessages();
   }
 
-  public ConfigProperty<String> chatTimeFormat() {
-    return chatTimeFormat;
+  public boolean hideBlankLines() {
+    return this.isEnabled() && this.filters.hideBlankLines();
+  }
+
+  public boolean hideSupremeBlankLines() {
+    return this.isEnabled() && this.filters.hideSupremeBlankLines();
+  }
+
+  public boolean replaceClanTags() {
+    return this.isEnabled() && this.magic.replaceClanTags();
+  }
+
+  public boolean replaceMagicPrefixes() {
+    return this.isEnabled() && this.magic.replacePrefixes();
+  }
+
+  public String magicPrefixReplacement() {
+    if (!this.replaceMagicPrefixes()) {
+      return "";
+    }
+    return this.magic.replacement();
+  }
+
+  public boolean showChatTime() {
+    return this.isEnabled() && this.chatTime.isEnabled();
+  }
+
+  public boolean chatTimeAfterMessage() {
+    return this.showChatTime() && this.chatTime.afterMessage();
+  }
+
+  public String chatTimeFormat() {
+    String format = this.chatTime.format();
+    return format == null ? "" : format;
+  }
+
+  private boolean route(SecondChatCategoryConfig category) {
+    return this.isEnabled() && this.secondChat.isEnabled() && category.showInSecondChat();
   }
 }

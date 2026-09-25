@@ -20,7 +20,7 @@ public class Realname extends ChatModule {
   @Subscribe
   public void messageProcessEvent(GGChatProcessEvent event) {
     if(event.isCancelled()) return;
-    RealnamePosition position = griefergames.configuration().chatConfig().getRealnamePosition();
+    RealnamePosition position = griefergames.configuration().chat().realnamePosition();
     if (position == RealnamePosition.DEFAULT) return;
     if (event.getMessage().getPlainText().isBlank()) return;
 
