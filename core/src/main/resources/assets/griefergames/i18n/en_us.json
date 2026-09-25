@@ -6,10 +6,9 @@
         "name": "Addon Enabled"
       },
       "openWiki": {
-        "name": "Wiki",
+        "name": "Open wiki",
         "text": "Open"
       },
-
       "chat": {
         "name": "Chat",
         "description": "Messages, commands, and the second chat.",
@@ -524,9 +523,23 @@
       "openSupport": {
         "name": "Support-Discord",
         "text": "Open"
+      },
+      "mapTooltipPreview": {
+        "name": "Show map in tooltip"
+      },
+      "headTooltipPreview": {
+        "name": "Enlarge head in tooltip"
+      },
+      "headEnchantmentGlint": {
+        "name": "Enchantment glint on heads, banners and chests"
+      },
+      "overstackingFix": {
+        "name": "Overstacking fix for newer versions"
+      },
+      "wikiKey": {
+        "name": "Open wiki (hotkey)"
       }
     },
-
     "messages": {
       "warning": "WARNING!",
       "on": "ON",
@@ -544,7 +557,6 @@
       "plotBordersOff": "Plot borders disabled.",
       "plotBordersUnavailable": "Plot borders are not available on this server."
     },
-
     "notifications": {
       "generalError": "An error occurred, please check the chat.",
       "addonLoaded": "GrieferGames Addon {version} loaded.",
@@ -568,7 +580,6 @@
         "mobs": "in {time} minutes"
       }
     },
-
     "hudWidgetCategory": {
       "griefergames": {
         "name": "GrieferGames",

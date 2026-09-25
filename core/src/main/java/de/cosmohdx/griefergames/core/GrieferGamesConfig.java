@@ -12,6 +12,10 @@ import de.cosmohdx.griefergames.feature.remover.RemoverConfig;
 import de.cosmohdx.griefergames.feature.payment.GrieferGamesPaymentsConfig;
 import de.cosmohdx.griefergames.feature.plotborder.PlotBorderConfig;
 import net.labymod.api.addon.AddonConfig;
+import de.cosmohdx.griefergames.feature.wiki.WikiActivity;
+import net.labymod.api.Laby;
+import net.labymod.api.client.gui.screen.key.Key;
+import net.labymod.api.client.gui.screen.widget.widgets.input.KeybindWidget.KeyBindSetting;
 import net.labymod.api.client.gui.screen.widget.widgets.input.ButtonWidget.ButtonSetting;
 import net.labymod.api.client.gui.screen.widget.widgets.input.SwitchWidget.SwitchSetting;
 import net.labymod.api.configuration.loader.annotation.ConfigName;
@@ -57,7 +61,7 @@ public class GrieferGamesConfig extends AddonConfig {
 
   @SpriteSlot(x = 3, y = 1)
   private final PlotBorderConfig plotBorders = new PlotBorderConfig();
-  
+
   @SpriteSlot(x = 4, y = 1)
   private final NearbyPlayersConfig nearbyPlayers = new NearbyPlayersConfig();
 
@@ -67,6 +71,21 @@ public class GrieferGamesConfig extends AddonConfig {
   @SettingDevelopment
   @SpriteSlot(x = 1, y = 0)
   private final DevConfig dev = new DevConfig();
+
+  @SwitchSetting
+  private final ConfigProperty<Boolean> mapTooltipPreview = new ConfigProperty<>(true);
+
+  @SwitchSetting
+  private final ConfigProperty<Boolean> headTooltipPreview = new ConfigProperty<>(true);
+
+  @SwitchSetting
+  private final ConfigProperty<Boolean> headEnchantmentGlint = new ConfigProperty<>(true);
+
+  @SwitchSetting
+  private final ConfigProperty<Boolean> overstackingFix = new ConfigProperty<>(true);
+
+  @KeyBindSetting
+  private final ConfigProperty<Key> wikiKey = new ConfigProperty<>(Key.F9);
 
   // Link buttons stay below every feature config. New configs go above this
   // block, and openGithub keeps after = the last feature field.
@@ -88,7 +107,7 @@ public class GrieferGamesConfig extends AddonConfig {
   @MethodOrder(after = "openSupport")
   @ButtonSetting
   public void openWiki() {
-    OperatingSystem.getPlatform().openUrl("https://wiki.griefergames.net/");
+    Laby.labyAPI().minecraft().minecraftWindow().displayScreen(new WikiActivity());
   }
 
   @Override
@@ -125,6 +144,15 @@ public class GrieferGamesConfig extends AddonConfig {
     return this.booster;
   }
 
+  public ConfigProperty<Boolean> mapTooltipPreview() { return this.mapTooltipPreview; }
+  public ConfigProperty<Boolean> headTooltipPreview() { return this.headTooltipPreview; }
+  public ConfigProperty<Boolean> headEnchantmentGlint() { return this.headEnchantmentGlint; }
+  public ConfigProperty<Boolean> overstackingFix() { return this.overstackingFix; }
+
+  public ConfigProperty<Key> wikiKey() {
+    return this.wikiKey;
+  }
+
   public GrieferGamesFriendsConfig friends() {
     return this.friends;
   }
@@ -132,7 +160,7 @@ public class GrieferGamesConfig extends AddonConfig {
   public PlotBorderConfig plotBorders() {
     return this.plotBorders;
   }
-  
+
   public NearbyPlayersConfig nearbyPlayers() {
     return this.nearbyPlayers;
   }
