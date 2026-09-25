@@ -6,6 +6,7 @@ import de.cosmohdx.griefergames.feature.automation.GrieferGamesAutomationsConfig
 import de.cosmohdx.griefergames.feature.booster.GrieferGamesBoosterToolsConfig;
 import de.cosmohdx.griefergames.feature.chat.GrieferGamesChatConfig;
 import de.cosmohdx.griefergames.feature.friends.GrieferGamesFriendsConfig;
+import de.cosmohdx.griefergames.feature.nearby.NearbyPlayersConfig;
 import de.cosmohdx.griefergames.feature.remover.RemoverConfig;
 import de.cosmohdx.griefergames.feature.payment.GrieferGamesPaymentsConfig;
 import de.cosmohdx.griefergames.feature.plotborder.PlotBorderConfig;
@@ -54,6 +55,9 @@ public class GrieferGamesConfig extends AddonConfig {
 
   @SpriteSlot(x = 3, y = 1)
   private final PlotBorderConfig plotBorders = new PlotBorderConfig();
+  
+  @SpriteSlot(x = 4, y = 1)
+  private final NearbyPlayersConfig nearbyPlayers = new NearbyPlayersConfig();
 
   @SpriteSlot(x = 7, y = 0)
   @MethodOrder(after = "friends")
@@ -109,5 +113,9 @@ public class GrieferGamesConfig extends AddonConfig {
 
   public PlotBorderConfig plotBorders() {
     return this.plotBorders;
+  }
+  
+  public NearbyPlayersConfig nearbyPlayers() {
+    return this.nearbyPlayers;
   }
 }

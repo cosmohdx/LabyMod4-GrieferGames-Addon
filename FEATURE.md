@@ -52,6 +52,17 @@ Solange das Netz noch nicht erkannt ist (`SubServerType.UNKNOWN`), bleiben Funkt
 | Delay-HUD | ✓ | ✓ |
 | Subserver-HUD | ✓ | ✓ |
 | Plot-Grenzen | ✓ | |
+| Spieler in der Nähe | ✓ | ✓ |
+
+## Spieler in der Nähe
+
+Grenzwertig gegenüber §2 Abs. 5 und 8 (kein Radar, keine visuellen Vorteile). Standard **aus**. Mit den Voreinstellungen nur Spieler in direkter Sichtlinie, Radius 16 (höchstens 32), nur Citybuilds, Distanz nur grob (`<5 m`, `<10 m`, `<20 m`, `<32 m`). Keine Richtung, keine Koordinaten, kein Ton, keine Auflösung von Nicks.
+
+Auf 1.8 zählen Citybuilds (`nature`, `extreme`, `evil`, `cb…`). Farmwelten (`lava`, `wasser`), der Event-Server und auf der Cloud Farm, Event und Minigame bleiben aus, solange „Nur auf Citybuilds“ an ist. Solange das Netz unbekannt ist, bleibt die Liste leer.
+
+Die Sichtlinie geht vom Auge zum Kopf oder zur Körpermitte. Blöcke mit Kollisionsform blockieren sie, so wie die Vanilla-Prüfung. Glas, Zäune und Laub blockieren deshalb je nach Version, sobald ihre Kollisionsform den Strahl trifft. Im Zweifel wird der Spieler nicht angezeigt. Spieler auf einem Reittier zählen mit, der eigene Spieler und die Spectator-Kamera nicht.
+
+Nicht veröffentlichen, bevor der GrieferGames-Support die Funktion freigegeben hat. Wird die Option „Sichtlinie aus“ abgelehnt, muss sie entfernt und fest auf an gesetzt werden.
 
 ## Nicht in diesem Branch
 
