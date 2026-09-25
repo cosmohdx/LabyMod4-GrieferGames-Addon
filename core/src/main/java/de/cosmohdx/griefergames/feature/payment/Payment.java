@@ -33,12 +33,20 @@ public class Payment extends ChatModule {
 
   @Subscribe
   public void messageProcessEvent(GGChatProcessEvent event) {
+    if (event.getMessage() == null) {
+      return;
+    }
+    String plain = event.getMessage().getPlainText();
+    if (plain == null || plain.isBlank()) {
+      return;
+    }
+    if (griefergames.configuration().payment().logBalanceTiming()) {
+      logPaymentTiming(plain);
+    }
     if (!griefergames.configuration().payment().isEnabled()) {
       return;
     }
     if (griefergames.state().getSubServerType() == SubServerType.REGULAR) {
-      if (event.getMessage().getPlainText().isBlank()) return;
-      String plain = event.getMessage().getPlainText();
 
       Matcher receiveMoneyMatcher = receiveMoneyRegex.matcher(plain);
       if (receiveMoneyMatcher.find()) {
@@ -107,6 +115,26 @@ public class Payment extends ChatModule {
       }
 
     }
+  }
+
+  private void logPaymentTiming(String plain) {
+    String type = null;
+    if (receiveMoneyRegex.matcher(plain).find()) {
+      type = "receive";
+    } else if (payMoneyRegex.matcher(plain).find()) {
+      type = "pay";
+    } else if (earnMoneyRegex.matcher(plain).find()) {
+      type = "moneydrop";
+    }
+    if (type == null) {
+      return;
+    }
+    griefergames.logger().info(
+        GrieferGames.LOG_PREFIX + "payment t=" + System.currentTimeMillis()
+            + " n=" + System.nanoTime()
+            + " type=" + type
+            + " text=" + plain
+    );
   }
 
   public double getAmount(String message) {

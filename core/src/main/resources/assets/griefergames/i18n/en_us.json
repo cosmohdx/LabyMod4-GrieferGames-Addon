@@ -284,6 +284,10 @@
           "name": "Warn about fake money",
           "description": "Warn about fake payments that use a Supreme status."
         },
+        "logBalanceTiming": {
+          "name": "Log balance timing",
+          "description": "Writes to the log when the cash balance, bank balance, or a payment line arrives, so you can compare the order. Off by default."
+        },
         "bankAchievement": {
           "name": "Bank notification",
           "description": "Show a notification for bank transactions."
@@ -477,6 +481,44 @@
     "hudWidget": {
       "gg_income": {
         "name": "Income"
+      },
+      "gg_balance": {
+        "name": "Balance",
+        "showCents": {
+          "name": "Show cents",
+          "description": "Show two decimal places."
+        },
+        "compact": {
+          "name": "Compact",
+          "description": "Shorten large amounts, for example 1.25 M."
+        },
+        "hideWhenZero": {
+          "name": "Hide when zero",
+          "description": "Hide the widget when the amount is 0."
+        }
+      },
+      "gg_bank": {
+        "name": "Bank balance",
+        "showCents": {
+          "name": "Show cents",
+          "description": "Show two decimal places."
+        },
+        "compact": {
+          "name": "Compact",
+          "description": "Shorten large amounts, for example 1.25 M."
+        },
+        "hideWhenZero": {
+          "name": "Hide when zero",
+          "description": "Hide the widget when the amount is 0."
+        }
+      },
+      "money": {
+        "decimal": ".",
+        "grouping": ",",
+        "thousand": "K",
+        "million": "M",
+        "billion": "B",
+        "trillion": "T"
       },
       "gg_nickname": {
         "name": "Nickname",

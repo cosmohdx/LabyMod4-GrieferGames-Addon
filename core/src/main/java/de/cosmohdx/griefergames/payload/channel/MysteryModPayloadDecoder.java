@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import de.cosmohdx.griefergames.payload.ClientPayload;
 import de.cosmohdx.griefergames.payload.JsonPayloadDecoder;
+import de.cosmohdx.griefergames.payload.model.MysteryModBankPayload;
 import de.cosmohdx.griefergames.payload.model.MysteryModMessage;
 import de.cosmohdx.griefergames.payload.model.RedstoneStatusPayload;
 import de.cosmohdx.griefergames.payload.model.UserSubtitlePayload;
@@ -26,6 +27,7 @@ public final class MysteryModPayloadDecoder {
   public MysteryModPayloadDecoder() {
     register(RedstoneStatusPayload.ID, RedstoneStatusPayload::decode);
     register(UserSubtitlePayload.ID, UserSubtitlePayload::decode);
+    register(MysteryModBankPayload.ID, MysteryModBankPayload::decode);
   }
 
   public void register(String key, JsonPayloadDecoder decoder) {

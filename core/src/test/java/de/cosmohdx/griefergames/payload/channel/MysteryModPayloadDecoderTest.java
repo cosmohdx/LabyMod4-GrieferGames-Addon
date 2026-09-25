@@ -6,10 +6,12 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import de.cosmohdx.griefergames.payload.model.MysteryModBankPayload;
 import de.cosmohdx.griefergames.payload.model.MysteryModMessage;
 import de.cosmohdx.griefergames.payload.model.RedstoneStatusPayload;
 import de.cosmohdx.griefergames.payload.model.UserSubtitlePayload;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.UUID;
 import net.labymod.serverapi.api.payload.io.PayloadWriter;
 import org.junit.jupiter.api.Test;
@@ -47,6 +49,25 @@ class MysteryModPayloadDecoderTest {
   @Test
   void emptySubtitleIsIgnored() throws IOException {
     assertTrue(decoder.decode(message("user_subtitle", "[]")).isEmpty());
+  }
+
+  @Test
+  void bankAmountIsTheBalance() throws IOException {
+    MysteryModBankPayload payload = assertInstanceOf(MysteryModBankPayload.class,
+        decoder.decode(message("bank", "{\"amount\":1500}")).orElseThrow());
+    assertEquals(0, payload.amount().compareTo(new BigDecimal("1500")));
+  }
+
+  @Test
+  void bankAmountKeepsAFraction() throws IOException {
+    MysteryModBankPayload payload = assertInstanceOf(MysteryModBankPayload.class,
+        decoder.decode(message("bank", "{\"amount\":10.5}")).orElseThrow());
+    assertEquals(0, payload.amount().compareTo(new BigDecimal("10.5")));
+  }
+
+  @Test
+  void bankWithoutAmountFails() {
+    assertThrows(IOException.class, () -> decoder.decode(message("bank", "{}")));
   }
 
   @Test

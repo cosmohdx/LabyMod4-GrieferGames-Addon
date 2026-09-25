@@ -31,6 +31,8 @@
 | Zahlungen loggen / highlighten / warnen | ✓ | |
 | Bank-Nachrichten / Notify | ✓ | |
 | Income-HUD | ✓ | |
+| Kontostand-HUD | ✓ | ✓ |
+| Bankguthaben-HUD | ✓ | ✓ |
 | Booster laden / Menü schließen / HUD | ✓ | |
 | Auto-Portal | ✓ | |
 | Subserver-Wechsel-Nachricht | ✓ | ✓ |
