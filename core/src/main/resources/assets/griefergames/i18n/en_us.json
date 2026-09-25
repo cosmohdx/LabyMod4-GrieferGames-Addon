@@ -5,16 +5,9 @@
       "enabled": {
         "name": "Addon Enabled"
       },
-      "openItemList": {
-        "name": "Item list",
-        "text": "Open"
-      },
       "openWiki": {
         "name": "Wiki",
         "text": "Open"
-      },
-      "autoUpdate": {
-        "name": "Auto Update"
       },
 
       "chat": {
@@ -460,13 +453,13 @@
         "heightRange": {
           "name": "Height around the player",
           "description": "How many blocks above and below you the grid is drawn."
-        },
-        "nearbyPlayers": {
-          "name": "Nearby players",
-          "description": "Shows nearby players in the HUD. Off by default. No direction and no coordinates, distance only in rough steps. With the defaults, only players you can see directly, and only on citybuilds. Players behind walls appear only if you turn line of sight off – that can violate §2 (5) and (8). Use it only after GrieferGames support has allowed the feature.",
-          "enabled": {
-            "name": "Nearby players"
-          }
+        }
+      },
+      "nearbyPlayers": {
+        "name": "Nearby players",
+        "description": "Shows nearby players in the HUD. Off by default. No direction and no coordinates, distance only in rough steps. With the defaults, only players you can see directly, and only on citybuilds. Players behind walls appear only if you turn line of sight off – that can violate §2 (5) and (8). Use it only after GrieferGames support has allowed the feature.",
+        "enabled": {
+          "name": "Nearby players"
         },
         "radius": {
           "name": "Radius",
@@ -491,6 +484,27 @@
         "onlyOnCitybuild": {
           "name": "Only on citybuilds",
           "description": "The list stays hidden on farm worlds, event servers and in minigames."
+        }
+      },
+      "itemList": {
+        "name": "Item list",
+        "description": "Overview of the GrieferGames items.",
+        "header": {
+          "source": {
+            "name": "Source\nhttps://raw.githubusercontent.com/Syntax-Official/GGItems/main/Items.json\nhttps://raw.githubusercontent.com/Syntax-Official/GGItems/main/categories.json"
+          }
+        },
+        "autoUpdate": {
+          "name": "Automatic updates",
+          "description": "Refreshes the item list when it is opened. Otherwise the bundled list stays."
+        },
+        "key": {
+          "name": "Hotkey",
+          "description": "Opens the item list. No key is set by default."
+        },
+        "open": {
+          "name": "Item list",
+          "text": "Open"
         }
       },
       "openWebsite": {

@@ -5,16 +5,9 @@
       "enabled": {
         "name": "Addon aktiviert"
       },
-      "openItemList": {
-        "name": "Itemliste",
-        "text": "Öffnen"
-      },
       "openWiki": {
         "name": "Wiki",
         "text": "Öffnen"
-      },
-      "autoUpdate": {
-        "name": "Automatisch aktualisieren"
       },
       "chat": {
         "name": "Chat",
@@ -459,13 +452,13 @@
         "heightRange": {
           "name": "Höhe um den Spieler",
           "description": "Wie viele Blöcke über und unter dir das Raster gezeichnet wird."
-        },
-        "nearbyPlayers": {
-          "name": "Spieler in der Nähe",
-          "description": "Zeigt nahe Spieler im HUD. Standardmäßig aus. Keine Richtung und keine Koordinaten, die Distanz nur grob. Mit den Voreinstellungen nur Spieler, die du direkt sehen kannst, und nur auf Citybuilds. Spieler hinter Wänden erscheinen nur, wenn du die Sichtlinie ausschaltest – das kann gegen §2 Abs. 5 und 8 verstoßen. Erst verwenden, wenn der GrieferGames-Support die Funktion freigegeben hat.",
-          "enabled": {
-            "name": "Spieler in der Nähe"
-          }
+        }
+      },
+      "nearbyPlayers": {
+        "name": "Spieler in der Nähe",
+        "description": "Zeigt nahe Spieler im HUD. Standardmäßig aus. Keine Richtung und keine Koordinaten, die Distanz nur grob. Mit den Voreinstellungen nur Spieler, die du direkt sehen kannst, und nur auf Citybuilds. Spieler hinter Wänden erscheinen nur, wenn du die Sichtlinie ausschaltest – das kann gegen §2 Abs. 5 und 8 verstoßen. Erst verwenden, wenn der GrieferGames-Support die Funktion freigegeben hat.",
+        "enabled": {
+          "name": "Spieler in der Nähe"
         },
         "radius": {
           "name": "Radius",
@@ -490,6 +483,27 @@
         "onlyOnCitybuild": {
           "name": "Nur auf Citybuilds",
           "description": "Auf Farmwelt, Event-Server und in Minigames bleibt die Liste aus."
+        }
+      },
+      "itemList": {
+        "name": "Itemliste",
+        "description": "Übersicht der GrieferGames-Items.",
+        "header": {
+          "source": {
+            "name": "Quelle\nhttps://raw.githubusercontent.com/Syntax-Official/GGItems/main/Items.json\nhttps://raw.githubusercontent.com/Syntax-Official/GGItems/main/categories.json"
+          }
+        },
+        "autoUpdate": {
+          "name": "Automatische Updates",
+          "description": "Lädt die Itemliste beim Öffnen neu. Sonst bleibt die mitgelieferte Liste."
+        },
+        "key": {
+          "name": "Hotkey",
+          "description": "Öffnet die Itemliste. Standardmäßig ist keine Taste gesetzt."
+        },
+        "open": {
+          "name": "Itemliste",
+          "text": "Öffnen"
         }
       },
       "openWebsite": {

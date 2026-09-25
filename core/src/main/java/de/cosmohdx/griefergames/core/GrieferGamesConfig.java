@@ -6,7 +6,7 @@ import de.cosmohdx.griefergames.feature.automation.GrieferGamesAutomationsConfig
 import de.cosmohdx.griefergames.feature.booster.GrieferGamesBoosterToolsConfig;
 import de.cosmohdx.griefergames.feature.chat.GrieferGamesChatConfig;
 import de.cosmohdx.griefergames.feature.friends.GrieferGamesFriendsConfig;
-import de.cosmohdx.griefergames.feature.itemlist.ItemListActivity;
+import de.cosmohdx.griefergames.feature.itemlist.ItemListConfig;
 import de.cosmohdx.griefergames.feature.nearby.NearbyPlayersConfig;
 import de.cosmohdx.griefergames.feature.remover.RemoverConfig;
 import de.cosmohdx.griefergames.feature.payment.GrieferGamesPaymentsConfig;
@@ -60,8 +60,13 @@ public class GrieferGamesConfig extends AddonConfig {
   @SpriteSlot(x = 4, y = 1)
   private final NearbyPlayersConfig nearbyPlayers = new NearbyPlayersConfig();
 
+  @SpriteSlot(x = 5, y = 1)
+  private final ItemListConfig itemList = new ItemListConfig();
+
+  // Link buttons stay below every feature config. New configs go above this
+  // block, and openGithub keeps after = the last feature field.
   @SpriteSlot(x = 7, y = 0)
-  @MethodOrder(after = "friends")
+  @MethodOrder(after = "itemList")
   @ButtonSetting
   public void openGithub() {
     OperatingSystem.getPlatform().openUrl("https://github.com/cosmohdx/LabyMod4-GrieferGames-Addon");
@@ -74,15 +79,8 @@ public class GrieferGamesConfig extends AddonConfig {
     OperatingSystem.getPlatform().openUrl("https://discord.gg/EtgdTX9dKa");
   }
 
-  @SpriteSlot(x = 3, y = 1)
+  @SpriteSlot(x = 6, y = 1)
   @MethodOrder(after = "openSupport")
-  @ButtonSetting
-  public void openItemList() {
-    ItemListActivity.open();
-  }
-
-  @SpriteSlot(x = 4, y = 1)
-  @MethodOrder(after = "openItemList")
   @ButtonSetting
   public void openWiki() {
     OperatingSystem.getPlatform().openUrl("https://wiki.griefergames.net/");
@@ -132,5 +130,9 @@ public class GrieferGamesConfig extends AddonConfig {
   
   public NearbyPlayersConfig nearbyPlayers() {
     return this.nearbyPlayers;
+  }
+
+  public ItemListConfig itemList() {
+    return this.itemList;
   }
 }

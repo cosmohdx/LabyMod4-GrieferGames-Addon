@@ -75,7 +75,7 @@ public final class ItemImages {
       this.loadBundled();
     }
     onUpdate.run();
-    if (!this.refreshRunning.compareAndSet(false, true)) {
+    if (!this.autoUpdateEnabled() || !this.refreshRunning.compareAndSet(false, true)) {
       return;
     }
     GrieferGames.get().schedule(() -> {
@@ -90,6 +90,11 @@ public final class ItemImages {
         this.refreshRunning.set(false);
       }
     }, 0, TimeUnit.MILLISECONDS);
+  }
+
+  private boolean autoUpdateEnabled() {
+    GrieferGames addon = GrieferGames.get();
+    return addon != null && addon.configuration().itemList().autoUpdate();
   }
 
   private void ensureLoaded() {
