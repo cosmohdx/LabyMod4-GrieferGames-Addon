@@ -104,8 +104,8 @@
                 }
               },
               "patterns": {
-                "name": "Eigene Muster",
-                "description": "Reguläre Ausdrücke für weitere private Nachrichten. Sie werden gespeichert, aber noch nicht ausgewertet."
+                "name": "Muster",
+                "description": "Reguläre Ausdrücke für Privatnachrichten. Die üblichen GrieferGames-Nachrichten sind vorausgefüllt und lassen sich ändern. Die Liste gilt, solange die Kategorie an ist. Ungültige Ausdrücke werden übersprungen und im Log vermerkt."
               }
             },
             "plotChat": {
@@ -115,8 +115,8 @@
                 "name": "Plot-Chat anzeigen"
               },
               "patterns": {
-                "name": "Eigene Muster",
-                "description": "Reguläre Ausdrücke für weitere Plot-Nachrichten. Sie werden gespeichert, aber noch nicht ausgewertet."
+                "name": "Muster",
+                "description": "Reguläre Ausdrücke für Plot-Nachrichten. Die üblichen GrieferGames-Nachrichten sind vorausgefüllt und lassen sich ändern. Die Liste gilt, solange die Kategorie an ist. Ungültige Ausdrücke werden übersprungen und im Log vermerkt."
               }
             },
             "remover": {
@@ -126,8 +126,8 @@
                 "name": "Remover anzeigen"
               },
               "patterns": {
-                "name": "Eigene Muster",
-                "description": "Reguläre Ausdrücke für weitere Remover-Nachrichten. Sie werden gespeichert, aber noch nicht ausgewertet."
+                "name": "Muster",
+                "description": "Reguläre Ausdrücke für Remover-Nachrichten. Die üblichen GrieferGames-Nachrichten sind vorausgefüllt und lassen sich ändern. Die Liste gilt, solange die Kategorie an ist. Ungültige Ausdrücke werden übersprungen und im Log vermerkt."
               }
             },
             "payments": {
@@ -137,8 +137,8 @@
                 "name": "Bezahlungen anzeigen"
               },
               "patterns": {
-                "name": "Eigene Muster",
-                "description": "Reguläre Ausdrücke für weitere Zahlungsnachrichten. Sie werden gespeichert, aber noch nicht ausgewertet."
+                "name": "Muster",
+                "description": "Reguläre Ausdrücke für Zahlungsnachrichten. Die üblichen GrieferGames-Nachrichten sind vorausgefüllt und lassen sich ändern. Die Liste gilt, solange die Kategorie an ist. Ungültige Ausdrücke werden übersprungen und im Log vermerkt."
               }
             },
             "bank": {
@@ -148,8 +148,8 @@
                 "name": "Bank anzeigen"
               },
               "patterns": {
-                "name": "Eigene Muster",
-                "description": "Reguläre Ausdrücke für weitere Banknachrichten. Sie werden gespeichert, aber noch nicht ausgewertet."
+                "name": "Muster",
+                "description": "Reguläre Ausdrücke für Banknachrichten. Die üblichen GrieferGames-Nachrichten sind vorausgefüllt und lassen sich ändern. Die Liste gilt, solange die Kategorie an ist. Ungültige Ausdrücke werden übersprungen und im Log vermerkt."
               }
             }
           },
@@ -291,6 +291,10 @@
           "name": "Vor Fake-Money warnen",
           "description": "Vor gefälschten Zahlungen durch den Supreme-Status warnen."
         },
+        "logBalanceTiming": {
+          "name": "Zeitmessung loggen",
+          "description": "Schreibt ins Log, wann Kontostand, Bankguthaben und Zahlungszeilen ankommen. Damit lässt sich die Reihenfolge vergleichen. Standardmäßig aus."
+        },
         "bankAchievement": {
           "name": "Bank-Benachrichtigung",
           "description": "Benachrichtigung für Bank-Transaktionen anzeigen."
@@ -422,6 +426,72 @@
           "description": "Zeigt deinen Freunden auf Discord, auf welchem CityBuild du gerade bist."
         }
       },
+      "plotBorders": {
+        "name": "Plot-Grenzen",
+        "description": "Linienraster um das Grundstück auf Nature und Extreme (1.8).",
+        "enabled": {
+          "name": "Plot-Grenzen"
+        },
+        "key": {
+          "name": "Taste",
+          "description": "Schaltet das Raster um oder hält es, solange die Taste gedrückt ist."
+        },
+        "activation": {
+          "name": "Aktivierung",
+          "description": "Umschalten lässt das Raster an, bis du die Taste erneut drückst. Halten zeigt es nur, solange die Taste gedrückt ist.",
+          "entries": {
+            "toggle": "Umschalten",
+            "hold": "Halten"
+          }
+        },
+        "notify": {
+          "name": "Hinweis anzeigen",
+          "description": "Schreibt in den Chat, wenn das Raster ein- oder ausgeschaltet wird."
+        },
+        "color": {
+          "name": "Farbe",
+          "description": "Farbe der Linien."
+        },
+        "lineSpacing": {
+          "name": "Linienabstand",
+          "description": "Abstand der Linien in Blöcken."
+        },
+        "heightRange": {
+          "name": "Höhe um den Spieler",
+          "description": "Wie viele Blöcke über und unter dir das Raster gezeichnet wird."
+        },
+        "nearbyPlayers": {
+          "name": "Spieler in der Nähe",
+          "description": "Zeigt nahe Spieler im HUD. Standardmäßig aus. Keine Richtung und keine Koordinaten, die Distanz nur grob. Mit den Voreinstellungen nur Spieler, die du direkt sehen kannst, und nur auf Citybuilds. Spieler hinter Wänden erscheinen nur, wenn du die Sichtlinie ausschaltest – das kann gegen §2 Abs. 5 und 8 verstoßen. Erst verwenden, wenn der GrieferGames-Support die Funktion freigegeben hat.",
+          "enabled": {
+            "name": "Spieler in der Nähe"
+          }
+        },
+        "radius": {
+          "name": "Radius",
+          "description": "Nur Spieler innerhalb dieser Blockzahl. Voreinstellung 16, höchstens 32."
+        },
+        "limit": {
+          "name": "Anzahl",
+          "description": "So viele Spieler zeigt das HUD höchstens an, die nächsten zuerst."
+        },
+        "onlyLineOfSight": {
+          "name": "Nur Spieler in direkter Sichtlinie",
+          "description": "Zeigt nur Spieler, die du direkt sehen kannst. Ausschalten zeigt auch Spieler hinter Wänden – das kann gegen §2 Abs. 5/8 verstoßen."
+        },
+        "distanceDisplay": {
+          "name": "Distanz",
+          "description": "Grobe Stufen wie <10 m, oder gar keine Distanz. Keine Richtung und keine Koordinaten.",
+          "entries": {
+            "hidden": "Ausblenden",
+            "coarse": "Grob"
+          }
+        },
+        "onlyOnCitybuild": {
+          "name": "Nur auf Citybuilds",
+          "description": "Auf Farmwelt, Event-Server und in Minigames bleibt die Liste aus."
+        }
+      },
       "openWebsite": {
         "name": "Website",
         "text": "Öffnen"
@@ -447,7 +517,10 @@
       "citybuildJoin": "Du bist nun auf {citybuild}.",
       "afkMessage": "Du wurdest als AFk erkannt.",
       "afkBackMessage": "Du wurdest als wieder zurück erkannt.",
-      "commandFailure": "Hast du dich vertippt? Wenn nicht, sende die Nachricht nochmal."
+      "commandFailure": "Hast du dich vertippt? Wenn nicht, sende die Nachricht nochmal.",
+      "plotBordersOn": "Plot-Grenzen eingeschaltet.",
+      "plotBordersOff": "Plot-Grenzen ausgeschaltet.",
+      "plotBordersUnavailable": "Plot-Grenzen sind auf diesem Server nicht verfügbar."
     },
     "notifications": {
       "generalError": "Ein Fehler ist aufgetreten, weitere Informationen im Chat.",
@@ -481,6 +554,44 @@
     "hudWidget": {
       "gg_income": {
         "name": "Einnahmen"
+      },
+      "gg_balance": {
+        "name": "Kontostand",
+        "showCents": {
+          "name": "Cent anzeigen",
+          "description": "Zwei Nachkommastellen anzeigen."
+        },
+        "compact": {
+          "name": "Kompakte Anzeige",
+          "description": "Große Beträge kürzen, zum Beispiel 1,25 Mio."
+        },
+        "hideWhenZero": {
+          "name": "Bei 0 verstecken",
+          "description": "Die Anzeige ausblenden, wenn der Betrag 0 ist."
+        }
+      },
+      "gg_bank": {
+        "name": "Bankguthaben",
+        "showCents": {
+          "name": "Cent anzeigen",
+          "description": "Zwei Nachkommastellen anzeigen."
+        },
+        "compact": {
+          "name": "Kompakte Anzeige",
+          "description": "Große Beträge kürzen, zum Beispiel 1,25 Mio."
+        },
+        "hideWhenZero": {
+          "name": "Bei 0 verstecken",
+          "description": "Die Anzeige ausblenden, wenn der Betrag 0 ist."
+        }
+      },
+      "money": {
+        "decimal": ",",
+        "grouping": ".",
+        "thousand": "Tsd.",
+        "million": "Mio.",
+        "billion": "Mrd.",
+        "trillion": "Bio."
       },
       "gg_nickname": {
         "name": "Nickname",
@@ -523,6 +634,9 @@
       },
       "gg_block_of_the_day": {
         "name": "Block des Tages"
+      },
+      "gg_nearby_players": {
+        "name": "Spieler in der Nähe"
       }
     },
     "itemlist": {

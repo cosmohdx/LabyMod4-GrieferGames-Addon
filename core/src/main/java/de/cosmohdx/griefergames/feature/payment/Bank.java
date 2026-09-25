@@ -34,10 +34,6 @@ public class Bank extends ChatModule {
       String plain = event.getMessage().getPlainText();
 
       if (plain.startsWith("[Bank] ")) {
-        if (griefergames.configuration().chat().routeBank()) {
-          event.setSecondChat(true);
-        }
-
         boolean deposit;
         if ((deposit = plain.endsWith("auf dein Bankkonto eingezahlt.")) || plain.endsWith("von deinem Bankkonto abgehoben.")) {
           if (griefergames.configuration().payment().bankNotification()) {

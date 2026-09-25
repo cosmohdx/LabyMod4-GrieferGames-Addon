@@ -33,12 +33,20 @@ public class Payment extends ChatModule {
 
   @Subscribe
   public void messageProcessEvent(GGChatProcessEvent event) {
+    if (event.getMessage() == null) {
+      return;
+    }
+    String plain = event.getMessage().getPlainText();
+    if (plain == null || plain.isBlank()) {
+      return;
+    }
+    if (griefergames.configuration().payment().logBalanceTiming()) {
+      logPaymentTiming(plain);
+    }
     if (!griefergames.configuration().payment().isEnabled()) {
       return;
     }
     if (griefergames.state().getSubServerType() == SubServerType.REGULAR) {
-      if (event.getMessage().getPlainText().isBlank()) return;
-      String plain = event.getMessage().getPlainText();
 
       Matcher receiveMoneyMatcher = receiveMoneyRegex.matcher(plain);
       if (receiveMoneyMatcher.find()) {
@@ -51,10 +59,6 @@ public class Payment extends ChatModule {
 
           if (griefergames.configuration().payment().logTransactions()) {
             griefergames.fileManager().logTransaction(rank + " ┃ " + name, amount, TransactionType.RECEIVE);
-          }
-
-          if (griefergames.configuration().chat().routePayments()) {
-            event.setSecondChat(true);
           }
 
           if (griefergames.configuration().payment().paymentNotification()) {
@@ -91,9 +95,6 @@ public class Payment extends ChatModule {
         if (griefergames.configuration().payment().logTransactions()) {
           griefergames.fileManager().logTransaction(rank + " ┃ " + name, amount, TransactionType.PAY);
         }
-        if (griefergames.configuration().chat().routePayments()) {
-          event.setSecondChat(true);
-        }
         if (griefergames.configuration().payment().paymentNotification()) {
           sendPaymentNotification(TransactionType.PAY, rank, name, amount);
         }
@@ -108,18 +109,32 @@ public class Payment extends ChatModule {
         if (griefergames.configuration().payment().logTransactions()) {
           griefergames.fileManager().logTransaction(null, amount, TransactionType.MONEYDROP);
         }
-        if (griefergames.configuration().chat().routePayments()) {
-          event.setSecondChat(true);
-        }
         if (griefergames.configuration().payment().paymentNotification()) {
           sendPaymentNotification(TransactionType.MONEYDROP, amount);
         }
       }
 
-      if (plain.startsWith("Kontostand: ") && griefergames.configuration().chat().routePayments()) {
-        event.setSecondChat(true);
-      }
     }
+  }
+
+  private void logPaymentTiming(String plain) {
+    String type = null;
+    if (receiveMoneyRegex.matcher(plain).find()) {
+      type = "receive";
+    } else if (payMoneyRegex.matcher(plain).find()) {
+      type = "pay";
+    } else if (earnMoneyRegex.matcher(plain).find()) {
+      type = "moneydrop";
+    }
+    if (type == null) {
+      return;
+    }
+    griefergames.logger().info(
+        GrieferGames.LOG_PREFIX + "payment t=" + System.currentTimeMillis()
+            + " n=" + System.nanoTime()
+            + " type=" + type
+            + " text=" + plain
+    );
   }
 
   public double getAmount(String message) {

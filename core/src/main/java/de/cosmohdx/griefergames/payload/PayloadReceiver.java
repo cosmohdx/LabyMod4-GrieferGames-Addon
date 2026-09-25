@@ -102,6 +102,21 @@ public class PayloadReceiver {
     }
     ClientPayload payload = decoded.get();
     logUnknownOnce(channel, payload);
+    deliver(payload);
+  }
+
+  /**
+   * Passes a payload to subscribers without a network packet.
+   * The dev command uses this to simulate a balance update.
+   */
+  public void dispatchLocal(ClientPayload payload) {
+    if (payload == null) {
+      return;
+    }
+    deliver(payload);
+  }
+
+  private void deliver(ClientPayload payload) {
     for (Subscription subscription : subscriptions) {
       if (!subscription.type.isInstance(payload)) {
         continue;

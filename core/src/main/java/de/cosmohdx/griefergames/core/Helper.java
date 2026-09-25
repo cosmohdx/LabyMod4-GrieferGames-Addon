@@ -1,6 +1,7 @@
 package de.cosmohdx.griefergames.core;
 
 import de.cosmohdx.griefergames.GrieferGames;
+import de.cosmohdx.griefergames.feature.chat.SecondChatTabs;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -10,26 +11,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import net.labymod.api.Laby;
-import net.labymod.api.client.chat.advanced.IngameChatTab;
-import net.labymod.api.client.chat.filter.ChatFilter;
 import net.labymod.api.client.component.Component;
-import net.labymod.api.client.gui.screen.widget.attributes.Filter;
-import net.labymod.api.client.gui.screen.widget.attributes.bounds.Bounds;
-import net.labymod.api.client.gui.screen.widget.attributes.bounds.PositionedBounds;
 import net.labymod.api.configuration.labymod.chat.AdvancedChatMessage;
-import net.labymod.api.configuration.labymod.chat.ChatTab;
-import net.labymod.api.configuration.labymod.chat.ChatWindow;
-import net.labymod.api.configuration.labymod.chat.category.GeneralChatTabConfig;
-import net.labymod.api.configuration.labymod.chat.config.ChatWindowConfig;
-import net.labymod.api.configuration.labymod.chat.config.RootChatTabConfig;
-import net.labymod.api.configuration.labymod.chat.config.RootChatTabConfig.Type;
-import net.labymod.api.metadata.Metadata;
-import net.labymod.api.util.bounds.DefaultRectangle;
-import net.labymod.api.util.bounds.MutableRectangle;
 
 public class Helper {
 
   private final GrieferGames griefergames;
+  private final SecondChatTabs secondChatTabs;
   private final List<String> cityBuilds = Arrays.asList("extreme", "evil", "nature", "lava", "wasser", "event");
   private final Pattern serverCityBuildRegex = Pattern.compile("^cb([0-9]+)$");
   private final Pattern tablistColoredPrefixRegex = Pattern.compile("(.+\\u2503 (?:§.)+)");
@@ -37,82 +25,20 @@ public class Helper {
   private final Pattern colorCodePattern = Pattern.compile("(?i)§[0-9A-FK-ORX]");
 
   public Helper(GrieferGames griefergames) {
-        this.griefergames = griefergames;
-    }
+    this.griefergames = griefergames;
+    this.secondChatTabs = new SecondChatTabs(griefergames);
+  }
+
+  public SecondChatTabs secondChatTabs() {
+    return this.secondChatTabs;
+  }
 
   /**
-   * Searches for the second chat tab with the given name
-   * it will be created if its not existing
-   * Will skip if chat config is disabled
-   * @param name Name of the second chat tab
+   * Binds the configured second-chat tab, creating it only when that tab does not already exist.
+   * Skips creation while the chat feature is disabled.
    */
-  public void findSecondChat(String name) {
-      if(!griefergames.configuration().chat().isEnabled() || !griefergames.configuration().chat().secondChat().isEnabled()) {
-        return;
-      }
-      IngameChatTab secondChat = null;
-
-      for (ChatWindow window : Laby.references().advancedChatController().getWindows()) {
-          for (ChatTab tab : window.getTabs()) {
-              if (tab.getName().equalsIgnoreCase(name) && tab instanceof IngameChatTab) {
-                  secondChat = (IngameChatTab) tab;
-              }
-          }
-      }
-
-      if (secondChat == null && griefergames.configuration().chat().createSecondChat()) {
-          secondChat = createNewSecondChat(name);
-      }
-
-      if(secondChat != null) {
-        if(griefergames.configuration().chat().useChatIndicators()) {
-          if(!secondChat.config().filters().get().isEmpty()) {
-            if (griefergames.configuration().chat().manageSecondChatFilters()) {
-              // Remove all filters
-              secondChat.config().filters().get().removeIf(it -> true);
-            } else {
-              // Remove only old chat filter of the addon
-              ChatFilter toRemoveFilter = secondChat.config().filters().get().stream().filter(
-                      it -> it.getIncludedTags().getTags().stream()
-                          .anyMatch(ti -> ti.getContent().equals("§chzgwefegsdrutjugiuteghuzazghwu")))
-                  .findFirst().orElse(null);
-              if (toRemoveFilter != null) {
-                secondChat.config().filters().get().remove(toRemoveFilter);
-              }
-            }
-          }
-        }else if(griefergames.configuration().chat().manageSecondChatFilters()){
-          if (secondChat.config().filters().get().isEmpty()) {
-            // Create dummy filter to prevent LabyMod from sending alle messages to the second chat
-            ChatFilter defaultChatFilter = new ChatFilter();
-            defaultChatFilter.name().set("GrieferGames-Addon");
-            defaultChatFilter.getIncludedTags().add("§chzgwefegsdrutjugiuteghuzazghwu");
-            secondChat.config().filters().get().add(defaultChatFilter);
-          }
-        }
-      }
-
-      griefergames.state().setSecondChat(secondChat);
-    }
-
-  /**
-   * Creates the new second chat tab with the given name
-   * @param name Chat Tab name
-   * @return The created chat tab
-   */
-  private IngameChatTab createNewSecondChat(String name) {
-      RootChatTabConfig tabConfig = new RootChatTabConfig(0, Type.CUSTOM, new GeneralChatTabConfig(name));
-      ChatWindowConfig config = new ChatWindowConfig(tabConfig);
-
-      Bounds bounds = new PositionedBounds(1000, 1000, 300, 160);
-      MutableRectangle rectangle = new DefaultRectangle();
-      rectangle.setRight(300);
-      rectangle.setBottom(160);
-
-      //DefaultChatWindow window = new DefaultChatWindow(config);
-      ChatWindow chatWindow = Laby.references().advancedChatController().getOrCreateSecondaryWindow(() -> tabConfig);
-      chatWindow.config().setPosition(bounds, rectangle);
-      return (IngameChatTab) chatWindow.initializeTab(tabConfig, null, false);
+  public void findSecondChat() {
+    this.secondChatTabs.sync();
   }
 
   /**

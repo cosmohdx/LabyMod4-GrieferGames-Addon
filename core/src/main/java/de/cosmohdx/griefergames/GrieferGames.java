@@ -26,9 +26,9 @@ import de.cosmohdx.griefergames.feature.chat.GGMessageSendListener;
 import de.cosmohdx.griefergames.feature.chat.GGNameTagListener;
 import de.cosmohdx.griefergames.feature.chat.Mention;
 import de.cosmohdx.griefergames.feature.chat.News;
-import de.cosmohdx.griefergames.feature.chat.PlotChat;
 import de.cosmohdx.griefergames.feature.chat.PrivateMessage;
 import de.cosmohdx.griefergames.feature.chat.Realname;
+import de.cosmohdx.griefergames.feature.chat.SecondChatRouterListener;
 import de.cosmohdx.griefergames.feature.chat.Teleport;
 import de.cosmohdx.griefergames.feature.chat.Vote;
 import de.cosmohdx.griefergames.feature.delay.DelayHudWidget;
@@ -40,12 +40,19 @@ import de.cosmohdx.griefergames.feature.itemlist.ItemListCommand;
 import de.cosmohdx.griefergames.feature.itemlist.ItemListMenuListener;
 import de.cosmohdx.griefergames.feature.remover.Remover;
 import de.cosmohdx.griefergames.feature.remover.RemoverHudWidget;
+import de.cosmohdx.griefergames.feature.nearby.NearbyPlayersHudWidget;
+import de.cosmohdx.griefergames.feature.nearby.NearbyPlayersListener;
+import de.cosmohdx.griefergames.feature.nearby.NearbyPlayersService;
 import de.cosmohdx.griefergames.feature.nickname.Nickname;
 import de.cosmohdx.griefergames.feature.nickname.NicknameHudWidget;
 import de.cosmohdx.griefergames.feature.payment.Bank;
 import de.cosmohdx.griefergames.feature.payment.FileManager;
 import de.cosmohdx.griefergames.feature.payment.IncomeHudWidget;
 import de.cosmohdx.griefergames.feature.payment.Payment;
+import de.cosmohdx.griefergames.feature.payment.balance.BalanceTracker;
+import de.cosmohdx.griefergames.feature.payment.hud.BalanceHudWidget;
+import de.cosmohdx.griefergames.feature.payment.hud.BankBalanceHudWidget;
+import de.cosmohdx.griefergames.feature.plotborder.PlotBorderListener;
 import de.cosmohdx.griefergames.feature.redstone.RedstoneHudWidget;
 import de.cosmohdx.griefergames.feature.redstone.RedstoneListener;
 import de.cosmohdx.griefergames.feature.server.GGServerJoinListener;
@@ -83,6 +90,7 @@ public class GrieferGames extends LabyAddon<GrieferGamesConfig> {
   private FileManager fileManager;
   private BoosterController boosterController;
   private PayloadReceiver payloadReceiver;
+  private BalanceTracker balanceTracker;
   private Remover remover;
   private BlockOfTheDay blockOfTheDay;
   private HudWidgetCategory hudWidgetCategory;
@@ -103,12 +111,15 @@ public class GrieferGames extends LabyAddon<GrieferGamesConfig> {
     griefergames = this;
     fileManager = new FileManager(this);
     helper = new Helper(this);
+    registerListener(helper.secondChatTabs());
     controller = reference.getGrieferGamesController();
     boosterController = new BoosterController(this);
     payloadReceiver = new PayloadReceiver(this);
+    balanceTracker = new BalanceTracker(this);
 
     registerSettingCategory();
     registerListener(payloadReceiver);
+    registerListener(balanceTracker);
     registerListener(new RedstoneListener(this));
     new UserSubtitleListener(this);
     registerListener(new GGServerJoinListener(this));
@@ -122,10 +133,14 @@ public class GrieferGames extends LabyAddon<GrieferGamesConfig> {
     registerListener(new FriendsPresenceListener(this));
     registerListener(new DelaySubServerListener(this));
     registerListener(new GGSubServerChangeListener(this));
+    registerListener(new PlotBorderListener(this));
     registerListener(new AutoPortalListener(this));
     registerListener(new AfkListener(this));
+    NearbyPlayersService nearbyPlayers = new NearbyPlayersService();
+    registerListener(new NearbyPlayersListener(this, nearbyPlayers));
 
     // Chat modules
+    registerListener(new SecondChatRouterListener(this));
     registerListener(new Blanks(this));
     registerListener(new PrivateMessage(this));
     registerListener(new Payment(this));
@@ -133,7 +148,6 @@ public class GrieferGames extends LabyAddon<GrieferGamesConfig> {
     registerListener(new AntiMagicClanTag(this));
     registerListener(new AntiMagicPrefix(this));
     registerListener(new News(this));
-    registerListener(new PlotChat(this));
     registerListener(new Vote(this));
     registerListener(new Realname(this));
     remover = new Remover(this);
@@ -152,6 +166,8 @@ public class GrieferGames extends LabyAddon<GrieferGamesConfig> {
     hudWidgetCategory = new HudWidgetCategory(this, namespace());
     labyAPI().hudWidgetRegistry().categoryRegistry().register(hudWidgetCategory);
     labyAPI().hudWidgetRegistry().register(new IncomeHudWidget(this));
+    labyAPI().hudWidgetRegistry().register(new BalanceHudWidget(this));
+    labyAPI().hudWidgetRegistry().register(new BankBalanceHudWidget(this));
     labyAPI().hudWidgetRegistry().register(new NicknameHudWidget(this));
     labyAPI().hudWidgetRegistry().register(new RedstoneHudWidget(this));
     labyAPI().hudWidgetRegistry().register(new DelayHudWidget(this));
@@ -161,6 +177,7 @@ public class GrieferGames extends LabyAddon<GrieferGamesConfig> {
     labyAPI().hudWidgetRegistry().register(RemoverHudWidget.items(this));
     labyAPI().hudWidgetRegistry().register(RemoverHudWidget.entities(this));
     labyAPI().hudWidgetRegistry().register(new BlockOfTheDayHudWidget(this));
+    labyAPI().hudWidgetRegistry().register(new NearbyPlayersHudWidget(this, nearbyPlayers));
 
     registerCommand(new ItemListCommand());
     registerListener(new ItemListMenuListener(this));
@@ -235,6 +252,10 @@ public class GrieferGames extends LabyAddon<GrieferGamesConfig> {
 
   public PayloadReceiver payloads() {
     return payloadReceiver;
+  }
+
+  public BalanceTracker balances() {
+    return balanceTracker;
   }
 
   public Remover remover() {

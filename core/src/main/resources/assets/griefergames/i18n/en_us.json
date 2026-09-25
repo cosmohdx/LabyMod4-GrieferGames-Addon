@@ -105,8 +105,8 @@
                 }
               },
               "patterns": {
-                "name": "Custom patterns",
-                "description": "Regular expressions for more private messages. They are saved, but not applied yet."
+                "name": "Patterns",
+                "description": "Regular expressions for private messages. The usual GrieferGames messages are filled in and can be edited. The list applies while the category is on. Invalid expressions are skipped and written to the log."
               }
             },
             "plotChat": {
@@ -116,8 +116,8 @@
                 "name": "Show plot chat"
               },
               "patterns": {
-                "name": "Custom patterns",
-                "description": "Regular expressions for more plot messages. They are saved, but not applied yet."
+                "name": "Patterns",
+                "description": "Regular expressions for plot messages. The usual GrieferGames messages are filled in and can be edited. The list applies while the category is on. Invalid expressions are skipped and written to the log."
               }
             },
             "remover": {
@@ -127,8 +127,8 @@
                 "name": "Show remover"
               },
               "patterns": {
-                "name": "Custom patterns",
-                "description": "Regular expressions for more remover messages. They are saved, but not applied yet."
+                "name": "Patterns",
+                "description": "Regular expressions for remover messages. The usual GrieferGames messages are filled in and can be edited. The list applies while the category is on. Invalid expressions are skipped and written to the log."
               }
             },
             "payments": {
@@ -138,8 +138,8 @@
                 "name": "Show payments"
               },
               "patterns": {
-                "name": "Custom patterns",
-                "description": "Regular expressions for more payment messages. They are saved, but not applied yet."
+                "name": "Patterns",
+                "description": "Regular expressions for payment messages. The usual GrieferGames messages are filled in and can be edited. The list applies while the category is on. Invalid expressions are skipped and written to the log."
               }
             },
             "bank": {
@@ -149,8 +149,8 @@
                 "name": "Show bank"
               },
               "patterns": {
-                "name": "Custom patterns",
-                "description": "Regular expressions for more bank messages. They are saved, but not applied yet."
+                "name": "Patterns",
+                "description": "Regular expressions for bank messages. The usual GrieferGames messages are filled in and can be edited. The list applies while the category is on. Invalid expressions are skipped and written to the log."
               }
             }
           },
@@ -292,6 +292,10 @@
           "name": "Warn about fake money",
           "description": "Warn about fake payments that use a Supreme status."
         },
+        "logBalanceTiming": {
+          "name": "Log balance timing",
+          "description": "Writes to the log when the cash balance, bank balance, or a payment line arrives, so you can compare the order. Off by default."
+        },
         "bankAchievement": {
           "name": "Bank notification",
           "description": "Show a notification for bank transactions."
@@ -423,6 +427,72 @@
           "description": "Shows your friends on Discord which CityBuild you are on."
         }
       },
+      "plotBorders": {
+        "name": "Plot borders",
+        "description": "Line grid around the plot on Nature and Extreme (1.8).",
+        "enabled": {
+          "name": "Plot borders"
+        },
+        "key": {
+          "name": "Key",
+          "description": "Toggles the grid, or holds it while the key is pressed."
+        },
+        "activation": {
+          "name": "Activation",
+          "description": "Toggle keeps the grid on until you press the key again. Hold shows it only while the key is pressed.",
+          "entries": {
+            "toggle": "Toggle",
+            "hold": "Hold"
+          }
+        },
+        "notify": {
+          "name": "Show notice",
+          "description": "Writes in chat when the grid is turned on or off."
+        },
+        "color": {
+          "name": "Color",
+          "description": "Color of the lines."
+        },
+        "lineSpacing": {
+          "name": "Line spacing",
+          "description": "Distance between lines, in blocks."
+        },
+        "heightRange": {
+          "name": "Height around the player",
+          "description": "How many blocks above and below you the grid is drawn."
+        },
+        "nearbyPlayers": {
+          "name": "Nearby players",
+          "description": "Shows nearby players in the HUD. Off by default. No direction and no coordinates, distance only in rough steps. With the defaults, only players you can see directly, and only on citybuilds. Players behind walls appear only if you turn line of sight off – that can violate §2 (5) and (8). Use it only after GrieferGames support has allowed the feature.",
+          "enabled": {
+            "name": "Nearby players"
+          }
+        },
+        "radius": {
+          "name": "Radius",
+          "description": "Only players within this many blocks. Default 16, maximum 32."
+        },
+        "limit": {
+          "name": "Limit",
+          "description": "How many players the HUD shows at most, closest first."
+        },
+        "onlyLineOfSight": {
+          "name": "Only players in direct line of sight",
+          "description": "Shows only players you can see directly. Turning this off also shows players behind walls – that can violate §2 (5) and (8)."
+        },
+        "distanceDisplay": {
+          "name": "Distance",
+          "description": "Rough steps such as <10 m, or no distance at all. No direction and no coordinates.",
+          "entries": {
+            "hidden": "Hidden",
+            "coarse": "Rough"
+          }
+        },
+        "onlyOnCitybuild": {
+          "name": "Only on citybuilds",
+          "description": "The list stays hidden on farm worlds, event servers and in minigames."
+        }
+      },
       "openWebsite": {
         "name": "Website",
         "text": "Open"
@@ -449,7 +519,10 @@
       "citybuildJoin": "You are now on {citybuild}.",
       "afkMessage": "You are marked as AFK now.",
       "afkBackMessage": "You are marked as back now.",
-      "commandFailure": "Did you make a mistake? If not, send the message again."
+      "commandFailure": "Did you make a mistake? If not, send the message again.",
+      "plotBordersOn": "Plot borders enabled.",
+      "plotBordersOff": "Plot borders disabled.",
+      "plotBordersUnavailable": "Plot borders are not available on this server."
     },
 
     "notifications": {
@@ -485,6 +558,44 @@
     "hudWidget": {
       "gg_income": {
         "name": "Income"
+      },
+      "gg_balance": {
+        "name": "Balance",
+        "showCents": {
+          "name": "Show cents",
+          "description": "Show two decimal places."
+        },
+        "compact": {
+          "name": "Compact",
+          "description": "Shorten large amounts, for example 1.25 M."
+        },
+        "hideWhenZero": {
+          "name": "Hide when zero",
+          "description": "Hide the widget when the amount is 0."
+        }
+      },
+      "gg_bank": {
+        "name": "Bank balance",
+        "showCents": {
+          "name": "Show cents",
+          "description": "Show two decimal places."
+        },
+        "compact": {
+          "name": "Compact",
+          "description": "Shorten large amounts, for example 1.25 M."
+        },
+        "hideWhenZero": {
+          "name": "Hide when zero",
+          "description": "Hide the widget when the amount is 0."
+        }
+      },
+      "money": {
+        "decimal": ".",
+        "grouping": ",",
+        "thousand": "K",
+        "million": "M",
+        "billion": "B",
+        "trillion": "T"
       },
       "gg_nickname": {
         "name": "Nickname",
@@ -527,6 +638,9 @@
       },
       "gg_block_of_the_day": {
         "name": "Block of the Day"
+      },
+      "gg_nearby_players": {
+        "name": "Nearby players"
       }
     },
     "itemlist": {

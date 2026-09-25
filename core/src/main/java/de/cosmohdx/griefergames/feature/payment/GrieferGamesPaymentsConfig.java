@@ -30,6 +30,9 @@ public class GrieferGamesPaymentsConfig extends FeatureConfig {
   @SwitchSetting
   private final ConfigProperty<Boolean> fakeMoneyWarning = new ConfigProperty<>(true);
 
+  @SwitchSetting
+  private final ConfigProperty<Boolean> logBalanceTiming = new ConfigProperty<>(false);
+
   @SettingSection("bank")
   @SwitchSetting
   private final ConfigProperty<Boolean> bankAchievement = new ConfigProperty<>(false);
@@ -48,6 +51,10 @@ public class GrieferGamesPaymentsConfig extends FeatureConfig {
 
   public boolean fakeMoneyWarning() {
     return this.isOn(this.fakeMoneyWarning);
+  }
+
+  public boolean logBalanceTiming() {
+    return this.isOn(this.logBalanceTiming);
   }
 
   public boolean bankNotification() {
