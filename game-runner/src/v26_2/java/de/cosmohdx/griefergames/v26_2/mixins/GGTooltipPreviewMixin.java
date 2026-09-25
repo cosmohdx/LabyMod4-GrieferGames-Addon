@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(value = GuiGraphicsExtractor.class, priority = 1000)
+@Mixin(GuiGraphicsExtractor.class)
 public abstract class GGTooltipPreviewMixin {
   @Unique private ItemStack ggaddon$tooltipStack;
 
@@ -37,8 +37,7 @@ public abstract class GGTooltipPreviewMixin {
       CallbackInfo ci) {
     ItemStack stack = this.ggaddon$tooltipStack != null
         ? this.ggaddon$tooltipStack : GGTooltipContext.current();
-    if (stack == null || components.isEmpty()
-        || components.stream().anyMatch(component -> component.getClass().getName().contains("SyntaxPreviewTooltip"))) {
+    if (stack == null || components.isEmpty()) {
       return;
     }
     GGPreviewTooltip preview = GGPreviewTooltip.create(components, stack);
