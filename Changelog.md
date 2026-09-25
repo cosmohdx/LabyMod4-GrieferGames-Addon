@@ -2,6 +2,29 @@
 
 ## Unreleased
 
+### Zusammenfassung
+
+- Neue Minecraft Versionen: 1.8.9 bis 26.3 jetzt vollständig unterstützt
+- Aktualisierte Funktion für Chat-Indikator bei 2nd Chat (noch Beta, aber deutlich besser als vorher)
+- (Experimentell) Wiki direkt im Spiel, über das Pausenmenü, die Einstellungen oder eine eigene Taste
+- (Experimentell) Itemliste direkt im Spiel, über das Pausenmenü, die Einstellungen oder eine eigene Taste
+- Neue Einstellungen: Item Tooltip und Optische Verbesserungen
+- Neue Funktionen: Spieler in der Nähe, Plot-Grenzen auf Nature und Extreme
+- Nach dem Joinen warten manche Funktionen kurz, bis klar ist, ob du auf einem Citybuild oder auf der Cloud bist
+- Neue Anzeigen im HUD: Kontostand, Bankguthaben, Block des Tages, ItemRemover und MobRemover
+- Neue Anzeige im HUD: Redstone-Anzeige, Untertitel über Spielern, aktueller Citybuild im LabyChat
+- Klick-zum-Antworten im Global-Chat ist entfernt (kann der Server selbst)
+- Komplette Überarbeitung der Einstellungen, nach Funktionen sortiert: Chat, Bezahlungen, Remover, Automatisierungen, AFK, Booster und Freunde
+- Viele Korrekturen, Bugfixes und Verbesserungen
+
+### Für dich
+
+- Das Wiki öffnest du direkt im Spiel, über das Pausenmenü, den Knopf in den Einstellungen oder eine eigene Taste. Standardmäßig ist keine Taste gesetzt.
+- Die Artikel kommen vom GrieferGames-Wiki, mit den Bereichen Allgemein, 1.8 und Cloud. In den Einstellungen steht die Adresse, von der sie geladen werden.
+- Itemliste und Wiki sind in den Einstellungen als Beta gekennzeichnet. Bei der Itemliste steht dort ebenfalls, woher die Liste kommt.
+- Zwei neue Bereiche: Item Tooltip und Optische Verbesserungen. Dort schaltest du die Kartenvorschau, die größere Kopfanzeige, den Verzauberungsglanz auf Köpfen, Bannern und Kisten und die echte Anzahl bei zu hohen Stapeln. Das gilt auf neueren Minecraft-Versionen.
+- Hattest du diese Schalter schon, bleiben sie so, wie du sie eingestellt hast.
+
 ### Spieler in der Nähe
 
 Im HUD-Editor unter GrieferGames gibt es die Anzeige „Spieler in der Nähe“. Sie ist standardmäßig aus.
