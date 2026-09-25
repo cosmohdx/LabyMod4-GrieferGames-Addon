@@ -145,8 +145,6 @@
 }
 
 .detail-panel {
-  left: 50%;
-  top: 50%;
   width: 48%;
   height: 72%;
   alignment-x: center;

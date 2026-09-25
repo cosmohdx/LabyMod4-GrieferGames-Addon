@@ -5,6 +5,10 @@
       "enabled": {
         "name": "Addon aktiviert"
       },
+      "openItemList": {
+        "name": "Itemliste",
+        "text": "Öffnen"
+      },
       "autoUpdate": {
         "name": "Automatisch aktualisieren"
       },

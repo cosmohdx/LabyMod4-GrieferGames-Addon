@@ -5,6 +5,10 @@
       "enabled": {
         "name": "Addon Enabled"
       },
+      "openItemList": {
+        "name": "Item list",
+        "text": "Open"
+      },
       "autoUpdate": {
         "name": "Auto Update"
       },

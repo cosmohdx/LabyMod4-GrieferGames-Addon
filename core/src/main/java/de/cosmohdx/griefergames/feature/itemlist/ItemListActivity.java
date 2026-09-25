@@ -21,6 +21,7 @@ import net.labymod.api.client.gui.screen.key.InputType;
 import net.labymod.api.client.gui.screen.key.Key;
 import net.labymod.api.client.gui.screen.widget.Widget;
 import net.labymod.api.client.gui.screen.widget.attributes.ObjectFitType;
+import net.labymod.api.client.gui.screen.widget.attributes.WidgetAlignment;
 import net.labymod.api.client.gui.screen.widget.size.SizeType;
 import net.labymod.api.client.gui.screen.widget.size.WidgetSide;
 import net.labymod.api.client.gui.screen.widget.size.WidgetSize;
@@ -208,9 +209,10 @@ public class ItemListActivity extends SimpleActivity {
     }
 
     int columns = this.columns(this.screenWidth());
-    float gap = 6;
-    float cardWidth = Math.max(70, (this.screenWidth() * 0.82F - 24F - gap * (columns - 1)) / columns);
-    float cardHeight = Math.max(116, Math.min(136, cardWidth));
+    float gap = 8;
+    float inner = this.screenWidth() * 0.90F - 14F;
+    float cardWidth = Math.max(88, (inner - gap * (columns - 1)) / columns);
+    float cardHeight = Math.max(150, Math.min(172, cardWidth + 16));
     TilesGridWidget<Widget> grid = new TilesGridWidget<>();
     grid.addId("item-grid");
     grid.tilesPerLine().set(columns);
@@ -255,10 +257,12 @@ public class ItemListActivity extends SimpleActivity {
     IconWidget icon = new IconWidget(this.images.icon(entry));
     icon.addId("card-image");
     icon.objectFit().set(ObjectFitType.CONTAIN);
+    this.size(icon, width * 0.84F, Math.max(48, height - 64));
     card.addChild(icon);
 
     RoundedPanel titlePill = new RoundedPanel(TITLE, TITLE_BORDER, 7);
     titlePill.addId("card-title-pill");
+    this.size(titlePill, width * 0.90F, 26);
     ComponentWidget title = ComponentWidget.text(entry.title());
     title.addId("card-title");
     titlePill.addChild(title);
@@ -275,9 +279,15 @@ public class ItemListActivity extends SimpleActivity {
     this.size(this.dimmer, this.screenWidth(), this.screenHeight());
     this.dimmer.setPressable(this::closeDetail);
 
+    float panelWidth = this.screenWidth() * 0.48F;
+    float panelHeight = this.screenHeight() * 0.72F;
     RoundedPanel panel = new RoundedPanel(DETAIL, DETAIL_BORDER, 10);
     panel.addId("detail-panel");
-    this.size(panel, this.screenWidth() * 0.48F, this.screenHeight() * 0.72F);
+    this.size(panel, panelWidth, panelHeight);
+    panel.alignmentX().set(WidgetAlignment.CENTER);
+    panel.alignmentY().set(WidgetAlignment.CENTER);
+    panel.left().set(this.screenWidth() / 2F);
+    panel.top().set(this.screenHeight() / 2F);
     panel.setPressable(() -> {
     });
     this.dimmer.addChild(panel);

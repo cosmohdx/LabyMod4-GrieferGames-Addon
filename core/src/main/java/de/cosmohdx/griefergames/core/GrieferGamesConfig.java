@@ -6,8 +6,10 @@ import de.cosmohdx.griefergames.feature.automation.GrieferGamesAutomationsConfig
 import de.cosmohdx.griefergames.feature.booster.GrieferGamesBoosterToolsConfig;
 import de.cosmohdx.griefergames.feature.chat.GrieferGamesChatConfig;
 import de.cosmohdx.griefergames.feature.friends.GrieferGamesFriendsConfig;
+import de.cosmohdx.griefergames.feature.itemlist.ItemListActivity;
 import de.cosmohdx.griefergames.feature.remover.RemoverConfig;
 import de.cosmohdx.griefergames.feature.payment.GrieferGamesPaymentsConfig;
+import net.labymod.api.Laby;
 import net.labymod.api.addon.AddonConfig;
 import net.labymod.api.client.gui.screen.widget.widgets.input.ButtonWidget.ButtonSetting;
 import net.labymod.api.client.gui.screen.widget.widgets.input.SwitchWidget.SwitchSetting;
@@ -29,6 +31,14 @@ public class GrieferGamesConfig extends AddonConfig {
   @SpriteSlot(x = 0, y = 0)
   @SwitchSetting
   private final ConfigProperty<Boolean> enabled = new ConfigProperty<>(true);
+
+  @MethodOrder(after = "enabled")
+  @ButtonSetting
+  public void openItemList() {
+    Laby.labyAPI().minecraft().executeNextTick(() ->
+        Laby.labyAPI().minecraft().minecraftWindow().displayScreen(new ItemListActivity())
+    );
+  }
 
   @SpriteSlot(x = 2, y = 0)
   private final GrieferGamesChatConfig chat = new GrieferGamesChatConfig();
