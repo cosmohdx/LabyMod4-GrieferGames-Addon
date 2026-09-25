@@ -188,8 +188,14 @@ final class WikiSite {
     }
     if (tag.equals("p") || tag.equals("blockquote")) {
       String text = node.text();
-      if (!text.isBlank()) blocks.add(new Block(tag.equals("p") ? Kind.PARAGRAPH : Kind.HINT,
-          text, "", links(node), 0));
+      if (!text.isBlank()) {
+        boolean emphasizedTitle = tag.equals("p") && node.children().size() == 1
+            && (node.children().get(0).tag.equals("strong") || node.children().get(0).tag.equals("b"))
+            && text.equals(node.children().get(0).text());
+        blocks.add(new Block(tag.equals("blockquote") ? Kind.HINT
+            : emphasizedTitle ? Kind.HEADING : Kind.PARAGRAPH,
+            text, "", links(node), emphasizedTitle ? 3 : 0));
+      }
       return;
     }
     if (tag.equals("pre")) {
@@ -201,23 +207,31 @@ final class WikiSite {
       return;
     }
     if (tag.equals("ul") || tag.equals("ol")) {
-      int number = 1;
-      for (WikiHtml.Node item : node.children()) {
-        if (!item.tag.equals("li")) continue;
-        blocks.add(new Block(Kind.PARAGRAPH, (tag.equals("ol") ? (number++) + ". " : "• ") + item.text(),
-            "", links(item), 0));
-      }
+      readList(node, blocks, 0);
       return;
     }
     if (tag.equals("table")) {
+      int rowsBefore = blocks.size();
+      List<String> headings = new ArrayList<>();
       for (WikiHtml.Node row : node.descendants("tr")) {
         List<String> cells = new ArrayList<>();
+        boolean header = false;
         for (WikiHtml.Node cell : row.children()) {
+          if (cell.tag.equals("th")) header = true;
           if (cell.tag.equals("th") || cell.tag.equals("td")) cells.add(cell.text());
         }
-        if (!cells.isEmpty()) blocks.add(new Block(Kind.TABLE_ROW, String.join("  ·  ", cells), "",
-            links(row), 0));
+        if (cells.isEmpty()) continue;
+        if (header) { headings = cells; continue; }
+        List<String> details = new ArrayList<>();
+        for (int i = 0; i < cells.size(); i++) {
+          if (cells.get(i).isBlank()) continue;
+          details.add(i < headings.size() && !headings.get(i).isBlank()
+              ? headings.get(i) + ": " + cells.get(i) : cells.get(i));
+        }
+        blocks.add(new Block(Kind.TABLE_ROW, String.join("  •  ", details), "", links(row), 0));
       }
+      if (blocks.size() == rowsBefore && !headings.isEmpty())
+        blocks.add(new Block(Kind.TABLE_ROW, String.join("  •  ", headings), "", List.of(), 0));
       return;
     }
     if (tag.equals("a")) {
@@ -233,6 +247,22 @@ final class WikiSite {
       return;
     }
     for (WikiHtml.Node child : node.children()) readBlock(child, blocks);
+  }
+
+  private static void readList(WikiHtml.Node list, List<Block> blocks, int depth) {
+    int number = 1;
+    for (WikiHtml.Node item : list.children()) {
+      if (!item.tag.equals("li")) continue;
+      String text = item.textWithoutNestedLists();
+      if (!text.isBlank()) {
+        String prefix = "  ".repeat(Math.min(depth, 3))
+            + (list.tag.equals("ol") ? (number++) + ". " : "• ");
+        blocks.add(new Block(Kind.PARAGRAPH, prefix + text, "", links(item), 0));
+      }
+      for (WikiHtml.Node child : item.children()) {
+        if (child.tag.equals("ul") || child.tag.equals("ol")) readList(child, blocks, depth + 1);
+      }
+    }
   }
 
   private static List<Link> links(WikiHtml.Node node) {

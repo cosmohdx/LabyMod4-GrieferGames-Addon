@@ -121,6 +121,18 @@ final class WikiHtml {
       return nodes;
     }
 
+    String textWithoutNestedLists() {
+      StringBuilder result = new StringBuilder();
+      for (Object part : this.parts) {
+        if (part instanceof String value) result.append(value);
+        else if (part instanceof Node node && !node.tag.equals("ul") && !node.tag.equals("ol")) {
+          result.append(node.textWithoutNestedLists());
+          if (node.tag.equals("p") || node.tag.equals("br")) result.append(' ');
+        }
+      }
+      return result.toString().replaceAll("\\s+", " ").trim();
+    }
+
     String text() {
       StringBuilder result = new StringBuilder();
       for (Object part : this.parts) {
