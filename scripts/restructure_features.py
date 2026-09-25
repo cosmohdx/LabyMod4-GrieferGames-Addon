@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Move core sources into feature packages and drop leftover neocraftr trees."""
+"""Historical one-shot from the first remaster commit.
+
+Do not re-run. A later pass split item remover, mob remover, AFK, nickname,
+delay, fly and subserver into their own packages. Re-running this script
+would move those classes back.
+"""
 from pathlib import Path
 import shutil
 import re

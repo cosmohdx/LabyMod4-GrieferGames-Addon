@@ -1,5 +1,6 @@
 package de.cosmohdx.griefergames.feature.automation;
 
+import de.cosmohdx.griefergames.feature.afk.GrieferGamesAFKConfig;
 import de.cosmohdx.griefergames.feature.booster.GrieferGamesBoosterToolsConfig;
 import net.labymod.api.client.gui.screen.widget.widgets.input.SliderWidget.SliderSetting;
 import net.labymod.api.client.gui.screen.widget.widgets.input.SwitchWidget.SwitchSetting;

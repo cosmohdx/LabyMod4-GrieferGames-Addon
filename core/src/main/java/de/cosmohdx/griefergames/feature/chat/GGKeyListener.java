@@ -27,16 +27,6 @@ public class GGKeyListener {
   public void onKeyInput(KeyEvent event) {
     if(!griefergames.state().isOnGrieferGames()) return;
 
-    if (griefergames.state().getSubServerType() == SubServerType.CLOUD || griefergames.state().getSubServerType() == SubServerType.REGULAR) {
-      if(event.state() == State.PRESS) {
-        griefergames.state().setLastActivity(System.currentTimeMillis());
-        if(griefergames.state().isAfk()) {
-          griefergames.state().setAfk(false);
-          griefergames.helper().performAfkActions(false);
-        }
-      }
-    }
-
     if(griefergames.state().getSubServerType() == SubServerType.REGULAR) {
       if(event.state() == State.PRESS) {
         if(griefergames.configuration().chatConfig().isAmpEnabled() &&

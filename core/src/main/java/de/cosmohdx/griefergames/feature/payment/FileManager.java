@@ -32,6 +32,9 @@ public class FileManager {
   }
 
   public void logTransaction(String player, double amount, TransactionType type) {
+    if (transactionsLogWriter == null) {
+      return;
+    }
     try {
       final String date = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(new Date());
       switch(type) {

@@ -1,7 +1,6 @@
 package de.cosmohdx.griefergames.core;
 
 import de.cosmohdx.griefergames.GrieferGames;
-import de.cosmohdx.griefergames.core.GrieferGamesConfig;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -14,7 +13,6 @@ import net.labymod.api.Laby;
 import net.labymod.api.client.chat.advanced.IngameChatTab;
 import net.labymod.api.client.chat.filter.ChatFilter;
 import net.labymod.api.client.component.Component;
-import net.labymod.api.client.component.format.NamedTextColor;
 import net.labymod.api.client.gui.screen.widget.attributes.Filter;
 import net.labymod.api.client.gui.screen.widget.attributes.bounds.Bounds;
 import net.labymod.api.client.gui.screen.widget.attributes.bounds.PositionedBounds;
@@ -26,7 +24,6 @@ import net.labymod.api.configuration.labymod.chat.config.ChatWindowConfig;
 import net.labymod.api.configuration.labymod.chat.config.RootChatTabConfig;
 import net.labymod.api.configuration.labymod.chat.config.RootChatTabConfig.Type;
 import net.labymod.api.metadata.Metadata;
-import net.labymod.api.util.I18n;
 import net.labymod.api.util.bounds.DefaultRectangle;
 import net.labymod.api.util.bounds.MutableRectangle;
 
@@ -212,34 +209,6 @@ public class Helper {
   public String capitalize(String str) {
       return str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
   }
-
-  /**
-   * Performs all actions to do if the player goes afk
-   * @param afk true if the player goes afk
-   */
-  public void performAfkActions(boolean afk) {
-      if (afk) {
-          griefergames.displayAddonMessage(Component.text(I18n.translate(griefergames.namespace() + ".messages.afkMessage"), NamedTextColor.GRAY));
-
-          if (griefergames.configuration().automations().afkConfig().afkNick().get() && isCityBuild(griefergames.state().getSubServer())) {
-              String nickname = griefergames.configuration().automations().afkConfig().afkNickname().get();
-              if (nickname.isBlank()) {
-                  nickname = GrieferGamesConfig.DEFAULT_AFK_NICKNAME;
-              }
-              nickname = nickname.replace("%name%", Laby.labyAPI().getName());
-              if (nickname.length() > 16) {
-                  nickname = nickname.substring(0, 16);
-              }
-
-              griefergames.sendMessage("/nick " + nickname);
-          }
-      } else {
-          griefergames.displayAddonMessage(Component.text(I18n.translate(griefergames.namespace() + ".messages.afkBackMessage"), NamedTextColor.GRAY));
-          if (griefergames.configuration().automations().afkConfig().afkNick().get() && isCityBuild(griefergames.state().getSubServer())) {
-              griefergames.sendMessage("/unnick");
-          }
-      }
-    }
 
   /**
    * Adds a gradiant to the message

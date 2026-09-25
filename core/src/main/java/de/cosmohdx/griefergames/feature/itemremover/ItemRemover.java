@@ -1,4 +1,4 @@
-package de.cosmohdx.griefergames.feature.chat;
+package de.cosmohdx.griefergames.feature.itemremover;
 
 import de.cosmohdx.griefergames.GrieferGames;
 import de.cosmohdx.griefergames.feature.chat.GGChatProcessEvent;
@@ -12,49 +12,49 @@ import net.labymod.api.client.resources.ResourceLocation;
 import net.labymod.api.event.Subscribe;
 import net.labymod.api.notification.Notification;
 import net.labymod.api.util.I18n;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class MobRemover extends ChatModule {
+public class ItemRemover extends ChatModule {
   private final GrieferGames griefergames;
-  private final Pattern mobRemoverMessageRegex = Pattern.compile("^\\[MobRemover\\] Achtung! In ([0-9]+) Minuten? werden alle Tiere gelöscht\\.$");
-  private final Pattern nmoboverDoneMessageRegex = Pattern.compile("^\\[MobRemover\\] Es wurden ([0-9]+) Tiere entfernt\\.$");
+  private final Pattern itemRemoverMessageRegex = Pattern.compile("^\\[GrieferGames\\] Warnung! Die auf dem Boden liegenden Items werden in ([0-9]+) Sekunden entfernt!$");
+  private final Pattern itemRemoverDoneMessageRegex = Pattern.compile("^\\[GrieferGames\\] Es wurden ([0-9]+) auf dem Boden liegende Items entfernt!$");
   private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
 
-  public MobRemover(GrieferGames griefergames) {
+  public ItemRemover(GrieferGames griefergames) {
     this.griefergames = griefergames;
   }
 
   @Subscribe
   public void messageProcessEvent(GGChatProcessEvent event) {
-    if(event.isCancelled()) return;
+    if (event.isCancelled()) return;
     if (griefergames.state().getSubServerType() == SubServerType.REGULAR) {
       String plain = event.getMessage().getPlainText();
       if (plain.isBlank()) return;
 
-      Matcher mobRemoverMessage = mobRemoverMessageRegex.matcher(plain);
-      Matcher mobRemoverDoneMessage = nmoboverDoneMessageRegex.matcher(plain);
+      Matcher itemRemoverMessage = itemRemoverMessageRegex.matcher(plain);
+      Matcher itemRemoverDoneMessage = itemRemoverDoneMessageRegex.matcher(plain);
 
       boolean done;
-      if ((done = mobRemoverDoneMessage.find()) || mobRemoverMessage.find()) {
-        if (griefergames.configuration().chatConfig().isMobRemoverLastTimeHover() && done) {
+      if ((done = itemRemoverDoneMessage.find()) || itemRemoverMessage.find()) {
+        if (griefergames.configuration().chatConfig().isRemoverLastTimeHover() && done) {
           String dateNowStr = LocalDateTime.now().format(formatter);
           Component hoverText = Component.text(dateNowStr);
-          event.getMessage().component().style(event.getMessage().component().style().hoverEvent(
-            HoverEvent.showText(hoverText)));
+          event.getMessage().component().style(event.getMessage().component().style().hoverEvent(HoverEvent.showText(hoverText)));
         }
 
-        if (griefergames.configuration().chatConfig().isMobRemoverChatRight()) {
+        if (griefergames.configuration().chatConfig().isRemoverChatRight()) {
           event.setSecondChat(true);
         }
 
-        if (griefergames.configuration().chatConfig().isMobRemoverNotification() && !done) {
+        if (griefergames.configuration().chatConfig().isRemoverNotification() && !done) {
           Laby.labyAPI().notificationController().push(Notification.builder()
-            .title(Component.text("MobRemover", NamedTextColor.RED))
-            .text(Component.text(I18n.translate(griefergames.namespace() + ".notifications.mobRemover").replace("{time}", mobRemoverMessage.group(1))))
-            .icon(Icon.texture(ResourceLocation.create(griefergames.namespace(), "textures/mobremover.png")))
+            .title(Component.text("ItemRemover", NamedTextColor.RED))
+            .text(Component.text(I18n.translate(griefergames.namespace() + ".notifications.itemRemover").replace("{time}", itemRemoverMessage.group(1))))
+            .icon(Icon.texture(ResourceLocation.create(griefergames.namespace(), "textures/itemremover.png")))
             .build());
         }
       }

@@ -1,4 +1,4 @@
-package de.cosmohdx.griefergames.feature.server;
+package de.cosmohdx.griefergames.feature.subserver;
 
 import de.cosmohdx.griefergames.GrieferGames;
 import net.labymod.api.client.gui.hud.hudwidget.text.TextHudWidget;
