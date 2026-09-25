@@ -97,8 +97,8 @@
                 }
               },
               "patterns": {
-                "name": "Custom patterns",
-                "description": "Regular expressions for more private messages. They are saved, but not applied yet."
+                "name": "Patterns",
+                "description": "Regular expressions for private messages. The usual GrieferGames messages are filled in and can be edited. The list applies while the category is on. Invalid expressions are skipped and written to the log."
               }
             },
             "plotChat": {
@@ -108,8 +108,8 @@
                 "name": "Show plot chat"
               },
               "patterns": {
-                "name": "Custom patterns",
-                "description": "Regular expressions for more plot messages. They are saved, but not applied yet."
+                "name": "Patterns",
+                "description": "Regular expressions for plot messages. The usual GrieferGames messages are filled in and can be edited. The list applies while the category is on. Invalid expressions are skipped and written to the log."
               }
             },
             "remover": {
@@ -119,8 +119,8 @@
                 "name": "Show remover"
               },
               "patterns": {
-                "name": "Custom patterns",
-                "description": "Regular expressions for more remover messages. They are saved, but not applied yet."
+                "name": "Patterns",
+                "description": "Regular expressions for remover messages. The usual GrieferGames messages are filled in and can be edited. The list applies while the category is on. Invalid expressions are skipped and written to the log."
               }
             },
             "payments": {
@@ -130,8 +130,8 @@
                 "name": "Show payments"
               },
               "patterns": {
-                "name": "Custom patterns",
-                "description": "Regular expressions for more payment messages. They are saved, but not applied yet."
+                "name": "Patterns",
+                "description": "Regular expressions for payment messages. The usual GrieferGames messages are filled in and can be edited. The list applies while the category is on. Invalid expressions are skipped and written to the log."
               }
             },
             "bank": {
@@ -141,8 +141,8 @@
                 "name": "Show bank"
               },
               "patterns": {
-                "name": "Custom patterns",
-                "description": "Regular expressions for more bank messages. They are saved, but not applied yet."
+                "name": "Patterns",
+                "description": "Regular expressions for bank messages. The usual GrieferGames messages are filled in and can be edited. The list applies while the category is on. Invalid expressions are skipped and written to the log."
               }
             }
           },

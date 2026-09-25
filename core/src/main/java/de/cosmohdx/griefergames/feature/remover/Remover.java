@@ -132,10 +132,6 @@ public class Remover extends ChatModule {
           event.getMessage().component().style().hoverEvent(HoverEvent.showText(hoverText)));
     }
 
-    if (this.griefergames.configuration().chat().routeRemover()) {
-      event.setSecondChat(true);
-    }
-
     if (!config.notification() || itemsCleared || mobsCleared) {
       return;
     }

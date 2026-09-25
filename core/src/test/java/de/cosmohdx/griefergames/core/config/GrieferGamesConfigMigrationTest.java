@@ -232,6 +232,8 @@ class GrieferGamesConfigMigrationTest {
     assertTrue(category.matchesPattern("private message"));
     assertFalse(category.matchesPattern("plot"));
     assertFalse(category.matchesPattern(null));
+    assertFalse(category.invalidPatternHint().isBlank());
+    assertTrue(category.invalidPatternHint().contains("["));
   }
 
   @Test

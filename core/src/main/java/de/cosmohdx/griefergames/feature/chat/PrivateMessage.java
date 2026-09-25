@@ -18,6 +18,7 @@ import java.util.regex.Pattern;
 
 public class PrivateMessage extends ChatModule {
   private final GrieferGames griefergames;
+  // Routing uses the same formats from SecondChatCategory. These copies still capture the sender.
   private final Pattern privateMessageRegex = Pattern.compile("\\[([A-Za-z\\-\\+]+) \\u2503 (~?\\!?\\w{1,16}) -> mir\\] (.*)$");
   private final Pattern privateMessageRegexCloud = Pattern.compile("\\[([A-Za-z\\-\\+]+) \\u2503 (~?\\!?\\w{1,16}) -> (mir|me)\\] (.*)$");
   private final Pattern privateMessageSentRegex = Pattern.compile("\\[(mir|me) -> ([A-Za-z\\-\\+]+) \\u2503 (~?\\!?\\w{1,16})\\] (.*)$");
@@ -58,10 +59,6 @@ public class PrivateMessage extends ChatModule {
         addReplyAction(event.getMessage().component(), "§6[", "§6 -> ", playerName);
       }
 
-      if (griefergames.configuration().chat().routePrivateMessages()) {
-        event.setSecondChat(true);
-      }
-
       if (griefergames.configuration().chat().privateMessageSound() != Sounds.NONE) {
         ResourceLocation resource = ResourceLocation.create("minecraft", griefergames.configuration().chat().privateMessageSound().path());
         Laby.labyAPI().minecraft().sounds().playSound(resource, 1f, 1f);
@@ -73,10 +70,6 @@ public class PrivateMessage extends ChatModule {
     if (privateMessageSent.find()) {
       if (griefergames.configuration().chat().clickToReply() && griefergames.state().isSubServerType(SubServerType.REGULAR)) {
         addReplyAction(event.getMessage().component(), "§6 -> ", "§6] ", privateMessageSent.group(3));
-      }
-
-      if (griefergames.configuration().chat().routePrivateMessages()) {
-        event.setSecondChat(true);
       }
     }
   }

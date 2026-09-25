@@ -96,8 +96,8 @@
                 }
               },
               "patterns": {
-                "name": "Eigene Muster",
-                "description": "Reguläre Ausdrücke für weitere private Nachrichten. Sie werden gespeichert, aber noch nicht ausgewertet."
+                "name": "Muster",
+                "description": "Reguläre Ausdrücke für Privatnachrichten. Die üblichen GrieferGames-Nachrichten sind vorausgefüllt und lassen sich ändern. Die Liste gilt, solange die Kategorie an ist. Ungültige Ausdrücke werden übersprungen und im Log vermerkt."
               }
             },
             "plotChat": {
@@ -107,8 +107,8 @@
                 "name": "Plot-Chat anzeigen"
               },
               "patterns": {
-                "name": "Eigene Muster",
-                "description": "Reguläre Ausdrücke für weitere Plot-Nachrichten. Sie werden gespeichert, aber noch nicht ausgewertet."
+                "name": "Muster",
+                "description": "Reguläre Ausdrücke für Plot-Nachrichten. Die üblichen GrieferGames-Nachrichten sind vorausgefüllt und lassen sich ändern. Die Liste gilt, solange die Kategorie an ist. Ungültige Ausdrücke werden übersprungen und im Log vermerkt."
               }
             },
             "remover": {
@@ -118,8 +118,8 @@
                 "name": "Remover anzeigen"
               },
               "patterns": {
-                "name": "Eigene Muster",
-                "description": "Reguläre Ausdrücke für weitere Remover-Nachrichten. Sie werden gespeichert, aber noch nicht ausgewertet."
+                "name": "Muster",
+                "description": "Reguläre Ausdrücke für Remover-Nachrichten. Die üblichen GrieferGames-Nachrichten sind vorausgefüllt und lassen sich ändern. Die Liste gilt, solange die Kategorie an ist. Ungültige Ausdrücke werden übersprungen und im Log vermerkt."
               }
             },
             "payments": {
@@ -129,8 +129,8 @@
                 "name": "Bezahlungen anzeigen"
               },
               "patterns": {
-                "name": "Eigene Muster",
-                "description": "Reguläre Ausdrücke für weitere Zahlungsnachrichten. Sie werden gespeichert, aber noch nicht ausgewertet."
+                "name": "Muster",
+                "description": "Reguläre Ausdrücke für Zahlungsnachrichten. Die üblichen GrieferGames-Nachrichten sind vorausgefüllt und lassen sich ändern. Die Liste gilt, solange die Kategorie an ist. Ungültige Ausdrücke werden übersprungen und im Log vermerkt."
               }
             },
             "bank": {
@@ -140,8 +140,8 @@
                 "name": "Bank anzeigen"
               },
               "patterns": {
-                "name": "Eigene Muster",
-                "description": "Reguläre Ausdrücke für weitere Banknachrichten. Sie werden gespeichert, aber noch nicht ausgewertet."
+                "name": "Muster",
+                "description": "Reguläre Ausdrücke für Banknachrichten. Die üblichen GrieferGames-Nachrichten sind vorausgefüllt und lassen sich ändern. Die Liste gilt, solange die Kategorie an ist. Ungültige Ausdrücke werden übersprungen und im Log vermerkt."
               }
             }
           },
