@@ -1,8 +1,12 @@
 package de.cosmohdx.griefergames.feature.booster;
 
 import de.cosmohdx.griefergames.GrieferGames;
+import de.cosmohdx.griefergames.payload.model.BoosterPayload;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
+import java.util.Set;
 
 public class BoosterController {
   private final GrieferGames griefergames;
@@ -67,6 +71,53 @@ public class BoosterController {
       booster.setCount(0);
       booster.getEndTimes().clear();
     }
+  }
+
+  public void applyPayload(BoosterPayload payload) {
+    Set<Booster> active = new HashSet<>();
+    for (BoosterPayload.Entry entry : payload.boosters()) {
+      if (entry.multiplier() <= 0) {
+        continue;
+      }
+      Booster booster = this.find(entry.type());
+      if (booster == null) {
+        continue;
+      }
+      booster.setCount(entry.multiplier());
+      active.add(booster);
+    }
+    for (Booster booster : this.boosters) {
+      if (active.contains(booster)) {
+        continue;
+      }
+      booster.setCount(0);
+      booster.getEndTimes().clear();
+    }
+  }
+
+  private Booster find(String type) {
+    String key = payloadKey(type);
+    for (Booster booster : this.boosters) {
+      if (payloadKey(booster.getType()).equals(key)) {
+        return booster;
+      }
+    }
+    return null;
+  }
+
+  static String payloadKey(String type) {
+    String key = type.toLowerCase(Locale.ROOT).trim();
+    if (key.endsWith("-booster")) {
+      key = key.substring(0, key.length() - "-booster".length());
+    }
+    return switch (key) {
+      case "break", "abbau" -> "break";
+      case "fly", "flug" -> "fly";
+      case "drop", "drops" -> "drops";
+      case "exp", "xp", "experience", "erfahrung" -> "erfahrung";
+      case "mob", "mobs" -> "mob";
+      default -> key;
+    };
   }
 
   public List<Booster> getBoosters() {

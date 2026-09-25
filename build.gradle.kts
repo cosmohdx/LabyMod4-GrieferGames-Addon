@@ -4,9 +4,10 @@ plugins {
 }
 
 val versions = providers.gradleProperty("net.labymod.minecraft-versions").get().split(";")
+val addonVersion = providers.gradleProperty("addon.version").get()
 
 group = "de.cosmohdx.griefergames"
-version = providers.environmentVariable("VERSION").getOrElse("1.1.7")
+version = addonVersion
 
 labyMod {
     defaultPackageName = "de.cosmohdx.griefergames"
@@ -28,7 +29,7 @@ labyMod {
         author = "Neocraftr, ByPander, CosmoHDx"
         description = "This add-on adds many useful features for the GrieferGames.net server."
         minecraftVersion = "*"
-        version = rootProject.version.toString()
+        version = addonVersion
     }
 }
 
