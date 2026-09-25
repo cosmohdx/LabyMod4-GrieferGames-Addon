@@ -66,12 +66,14 @@ public class GrieferGamesConfig extends AddonConfig {
     OperatingSystem.getPlatform().openUrl("https://discord.gg/EtgdTX9dKa");
   }
 
+  @SpriteSlot(x = 3, y = 1)
   @MethodOrder(after = "openSupport")
   @ButtonSetting
   public void openItemList() {
     ItemListActivity.open();
   }
 
+  @SpriteSlot(x = 4, y = 1)
   @MethodOrder(after = "openItemList")
   @ButtonSetting
   public void openWiki() {
