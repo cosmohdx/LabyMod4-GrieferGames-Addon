@@ -9,6 +9,10 @@ import de.cosmohdx.griefergames.feature.friends.GrieferGamesFriendsConfig;
 import de.cosmohdx.griefergames.feature.remover.RemoverConfig;
 import de.cosmohdx.griefergames.feature.payment.GrieferGamesPaymentsConfig;
 import net.labymod.api.addon.AddonConfig;
+import de.cosmohdx.griefergames.feature.wiki.WikiActivity;
+import net.labymod.api.Laby;
+import net.labymod.api.client.gui.screen.key.Key;
+import net.labymod.api.client.gui.screen.widget.widgets.input.KeybindWidget.KeyBindSetting;
 import net.labymod.api.client.gui.screen.widget.widgets.input.ButtonWidget.ButtonSetting;
 import net.labymod.api.client.gui.screen.widget.widgets.input.SwitchWidget.SwitchSetting;
 import net.labymod.api.configuration.loader.annotation.ConfigName;
@@ -50,6 +54,26 @@ public class GrieferGamesConfig extends AddonConfig {
 
   @SpriteSlot(x = 5, y = 0)
   private final GrieferGamesFriendsConfig friends = new GrieferGamesFriendsConfig();
+
+  @SwitchSetting
+  private final ConfigProperty<Boolean> mapTooltipPreview = new ConfigProperty<>(true);
+
+  @SwitchSetting
+  private final ConfigProperty<Boolean> headTooltipPreview = new ConfigProperty<>(true);
+
+  @SwitchSetting
+  private final ConfigProperty<Boolean> headEnchantmentGlint = new ConfigProperty<>(true);
+
+  @SwitchSetting
+  private final ConfigProperty<Boolean> overstackingFix = new ConfigProperty<>(true);
+
+  @KeyBindSetting
+  private final ConfigProperty<Key> wikiKey = new ConfigProperty<>(Key.F9);
+
+  @ButtonSetting
+  public void openWiki() {
+    Laby.labyAPI().minecraft().minecraftWindow().displayScreen(new WikiActivity());
+  }
 
   @SpriteSlot(x = 7, y = 0)
   @MethodOrder(after = "friends")
@@ -97,6 +121,15 @@ public class GrieferGamesConfig extends AddonConfig {
 
   public GrieferGamesBoosterToolsConfig booster() {
     return this.booster;
+  }
+
+  public ConfigProperty<Boolean> mapTooltipPreview() { return this.mapTooltipPreview; }
+  public ConfigProperty<Boolean> headTooltipPreview() { return this.headTooltipPreview; }
+  public ConfigProperty<Boolean> headEnchantmentGlint() { return this.headEnchantmentGlint; }
+  public ConfigProperty<Boolean> overstackingFix() { return this.overstackingFix; }
+
+  public ConfigProperty<Key> wikiKey() {
+    return this.wikiKey;
   }
 
   public GrieferGamesFriendsConfig friends() {

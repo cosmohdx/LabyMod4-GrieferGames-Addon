@@ -429,6 +429,16 @@
       "openSupport": {
         "name": "Support-Discord",
         "text": "Öffnen"
+      },
+      "mapTooltipPreview": {"name": "Karte im Tooltip anzeigen"},
+      "headTooltipPreview": {"name": "Kopf im Tooltip vergrößern"},
+      "headEnchantmentGlint": {"name": "Verzauberungsglanz auf Köpfen, Bannern und Kisten"},
+      "overstackingFix": {"name": "Overstacking Fix für höhere Versionen"},
+      "wikiKey": {
+        "name": "Wiki öffnen (Hotkey)"
+      },
+      "openWiki": {
+        "name": "Wiki öffnen"
       }
     },
     "messages": {

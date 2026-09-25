@@ -52,6 +52,7 @@ import de.cosmohdx.griefergames.feature.redstone.RedstoneListener;
 import de.cosmohdx.griefergames.feature.server.GGServerJoinListener;
 import de.cosmohdx.griefergames.feature.server.GGServerQuitListener;
 import de.cosmohdx.griefergames.feature.subserver.GGScoreboardListener;
+import de.cosmohdx.griefergames.feature.wiki.WikiHotkey;
 import de.cosmohdx.griefergames.feature.subtitle.UserSubtitleListener;
 import de.cosmohdx.griefergames.payload.PayloadReceiver;
 import de.cosmohdx.griefergames.feature.subserver.GGSubServerChangeListener;
@@ -121,6 +122,7 @@ public class GrieferGames extends LabyAddon<GrieferGamesConfig> {
     registerListener(new GGMessageSendListener(this));
     registerListener(new GGMessageReceiveListener(this));
     registerListener(new GGKeyListener(this));
+    registerListener(new WikiHotkey(this));
     registerListener(new GGNameTagListener(this));
     registerListener(new GGScoreboardListener(this));
     registerListener(new BoosterListener(this));

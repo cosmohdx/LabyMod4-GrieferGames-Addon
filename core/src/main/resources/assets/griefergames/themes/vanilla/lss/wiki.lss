@@ -1,0 +1,29 @@
+.wiki-brand { left: 4%; top: 5%; width: 31%; height: 24; text-color: white; font-size: 1.12; }
+.wiki-general { left: 4%; top: 12%; width: 7.5%; height: 23; }
+.wiki-legacy { left: 12%; top: 12%; width: 6%; height: 23; }
+.wiki-cloud { left: 18.5%; top: 12%; width: 7.5%; height: 23; }
+.wiki-search { left: 4%; top: 19%; width: 22%; height: 24; }
+.wiki-navigation { left: 4%; top: 26%; width: 22%; height: 65%; enable-scroll-content: true; }
+.wiki-nav-list { width: 100%; height: fit-content; space-between-entries: 2; }
+.wiki-section { width: 100%; height: 23; text-color: gray; font-size: 0.78; }
+.wiki-row { width: 100%; height: 24; }
+.wiki-row-label, .wiki-row-active { left: 4%; top: 3; width: 82%; height: 18; text-color: white; font-size: 0.85; overflow-strategy: clip; }
+.wiki-row-active { text-color: gold; }
+.wiki-row-arrow { right: 2%; top: 1; width: 12%; height: 21; text-align: center; text-color: gray; font-size: 1.1; }
+.wiki-empty { width: 100%; height: 24; text-color: gray; font-size: 0.85; }
+.wiki-article-title { left: 30%; top: 7%; width: 66%; height: 31; text-color: white; font-size: 1.4; overflow-strategy: clip; }
+.wiki-description { left: 30%; top: 14%; width: 66%; height: 34; text-color: gray; font-size: 0.88; overflow-strategy: wrap; }
+.wiki-article { left: 30%; top: 23%; width: 66%; height: 68%; enable-scroll-content: true; }
+.wiki-content { width: 100%; height: fit-content; space-between-entries: 6; }
+.wiki-heading { width: 100%; height: fit-content; text-color: white; font-size: 1.12; overflow-strategy: wrap; }
+.wiki-subheading { width: 100%; height: fit-content; text-color: gold; font-size: 0.95; overflow-strategy: wrap; }
+.wiki-paragraph, .wiki-table-row, .wiki-hint, .wiki-code { width: 100%; height: fit-content; text-color: white; font-size: 0.83; overflow-strategy: wrap; }
+.wiki-table-row { text-color: gray; }
+.wiki-hint { text-color: aqua; }
+.wiki-code { text-color: gray; }
+.wiki-image { width: 100%; height: 150; object-fit: contain; }
+.wiki-article-link { width: 100%; height: fit-content; text-color: gold; font-size: 0.83; overflow-strategy: wrap; }
+.wiki-divider { width: 100%; height: 12; text-color: gray; font-size: 0.7; }
+.wiki-status { left: 4%; bottom: 4%; width: 92%; height: 16; text-color: gray; font-size: 0.75; }
+
+.wiki-tab-label, .wiki-tab-active { left: 0; top: 3; width: 100%; height: 17; text-align: center; text-color: white; font-size: 0.82; }
