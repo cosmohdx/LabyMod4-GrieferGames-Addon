@@ -3,6 +3,8 @@ package de.cosmohdx.griefergames.feature.remover;
 import de.cosmohdx.griefergames.GrieferGames;
 import de.cosmohdx.griefergames.feature.chat.ChatModule;
 import de.cosmohdx.griefergames.feature.chat.GGChatProcessEvent;
+import de.cosmohdx.griefergames.payload.model.ClearLagPayload;
+import de.cosmohdx.griefergames.payload.model.EntityRemoverPayload;
 import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.event.HoverEvent;
@@ -10,6 +12,7 @@ import net.labymod.api.client.component.format.NamedTextColor;
 import net.labymod.api.client.gui.icon.Icon;
 import net.labymod.api.client.resources.ResourceLocation;
 import net.labymod.api.event.Subscribe;
+import net.labymod.api.event.client.network.server.ServerDisconnectEvent;
 import net.labymod.api.notification.Notification;
 import net.labymod.api.util.I18n;
 import java.time.LocalDateTime;
@@ -18,6 +21,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Remover extends ChatModule {
+
+  private static final long NOTIFY_WITHIN_SECONDS = 60;
 
   private final GrieferGames griefergames;
   private final Pattern itemWarning = Pattern.compile(
@@ -29,9 +34,50 @@ public class Remover extends ChatModule {
   private final Pattern mobDone = Pattern.compile(
       "^\\[MobRemover\\] Es wurden ([0-9]+) Tiere entfernt\\.$");
   private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+  private long previousItemSeconds = Long.MAX_VALUE;
+  private long previousEntitySeconds = Long.MAX_VALUE;
 
   public Remover(GrieferGames griefergames) {
     this.griefergames = griefergames;
+    griefergames.payloads().subscribe(ClearLagPayload.class, payload ->
+        this.onCountdown(payload.known(), payload.remainingSeconds(), true));
+    griefergames.payloads().subscribe(EntityRemoverPayload.class, payload ->
+        this.onCountdown(payload.known(), payload.remainingSeconds(), false));
+  }
+
+  @Subscribe
+  public void onServerQuit(ServerDisconnectEvent event) {
+    this.previousItemSeconds = Long.MAX_VALUE;
+    this.previousEntitySeconds = Long.MAX_VALUE;
+  }
+
+  private void onCountdown(boolean known, long remaining, boolean items) {
+    if (!known) {
+      this.remember(items, Long.MAX_VALUE);
+      return;
+    }
+    long previous = items ? this.previousItemSeconds : this.previousEntitySeconds;
+    this.remember(items, remaining);
+    if (remaining > previous || previous <= NOTIFY_WITHIN_SECONDS || remaining > NOTIFY_WITHIN_SECONDS) {
+      return;
+    }
+    if (!this.griefergames.configuration().remover().notification()) {
+      return;
+    }
+    if (items) {
+      this.push("ItemRemover", "textures/itemremover.png", "notifications.remover.items", Long.toString(remaining));
+    } else {
+      long minutes = Math.max(1, (remaining + 59) / 60);
+      this.push("MobRemover", "textures/mobremover.png", "notifications.remover.mobs", Long.toString(minutes));
+    }
+  }
+
+  private void remember(boolean items, long remaining) {
+    if (items) {
+      this.previousItemSeconds = remaining;
+    } else {
+      this.previousEntitySeconds = remaining;
+    }
   }
 
   @Subscribe
