@@ -41,9 +41,13 @@ import de.cosmohdx.griefergames.feature.payment.Bank;
 import de.cosmohdx.griefergames.feature.payment.FileManager;
 import de.cosmohdx.griefergames.feature.payment.IncomeHudWidget;
 import de.cosmohdx.griefergames.feature.payment.Payment;
+import de.cosmohdx.griefergames.feature.redstone.RedstoneHudWidget;
+import de.cosmohdx.griefergames.feature.redstone.RedstoneListener;
 import de.cosmohdx.griefergames.feature.server.GGServerJoinListener;
 import de.cosmohdx.griefergames.feature.server.GGServerQuitListener;
 import de.cosmohdx.griefergames.feature.subserver.GGScoreboardListener;
+import de.cosmohdx.griefergames.feature.subtitle.UserSubtitleListener;
+import de.cosmohdx.griefergames.payload.PayloadReceiver;
 import de.cosmohdx.griefergames.feature.subserver.GGSubServerChangeListener;
 import de.cosmohdx.griefergames.feature.subserver.SubServerHUDWidget;
 import net.labymod.api.addon.LabyAddon;
@@ -73,6 +77,7 @@ public class GrieferGames extends LabyAddon<GrieferGamesConfig> {
   private GrieferGamesController controller;
   private FileManager fileManager;
   private BoosterController boosterController;
+  private PayloadReceiver payloadReceiver;
   private HudWidgetCategory hudWidgetCategory;
   private final ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor(runnable -> {
     Thread thread = new Thread(runnable, "griefergames-addon");
@@ -88,8 +93,12 @@ public class GrieferGames extends LabyAddon<GrieferGamesConfig> {
     helper = new Helper(this);
     controller = reference.getGrieferGamesController();
     boosterController = new BoosterController(this);
+    payloadReceiver = new PayloadReceiver(this);
 
     registerSettingCategory();
+    registerListener(payloadReceiver);
+    registerListener(new RedstoneListener(this));
+    new UserSubtitleListener(this);
     registerListener(new GGServerJoinListener(this));
     registerListener(new GGServerQuitListener(this));
     registerListener(new GGMessageSendListener(this));
@@ -130,6 +139,7 @@ public class GrieferGames extends LabyAddon<GrieferGamesConfig> {
     labyAPI().hudWidgetRegistry().categoryRegistry().register(hudWidgetCategory);
     labyAPI().hudWidgetRegistry().register(new IncomeHudWidget(this));
     labyAPI().hudWidgetRegistry().register(new NicknameHudWidget(this));
+    labyAPI().hudWidgetRegistry().register(new RedstoneHudWidget(this));
     labyAPI().hudWidgetRegistry().register(new DelayHudWidget(this));
     labyAPI().hudWidgetRegistry().register(new FlyHudWidget(this));
     labyAPI().hudWidgetRegistry().register(new BoosterHudWidget(this));
@@ -201,6 +211,10 @@ public class GrieferGames extends LabyAddon<GrieferGamesConfig> {
 
   public BoosterController boosterController() {
     return boosterController;
+  }
+
+  public PayloadReceiver payloads() {
+    return payloadReceiver;
   }
 
   public AddonState state() {
