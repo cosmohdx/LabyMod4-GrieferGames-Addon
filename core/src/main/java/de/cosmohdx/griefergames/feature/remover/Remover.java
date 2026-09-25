@@ -36,6 +36,8 @@ public class Remover extends ChatModule {
   private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
   private long previousItemSeconds = Long.MAX_VALUE;
   private long previousEntitySeconds = Long.MAX_VALUE;
+  private long itemClearAt = -1;
+  private long entityClearAt = -1;
 
   public Remover(GrieferGames griefergames) {
     this.griefergames = griefergames;
@@ -49,13 +51,25 @@ public class Remover extends ChatModule {
   public void onServerQuit(ServerDisconnectEvent event) {
     this.previousItemSeconds = Long.MAX_VALUE;
     this.previousEntitySeconds = Long.MAX_VALUE;
+    this.itemClearAt = -1;
+    this.entityClearAt = -1;
+  }
+
+  public long remainingMillis(boolean items) {
+    long clearAt = items ? this.itemClearAt : this.entityClearAt;
+    if (clearAt < 0) {
+      return -1;
+    }
+    return Math.max(0, clearAt - System.currentTimeMillis());
   }
 
   private void onCountdown(boolean known, long remaining, boolean items) {
     if (!known) {
       this.remember(items, Long.MAX_VALUE);
+      this.rememberClearAt(items, -1);
       return;
     }
+    this.rememberClearAt(items, System.currentTimeMillis() + remaining * 1000L);
     long previous = items ? this.previousItemSeconds : this.previousEntitySeconds;
     this.remember(items, remaining);
     if (remaining > previous || previous <= NOTIFY_WITHIN_SECONDS || remaining > NOTIFY_WITHIN_SECONDS) {
@@ -77,6 +91,14 @@ public class Remover extends ChatModule {
       this.previousItemSeconds = remaining;
     } else {
       this.previousEntitySeconds = remaining;
+    }
+  }
+
+  private void rememberClearAt(boolean items, long clearAt) {
+    if (items) {
+      this.itemClearAt = clearAt;
+    } else {
+      this.entityClearAt = clearAt;
     }
   }
 

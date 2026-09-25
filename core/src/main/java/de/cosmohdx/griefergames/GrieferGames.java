@@ -35,6 +35,7 @@ import de.cosmohdx.griefergames.feature.delay.WaitTime;
 import de.cosmohdx.griefergames.feature.fly.FlyHudWidget;
 import de.cosmohdx.griefergames.feature.friends.FriendsPresenceListener;
 import de.cosmohdx.griefergames.feature.remover.Remover;
+import de.cosmohdx.griefergames.feature.remover.RemoverHudWidget;
 import de.cosmohdx.griefergames.feature.nickname.Nickname;
 import de.cosmohdx.griefergames.feature.nickname.NicknameHudWidget;
 import de.cosmohdx.griefergames.feature.payment.Bank;
@@ -78,6 +79,7 @@ public class GrieferGames extends LabyAddon<GrieferGamesConfig> {
   private FileManager fileManager;
   private BoosterController boosterController;
   private PayloadReceiver payloadReceiver;
+  private Remover remover;
   private HudWidgetCategory hudWidgetCategory;
   private final ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor(runnable -> {
     Thread thread = new Thread(runnable, "griefergames-addon");
@@ -129,7 +131,8 @@ public class GrieferGames extends LabyAddon<GrieferGamesConfig> {
     registerListener(new PlotChat(this));
     registerListener(new Vote(this));
     registerListener(new Realname(this));
-    registerListener(new Remover(this));
+    remover = new Remover(this);
+    registerListener(remover);
     registerListener(new BetterIgnoreList(this));
     registerListener(new Mention(this));
     registerListener(new Nickname(this));
@@ -148,6 +151,8 @@ public class GrieferGames extends LabyAddon<GrieferGamesConfig> {
     labyAPI().hudWidgetRegistry().register(new FlyHudWidget(this));
     labyAPI().hudWidgetRegistry().register(new BoosterHudWidget(this));
     labyAPI().hudWidgetRegistry().register(new SubServerHUDWidget(this));
+    labyAPI().hudWidgetRegistry().register(RemoverHudWidget.items(this));
+    labyAPI().hudWidgetRegistry().register(RemoverHudWidget.entities(this));
 
     if(labyAPI().labyModLoader().isAddonDevelopmentEnvironment()) {
       registerCommand(new GGMessageCommand(this));
@@ -219,6 +224,10 @@ public class GrieferGames extends LabyAddon<GrieferGamesConfig> {
 
   public PayloadReceiver payloads() {
     return payloadReceiver;
+  }
+
+  public Remover remover() {
+    return remover;
   }
 
   public AddonState state() {

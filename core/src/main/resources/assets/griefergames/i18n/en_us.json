@@ -510,6 +510,12 @@
       },
       "gg_subserver": {
         "name": "Subserver"
+      },
+      "gg_item_remover": {
+        "name": "Item remover"
+      },
+      "gg_entity_remover": {
+        "name": "Mob remover"
       }
     },
     "region_type": {

@@ -16,7 +16,6 @@ public class BoosterListener {
 
   private final GrieferGames griefergames;
   private boolean boosterPayloadSeen;
-  private boolean openWhenPayloadArrives;
   private int ticksUntilBoosterMenu = -1;
 
   public BoosterListener(GrieferGames griefergames) {
@@ -27,9 +26,7 @@ public class BoosterListener {
   private void onBoosterPayload(BoosterPayload payload) {
     this.griefergames.boosterController().applyPayload(payload);
     this.boosterPayloadSeen = true;
-    if (this.openWhenPayloadArrives) {
-      this.openBoosterMenu();
-    }
+    this.ticksUntilBoosterMenu = -1;
   }
 
   @Subscribe
@@ -38,7 +35,7 @@ public class BoosterListener {
     if (event.phase() != Phase.POST) return;
     if (this.ticksUntilBoosterMenu > 0) {
       this.ticksUntilBoosterMenu--;
-      if (this.ticksUntilBoosterMenu == 0) {
+      if (this.ticksUntilBoosterMenu == 0 && !this.boosterPayloadSeen) {
         this.openBoosterMenu();
       }
     }
@@ -56,19 +53,13 @@ public class BoosterListener {
     if (!griefergames.state().isOnGrieferGames()) return;
     if (griefergames.state().getSubServerType() != SubServerType.REGULAR) return;
     if (!event.chatMessage().getPlainText().equals("[Switcher] Daten heruntergeladen!")) return;
-    if (!griefergames.configuration().booster().loadBoostersOnJoin()) return;
-    if (this.boosterPayloadSeen) {
-      this.openBoosterMenu();
-      return;
-    }
-    this.openWhenPayloadArrives = true;
+    if (!griefergames.configuration().booster().loadBoostersOnJoin() || this.boosterPayloadSeen) return;
     this.ticksUntilBoosterMenu = PAYLOAD_WAIT_TICKS;
   }
 
   @Subscribe
   public void onSubServerChange(GGSubServerChangeEvent event) {
     griefergames.boosterController().resetBoosters();
-    this.boosterPayloadSeen = false;
   }
 
   @Subscribe
@@ -77,9 +68,9 @@ public class BoosterListener {
   }
 
   private void openBoosterMenu() {
-    this.openWhenPayloadArrives = false;
     this.ticksUntilBoosterMenu = -1;
-    if (!this.griefergames.state().isOnGrieferGames()
+    if (this.boosterPayloadSeen
+        || !this.griefergames.state().isOnGrieferGames()
         || this.griefergames.state().getSubServerType() != SubServerType.REGULAR
         || !this.griefergames.configuration().booster().loadBoostersOnJoin()) {
       return;
@@ -90,7 +81,6 @@ public class BoosterListener {
 
   private void cancelBoosterMenu() {
     this.boosterPayloadSeen = false;
-    this.openWhenPayloadArrives = false;
     this.ticksUntilBoosterMenu = -1;
   }
 }

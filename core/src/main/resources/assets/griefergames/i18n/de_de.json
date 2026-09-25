@@ -506,6 +506,12 @@
       },
       "gg_subserver": {
         "name": "Unterserver"
+      },
+      "gg_item_remover": {
+        "name": "ItemRemover"
+      },
+      "gg_entity_remover": {
+        "name": "MobRemover"
       }
     },
     "region_type": {
