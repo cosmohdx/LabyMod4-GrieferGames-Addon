@@ -16,6 +16,7 @@
 - Klick-zum-Antworten im Global-Chat ist entfernt (kann der Server selbst)
 - Komplette Überarbeitung der Einstellungen, nach Funktionen sortiert: Chat, Bezahlungen, Remover, Automatisierungen, AFK, Booster und Freunde
 - Viele Korrekturen, Bugfixes und Verbesserungen
+- Implementierung der neuen GG Client Payloads
 
 ### Für dich
 
