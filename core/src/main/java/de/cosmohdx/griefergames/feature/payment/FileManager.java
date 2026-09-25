@@ -57,6 +57,17 @@ public class FileManager {
     OperatingSystem.getPlatform().openFile(transactionsLogFile);
   }
 
+  public void open() {
+    if (transactionsLogWriter != null) {
+      return;
+    }
+    try {
+      transactionsLogWriter = new BufferedWriter(new FileWriter(transactionsLogFile, true));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
   public void close() {
     if (transactionsLogWriter == null) {
       return;
@@ -65,6 +76,8 @@ public class FileManager {
       transactionsLogWriter.close();
     } catch (IOException e) {
       e.printStackTrace();
+    } finally {
+      transactionsLogWriter = null;
     }
   }
 }

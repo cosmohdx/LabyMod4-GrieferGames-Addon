@@ -143,11 +143,17 @@ public class GrieferGames extends LabyAddon<GrieferGamesConfig> {
   }
 
   @Override
-  protected void disable() {
+  protected void onDeactivated() {
     if (fileManager != null) {
       fileManager.close();
     }
-    scheduler.shutdownNow();
+  }
+
+  @Override
+  protected void onActivated() {
+    if (fileManager != null) {
+      fileManager.open();
+    }
   }
 
   public void schedule(Runnable runnable, long delay, TimeUnit unit) {
