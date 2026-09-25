@@ -1,14 +1,10 @@
 package de.cosmohdx.griefergames.feature.booster;
 
+import de.cosmohdx.griefergames.core.config.FeatureConfig;
 import net.labymod.api.client.gui.screen.widget.widgets.input.SwitchWidget.SwitchSetting;
-import net.labymod.api.configuration.loader.Config;
 import net.labymod.api.configuration.loader.property.ConfigProperty;
 
-public class GrieferGamesBoosterToolsConfig extends Config {
-
-  //@ParentSwitch
-  @SwitchSetting
-  private final ConfigProperty<Boolean> enabled = new ConfigProperty<Boolean>(true);
+public class GrieferGamesBoosterToolsConfig extends FeatureConfig {
 
   @SwitchSetting
   private final ConfigProperty<Boolean> loadBoostersOnJoin = new ConfigProperty<>(true);
@@ -16,16 +12,11 @@ public class GrieferGamesBoosterToolsConfig extends Config {
   @SwitchSetting
   private final ConfigProperty<Boolean> hideBoosterMenu = new ConfigProperty<>(false);
 
-  public boolean isEnabled() {
-    return enabled.get();
-  }
-
   public boolean loadBoostersOnJoin() {
-    return enabled.get() && loadBoostersOnJoin.get();
+    return this.isOn(this.loadBoostersOnJoin);
   }
 
-  public boolean isHideBoosterMenu() {
-    return enabled.get() && hideBoosterMenu.get();
+  public boolean hideBoosterMenu() {
+    return this.isOn(this.hideBoosterMenu);
   }
-
 }

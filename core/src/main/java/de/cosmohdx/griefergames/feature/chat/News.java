@@ -16,7 +16,7 @@ public class News extends ChatModule {
   @Subscribe
   public void messageProcessEvent(GGChatProcessEvent event) {
     if(event.isCancelled()) return;
-    if (!griefergames.configuration().chatConfig().isHideNewsMessages()) return;
+    if (!griefergames.configuration().chat().hideNewsMessages()) return;
 
     String plain = event.getMessage().getPlainText();
     boolean isNewsSeperator = event.getMessage().getFormattedText().contains("§f§m------------§8 [ §6News§8 ] §f§m------------");

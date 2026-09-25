@@ -40,18 +40,18 @@ public class MobRemover extends ChatModule {
 
       boolean done;
       if ((done = mobRemoverDoneMessage.find()) || mobRemoverMessage.find()) {
-        if (griefergames.configuration().chatConfig().isMobRemoverLastTimeHover() && done) {
+        if (griefergames.configuration().mobRemover().lastTimeHover() && done) {
           String dateNowStr = LocalDateTime.now().format(formatter);
           Component hoverText = Component.text(dateNowStr);
           event.getMessage().component().style(event.getMessage().component().style().hoverEvent(
             HoverEvent.showText(hoverText)));
         }
 
-        if (griefergames.configuration().chatConfig().isMobRemoverChatRight()) {
+        if (griefergames.configuration().chat().routeMobRemover()) {
           event.setSecondChat(true);
         }
 
-        if (griefergames.configuration().chatConfig().isMobRemoverNotification() && !done) {
+        if (griefergames.configuration().mobRemover().notification() && !done) {
           Laby.labyAPI().notificationController().push(Notification.builder()
             .title(Component.text("MobRemover", NamedTextColor.RED))
             .text(Component.text(I18n.translate(griefergames.namespace() + ".notifications.mobRemover").replace("{time}", mobRemoverMessage.group(1))))

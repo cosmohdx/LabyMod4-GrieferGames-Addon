@@ -21,7 +21,7 @@ public class AntiMagicClanTag extends ChatModule {
   @Subscribe
   public void messageProcessEvent(GGChatProcessEvent event) {
     if (event.isCancelled()) return;
-    if (!griefergames.configuration().chatConfig().isAmpClantagEnabled()) return;
+    if (!griefergames.configuration().chat().replaceClanTags()) return;
 
     String formatted = event.getMessage().getFormattedText();
     if (formatted.contains("§k") || formatted.contains("§m")) {

@@ -23,7 +23,7 @@ public class BetterIgnoreList extends ChatModule {
   public void messageProcessEvent(GGChatProcessEvent event) {
     if(event.isCancelled()) return;
     if(!griefergames.state().isSubServerType(SubServerType.REGULAR)) return;
-    if (!griefergames.configuration().chatConfig().isBetterIgnoreList()) return;
+    if (!griefergames.configuration().chat().betterIgnoreList()) return;
     if(!event.getMessage().getPlainText().startsWith("Ignoriert: ")) return;
 
     List<Component> children = new ArrayList<>(event.getMessage().component().getChildren());

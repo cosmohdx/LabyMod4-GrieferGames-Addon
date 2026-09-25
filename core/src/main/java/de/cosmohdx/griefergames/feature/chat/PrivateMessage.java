@@ -41,8 +41,8 @@ public class PrivateMessage extends ChatModule {
     // Auto AFK message reply
     if (isIncomingPrivateMessage) {
       String playerName = privateMessage.group(2);
-      if (griefergames.configuration().automations().afkConfig().afkMsgReply().get() && griefergames.state().isAfk() && lastAfkMessage + 1000 <= System.currentTimeMillis()) {
-        String message = griefergames.configuration().automations().afkConfig().afkMsgText().get();
+      if (griefergames.configuration().afk().replyToMessages() && griefergames.state().isAfk() && lastAfkMessage + 1000 <= System.currentTimeMillis()) {
+        String message = griefergames.configuration().afk().replyText();
         if (!message.isBlank()) {
           griefergames.sendMessage("/msg " + playerName + " " + message);
           lastAfkMessage = System.currentTimeMillis();
@@ -54,16 +54,16 @@ public class PrivateMessage extends ChatModule {
     if (isIncomingPrivateMessage) {
       String playerName = privateMessage.group(2);
 
-      if (griefergames.configuration().chatConfig().isClickToReply() && griefergames.state().isSubServerType(SubServerType.REGULAR)) {
+      if (griefergames.configuration().chat().clickToReply() && griefergames.state().isSubServerType(SubServerType.REGULAR)) {
         addReplyAction(event.getMessage().component(), "§6[", "§6 -> ", playerName);
       }
 
-      if (griefergames.configuration().chatConfig().isPrivateChatRight()) {
+      if (griefergames.configuration().chat().routePrivateMessages()) {
         event.setSecondChat(true);
       }
 
-      if (griefergames.configuration().chatConfig().getPrivateChatSound() != Sounds.NONE) {
-        ResourceLocation resource = ResourceLocation.create("minecraft", griefergames.configuration().chatConfig().getPrivateChatSound().path());
+      if (griefergames.configuration().chat().privateMessageSound() != Sounds.NONE) {
+        ResourceLocation resource = ResourceLocation.create("minecraft", griefergames.configuration().chat().privateMessageSound().path());
         Laby.labyAPI().minecraft().sounds().playSound(resource, 1f, 1f);
       }
     }
@@ -71,11 +71,11 @@ public class PrivateMessage extends ChatModule {
     // Outgoing private message
     Matcher privateMessageSent = privateMessageSentRegex.matcher(griefergames.helper().removeLeadingMiscCodes(event.getMessage().getPlainText()));
     if (privateMessageSent.find()) {
-      if (griefergames.configuration().chatConfig().isClickToReply() && griefergames.state().isSubServerType(SubServerType.REGULAR)) {
+      if (griefergames.configuration().chat().clickToReply() && griefergames.state().isSubServerType(SubServerType.REGULAR)) {
         addReplyAction(event.getMessage().component(), "§6 -> ", "§6] ", privateMessageSent.group(3));
       }
 
-      if (griefergames.configuration().chatConfig().isPrivateChatRight()) {
+      if (griefergames.configuration().chat().routePrivateMessages()) {
         event.setSecondChat(true);
       }
     }

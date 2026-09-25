@@ -21,8 +21,8 @@ public class BoosterListener {
     if (!griefergames.state().isOnGrieferGames()) return;
     if (event.phase() != Phase.POST) return;
     if (griefergames.state().getSubServerType() != SubServerType.REGULAR) return;
-    if (!griefergames.configuration().automations().boosterConfig().isEnabled()) return;
-    if (griefergames.configuration().automations().boosterConfig().isHideBoosterMenu() || griefergames.state().isHideBoosterMenu()) {
+    if (!griefergames.configuration().booster().isEnabled()) return;
+    if (griefergames.configuration().booster().hideBoosterMenu() || griefergames.state().isHideBoosterMenu()) {
       if (griefergames.controller().hideBoosterMenu()) {
         griefergames.state().setHideBoosterMenu(false);
       }
@@ -34,7 +34,7 @@ public class BoosterListener {
     if (!griefergames.state().isOnGrieferGames()) return;
     if (griefergames.state().getSubServerType() != SubServerType.REGULAR) return;
     if (!event.chatMessage().getPlainText().equals("[Switcher] Daten heruntergeladen!")) return;
-    if (griefergames.configuration().automations().boosterConfig().loadBoostersOnJoin()) {
+    if (griefergames.configuration().booster().loadBoostersOnJoin()) {
       griefergames.state().setHideBoosterMenu(true);
       griefergames.sendMessage("/booster");
     }

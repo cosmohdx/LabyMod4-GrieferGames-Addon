@@ -29,7 +29,7 @@ public class GGKeyListener {
 
     if(griefergames.state().getSubServerType() == SubServerType.REGULAR) {
       if(event.state() == State.PRESS) {
-        if(griefergames.configuration().chatConfig().isAmpEnabled() &&
+        if(griefergames.configuration().chat().replaceMagicPrefixes() &&
             event.key().getId() == Laby.labyAPI().minecraft().options().getInputMapping("key.playerlist").getKeyCode()) {
 
           for(NetworkPlayerInfo playerInfo : Laby.labyAPI().minecraft().getClientPacketListener().getNetworkPlayerInfos()) {
@@ -39,7 +39,7 @@ public class GGKeyListener {
             Matcher matcher = antiMagicPrefixRegex.matcher(griefergames.helper().componentToPlainText(playerInfo.displayName()));
             if(!matcher.find()) continue;
 
-            String ampReplacement = griefergames.configuration().chatConfig().getAmpReplacement();
+            String ampReplacement = griefergames.configuration().chat().magicPrefixReplacement();
             if(ampReplacement.isBlank()) {
               ampReplacement = GrieferGamesConfig.DEFAULT_AMP_REPLACEMENT;
             }

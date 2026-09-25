@@ -1,30 +1,10 @@
 package de.cosmohdx.griefergames.feature.automation;
 
-import de.cosmohdx.griefergames.feature.afk.GrieferGamesAFKConfig;
-import de.cosmohdx.griefergames.feature.booster.GrieferGamesBoosterToolsConfig;
-import net.labymod.api.client.gui.screen.widget.widgets.input.SliderWidget.SliderSetting;
+import de.cosmohdx.griefergames.core.config.FeatureConfig;
 import net.labymod.api.client.gui.screen.widget.widgets.input.SwitchWidget.SwitchSetting;
-import net.labymod.api.client.gui.screen.widget.widgets.input.TextFieldWidget.TextFieldSetting;
-import net.labymod.api.client.gui.screen.widget.widgets.input.color.ColorPickerWidget.ColorPickerSetting;
-import net.labymod.api.client.gui.screen.widget.widgets.input.dropdown.DropdownWidget.DropdownSetting;
-import net.labymod.api.configuration.loader.Config;
-import net.labymod.api.configuration.loader.annotation.SpriteSlot;
 import net.labymod.api.configuration.loader.property.ConfigProperty;
-import net.labymod.api.configuration.settings.annotation.SettingSection;
-import java.awt.*;
 
-public class GrieferGamesAutomationsConfig extends Config {
-
-  //@ParentSwitch
-  @SwitchSetting
-  private final ConfigProperty<Boolean> enabled = new ConfigProperty<Boolean>(true);
-
-  // 1.8
-  @SpriteSlot(x = 0, y = 1)
-  private GrieferGamesBoosterToolsConfig boosterConfig = new GrieferGamesBoosterToolsConfig();
-
-  @SpriteSlot(x = 1, y = 1)
-  private GrieferGamesAFKConfig afkConfig = new GrieferGamesAFKConfig();
+public class GrieferGamesAutomationsConfig extends FeatureConfig {
 
   @SwitchSetting
   private final ConfigProperty<Boolean> autoPortal = new ConfigProperty<>(false);
@@ -32,57 +12,36 @@ public class GrieferGamesAutomationsConfig extends Config {
   @SwitchSetting
   private final ConfigProperty<Boolean> sendSubServer = new ConfigProperty<>(false);
 
-  @SettingSection("chatcolor")
-  @DropdownSetting
-  private final ConfigProperty<ChatColor> autoColor = new ConfigProperty<>(ChatColor.NONE);
+  private final ChatColorConfig chatColor = new ChatColorConfig();
 
-  @SwitchSetting
-  private final ConfigProperty<Boolean> autoColorCloud = new ConfigProperty<>(false);
-
-  @ColorPickerSetting
-  private final ConfigProperty<Integer> autoColorCloudColor = new ConfigProperty<>(new Color(255,255,255).getRGB());
-
-  @SwitchSetting
-  private final ConfigProperty<Boolean> colorGradiantCloud = new ConfigProperty<>(true);
-
-
-  public GrieferGamesBoosterToolsConfig boosterConfig() {
-    return boosterConfig;
+  public ChatColorConfig chatColor() {
+    return this.chatColor;
   }
 
-  public GrieferGamesAFKConfig afkConfig() {
-    return afkConfig;
+  public boolean autoPortal() {
+    return this.isOn(this.autoPortal);
   }
 
-  public boolean isEnabled() {
-    return enabled.get();
+  public boolean announceSubServer() {
+    return this.isOn(this.sendSubServer);
   }
 
-  public boolean isAutoPortalEnabled() {
-    return enabled.get() && autoPortal.get();
+  public ChatColor autoColor() {
+    if (!this.isEnabled()) {
+      return ChatColor.NONE;
+    }
+    return this.chatColor.autoColor();
   }
 
-  public boolean isSendSubServerEnabled() {
-    return enabled.get() && sendSubServer.get();
+  public boolean autoColorCloud() {
+    return this.isEnabled() && this.chatColor.autoColorCloud();
   }
 
-  public ConfigProperty<Boolean> sendSubServer() {
-    return sendSubServer;
+  public int autoColorCloudColor() {
+    return this.chatColor.autoColorCloudColor();
   }
 
-  public ConfigProperty<ChatColor> autoColor() {
-    return autoColor;
-  }
-
-  public ConfigProperty<Boolean> autoColorCloud() {
-    return autoColorCloud;
-  }
-
-  public ConfigProperty<Integer> autoColorCloudColor() {
-    return autoColorCloudColor;
-  }
-
-  public ConfigProperty<Boolean> colorGradiantCloud() {
-    return colorGradiantCloud;
+  public boolean colorGradientCloud() {
+    return this.isEnabled() && this.chatColor.colorGradientCloud();
   }
 }
