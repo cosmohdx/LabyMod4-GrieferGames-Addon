@@ -418,6 +418,37 @@
           "description": "Zeigt deinen Freunden auf Discord, auf welchem CityBuild du gerade bist."
         }
       },
+      "nearbyPlayers": {
+        "name": "Spieler in der Nähe",
+        "description": "Zeigt nahe Spieler im HUD. Standardmäßig aus. Keine Richtung und keine Koordinaten, die Distanz nur grob. Mit den Voreinstellungen nur Spieler, die du direkt sehen kannst, und nur auf Citybuilds. Spieler hinter Wänden erscheinen nur, wenn du die Sichtlinie ausschaltest – das kann gegen §2 Abs. 5 und 8 verstoßen. Erst verwenden, wenn der GrieferGames-Support die Funktion freigegeben hat.",
+        "enabled": {
+          "name": "Spieler in der Nähe"
+        },
+        "radius": {
+          "name": "Radius",
+          "description": "Nur Spieler innerhalb dieser Blockzahl. Voreinstellung 16, höchstens 32."
+        },
+        "limit": {
+          "name": "Anzahl",
+          "description": "So viele Spieler zeigt das HUD höchstens an, die nächsten zuerst."
+        },
+        "onlyLineOfSight": {
+          "name": "Nur Spieler in direkter Sichtlinie",
+          "description": "Zeigt nur Spieler, die du direkt sehen kannst. Ausschalten zeigt auch Spieler hinter Wänden – das kann gegen §2 Abs. 5/8 verstoßen."
+        },
+        "distanceDisplay": {
+          "name": "Distanz",
+          "description": "Grobe Stufen wie <10 m, oder gar keine Distanz. Keine Richtung und keine Koordinaten.",
+          "entries": {
+            "hidden": "Ausblenden",
+            "coarse": "Grob"
+          }
+        },
+        "onlyOnCitybuild": {
+          "name": "Nur auf Citybuilds",
+          "description": "Auf Farmwelt, Event-Server und in Minigames bleibt die Liste aus."
+        }
+      },
       "openWebsite": {
         "name": "Website",
         "text": "Öffnen"
@@ -557,6 +588,9 @@
       },
       "gg_block_of_the_day": {
         "name": "Block des Tages"
+      },
+      "gg_nearby_players": {
+        "name": "Spieler in der Nähe"
       }
     },
     "region_type": {

@@ -419,6 +419,37 @@
           "description": "Shows your friends on Discord which CityBuild you are on."
         }
       },
+      "nearbyPlayers": {
+        "name": "Nearby players",
+        "description": "Shows nearby players in the HUD. Off by default. No direction and no coordinates, distance only in rough steps. With the defaults, only players you can see directly, and only on citybuilds. Players behind walls appear only if you turn line of sight off – that can violate §2 (5) and (8). Use it only after GrieferGames support has allowed the feature.",
+        "enabled": {
+          "name": "Nearby players"
+        },
+        "radius": {
+          "name": "Radius",
+          "description": "Only players within this many blocks. Default 16, maximum 32."
+        },
+        "limit": {
+          "name": "Limit",
+          "description": "How many players the HUD shows at most, closest first."
+        },
+        "onlyLineOfSight": {
+          "name": "Only players in direct line of sight",
+          "description": "Shows only players you can see directly. Turning this off also shows players behind walls – that can violate §2 (5) and (8)."
+        },
+        "distanceDisplay": {
+          "name": "Distance",
+          "description": "Rough steps such as <10 m, or no distance at all. No direction and no coordinates.",
+          "entries": {
+            "hidden": "Hidden",
+            "coarse": "Rough"
+          }
+        },
+        "onlyOnCitybuild": {
+          "name": "Only on citybuilds",
+          "description": "The list stays hidden on farm worlds, event servers and in minigames."
+        }
+      },
       "openWebsite": {
         "name": "Website",
         "text": "Open"
@@ -561,6 +592,9 @@
       },
       "gg_block_of_the_day": {
         "name": "Block of the Day"
+      },
+      "gg_nearby_players": {
+        "name": "Nearby players"
       }
     },
     "region_type": {
