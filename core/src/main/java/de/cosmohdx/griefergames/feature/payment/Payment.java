@@ -53,10 +53,6 @@ public class Payment extends ChatModule {
             griefergames.fileManager().logTransaction(rank + " ┃ " + name, amount, TransactionType.RECEIVE);
           }
 
-          if (griefergames.configuration().chat().routePayments()) {
-            event.setSecondChat(true);
-          }
-
           if (griefergames.configuration().payment().paymentNotification()) {
             sendPaymentNotification(TransactionType.RECEIVE, rank, name, amount);
           }
@@ -91,9 +87,6 @@ public class Payment extends ChatModule {
         if (griefergames.configuration().payment().logTransactions()) {
           griefergames.fileManager().logTransaction(rank + " ┃ " + name, amount, TransactionType.PAY);
         }
-        if (griefergames.configuration().chat().routePayments()) {
-          event.setSecondChat(true);
-        }
         if (griefergames.configuration().payment().paymentNotification()) {
           sendPaymentNotification(TransactionType.PAY, rank, name, amount);
         }
@@ -108,17 +101,11 @@ public class Payment extends ChatModule {
         if (griefergames.configuration().payment().logTransactions()) {
           griefergames.fileManager().logTransaction(null, amount, TransactionType.MONEYDROP);
         }
-        if (griefergames.configuration().chat().routePayments()) {
-          event.setSecondChat(true);
-        }
         if (griefergames.configuration().payment().paymentNotification()) {
           sendPaymentNotification(TransactionType.MONEYDROP, amount);
         }
       }
 
-      if (plain.startsWith("Kontostand: ") && griefergames.configuration().chat().routePayments()) {
-        event.setSecondChat(true);
-      }
     }
   }
 

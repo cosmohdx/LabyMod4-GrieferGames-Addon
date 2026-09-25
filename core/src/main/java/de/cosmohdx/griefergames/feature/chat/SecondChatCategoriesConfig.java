@@ -7,7 +7,8 @@ import net.labymod.api.configuration.loader.Config;
  * Built-in message categories for the second chat.
  *
  * <p>Each entry is a {@link SecondChatCategoryConfig}: a toggle plus a pattern list.
- * {@link #entries()} is the list a later router can walk without knowing every field.
+ * {@link #entries()} is what {@link SecondChatRouter} walks. Keep it in the same order as
+ * {@link SecondChatCategory}.
  */
 public class SecondChatCategoriesConfig extends Config {
 

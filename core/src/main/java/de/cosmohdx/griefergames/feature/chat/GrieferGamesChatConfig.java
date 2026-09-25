@@ -88,26 +88,6 @@ public class GrieferGamesChatConfig extends FeatureConfig {
     return this.secondChat.realname().position();
   }
 
-  public boolean routePrivateMessages() {
-    return this.route(this.secondChat.categories().privateMessages());
-  }
-
-  public boolean routePlotChat() {
-    return this.route(this.secondChat.categories().plotChat());
-  }
-
-  public boolean routeRemover() {
-    return this.route(this.secondChat.categories().remover());
-  }
-
-  public boolean routePayments() {
-    return this.route(this.secondChat.categories().payments());
-  }
-
-  public boolean routeBank() {
-    return this.route(this.secondChat.categories().bank());
-  }
-
   public Sounds privateMessageSound() {
     if (!this.isEnabled()) {
       return Sounds.NONE;
@@ -165,9 +145,5 @@ public class GrieferGamesChatConfig extends FeatureConfig {
   public String chatTimeFormat() {
     String format = this.chatTime.format();
     return format == null ? "" : format;
-  }
-
-  private boolean route(SecondChatCategoryConfig category) {
-    return this.isEnabled() && this.secondChat.isEnabled() && category.showInSecondChat();
   }
 }

@@ -26,9 +26,9 @@ import de.cosmohdx.griefergames.feature.chat.GGMessageSendListener;
 import de.cosmohdx.griefergames.feature.chat.GGNameTagListener;
 import de.cosmohdx.griefergames.feature.chat.Mention;
 import de.cosmohdx.griefergames.feature.chat.News;
-import de.cosmohdx.griefergames.feature.chat.PlotChat;
 import de.cosmohdx.griefergames.feature.chat.PrivateMessage;
 import de.cosmohdx.griefergames.feature.chat.Realname;
+import de.cosmohdx.griefergames.feature.chat.SecondChatRouterListener;
 import de.cosmohdx.griefergames.feature.chat.Teleport;
 import de.cosmohdx.griefergames.feature.chat.Vote;
 import de.cosmohdx.griefergames.feature.delay.DelayHudWidget;
@@ -125,6 +125,7 @@ public class GrieferGames extends LabyAddon<GrieferGamesConfig> {
     registerListener(new AfkListener(this));
 
     // Chat modules
+    registerListener(new SecondChatRouterListener(this));
     registerListener(new Blanks(this));
     registerListener(new PrivateMessage(this));
     registerListener(new Payment(this));
@@ -132,7 +133,6 @@ public class GrieferGames extends LabyAddon<GrieferGamesConfig> {
     registerListener(new AntiMagicClanTag(this));
     registerListener(new AntiMagicPrefix(this));
     registerListener(new News(this));
-    registerListener(new PlotChat(this));
     registerListener(new Vote(this));
     registerListener(new Realname(this));
     remover = new Remover(this);
