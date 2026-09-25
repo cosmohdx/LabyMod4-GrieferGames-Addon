@@ -2,9 +2,21 @@
 
 ## Unreleased
 
+### Spieler in der Nähe
+
+Im HUD-Editor unter GrieferGames gibt es die Anzeige „Spieler in der Nähe“. Sie ist standardmäßig aus.
+
+Ist sie an, stehen nahe Spieler mit Kopf und grober Distanz in der Liste, zum Beispiel `<10 m`. Keine Richtung und keine Koordinaten. Nur Spieler, die du direkt sehen kannst, und nur auf Citybuilds. Unsichtbare Spieler, Zuschauer und NPCs fehlen. Hinter einer Wand erscheint niemand, solange „Nur Spieler in direkter Sichtlinie“ an ist. Die Anzeige wartet, bis klar ist, ob du auf einem Citybuild oder auf der Cloud spielst.
+
+Die Funktion darf erst genutzt werden, wenn der GrieferGames-Support sie freigegeben hat. Spieler hinter Wänden zu zeigen kann gegen §2 Abs. 5 und 8 verstoßen.
+
 ### Netzwerk
 
 Direkt nach dem Beitreten ist noch nicht klar, ob du auf einem Citybuild (1.8) oder auf der Cloud spielst. Funktionen, die nur auf einem der beiden Netze laufen, warten deshalb kurz. Dazu gehören zum Beispiel Zahlungen, die Bank, Booster, der Nickname und die automatische Chatfarbe. Sobald das Netz erkannt ist, verhalten sie sich wie bisher. Beim Verlassen des Servers setzt das Addon die Erkennung zurück.
+
+### Plot-Grenzen
+
+Auf Nature und Extreme kannst du die Kanten des Grundstücks, auf dem du stehst, als Linienraster einblenden. Die Funktion ist standardmäßig aus. Unter Plot-Grenzen legst du Taste, Umschalten oder Halten, Farbe, Linienabstand und die Höhe um dich herum fest. Auf anderen Servern und auf der Cloud bleibt das Raster aus. Dort sagt der Chat, dass die Anzeige nicht verfügbar ist.
 
 ## 1.2.0
 
@@ -44,6 +56,10 @@ Das Icon der Einnahmen-Anzeige wird wieder angezeigt.
 ### Block des Tages
 
 Im HUD-Editor unter GrieferGames gibt es die Anzeige Block des Tages. Sie zeigt den heutigen Block und daneben, wie oft du ihn in dieser Sitzung gesammelt hast, zum Beispiel `Diamond Ore (3)`. Wechselt der Block, beginnt der Zähler bei null.
+
+### Itemliste
+
+Mit `/itemliste` öffnet sich eine Übersicht der öffentlichen Itemliste. Oben kann nach Namen gesucht und nach Kategorie gefiltert werden. Ein Klick auf ein Item zeigt Beschreibung und Bild. Die Liste und die Bilder werden beim Öffnen aktualisiert.
 
 ### Sonstiges
 

@@ -5,8 +5,9 @@
       "enabled": {
         "name": "Addon Enabled"
       },
-      "autoUpdate": {
-        "name": "Auto Update"
+      "openWiki": {
+        "name": "Open wiki",
+        "text": "Open"
       },
       "chat": {
         "name": "Chat",
@@ -418,6 +419,93 @@
           "description": "Shows your friends on Discord which CityBuild you are on."
         }
       },
+      "plotBorders": {
+        "name": "Plot borders",
+        "description": "Line grid around the plot on Nature and Extreme (1.8).",
+        "enabled": {
+          "name": "Plot borders"
+        },
+        "key": {
+          "name": "Key",
+          "description": "Toggles the grid, or holds it while the key is pressed."
+        },
+        "activation": {
+          "name": "Activation",
+          "description": "Toggle keeps the grid on until you press the key again. Hold shows it only while the key is pressed.",
+          "entries": {
+            "toggle": "Toggle",
+            "hold": "Hold"
+          }
+        },
+        "notify": {
+          "name": "Show notice",
+          "description": "Writes in chat when the grid is turned on or off."
+        },
+        "color": {
+          "name": "Color",
+          "description": "Color of the lines."
+        },
+        "lineSpacing": {
+          "name": "Line spacing",
+          "description": "Distance between lines, in blocks."
+        },
+        "heightRange": {
+          "name": "Height around the player",
+          "description": "How many blocks above and below you the grid is drawn."
+        }
+      },
+      "nearbyPlayers": {
+        "name": "Nearby players",
+        "description": "Shows nearby players in the HUD. Off by default. No direction and no coordinates, distance only in rough steps. With the defaults, only players you can see directly, and only on citybuilds. Players behind walls appear only if you turn line of sight off – that can violate §2 (5) and (8). Use it only after GrieferGames support has allowed the feature.",
+        "enabled": {
+          "name": "Nearby players"
+        },
+        "radius": {
+          "name": "Radius",
+          "description": "Only players within this many blocks. Default 16, maximum 32."
+        },
+        "limit": {
+          "name": "Limit",
+          "description": "How many players the HUD shows at most, closest first."
+        },
+        "onlyLineOfSight": {
+          "name": "Only players in direct line of sight",
+          "description": "Shows only players you can see directly. Turning this off also shows players behind walls – that can violate §2 (5) and (8)."
+        },
+        "distanceDisplay": {
+          "name": "Distance",
+          "description": "Rough steps such as <10 m, or no distance at all. No direction and no coordinates.",
+          "entries": {
+            "hidden": "Hidden",
+            "coarse": "Rough"
+          }
+        },
+        "onlyOnCitybuild": {
+          "name": "Only on citybuilds",
+          "description": "The list stays hidden on farm worlds, event servers and in minigames."
+        }
+      },
+      "itemList": {
+        "name": "Item list",
+        "description": "Overview of the GrieferGames items.",
+        "header": {
+          "source": {
+            "name": "Source\nhttps://raw.githubusercontent.com/Syntax-Official/GGItems/main/Items.json\nhttps://raw.githubusercontent.com/Syntax-Official/GGItems/main/categories.json"
+          }
+        },
+        "autoUpdate": {
+          "name": "Automatic updates",
+          "description": "Refreshes the item list when it is opened. Otherwise the bundled list stays."
+        },
+        "key": {
+          "name": "Hotkey",
+          "description": "Opens the item list. No key is set by default."
+        },
+        "open": {
+          "name": "Item list",
+          "text": "Open"
+        }
+      },
       "openWebsite": {
         "name": "Website",
         "text": "Open"
@@ -430,15 +518,20 @@
         "name": "Support-Discord",
         "text": "Open"
       },
-      "mapTooltipPreview": {"name": "Show map in tooltip"},
-      "headTooltipPreview": {"name": "Enlarge head in tooltip"},
-      "headEnchantmentGlint": {"name": "Enchantment glint on heads, banners and chests"},
-      "overstackingFix": {"name": "Overstacking fix for newer versions"},
+      "mapTooltipPreview": {
+        "name": "Show map in tooltip"
+      },
+      "headTooltipPreview": {
+        "name": "Enlarge head in tooltip"
+      },
+      "headEnchantmentGlint": {
+        "name": "Enchantment glint on heads, banners and chests"
+      },
+      "overstackingFix": {
+        "name": "Overstacking fix for newer versions"
+      },
       "wikiKey": {
         "name": "Open wiki (hotkey)"
-      },
-      "openWiki": {
-        "name": "Open wiki"
       }
     },
     "messages": {
@@ -453,7 +546,10 @@
       "citybuildJoin": "You are now on {citybuild}.",
       "afkMessage": "You are marked as AFK now.",
       "afkBackMessage": "You are marked as back now.",
-      "commandFailure": "Did you make a mistake? If not, send the message again."
+      "commandFailure": "Did you make a mistake? If not, send the message again.",
+      "plotBordersOn": "Plot borders enabled.",
+      "plotBordersOff": "Plot borders disabled.",
+      "plotBordersUnavailable": "Plot borders are not available on this server."
     },
     "notifications": {
       "generalError": "An error occurred, please check the chat.",
@@ -567,7 +663,21 @@
       },
       "gg_block_of_the_day": {
         "name": "Block of the Day"
+      },
+      "gg_nearby_players": {
+        "name": "Nearby players"
       }
+    },
+    "itemlist": {
+      "title": "GrieferGames Item List",
+      "search": "Search items…",
+      "all": "All",
+      "loading": "Loading item list…",
+      "empty": "No matching items",
+      "count": "{count} items",
+      "more": "Load more items",
+      "close": "Close",
+      "network": "{network} network"
     },
     "region_type": {
       "citybuild": "Citybuild",

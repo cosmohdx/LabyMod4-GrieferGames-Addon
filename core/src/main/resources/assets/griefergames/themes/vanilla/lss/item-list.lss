@@ -1,0 +1,203 @@
+.catalog-background {
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.catalog-title {
+  left: 50%;
+  top: 4%;
+  alignment-x: center;
+  text-color: white;
+  font-size: 1.6;
+}
+
+.catalog-search {
+  left: 5%;
+  top: 11%;
+  width: 69%;
+  height: 28;
+}
+
+.catalog-category {
+  left: 75%;
+  top: 11%;
+  width: 20%;
+  height: 28;
+}
+
+.catalog-status {
+  left: 5%;
+  top: 16.2%;
+  text-color: gray;
+}
+
+.catalog-scroll {
+  left: 5%;
+  top: 19%;
+  width: 90%;
+  height: 76%;
+  enable-scroll-content: true;
+}
+
+.catalog-sections {
+  width: 100%;
+  height: fit-content;
+  space-between-entries: 6;
+}
+
+.network-header {
+  width: 100%;
+  height: 32;
+}
+
+.network-name {
+  left: 10;
+  top: 50%;
+  alignment-y: center;
+  text-color: white;
+  font-size: 1.2;
+}
+
+.network-arrow {
+  right: 11;
+  top: 50%;
+  alignment-y: center;
+  text-color: gray;
+}
+
+.network-empty {
+  left: 10;
+  height: 25;
+  text-color: gray;
+}
+
+.item-grid {
+  width: 100%;
+  height: fit-content;
+  tiles-per-line: 5;
+  space-between-entries: 6;
+}
+
+.item-card {
+  overflow: hidden;
+}
+
+.card-label-pill {
+  right: 5;
+  top: 5;
+  height: 18;
+}
+
+.card-label {
+  left: 50%;
+  top: 50%;
+  width: 95%;
+  alignment-x: center;
+  alignment-y: center;
+  overflow-strategy: clip;
+  text-color: white;
+  font-size: 0.68;
+}
+
+.card-image {
+  left: 50%;
+  top: 26;
+  alignment-x: center;
+  width: 84%;
+  height: 52%;
+  object-fit: contain;
+}
+
+.card-title-pill {
+  left: 50%;
+  bottom: 6;
+  alignment-x: center;
+  width: 90%;
+  height: 26;
+}
+
+.card-title {
+  left: 50%;
+  top: 50%;
+  width: 94%;
+  alignment-x: center;
+  alignment-y: center;
+  overflow-strategy: wrap;
+  text-color: white;
+  font-size: 0.82;
+}
+
+.load-more {
+  left: 50%;
+  alignment-x: center;
+  width: 40%;
+  height: 25;
+}
+
+.detail-dimmer {
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  priority-layer: very-front;
+}
+
+.detail-panel {
+  width: 48%;
+  height: 72%;
+  alignment-x: center;
+  alignment-y: center;
+}
+
+.modal-scroll {
+  left: 4%;
+  top: 5%;
+  width: 92%;
+  height: 79%;
+  enable-scroll-content: true;
+}
+
+.modal-content {
+  width: 100%;
+  height: fit-content;
+  space-between-entries: 13;
+}
+
+.modal-image {
+  width: 100%;
+  height: 130;
+  object-fit: contain;
+}
+
+.modal-title-pill {
+  width: 100%;
+  height: 40;
+}
+
+.modal-title {
+  left: 50%;
+  top: 50%;
+  width: 94%;
+  alignment-x: center;
+  alignment-y: center;
+  overflow-strategy: wrap;
+  text-color: white;
+  font-size: 1.4;
+}
+
+.modal-description {
+  width: 100%;
+  height: fit-content;
+  overflow-strategy: wrap;
+  text-color: white;
+  font-size: 1.1;
+}
+
+.modal-close {
+  left: 4%;
+  bottom: 5%;
+  width: 92%;
+  height: 28;
+}

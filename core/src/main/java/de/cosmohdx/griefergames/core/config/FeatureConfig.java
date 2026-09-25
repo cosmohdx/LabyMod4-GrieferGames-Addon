@@ -29,6 +29,7 @@ public abstract class FeatureConfig extends Config {
   protected FeatureConfig(boolean enabledByDefault) {
     if (!enabledByDefault) {
       this.enabled.set(false);
+      this.enabled.updateDefaultValue(false);
     }
   }
 
