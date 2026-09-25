@@ -47,6 +47,7 @@ import de.cosmohdx.griefergames.feature.payment.Payment;
 import de.cosmohdx.griefergames.feature.payment.balance.BalanceTracker;
 import de.cosmohdx.griefergames.feature.payment.hud.BalanceHudWidget;
 import de.cosmohdx.griefergames.feature.payment.hud.BankBalanceHudWidget;
+import de.cosmohdx.griefergames.feature.plotborder.PlotBorderListener;
 import de.cosmohdx.griefergames.feature.redstone.RedstoneHudWidget;
 import de.cosmohdx.griefergames.feature.redstone.RedstoneListener;
 import de.cosmohdx.griefergames.feature.server.GGServerJoinListener;
@@ -127,6 +128,7 @@ public class GrieferGames extends LabyAddon<GrieferGamesConfig> {
     registerListener(new FriendsPresenceListener(this));
     registerListener(new DelaySubServerListener(this));
     registerListener(new GGSubServerChangeListener(this));
+    registerListener(new PlotBorderListener(this));
     registerListener(new AutoPortalListener(this));
     registerListener(new AfkListener(this));
 

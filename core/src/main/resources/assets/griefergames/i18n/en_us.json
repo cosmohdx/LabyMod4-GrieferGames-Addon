@@ -419,6 +419,41 @@
           "description": "Shows your friends on Discord which CityBuild you are on."
         }
       },
+      "plotBorders": {
+        "name": "Plot borders",
+        "description": "Line grid around the plot on Nature and Extreme (1.8).",
+        "enabled": {
+          "name": "Plot borders"
+        },
+        "key": {
+          "name": "Key",
+          "description": "Toggles the grid, or holds it while the key is pressed."
+        },
+        "activation": {
+          "name": "Activation",
+          "description": "Toggle keeps the grid on until you press the key again. Hold shows it only while the key is pressed.",
+          "entries": {
+            "toggle": "Toggle",
+            "hold": "Hold"
+          }
+        },
+        "notify": {
+          "name": "Show notice",
+          "description": "Writes in chat when the grid is turned on or off."
+        },
+        "color": {
+          "name": "Color",
+          "description": "Color of the lines."
+        },
+        "lineSpacing": {
+          "name": "Line spacing",
+          "description": "Distance between lines, in blocks."
+        },
+        "heightRange": {
+          "name": "Height around the player",
+          "description": "How many blocks above and below you the grid is drawn."
+        }
+      },
       "openWebsite": {
         "name": "Website",
         "text": "Open"
@@ -445,7 +480,10 @@
       "citybuildJoin": "You are now on {citybuild}.",
       "afkMessage": "You are marked as AFK now.",
       "afkBackMessage": "You are marked as back now.",
-      "commandFailure": "Did you make a mistake? If not, send the message again."
+      "commandFailure": "Did you make a mistake? If not, send the message again.",
+      "plotBordersOn": "Plot borders enabled.",
+      "plotBordersOff": "Plot borders disabled.",
+      "plotBordersUnavailable": "Plot borders are not available on this server."
     },
 
     "notifications": {
