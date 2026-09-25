@@ -1,0 +1,127 @@
+{
+  "Alles": {
+    "filter": ""
+  },
+  "Frühling": {
+    "filter": "Frühlings-Kiste ",
+    "priorityRange": { "start": "2025-03-01", "end": "2025-05-31" }
+  },
+  "Sommer": {
+    "filter": "Sommer-Kiste ",
+    "priorityRange": { "start": "20xx-06-01", "end": "20xx-08-31" },
+    "priority": 1
+  },
+  "Herbst": {
+    "filter": "Herbst-Kiste ",
+    "priorityRange": { "start": "2025-09-01", "end": "2025-11-15" }
+  },
+  "Winter": {
+    "filter": "Winter-Kiste ",
+    "priorityRange": { "start": "20xx-12-01", "end": "20xx-02-28" }
+  },
+  "Supreme-Kiste": {
+    "filter": "Supreme-Kiste"
+  },
+  "Epische Kiste": {
+    "filter": "Epische Kiste "
+  },
+  "Vote-Kiste": {
+    "filter": "Vote-Kiste"
+  },
+  "Ostern": {
+    "filter": "Oster-Event ",
+    "priorityRange": { "start": "2025-03-15", "end": "2025-04-15" },
+    "priority": 1
+  },
+  "Halloween": {
+    "filter": "Halloween-Event ",
+    "priorityRange": { "start": "2025-10-15", "end": "2025-11-05" },
+    "priority": 1
+  },
+  "Weihnachten": {
+    "filter": "Weihnachts-Event ",
+    "priorityRange": { "start": "2025-12-01", "end": "2025-12-31" },
+    "priority": 0
+  },
+  "AdminEvil": {
+    "filter": "AdminEvil-Item"
+  },
+  "Adventurer": {
+    "filter": "Adventurer-Items | ",
+    "priorityRange": { "start": "2025-06-01", "end": "2025-08-31" },
+    "priority": 4
+  },
+  "Angeln": {
+    "filter": "Angel-Event "
+  },
+  "Birth-Items": {
+    "filter": "BIRTH-Item ",
+    "priority": 1
+  },
+  "Bonze-Klingen": {
+    "filter": "Bonze-Klinge "
+  },
+  "Bug-Items": {
+    "filter": "Bug-Items | "
+  },
+  "CustomBlocks": {
+    "filter": "CustomBlocks"
+  },
+  "Events": {
+    "filter": "Event-Items | "
+  },
+  "Fragmente": {
+    "filter": "Fragmente | "
+  },
+  "GrieferPass": {
+    "filter": "GrieferPass | "
+  },
+  "Jubiläum": {
+    "filter": "GG-Jubiläum "
+  },
+  "Köpfe": {
+    "filter": "Köpfe | "
+  },
+  "LordVarus": {
+    "filter": "LordVarus-Item"
+  },
+  "Orb-System": {
+    "filter": "Orb-Items | "
+  },
+  "Partikel": {
+    "filter": "Partikel-Effekt | "
+  },
+  "Perks": {
+    "filter": "Perks | "
+  },
+  "Prefixe": {
+    "filter": "Prefixe | "
+  },
+  "Ränder": {
+    "filter": "Rand-Effekt | "
+  },
+  "Rechte": {
+    "filter": "Rechte | "
+  },
+  "Rypex": {
+    "filter": "Rypex-Item"
+  },
+  "Schriften": {
+    "filter": "Schriften | "
+  },
+  "Swap-Token": {
+    "filter": "Swap-Token "
+  },
+  "Talisman": {
+  "filter": "Talisman "
+  },
+  "Team-Items": {
+    "filter": "Team-Item "
+  },
+  "Zauberwald": {
+    "filter": "Zauberwald | "
+  },
+  "Zwieback": {
+    "filter": "Zwieback-Item"
+  }
+}

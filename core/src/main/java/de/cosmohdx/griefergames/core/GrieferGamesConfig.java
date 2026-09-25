@@ -6,6 +6,7 @@ import de.cosmohdx.griefergames.feature.automation.GrieferGamesAutomationsConfig
 import de.cosmohdx.griefergames.feature.booster.GrieferGamesBoosterToolsConfig;
 import de.cosmohdx.griefergames.feature.chat.GrieferGamesChatConfig;
 import de.cosmohdx.griefergames.feature.friends.GrieferGamesFriendsConfig;
+import de.cosmohdx.griefergames.feature.itemlist.ItemListActivity;
 import de.cosmohdx.griefergames.feature.nearby.NearbyPlayersConfig;
 import de.cosmohdx.griefergames.feature.remover.RemoverConfig;
 import de.cosmohdx.griefergames.feature.payment.GrieferGamesPaymentsConfig;
@@ -71,6 +72,20 @@ public class GrieferGamesConfig extends AddonConfig {
   @ButtonSetting
   public void openSupport() {
     OperatingSystem.getPlatform().openUrl("https://discord.gg/EtgdTX9dKa");
+  }
+
+  @SpriteSlot(x = 3, y = 1)
+  @MethodOrder(after = "openSupport")
+  @ButtonSetting
+  public void openItemList() {
+    ItemListActivity.open();
+  }
+
+  @SpriteSlot(x = 4, y = 1)
+  @MethodOrder(after = "openItemList")
+  @ButtonSetting
+  public void openWiki() {
+    OperatingSystem.getPlatform().openUrl("https://wiki.griefergames.net/");
   }
 
   @Override

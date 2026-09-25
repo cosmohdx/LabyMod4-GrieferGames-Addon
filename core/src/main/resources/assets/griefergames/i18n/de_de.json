@@ -5,6 +5,14 @@
       "enabled": {
         "name": "Addon aktiviert"
       },
+      "openItemList": {
+        "name": "Itemliste",
+        "text": "Öffnen"
+      },
+      "openWiki": {
+        "name": "Wiki",
+        "text": "Öffnen"
+      },
       "autoUpdate": {
         "name": "Automatisch aktualisieren"
       },
@@ -630,6 +638,17 @@
       "gg_nearby_players": {
         "name": "Spieler in der Nähe"
       }
+    },
+    "itemlist": {
+      "title": "GrieferGames Item-Liste",
+      "search": "Items suchen…",
+      "all": "Alles",
+      "loading": "Item-Liste wird geladen…",
+      "empty": "Keine passenden Items",
+      "count": "{count} Items",
+      "more": "Weitere Items laden",
+      "close": "Schließen",
+      "network": "{network} Netzwerk"
     },
     "region_type": {
       "citybuild": "Citybuild",
