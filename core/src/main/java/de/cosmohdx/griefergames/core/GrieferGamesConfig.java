@@ -9,7 +9,6 @@ import de.cosmohdx.griefergames.feature.friends.GrieferGamesFriendsConfig;
 import de.cosmohdx.griefergames.feature.itemlist.ItemListActivity;
 import de.cosmohdx.griefergames.feature.remover.RemoverConfig;
 import de.cosmohdx.griefergames.feature.payment.GrieferGamesPaymentsConfig;
-import net.labymod.api.Laby;
 import net.labymod.api.addon.AddonConfig;
 import net.labymod.api.client.gui.screen.widget.widgets.input.ButtonWidget.ButtonSetting;
 import net.labymod.api.client.gui.screen.widget.widgets.input.SwitchWidget.SwitchSetting;
@@ -31,14 +30,6 @@ public class GrieferGamesConfig extends AddonConfig {
   @SpriteSlot(x = 0, y = 0)
   @SwitchSetting
   private final ConfigProperty<Boolean> enabled = new ConfigProperty<>(true);
-
-  @MethodOrder(after = "enabled")
-  @ButtonSetting
-  public void openItemList() {
-    Laby.labyAPI().minecraft().executeNextTick(() ->
-        Laby.labyAPI().minecraft().minecraftWindow().displayScreen(new ItemListActivity())
-    );
-  }
 
   @SpriteSlot(x = 2, y = 0)
   private final GrieferGamesChatConfig chat = new GrieferGamesChatConfig();
@@ -73,6 +64,18 @@ public class GrieferGamesConfig extends AddonConfig {
   @ButtonSetting
   public void openSupport() {
     OperatingSystem.getPlatform().openUrl("https://discord.gg/EtgdTX9dKa");
+  }
+
+  @MethodOrder(after = "openSupport")
+  @ButtonSetting
+  public void openItemList() {
+    ItemListActivity.open();
+  }
+
+  @MethodOrder(after = "openItemList")
+  @ButtonSetting
+  public void openWiki() {
+    OperatingSystem.getPlatform().openUrl("https://wiki.griefergames.net/");
   }
 
   @Override

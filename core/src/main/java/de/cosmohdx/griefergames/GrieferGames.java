@@ -37,6 +37,7 @@ import de.cosmohdx.griefergames.feature.delay.WaitTime;
 import de.cosmohdx.griefergames.feature.fly.FlyHudWidget;
 import de.cosmohdx.griefergames.feature.friends.FriendsPresenceListener;
 import de.cosmohdx.griefergames.feature.itemlist.ItemListCommand;
+import de.cosmohdx.griefergames.feature.itemlist.ItemListMenuListener;
 import de.cosmohdx.griefergames.feature.remover.Remover;
 import de.cosmohdx.griefergames.feature.remover.RemoverHudWidget;
 import de.cosmohdx.griefergames.feature.nickname.Nickname;
@@ -162,6 +163,7 @@ public class GrieferGames extends LabyAddon<GrieferGamesConfig> {
     labyAPI().hudWidgetRegistry().register(new BlockOfTheDayHudWidget(this));
 
     registerCommand(new ItemListCommand());
+    registerListener(new ItemListMenuListener(this));
 
     if(labyAPI().labyModLoader().isAddonDevelopmentEnvironment()) {
       registerCommand(new GGMessageCommand(this));

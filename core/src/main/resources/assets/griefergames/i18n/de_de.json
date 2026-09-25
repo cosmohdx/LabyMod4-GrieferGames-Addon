@@ -9,6 +9,10 @@
         "name": "Itemliste",
         "text": "Öffnen"
       },
+      "openWiki": {
+        "name": "Wiki",
+        "text": "Öffnen"
+      },
       "autoUpdate": {
         "name": "Automatisch aktualisieren"
       },

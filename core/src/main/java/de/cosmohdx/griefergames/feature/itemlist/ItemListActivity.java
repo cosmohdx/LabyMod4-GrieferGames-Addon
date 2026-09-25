@@ -67,6 +67,12 @@ public class ItemListActivity extends SimpleActivity {
   private boolean initialized;
   private boolean active = true;
 
+  public static void open() {
+    Laby.labyAPI().minecraft().executeNextTick(() ->
+        Laby.labyAPI().minecraft().minecraftWindow().displayScreen(new ItemListActivity())
+    );
+  }
+
   @Override
   public void initialize(Parent parent) {
     super.initialize(parent);
