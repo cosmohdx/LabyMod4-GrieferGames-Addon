@@ -494,8 +494,8 @@
       "gg_booster": {
         "name": "Booster",
         "break": "Break",
-        "drop": "Drop",
-        "experience": "XP",
+        "drops": "Drops",
+        "experience": "Experience",
         "fly": "Fly",
         "mob": "Mob",
         "nameColor": {

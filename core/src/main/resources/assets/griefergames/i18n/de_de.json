@@ -489,10 +489,10 @@
       },
       "gg_booster": {
         "name": "Booster",
-        "break": "Break",
-        "drop": "Drop",
+        "break": "Abbau",
+        "drops": "Drops",
         "experience": "Erfahrung",
-        "fly": "Fliegen",
+        "fly": "Flug",
         "mob": "Mob",
         "nameColor": {
           "name": "Namen Farbe"

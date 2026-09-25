@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public abstract class Booster {
-	private String name;
+	private final String nameKey;
 	private String type;
 	private boolean highlightDuration = false;
 	private boolean stackable;
@@ -20,8 +20,8 @@ public abstract class Booster {
   private Icon icon;
   private boolean dummy;
 
-	Booster(String name, String type, int iconIndex, boolean stackable) {
-		this.name = name;
+	Booster(String nameKey, String type, int iconIndex, boolean stackable) {
+		this.nameKey = nameKey;
 		this.type = type;
 		this.count = 0;
 		this.stackable = stackable;
@@ -94,7 +94,7 @@ public abstract class Booster {
 	}
 
 	public String getName() {
-		return name;
+		return I18n.translate(GrieferGames.get().namespace() + ".hudWidget.gg_booster." + this.nameKey);
 	}
 
 	public int getCount() {
