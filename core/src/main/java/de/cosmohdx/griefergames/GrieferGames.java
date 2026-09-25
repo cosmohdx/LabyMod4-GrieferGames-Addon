@@ -36,6 +36,7 @@ import de.cosmohdx.griefergames.feature.delay.DelaySubServerListener;
 import de.cosmohdx.griefergames.feature.delay.WaitTime;
 import de.cosmohdx.griefergames.feature.fly.FlyHudWidget;
 import de.cosmohdx.griefergames.feature.friends.FriendsPresenceListener;
+import de.cosmohdx.griefergames.feature.itempreview.ItemPreviewListener;
 import de.cosmohdx.griefergames.feature.remover.Remover;
 import de.cosmohdx.griefergames.feature.remover.RemoverHudWidget;
 import de.cosmohdx.griefergames.feature.nickname.Nickname;
@@ -119,6 +120,7 @@ public class GrieferGames extends LabyAddon<GrieferGamesConfig> {
     registerListener(new GGScoreboardListener(this));
     registerListener(new BoosterListener(this));
     registerListener(new FriendsPresenceListener(this));
+    registerListener(new ItemPreviewListener(this));
     registerListener(new DelaySubServerListener(this));
     registerListener(new GGSubServerChangeListener(this));
     registerListener(new AutoPortalListener(this));

@@ -6,6 +6,7 @@ import de.cosmohdx.griefergames.feature.automation.GrieferGamesAutomationsConfig
 import de.cosmohdx.griefergames.feature.booster.GrieferGamesBoosterToolsConfig;
 import de.cosmohdx.griefergames.feature.chat.GrieferGamesChatConfig;
 import de.cosmohdx.griefergames.feature.friends.GrieferGamesFriendsConfig;
+import de.cosmohdx.griefergames.feature.itempreview.ItemPreviewConfig;
 import de.cosmohdx.griefergames.feature.remover.RemoverConfig;
 import de.cosmohdx.griefergames.feature.payment.GrieferGamesPaymentsConfig;
 import net.labymod.api.addon.AddonConfig;
@@ -50,6 +51,9 @@ public class GrieferGamesConfig extends AddonConfig {
 
   @SpriteSlot(x = 5, y = 0)
   private final GrieferGamesFriendsConfig friends = new GrieferGamesFriendsConfig();
+
+  @SpriteSlot(x = 1, y = 0)
+  private final ItemPreviewConfig itemPreview = new ItemPreviewConfig();
 
   @SpriteSlot(x = 7, y = 0)
   @MethodOrder(after = "friends")
@@ -101,5 +105,9 @@ public class GrieferGamesConfig extends AddonConfig {
 
   public GrieferGamesFriendsConfig friends() {
     return this.friends;
+  }
+
+  public ItemPreviewConfig itemPreview() {
+    return this.itemPreview;
   }
 }

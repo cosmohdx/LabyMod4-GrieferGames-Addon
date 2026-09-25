@@ -415,6 +415,33 @@
           "description": "Shows your friends on Discord which CityBuild you are on."
         }
       },
+      "itemPreview": {
+        "name": "Items",
+        "description": "Extra displays for maps, heads and enchanted special items.",
+        "enabled": {
+          "name": "Items"
+        },
+        "showMap": {
+          "name": "Show map in tooltip",
+          "description": "Shows the map from loaded map data while hovering. Without data the tooltip stays unchanged."
+        },
+        "mapSize": {
+          "name": "Map size",
+          "description": "Edge length of the map preview in pixels."
+        },
+        "showHead": {
+          "name": "Enlarge head in tooltip",
+          "description": "Shows an enlarged player head while hovering. Without a loaded skin the tooltip stays unchanged."
+        },
+        "headSize": {
+          "name": "Head size",
+          "description": "Edge length of the head preview in pixels."
+        },
+        "enchantmentGlint": {
+          "name": "Enchantment glint on heads, banners and chests",
+          "description": "Draws the enchantment glint on enchanted heads, banners and chests. On Minecraft 1.21.10 through 26.3 this setting has no effect."
+        }
+      },
       "openWebsite": {
         "name": "Website",
         "text": "Open"

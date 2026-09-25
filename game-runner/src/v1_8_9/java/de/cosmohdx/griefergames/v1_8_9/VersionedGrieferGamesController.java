@@ -40,4 +40,29 @@ public class VersionedGrieferGamesController extends GrieferGamesController {
     }
     return false;
   }
+
+
+  @Override
+  public int[] filledMapPixels(int mapId) {
+    if (Minecraft.getMinecraft().theWorld == null) {
+      return null;
+    }
+    net.minecraft.world.storage.MapData data = net.minecraft.item.ItemMap.loadMapData(mapId, Minecraft.getMinecraft().theWorld);
+    if (data == null) {
+      return null;
+    }
+    return de.cosmohdx.griefergames.feature.itempreview.MapPixels.toArgb(data.colors, packed -> {
+      net.minecraft.block.material.MapColor[] palette = net.minecraft.block.material.MapColor.mapColorArray;
+      int index = packed >> 2;
+      if (index < 0 || index >= palette.length || palette[index] == null) {
+        return 0;
+      }
+      return palette[index].getMapColor(packed & 3);
+    });
+  }
+
+  @Override
+  public boolean patchSpecialItemEnchantmentGlint() {
+    return true;
+  }
 }

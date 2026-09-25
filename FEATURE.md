@@ -47,6 +47,11 @@
 | Fly-HUD | ✓ | ✓ |
 | Delay-HUD | ✓ | ✓ |
 | Subserver-HUD | ✓ | ✓ |
+| Karte im Tooltip anzeigen | ✓ | ✓ |
+| Kopf im Tooltip vergrößern | ✓ | ✓ |
+| Verzauberungsglanz auf Köpfen, Bannern und Kisten | ✓ | ✓ |
+
+Der Verzauberungsglanz hängt nicht vom Server ab. Auf 1.8.9 bis 1.21.8 zeichnet das Spiel den Glanz für Köpfe, Banner und Kisten von sich aus nicht, die Einstellung ergänzt ihn. Auf Minecraft 1.21.10 bis 26.3 hat die Einstellung keinen Effekt.
 
 ## Nicht in diesem Branch
 

@@ -29,6 +29,14 @@ Das Menü lässt sich wie bisher ausblenden.
 
 Im HUD-Editor unter GrieferGames gibt es die Anzeige Block des Tages. Sie zeigt den heutigen Block und daneben, wie oft du ihn in dieser Sitzung gesammelt hast, zum Beispiel `Diamond Ore (3)`. Wechselt der Block, beginnt der Zähler bei null.
 
+### Gegenstände
+
+Gefüllte Karten zeigen im Tooltip eine Vorschau, sobald die Kartendaten geladen sind. Die Größe lässt sich einstellen.
+
+Spielerköpfe zeigen im Tooltip eine vergrößerte Ansicht, sobald die Skin geladen ist. Köpfe mit eigener Textur nutzen diese Textur.
+
+Verzauberte Köpfe, Banner und Kisten haben einen Verzauberungsglanz im Inventar und in der Hand. Auf Minecraft 1.21.10 bis 26.3 hat diese Einstellung keinen Effekt.
+
 ### Sonstiges
 
 - Die Redstone-Anzeige im HUD funktioniert wieder.

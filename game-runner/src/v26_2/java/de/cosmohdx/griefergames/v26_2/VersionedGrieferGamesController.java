@@ -39,4 +39,17 @@ public class VersionedGrieferGamesController extends GrieferGamesController {
     }
     return false;
   }
+
+
+  @Override
+  public int[] filledMapPixels(int mapId) {
+    if (Minecraft.getInstance().level == null) {
+      return null;
+    }
+    net.minecraft.world.level.saveddata.maps.MapItemSavedData data = net.minecraft.world.item.MapItem.getSavedData(new net.minecraft.world.level.saveddata.maps.MapId(mapId), Minecraft.getInstance().level);
+    if (data == null) {
+      return null;
+    }
+    return de.cosmohdx.griefergames.feature.itempreview.MapPixels.toArgb(data.colors, packed -> net.minecraft.world.level.material.MapColor.getColorFromPackedId(packed));
+  }
 }

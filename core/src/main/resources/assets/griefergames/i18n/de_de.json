@@ -414,6 +414,33 @@
           "description": "Zeigt deinen Freunden auf Discord, auf welchem CityBuild du gerade bist."
         }
       },
+      "itemPreview": {
+        "name": "Gegenstände",
+        "description": "Zusätzliche Anzeigen für Karten, Köpfe und verzauberte Spezialgegenstände.",
+        "enabled": {
+          "name": "Gegenstände"
+        },
+        "showMap": {
+          "name": "Karte im Tooltip anzeigen",
+          "description": "Zeigt beim Darüberfahren die Karte aus den geladenen Kartendaten. Ohne Daten bleibt der Tooltip unverändert."
+        },
+        "mapSize": {
+          "name": "Kartengröße",
+          "description": "Kantenlänge der Kartenvorschau in Pixeln."
+        },
+        "showHead": {
+          "name": "Kopf im Tooltip vergrößern",
+          "description": "Zeigt beim Darüberfahren einen vergrößerten Spielerkopf. Ohne geladene Skin bleibt der Tooltip unverändert."
+        },
+        "headSize": {
+          "name": "Kopfgröße",
+          "description": "Kantenlänge der Kopfvorschau in Pixeln."
+        },
+        "enchantmentGlint": {
+          "name": "Verzauberungsglanz auf Köpfen, Bannern und Kisten",
+          "description": "Zeichnet den Verzauberungsglanz auf verzauberten Köpfen, Bannern und Kisten. Auf Minecraft 1.21.10 bis 26.3 hat die Einstellung keinen Effekt."
+        }
+      },
       "openWebsite": {
         "name": "Website",
         "text": "Öffnen"
