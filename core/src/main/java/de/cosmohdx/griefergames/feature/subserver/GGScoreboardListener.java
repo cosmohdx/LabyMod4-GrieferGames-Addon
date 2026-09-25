@@ -3,6 +3,7 @@ package de.cosmohdx.griefergames.feature.subserver;
 import de.cosmohdx.griefergames.GrieferGames;
 import de.cosmohdx.griefergames.core.CloudRegionType;
 import de.cosmohdx.griefergames.core.SubServerType;
+import java.util.Optional;
 import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.TextComponent;
@@ -30,10 +31,14 @@ public class GGScoreboardListener {
 
     if(event.team().getTeamName().equals("server_value")) {
       // Handle 1.8 Servers
-      String subServerName = griefergames.helper().componentToPlainText(event.team().getPrefix()).toLowerCase();
-      if(subServerName.isBlank() || subServerName.contains("lade")) return;
+      String prefix = event.team().getPrefix() == null
+          ? null
+          : griefergames.helper().componentToPlainText(event.team().getPrefix());
+      Optional<String> legacySubServer = NetworkDetector.legacySubServer(event.team().getTeamName(), prefix);
+      if(legacySubServer.isEmpty()) return;
 
-      griefergames.state().setSubServerType(SubServerType.REGULAR);
+      NetworkTypeUpdater.apply(griefergames, SubServerType.REGULAR);
+      String subServerName = legacySubServer.get();
       if(!griefergames.state().getSubServer().equals(subServerName)) {
         griefergames.state().setSubServer(subServerName);
         GGSubServerChangeEvent changeEvent = new GGSubServerChangeEvent(subServerName);
@@ -63,26 +68,28 @@ public class GGScoreboardListener {
 
   @Subscribe
   public void onTablistUpdate(PlayerListUpdateEvent event) {
+    if(!griefergames.state().isOnGrieferGames()) return;
     TabList tablist = Laby.labyAPI().minecraft().getTabList();
     if(tablist == null) return;
     Component header = tablist.header();
     if(header == null) return;
-    String serverName = CloudRegionType.extractServerNameFromComponent(header);
-    if(serverName == null) return;
-    CloudRegionType regionType = CloudRegionType.getRegionType(serverName);
-    if(regionType != null) {
-      griefergames.state().setSubServerType(SubServerType.CLOUD);
-      boolean skipUpdate = (currentRegionType == CloudRegionType.MINIGAME || regionType == CloudRegionType.EVENT) && regionType == currentRegionType;
-      currentRegion = serverName;
-      currentRegionType = regionType;
-      String subServerName = I18n.translate("griefergames.region_type.with_name." + regionType.name().toLowerCase(),
-          regionType.onlyName(serverName)
-      );
-      if(!skipUpdate && !griefergames.state().getSubServer().equals(subServerName)) {
-        griefergames.state().setSubServer(subServerName);
-          GGSubServerChangeEvent changeEvent = new GGSubServerChangeEvent(subServerName);
-          Laby.labyAPI().eventBus().fire(changeEvent);
-      }
+    String headerText = griefergames.helper().componentToPlainText(header);
+    Optional<NetworkDetector.CloudServer> cloudServer = NetworkDetector.cloudServer(headerText);
+    if(cloudServer.isEmpty()) return;
+    CloudRegionType regionType = cloudServer.get().regionType();
+    String serverName = cloudServer.get().serverName();
+    NetworkTypeUpdater.apply(griefergames, SubServerType.CLOUD);
+    boolean skipUpdate = (currentRegionType == CloudRegionType.MINIGAME || regionType == CloudRegionType.EVENT)
+        && regionType == currentRegionType;
+    currentRegion = serverName;
+    currentRegionType = regionType;
+    String subServerName = I18n.translate("griefergames.region_type.with_name." + regionType.name().toLowerCase(),
+        regionType.onlyName(serverName)
+    );
+    if(!skipUpdate && !griefergames.state().getSubServer().equals(subServerName)) {
+      griefergames.state().setSubServer(subServerName);
+      GGSubServerChangeEvent changeEvent = new GGSubServerChangeEvent(subServerName);
+      Laby.labyAPI().eventBus().fire(changeEvent);
     }
   }
 

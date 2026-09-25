@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+### Netzwerk
+
+Direkt nach dem Beitreten ist noch nicht klar, ob du auf einem Citybuild (1.8) oder auf der Cloud spielst. Funktionen, die nur auf einem der beiden Netze laufen, warten deshalb kurz. Dazu gehören zum Beispiel Zahlungen, die Bank, Booster, der Nickname und die automatische Chatfarbe. Sobald das Netz erkannt ist, verhalten sie sich wie bisher. Beim Verlassen des Servers setzt das Addon die Erkennung zurück.
+
 ## 1.2.0
 
 Das Addon läuft mit dem aktuellen LabyMod auf Minecraft 1.8.9 bis 26.3. Deine bisherigen Einstellungen bleiben erhalten und werden beim ersten Start in die neue Übersicht übernommen.

@@ -36,7 +36,28 @@ public enum CloudRegionType {
   }
 
   /**
-   * Extracts the server name from a component
+   * Region token inside plain header text, for example {@code cb1-1} in a longer line.
+   *
+   * @param text plain header text
+   * @return server name or null
+   */
+  public static String extractServerName(String text) {
+    if (text == null || !containsServerName(text)) {
+      return null;
+    }
+    if (text.contains(" ")) {
+      for (String part : text.split(" ")) {
+        if (containsServerName(part)) {
+          return part;
+        }
+      }
+    }
+    return text;
+  }
+
+  /**
+   * Extracts the server name from a component.
+   *
    * @param component component
    * @return server name or null
    */
@@ -49,17 +70,7 @@ public enum CloudRegionType {
         }
       }
     } else if (component instanceof TextComponent) {
-      String text = ((TextComponent) component).getText();
-      if (containsServerName(text)) {
-        if(text.contains(" ")) {
-          for(String part : text.split(" ")) {
-            if(containsServerName(part)) {
-              return part;
-            }
-          }
-        }
-        return text;
-      }
+      return extractServerName(((TextComponent) component).getText());
     }
     return null;
   }

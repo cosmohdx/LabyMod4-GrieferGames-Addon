@@ -5,6 +5,8 @@
 **1.8** = Citybuild / `SubServerType.REGULAR`  
 **Cloud** = Cloud-Netz / `SubServerType.CLOUD`
 
+Solange das Netz noch nicht erkannt ist (`SubServerType.UNKNOWN`), bleiben Funktionen aus, die ein bestimmtes Netz voraussetzen. Nach dem Verlassen des Servers gilt das Netz wieder als unbekannt.
+
 | Feature | 1.8 | Cloud |
 |---|---|---|
 | Addon-Master-Switch | ✓ | ✓ |
