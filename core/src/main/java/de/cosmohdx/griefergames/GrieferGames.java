@@ -38,6 +38,9 @@ import de.cosmohdx.griefergames.feature.fly.FlyHudWidget;
 import de.cosmohdx.griefergames.feature.friends.FriendsPresenceListener;
 import de.cosmohdx.griefergames.feature.remover.Remover;
 import de.cosmohdx.griefergames.feature.remover.RemoverHudWidget;
+import de.cosmohdx.griefergames.feature.nearby.NearbyPlayersHudWidget;
+import de.cosmohdx.griefergames.feature.nearby.NearbyPlayersListener;
+import de.cosmohdx.griefergames.feature.nearby.NearbyPlayersService;
 import de.cosmohdx.griefergames.feature.nickname.Nickname;
 import de.cosmohdx.griefergames.feature.nickname.NicknameHudWidget;
 import de.cosmohdx.griefergames.feature.payment.Bank;
@@ -123,6 +126,8 @@ public class GrieferGames extends LabyAddon<GrieferGamesConfig> {
     registerListener(new GGSubServerChangeListener(this));
     registerListener(new AutoPortalListener(this));
     registerListener(new AfkListener(this));
+    NearbyPlayersService nearbyPlayers = new NearbyPlayersService();
+    registerListener(new NearbyPlayersListener(this, nearbyPlayers));
 
     // Chat modules
     registerListener(new SecondChatRouterListener(this));
@@ -160,6 +165,7 @@ public class GrieferGames extends LabyAddon<GrieferGamesConfig> {
     labyAPI().hudWidgetRegistry().register(RemoverHudWidget.items(this));
     labyAPI().hudWidgetRegistry().register(RemoverHudWidget.entities(this));
     labyAPI().hudWidgetRegistry().register(new BlockOfTheDayHudWidget(this));
+    labyAPI().hudWidgetRegistry().register(new NearbyPlayersHudWidget(this, nearbyPlayers));
 
     if(labyAPI().labyModLoader().isAddonDevelopmentEnvironment()) {
       registerCommand(new GGMessageCommand(this));

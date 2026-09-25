@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+### Spieler in der Nähe
+
+Im HUD-Editor unter GrieferGames gibt es die Anzeige „Spieler in der Nähe“. Sie ist standardmäßig aus.
+
+Ist sie an, stehen nahe Spieler mit Kopf und grober Distanz in der Liste, zum Beispiel `<10 m`. Keine Richtung und keine Koordinaten. Nur Spieler, die du direkt sehen kannst, und nur auf Citybuilds. Unsichtbare Spieler, Zuschauer und NPCs fehlen. Hinter einer Wand erscheint niemand, solange „Nur Spieler in direkter Sichtlinie“ an ist. Die Anzeige wartet, bis klar ist, ob du auf einem Citybuild oder auf der Cloud spielst.
+
+Die Funktion darf erst genutzt werden, wenn der GrieferGames-Support sie freigegeben hat. Spieler hinter Wänden zu zeigen kann gegen §2 Abs. 5 und 8 verstoßen.
+
 ### Netzwerk
 
 Direkt nach dem Beitreten ist noch nicht klar, ob du auf einem Citybuild (1.8) oder auf der Cloud spielst. Funktionen, die nur auf einem der beiden Netze laufen, warten deshalb kurz. Dazu gehören zum Beispiel Zahlungen, die Bank, Booster, der Nickname und die automatische Chatfarbe. Sobald das Netz erkannt ist, verhalten sie sich wie bisher. Beim Verlassen des Servers setzt das Addon die Erkennung zurück.
