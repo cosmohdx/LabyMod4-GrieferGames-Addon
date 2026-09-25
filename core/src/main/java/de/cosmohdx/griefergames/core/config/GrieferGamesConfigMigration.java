@@ -8,11 +8,12 @@ import java.util.Map;
  * Rewrites saved addon settings into the current tree.
  *
  * <p>Version 2 groups each feature into its own sub-config and moves second-chat routing
- * into per-category entries. Values are copied; only the path changes.
+ * into per-category entries. Version 3 folds the item and mob removers into one feature
+ * and one second-chat category. Values are copied; only the path changes.
  */
 public final class GrieferGamesConfigMigration {
 
-  public static final int CURRENT_VERSION = 2;
+  public static final int CURRENT_VERSION = 3;
 
   private GrieferGamesConfigMigration() {
   }
@@ -23,6 +24,9 @@ public final class GrieferGamesConfigMigration {
     }
     if (usedVersion < 2) {
       migrateToVersion2(root);
+    }
+    if (usedVersion < 3) {
+      migrateToVersion3(root);
     }
   }
 
@@ -166,6 +170,75 @@ public final class GrieferGamesConfigMigration {
     }
     move(friends, friends, "labyChatShowSubServerEnabled", "showSubServerInLabyChat");
     move(friends, friends, "discordShowSubServerEnabled", "showSubServerInDiscord");
+  }
+
+  private static void migrateToVersion3(JsonObject root) {
+    JsonObject item = object(root, "itemRemover");
+    JsonObject mob = object(root, "mobRemover");
+    if (item != null || mob != null) {
+      JsonObject remover = object(root, "remover");
+      if (remover == null) {
+        remover = new JsonObject();
+        root.add("remover", remover);
+      }
+      absorbRemover(remover, item);
+      absorbRemover(remover, mob);
+      root.remove("itemRemover");
+      root.remove("mobRemover");
+    }
+    mergeRemoverCategory(root);
+  }
+
+  private static void absorbRemover(JsonObject into, JsonObject from) {
+    if (from == null) {
+      return;
+    }
+    copyMissing(from, into);
+    orBoolean(into, from, "enabled");
+    orBoolean(into, from, "lastTimeHover");
+    orBoolean(into, from, "notification");
+  }
+
+  private static void mergeRemoverCategory(JsonObject root) {
+    JsonObject chat = object(root, "chat");
+    JsonObject secondChat = chat == null ? null : object(chat, "secondChat");
+    JsonObject categories = secondChat == null ? null : object(secondChat, "categories");
+    if (categories == null) {
+      return;
+    }
+    JsonObject item = object(categories, "itemRemover");
+    JsonObject mob = object(categories, "mobRemover");
+    if (item == null && mob == null) {
+      return;
+    }
+    JsonObject remover = object(categories, "remover");
+    if (remover == null) {
+      remover = new JsonObject();
+      categories.add("remover", remover);
+    }
+    absorbCategory(remover, item);
+    absorbCategory(remover, mob);
+    categories.remove("itemRemover");
+    categories.remove("mobRemover");
+  }
+
+  private static void absorbCategory(JsonObject into, JsonObject from) {
+    if (from == null) {
+      return;
+    }
+    copyMissing(from, into);
+    orBoolean(into, from, "showInSecondChat");
+  }
+
+  private static void orBoolean(JsonObject into, JsonObject from, String key) {
+    if (!from.has(key)) {
+      return;
+    }
+    if (!into.has(key)) {
+      into.add(key, from.get(key));
+    } else if (asBoolean(from.get(key), false)) {
+      into.addProperty(key, true);
+    }
   }
 
   private static void extractRemover(JsonObject root, JsonObject chat, String featureKey, String hoverKey,

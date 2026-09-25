@@ -111,26 +111,15 @@
                 "description": "Reguläre Ausdrücke für weitere Plot-Nachrichten. Sie werden gespeichert, aber noch nicht ausgewertet."
               }
             },
-            "itemRemover": {
-              "name": "ItemRemover",
-              "description": "ItemRemover-Nachrichten im zweiten Chat anzeigen.",
+            "remover": {
+              "name": "Remover",
+              "description": "Item- und MobRemover-Nachrichten im zweiten Chat anzeigen.",
               "showInSecondChat": {
-                "name": "ItemRemover anzeigen"
+                "name": "Remover anzeigen"
               },
               "patterns": {
                 "name": "Eigene Muster",
-                "description": "Reguläre Ausdrücke für weitere ItemRemover-Nachrichten. Sie werden gespeichert, aber noch nicht ausgewertet."
-              }
-            },
-            "mobRemover": {
-              "name": "MobRemover",
-              "description": "MobRemover-Nachrichten im zweiten Chat anzeigen.",
-              "showInSecondChat": {
-                "name": "MobRemover anzeigen"
-              },
-              "patterns": {
-                "name": "Eigene Muster",
-                "description": "Reguläre Ausdrücke für weitere MobRemover-Nachrichten. Sie werden gespeichert, aber noch nicht ausgewertet."
+                "description": "Reguläre Ausdrücke für weitere Remover-Nachrichten. Sie werden gespeichert, aber noch nicht ausgewertet."
               }
             },
             "payments": {
@@ -299,34 +288,19 @@
           "description": "Benachrichtigung für Bank-Transaktionen anzeigen."
         }
       },
-      "itemRemover": {
-        "name": "ItemRemover",
-        "description": "Zeitstempel und Benachrichtigung für den ItemRemover (1.8).",
+      "remover": {
+        "name": "Remover",
+        "description": "Zeitstempel und Benachrichtigung für Item- und MobRemover.",
         "enabled": {
-          "name": "ItemRemover"
+          "name": "Remover"
         },
         "lastTimeHover": {
-          "name": "Zeitstempel (1.8)",
-          "description": "Zeitstempel anzeigen, wenn du über eine ItemRemover-Nachricht fährst."
+          "name": "Zeitstempel",
+          "description": "Zeitstempel anzeigen, wenn du über eine Remover-Nachricht fährst."
         },
         "notification": {
-          "name": "Benachrichtigung (1.8)",
-          "description": "ItemRemover oben rechts auf dem Bildschirm anzeigen."
-        }
-      },
-      "mobRemover": {
-        "name": "MobRemover",
-        "description": "Zeitstempel und Benachrichtigung für den MobRemover (1.8).",
-        "enabled": {
-          "name": "MobRemover"
-        },
-        "lastTimeHover": {
-          "name": "Zeitstempel (1.8)",
-          "description": "Zeitstempel anzeigen, wenn du über eine MobRemover-Nachricht fährst."
-        },
-        "notification": {
-          "name": "Benachrichtigung (1.8)",
-          "description": "MobRemover oben rechts auf dem Bildschirm anzeigen."
+          "name": "Benachrichtigung",
+          "description": "Remover oben rechts auf dem Bildschirm anzeigen."
         }
       },
       "automations": {
@@ -485,8 +459,10 @@
         "pay": "Du hast {amount} an {player} bezahlt.",
         "moneydrop": "Du hast einen MoneyDrop von {amount} erhalten"
       },
-      "itemRemover": "in {time} Sekunden",
-      "mobRemover": "in {time} Minuten"
+      "remover": {
+        "items": "in {time} Sekunden",
+        "mobs": "in {time} Minuten"
+      }
     },
     "hudWidgetCategory": {
       "griefergames": {

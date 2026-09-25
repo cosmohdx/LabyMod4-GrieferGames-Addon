@@ -6,8 +6,7 @@ import de.cosmohdx.griefergames.feature.automation.GrieferGamesAutomationsConfig
 import de.cosmohdx.griefergames.feature.booster.GrieferGamesBoosterToolsConfig;
 import de.cosmohdx.griefergames.feature.chat.GrieferGamesChatConfig;
 import de.cosmohdx.griefergames.feature.friends.GrieferGamesFriendsConfig;
-import de.cosmohdx.griefergames.feature.itemremover.ItemRemoverConfig;
-import de.cosmohdx.griefergames.feature.mobremover.MobRemoverConfig;
+import de.cosmohdx.griefergames.feature.remover.RemoverConfig;
 import de.cosmohdx.griefergames.feature.payment.GrieferGamesPaymentsConfig;
 import net.labymod.api.addon.AddonConfig;
 import net.labymod.api.client.gui.screen.widget.widgets.input.ButtonWidget.ButtonSetting;
@@ -38,10 +37,7 @@ public class GrieferGamesConfig extends AddonConfig {
   private final GrieferGamesPaymentsConfig payment = new GrieferGamesPaymentsConfig();
 
   @SpriteSlot(x = 2, y = 1)
-  private final ItemRemoverConfig itemRemover = new ItemRemoverConfig();
-
-  @SpriteSlot(x = 3, y = 1)
-  private final MobRemoverConfig mobRemover = new MobRemoverConfig();
+  private final RemoverConfig remover = new RemoverConfig();
 
   @SpriteSlot(x = 4, y = 0)
   private final GrieferGamesAutomationsConfig automations = new GrieferGamesAutomationsConfig();
@@ -87,12 +83,8 @@ public class GrieferGamesConfig extends AddonConfig {
     return this.payment;
   }
 
-  public ItemRemoverConfig itemRemover() {
-    return this.itemRemover;
-  }
-
-  public MobRemoverConfig mobRemover() {
-    return this.mobRemover;
+  public RemoverConfig remover() {
+    return this.remover;
   }
 
   public GrieferGamesAutomationsConfig automations() {

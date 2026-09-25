@@ -103,8 +103,9 @@ class GrieferGamesConfigMigrationTest {
     assertFalse(categories.getAsJsonObject("privateMessages").get("showInSecondChat").getAsBoolean());
     assertEquals("PLING", categories.getAsJsonObject("privateMessages").get("sound").getAsString());
     assertTrue(categories.getAsJsonObject("plotChat").get("showInSecondChat").getAsBoolean());
-    assertTrue(categories.getAsJsonObject("itemRemover").get("showInSecondChat").getAsBoolean());
-    assertFalse(categories.getAsJsonObject("mobRemover").get("showInSecondChat").getAsBoolean());
+    assertTrue(categories.getAsJsonObject("remover").get("showInSecondChat").getAsBoolean());
+    assertFalse(categories.has("itemRemover"));
+    assertFalse(categories.has("mobRemover"));
     assertFalse(categories.getAsJsonObject("payments").get("showInSecondChat").getAsBoolean());
     assertTrue(categories.getAsJsonObject("bank").get("showInSecondChat").getAsBoolean());
     assertEquals("BOTH", secondChat.getAsJsonObject("realname").get("position").getAsString());
@@ -119,11 +120,11 @@ class GrieferGamesConfigMigrationTest {
     assertTrue(chat.getAsJsonObject("chatTime").get("chatTimeAfterMessage").getAsBoolean());
     assertEquals("{h}", chat.getAsJsonObject("chatTime").get("chatTimeFormat").getAsString());
 
-    assertFalse(root.getAsJsonObject("itemRemover").get("lastTimeHover").getAsBoolean());
-    assertFalse(root.getAsJsonObject("itemRemover").get("notification").getAsBoolean());
-    assertFalse(root.getAsJsonObject("itemRemover").has("enabled"));
-    assertFalse(root.getAsJsonObject("mobRemover").get("lastTimeHover").getAsBoolean());
-    assertTrue(root.getAsJsonObject("mobRemover").get("notification").getAsBoolean());
+    assertFalse(root.getAsJsonObject("remover").get("lastTimeHover").getAsBoolean());
+    assertTrue(root.getAsJsonObject("remover").get("notification").getAsBoolean());
+    assertFalse(root.getAsJsonObject("remover").has("enabled"));
+    assertFalse(root.has("itemRemover"));
+    assertFalse(root.has("mobRemover"));
 
     assertFalse(root.getAsJsonObject("payment").has("payChatRight"));
     assertFalse(root.getAsJsonObject("payment").has("bankChatRight"));
@@ -160,9 +161,10 @@ class GrieferGamesConfigMigrationTest {
     GrieferGamesConfigMigration.migrate(root, -1);
 
     assertFalse(root.getAsJsonObject("chat").get("enabled").getAsBoolean());
-    assertFalse(root.getAsJsonObject("itemRemover").get("enabled").getAsBoolean());
-    assertTrue(root.getAsJsonObject("itemRemover").get("lastTimeHover").getAsBoolean());
-    assertFalse(root.getAsJsonObject("mobRemover").get("enabled").getAsBoolean());
+    assertFalse(root.getAsJsonObject("remover").get("enabled").getAsBoolean());
+    assertTrue(root.getAsJsonObject("remover").get("lastTimeHover").getAsBoolean());
+    assertFalse(root.has("itemRemover"));
+    assertFalse(root.has("mobRemover"));
   }
 
   @Test
@@ -176,7 +178,8 @@ class GrieferGamesConfigMigrationTest {
 
     GrieferGamesConfigMigration.migrate(root, 1);
 
-    assertTrue(root.getAsJsonObject("itemRemover").get("enabled").getAsBoolean());
+    assertTrue(root.getAsJsonObject("remover").get("enabled").getAsBoolean());
+    assertFalse(root.has("itemRemover"));
   }
 
   @Test
@@ -238,13 +241,13 @@ class GrieferGamesConfigMigrationTest {
     assertTrue(categories.privateMessages().showInSecondChat());
     assertEquals("plotChat", categories.plotChat().id());
     assertTrue(categories.plotChat().showInSecondChat());
-    assertEquals("itemRemover", categories.itemRemover().id());
-    assertFalse(categories.itemRemover().showInSecondChat());
-    assertEquals("bank", categories.entries().get(5).id());
+    assertEquals("remover", categories.remover().id());
+    assertFalse(categories.remover().showInSecondChat());
+    assertEquals("bank", categories.entries().get(4).id());
 
     SecondChatCategoryConfig reloaded = new SecondChatCategoryConfig();
-    reloaded.bindId("mobRemover");
-    assertEquals("mobRemover", reloaded.id());
+    reloaded.bindId("remover");
+    assertEquals("remover", reloaded.id());
     assertFalse(reloaded.showInSecondChat());
   }
 

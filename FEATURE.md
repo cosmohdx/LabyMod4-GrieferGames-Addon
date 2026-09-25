@@ -20,8 +20,7 @@
 | Mentions highlighten | ✓ | ✓ |
 | TPA/TPAHERE highlighten | ✓ | |
 | Realname-Anzeige | ✓ | ✓ |
-| ItemRemover (Chat / Hover / Notify) | ✓ | |
-| MobRemover (Chat / Hover / Notify) | ✓ | |
+| Remover (Chat / Hover / Notify) | ✓ | ✓ |
 | Vote-Nachrichten verstecken | ✓ | |
 | News verstecken | ✓ | ✓ |
 | Leere Zeilen entfernen | ✓ | ✓ |

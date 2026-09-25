@@ -1,10 +1,10 @@
-package de.cosmohdx.griefergames.feature.mobremover;
+package de.cosmohdx.griefergames.feature.remover;
 
 import de.cosmohdx.griefergames.core.config.FeatureConfig;
 import net.labymod.api.client.gui.screen.widget.widgets.input.SwitchWidget.SwitchSetting;
 import net.labymod.api.configuration.loader.property.ConfigProperty;
 
-public class MobRemoverConfig extends FeatureConfig {
+public class RemoverConfig extends FeatureConfig {
 
   @SwitchSetting
   private final ConfigProperty<Boolean> lastTimeHover = new ConfigProperty<>(true);

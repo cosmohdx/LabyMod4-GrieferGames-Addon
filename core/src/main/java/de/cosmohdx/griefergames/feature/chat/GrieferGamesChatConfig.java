@@ -96,12 +96,8 @@ public class GrieferGamesChatConfig extends FeatureConfig {
     return this.route(this.secondChat.categories().plotChat());
   }
 
-  public boolean routeItemRemover() {
-    return this.route(this.secondChat.categories().itemRemover());
-  }
-
-  public boolean routeMobRemover() {
-    return this.route(this.secondChat.categories().mobRemover());
+  public boolean routeRemover() {
+    return this.route(this.secondChat.categories().remover());
   }
 
   public boolean routePayments() {

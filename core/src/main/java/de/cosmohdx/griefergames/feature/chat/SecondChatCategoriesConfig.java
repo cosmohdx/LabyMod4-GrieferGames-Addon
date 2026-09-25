@@ -13,8 +13,7 @@ public class SecondChatCategoriesConfig extends Config {
 
   private final PrivateMessageCategoryConfig privateMessages = new PrivateMessageCategoryConfig();
   private final SecondChatCategoryConfig plotChat = new SecondChatCategoryConfig("plotChat", true);
-  private final SecondChatCategoryConfig itemRemover = new SecondChatCategoryConfig("itemRemover", false);
-  private final SecondChatCategoryConfig mobRemover = new SecondChatCategoryConfig("mobRemover", false);
+  private final SecondChatCategoryConfig remover = new SecondChatCategoryConfig("remover", false);
   private final SecondChatCategoryConfig payments = new SecondChatCategoryConfig("payments", true);
   private final SecondChatCategoryConfig bank = new SecondChatCategoryConfig("bank", true);
 
@@ -26,12 +25,8 @@ public class SecondChatCategoriesConfig extends Config {
     return bind(this.plotChat, "plotChat");
   }
 
-  public SecondChatCategoryConfig itemRemover() {
-    return bind(this.itemRemover, "itemRemover");
-  }
-
-  public SecondChatCategoryConfig mobRemover() {
-    return bind(this.mobRemover, "mobRemover");
+  public SecondChatCategoryConfig remover() {
+    return bind(this.remover, "remover");
   }
 
   public SecondChatCategoryConfig payments() {
@@ -43,7 +38,7 @@ public class SecondChatCategoriesConfig extends Config {
   }
 
   public List<SecondChatCategoryConfig> entries() {
-    return List.of(privateMessages(), plotChat(), itemRemover(), mobRemover(), payments(), bank());
+    return List.of(privateMessages(), plotChat(), remover(), payments(), bank());
   }
 
   private static <T extends SecondChatCategoryConfig> T bind(T category, String id) {

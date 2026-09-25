@@ -112,26 +112,15 @@
                 "description": "Regular expressions for more plot messages. They are saved, but not applied yet."
               }
             },
-            "itemRemover": {
-              "name": "ItemRemover",
-              "description": "Show ItemRemover messages in the second chat.",
+            "remover": {
+              "name": "Remover",
+              "description": "Show item and mob remover messages in the second chat.",
               "showInSecondChat": {
-                "name": "Show ItemRemover"
+                "name": "Show remover"
               },
               "patterns": {
                 "name": "Custom patterns",
-                "description": "Regular expressions for more ItemRemover messages. They are saved, but not applied yet."
-              }
-            },
-            "mobRemover": {
-              "name": "MobRemover",
-              "description": "Show MobRemover messages in the second chat.",
-              "showInSecondChat": {
-                "name": "Show MobRemover"
-              },
-              "patterns": {
-                "name": "Custom patterns",
-                "description": "Regular expressions for more MobRemover messages. They are saved, but not applied yet."
+                "description": "Regular expressions for more remover messages. They are saved, but not applied yet."
               }
             },
             "payments": {
@@ -300,34 +289,19 @@
           "description": "Show a notification for bank transactions."
         }
       },
-      "itemRemover": {
-        "name": "ItemRemover",
-        "description": "Timestamp and notification for the ItemRemover (1.8).",
+      "remover": {
+        "name": "Remover",
+        "description": "Timestamp and notification for the item and mob remover.",
         "enabled": {
-          "name": "ItemRemover"
+          "name": "Remover"
         },
         "lastTimeHover": {
-          "name": "Timestamp (1.8)",
-          "description": "Show the timestamp when you hover an ItemRemover message."
+          "name": "Timestamp",
+          "description": "Show the timestamp when you hover a remover message."
         },
         "notification": {
-          "name": "Notification (1.8)",
-          "description": "Show the ItemRemover at the top right of the screen."
-        }
-      },
-      "mobRemover": {
-        "name": "MobRemover",
-        "description": "Timestamp and notification for the MobRemover (1.8).",
-        "enabled": {
-          "name": "MobRemover"
-        },
-        "lastTimeHover": {
-          "name": "Timestamp (1.8)",
-          "description": "Show the timestamp when you hover a MobRemover message."
-        },
-        "notification": {
-          "name": "Notification (1.8)",
-          "description": "Show the MobRemover at the top right of the screen."
+          "name": "Notification",
+          "description": "Show the remover at the top right of the screen."
         }
       },
       "automations": {
@@ -488,8 +462,10 @@
         "pay": "You paid {amount} to {player}.",
         "moneydrop": "You received a {amount} moneydrop"
       },
-      "itemRemover": "in {time} seconds",
-      "mobRemover": "in {time} minutes"
+      "remover": {
+        "items": "in {time} seconds",
+        "mobs": "in {time} minutes"
+      }
     },
 
     "hudWidgetCategory": {
