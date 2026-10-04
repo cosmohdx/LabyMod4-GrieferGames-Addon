@@ -21,7 +21,7 @@ public class NearbyPlayersConfig extends FeatureConfig {
   private final ConfigProperty<DistanceDisplay> distanceDisplay = new ConfigProperty<>(DistanceDisplay.COARSE);
 
   @SwitchSetting
-  private final ConfigProperty<Boolean> onlyOnCitybuild = new ConfigProperty<>(true);
+  private final ConfigProperty<Boolean> onlyOnCitybuild = new ConfigProperty<>(false);
 
   public NearbyPlayersConfig() {
     super(false);

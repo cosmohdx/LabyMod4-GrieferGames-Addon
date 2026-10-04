@@ -17,7 +17,7 @@ public record PlotGridProfile(
 ) {
 
   public static final PlotGridProfile LEGACY_NATURE_EXTREME =
-      new PlotGridProfile("legacy-nature-extreme", 42, -42, 41, 0, 255);
+      new PlotGridProfile("legacy-nature-extreme", 42, -42, 41, -64, 320);
 
   public PlotGridProfile {
     if (id == null || id.isBlank()) {

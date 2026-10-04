@@ -2,18 +2,21 @@ package de.cosmohdx.griefergames.feature.plotborder;
 
 import de.cosmohdx.griefergames.GrieferGames;
 import de.cosmohdx.griefergames.core.HotkeyToggle;
+import de.cosmohdx.griefergames.core.SubServerType;
 import de.cosmohdx.griefergames.feature.subserver.GGNetworkTypeChangeEvent;
 import de.cosmohdx.griefergames.feature.subserver.GGSubServerChangeEvent;
 import java.util.List;
 import net.labymod.api.Laby;
 import net.labymod.api.client.entity.player.ClientPlayer;
 import net.labymod.api.client.gui.screen.key.Key;
+import net.labymod.api.client.render.state.world.WorldSnapshotContext;
 import net.labymod.api.event.Phase;
 import net.labymod.api.event.Subscribe;
 import net.labymod.api.event.client.input.KeyEvent;
 import net.labymod.api.event.client.input.KeyEvent.State;
-import net.labymod.api.event.client.render.world.RenderWorldEvent;
+import net.labymod.api.event.client.lifecycle.GameTickEvent;
 import net.labymod.api.util.I18n;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Hotkey state for the plot grid. The grid is drawn only on the legacy network, on Nature
@@ -29,7 +32,6 @@ public class PlotBorderListener {
   private int cachedSpacing = Integer.MIN_VALUE;
   private int cachedHeightRange = Integer.MIN_VALUE;
   private List<Line3d> cachedLines = List.of();
-  private boolean renderFailed;
 
   public PlotBorderListener(GrieferGames griefergames) {
     this.griefergames = griefergames;
@@ -53,9 +55,21 @@ public class PlotBorderListener {
   }
 
   @Subscribe
+  public void onTick(GameTickEvent event) {
+    if (event.phase() != Phase.POST) {
+      return;
+    }
+    this.releaseHoldIfKeyIsUp(this.config());
+  }
+
+  @Subscribe
   public void onNetworkTypeChange(GGNetworkTypeChangeEvent event) {
-    this.hotkey.reset();
     this.clearCache();
+    // Keep the hotkey while detection recovers from UNKNOWN after join/switch.
+    if (event.oldType() == SubServerType.UNKNOWN) {
+      return;
+    }
+    this.hotkey.reset();
   }
 
   @Subscribe
@@ -63,39 +77,28 @@ public class PlotBorderListener {
     this.clearCache();
   }
 
-  @Subscribe
-  public void onRenderWorld(RenderWorldEvent event) {
-    if (event.phase() != Phase.POST || this.renderFailed) {
-      return;
-    }
+  @Nullable
+  PlotBorderSnapshot prepareSnapshot(WorldSnapshotContext context) {
     PlotBorderConfig config = this.config();
     if (!this.shouldDraw(config)) {
-      return;
+      return null;
     }
     if (Laby.labyAPI().minecraft().options().isHideGUI()) {
-      return;
-    }
-    this.releaseHoldIfKeyIsUp(config);
-    if (!this.hotkey.isActive()) {
-      return;
+      return null;
     }
     ClientPlayer player = Laby.labyAPI().minecraft().getClientPlayer();
     if (player == null) {
-      return;
-    }
-    if (event.stack() == null || event.camera() == null || event.camera().renderPosition() == null) {
-      return;
+      return null;
     }
     int blockX = floorBlock(player.position().getX());
     int blockY = floorBlock(player.position().getY());
     int blockZ = floorBlock(player.position().getZ());
-    try {
-      List<Line3d> lines = this.linesFor(blockX, blockY, blockZ, config);
-      PlotBorderRenderer.draw(event.stack(), event.camera().renderPosition(), lines, config.colorArgb());
-    } catch (RuntimeException exception) {
-      this.renderFailed = true;
-      this.griefergames.logger().warn(GrieferGames.LOG_PREFIX + "Plot borders could not be drawn.", exception);
+    List<Line3d> lines = this.linesFor(blockX, blockY, blockZ, config);
+    if (lines.isEmpty()) {
+      return null;
     }
+    var camera = context.camera().renderPosition();
+    return new PlotBorderSnapshot(lines, config.colorArgb(), camera.getX(), camera.getY(), camera.getZ());
   }
 
   private List<Line3d> linesFor(int blockX, int blockY, int blockZ, PlotBorderConfig config) {

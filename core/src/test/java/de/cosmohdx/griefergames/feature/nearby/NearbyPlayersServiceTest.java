@@ -94,13 +94,17 @@ class NearbyPlayersServiceTest {
   }
 
   @Test
-  void disabledFeatureAndUnknownNetworkShowNobody() {
+  void disabledFeatureAndCitybuildGateOnUnknownShowNobody() {
     NearbyCandidate nearby = player("ok", 2.0D, true);
     NearbyQuery disabled = new NearbyQuery(false, 16, 8, true, true, SubServerType.REGULAR, "nature", null);
-    NearbyQuery unknown = new NearbyQuery(true, 16, 8, true, true, SubServerType.UNKNOWN, "nature", null);
+    NearbyQuery unknownCitybuildOnly =
+        new NearbyQuery(true, 16, 8, true, true, SubServerType.UNKNOWN, "nature", null);
+    NearbyQuery unknownEverywhere =
+        new NearbyQuery(true, 16, 8, true, false, SubServerType.UNKNOWN, "lobby", null);
 
     assertTrue(NearbyPlayersService.select(disabled, List.of(nearby)).isEmpty());
-    assertTrue(NearbyPlayersService.select(unknown, List.of(nearby)).isEmpty());
+    assertTrue(NearbyPlayersService.select(unknownCitybuildOnly, List.of(nearby)).isEmpty());
+    assertEquals(1, NearbyPlayersService.select(unknownEverywhere, List.of(nearby)).size());
     assertTrue(NearbyPlayersService.select(query(16, 8, true), null).isEmpty());
     assertTrue(NearbyPlayersService.select(query(16, 8, true), List.of()).isEmpty());
   }

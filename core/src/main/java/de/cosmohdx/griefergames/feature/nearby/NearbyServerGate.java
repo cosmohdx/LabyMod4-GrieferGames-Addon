@@ -21,11 +21,11 @@ public final class NearbyServerGate {
       @Nullable SubServerType network,
       @Nullable String subServer,
       @Nullable CloudRegionType cloudRegion) {
-    if (network != SubServerType.REGULAR && network != SubServerType.CLOUD) {
-      return false;
-    }
     if (!onlyOnCitybuild) {
       return true;
+    }
+    if (network != SubServerType.REGULAR && network != SubServerType.CLOUD) {
+      return false;
     }
     if (network == SubServerType.CLOUD) {
       return cloudRegion == CloudRegionType.CITYBUILD;

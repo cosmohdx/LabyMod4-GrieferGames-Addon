@@ -1,10 +1,12 @@
 package de.cosmohdx.griefergames.feature.subserver;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import de.cosmohdx.griefergames.core.CloudRegionType;
 import de.cosmohdx.griefergames.feature.subserver.NetworkDetector.CloudServer;
+import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
 
@@ -18,12 +20,53 @@ class NetworkDetectorTest {
   }
 
   @Test
+  void numberedServerValueTeamIsTheLegacyNetwork() {
+    assertEquals(
+        Optional.of("lobby"),
+        NetworkDetector.legacySubServer("5_10_value", "Lobby", "Server"));
+    assertEquals(
+        Optional.of("nature"),
+        NetworkDetector.legacySubServer("5_10_value", "Nature", "Server"));
+    assertTrue(NetworkDetector.legacySubServer("5_10_value", "Lobby", "Server-Adresse").isEmpty());
+    assertTrue(NetworkDetector.legacySubServer("4_19_value", "0$", "Kontostand").isEmpty());
+  }
+
+  @Test
+  void tabHeaderAktuellerServerIsTheLegacyNetwork() {
+    assertEquals(
+        Optional.of("lobby"),
+        NetworkDetector.legacyFromTabHeader(
+            "GrieferGames.net – Server-Netzwerk\nAktueller Server: Lobby"));
+    assertEquals(
+        Optional.of("nature"),
+        NetworkDetector.legacyFromTabHeader("Aktueller Server: Nature"));
+    assertTrue(NetworkDetector.legacyFromTabHeader("Willkommen auf cb1-1").isEmpty());
+    assertTrue(NetworkDetector.legacyFromTabHeader("hello").isEmpty());
+  }
+
+  @Test
+  void entryOrSuffixAloneIsEnoughForTheLegacyNetwork() {
+    assertEquals(
+        Optional.of("nature"),
+        NetworkDetector.legacySubServer("server_value", List.of("", "Nature", "")));
+    assertEquals(
+        Optional.of("nature"),
+        NetworkDetector.legacySubServer("server_value", List.of("", "", "§", "Nature")));
+    assertEquals(
+        Optional.of("cb12"),
+        NetworkDetector.legacySubServer("server_value", List.of("", "CB12", "")));
+    assertEquals(
+        Optional.of("nature"),
+        NetworkDetector.legacySubServer("server_value", List.of("", "§aNature")));
+  }
+
+  @Test
   void loadingOrBlankScoreboardDoesNotDetectANetwork() {
     assertTrue(NetworkDetector.legacySubServer("server_value", "Lade...").isEmpty());
     assertTrue(NetworkDetector.legacySubServer("server_value", "Server wird geladen").isEmpty());
     assertTrue(NetworkDetector.legacySubServer("server_value", "   ").isEmpty());
     assertTrue(NetworkDetector.legacySubServer("server_value", "").isEmpty());
-    assertTrue(NetworkDetector.legacySubServer("server_value", null).isEmpty());
+    assertTrue(NetworkDetector.legacySubServer("server_value", (String) null).isEmpty());
   }
 
   @Test
@@ -32,6 +75,52 @@ class NetworkDetectorTest {
     assertTrue(NetworkDetector.legacySubServer("Server_Value", "nature").isEmpty());
     assertTrue(NetworkDetector.legacySubServer("money_value", "Bedwars").isEmpty());
     assertTrue(NetworkDetector.legacySubServer("server_value ", "nature").isEmpty());
+  }
+
+  @Test
+  void sidebarLinesMatchKnownLegacyServers() {
+    assertEquals(Optional.of("nature"), NetworkDetector.legacySidebarLine("Nature"));
+    assertEquals(Optional.of("cb12"), NetworkDetector.legacySidebarLine("CB12"));
+    assertEquals(Optional.of("extreme"), NetworkDetector.legacySidebarLine(" extreme "));
+    assertTrue(NetworkDetector.legacySidebarLine("12.345.67$").isEmpty());
+    assertTrue(NetworkDetector.legacySidebarLine("Online").isEmpty());
+    assertTrue(NetworkDetector.legacySidebarLine("Lade...").isEmpty());
+  }
+
+  @Test
+  void grieferGamesHostsIncludeCommonJoinAddresses() {
+    assertTrue(NetworkDetector.isGrieferGamesHost("mc.griefergames.net"));
+    assertTrue(NetworkDetector.isGrieferGamesHost("play.griefergames.net"));
+    assertTrue(NetworkDetector.isGrieferGamesHost("cloud.griefergames.net"));
+    assertTrue(NetworkDetector.isGrieferGamesHost("GrieferGames.de"));
+    assertTrue(NetworkDetector.isGrieferGamesHost("join.griefergames.live"));
+    assertTrue(NetworkDetector.isGrieferGamesHost("something.griefergames.cloud"));
+    assertTrue(NetworkDetector.isGrieferGamesHost("griefergames"));
+    assertFalse(NetworkDetector.isGrieferGamesHost("hypixel.net"));
+    assertFalse(NetworkDetector.isGrieferGamesHost("192.168.1.1"));
+    assertFalse(NetworkDetector.isGrieferGamesHost(""));
+    assertFalse(NetworkDetector.isGrieferGamesHost(null));
+  }
+
+  @Test
+  void scoreboardTeamsIdentifyGrieferGamesWithoutHost() {
+    assertTrue(NetworkDetector.looksLikeGrieferGamesScoreboard(List.of("server_value", "money_value")));
+    assertTrue(NetworkDetector.looksLikeGrieferGamesScoreboard(List.of("money_value", "online_value")));
+    assertTrue(NetworkDetector.looksLikeGrieferGamesScoreboard(List.of("server_value")));
+    assertTrue(NetworkDetector.looksLikeGrieferGamesScoreboard(List.of("5_10_title", "address_value")));
+    assertFalse(NetworkDetector.looksLikeGrieferGamesScoreboard(List.of("5_10_title", "5_10_value")));
+    assertFalse(NetworkDetector.looksLikeGrieferGamesScoreboard(List.of("money_value")));
+    assertFalse(NetworkDetector.looksLikeGrieferGamesScoreboard(List.of("red", "blue")));
+    assertFalse(NetworkDetector.looksLikeGrieferGamesScoreboard(List.of()));
+    assertFalse(NetworkDetector.looksLikeGrieferGamesScoreboard(null));
+  }
+
+  @Test
+  void pluginChannelsIdentifyGrieferGames() {
+    assertTrue(NetworkDetector.isGrieferGamesPluginChannel("griefergames"));
+    assertTrue(NetworkDetector.isGrieferGamesPluginChannel("MysteryMod"));
+    assertFalse(NetworkDetector.isGrieferGamesPluginChannel("minecraft"));
+    assertFalse(NetworkDetector.isGrieferGamesPluginChannel(null));
   }
 
   @Test

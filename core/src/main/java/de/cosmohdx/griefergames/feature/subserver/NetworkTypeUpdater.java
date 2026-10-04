@@ -30,4 +30,16 @@ public final class NetworkTypeUpdater {
       Laby.labyAPI().eventBus().fire(event);
     });
   }
+
+  /**
+   * Marks the network as unknown and clears the cached sub-server name so HUDs do not keep a
+   * stale label while scoreboard/tab-list detection catches up.
+   */
+  public static void reset(GrieferGames griefergames) {
+    apply(griefergames, SubServerType.UNKNOWN);
+    if (!griefergames.state().getSubServer().isEmpty()) {
+      griefergames.state().setSubServer("");
+      Laby.labyAPI().eventBus().fire(new GGSubServerChangeEvent(""));
+    }
+  }
 }

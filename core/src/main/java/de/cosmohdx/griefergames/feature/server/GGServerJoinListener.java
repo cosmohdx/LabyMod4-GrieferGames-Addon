@@ -1,7 +1,6 @@
 package de.cosmohdx.griefergames.feature.server;
 
 import de.cosmohdx.griefergames.GrieferGames;
-import de.cosmohdx.griefergames.core.SubServerType;
 import de.cosmohdx.griefergames.feature.subserver.NetworkTypeUpdater;
 import de.cosmohdx.griefergames.payload.PayloadDebug;
 import net.labymod.api.Laby;
@@ -25,33 +24,25 @@ public class GGServerJoinListener {
 
   @Subscribe
   public void onServerJoin(ServerJoinEvent event) {
-    NetworkTypeUpdater.apply(griefergames, SubServerType.UNKNOWN);
-    String host = event.serverData().address().getHost().toLowerCase();
-    boolean onGrieferGames = host.endsWith("griefergames.net")
-        || host.endsWith("griefergames.de")
-        || host.endsWith("griefergames.live");
-    if (onGrieferGames) {
-      griefergames.state().setOnGrieferGames(true);
-      griefergames.state().setLastActivity(System.currentTimeMillis());
-      griefergames.state().setAfk(false);
-      griefergames.state().setWaitTime(0);
-      griefergames.state().setCitybuildDelay(false);
-      griefergames.state().setNickname(null);
-      griefergames.state().setHideBoosterMenu(false);
-      griefergames.helper().findSecondChat();
-
-      // Warn user when advanced chat is disabled.
-      if(!Laby.labyAPI().config().ingame().advancedChat().enabled().get()) {
-        griefergames.displayAddonMessage(Component.text(I18n.translate(griefergames.namespace()+".messages.advancedChatWarning"),
-            Style.builder().color(NamedTextColor.RED).decorate(TextDecoration.BOLD).build()));
-        Laby.labyAPI().notificationController().push(Notification.builder()
-            .title(Component.text("GrieferGames-Addon", NamedTextColor.GOLD))
-            .text(Component.text(I18n.translate(griefergames.namespace()+".notifications.generalError"), NamedTextColor.RED))
-            .icon(Icon.texture(ResourceLocation.create(griefergames.namespace(), "textures/error.png"))).build());
-      }
+    NetworkTypeUpdater.reset(griefergames);
+    boolean onGrieferGames = GrieferGamesPresence.enterFromServerData(griefergames, event.serverData());
+    if (!onGrieferGames) {
+      // Address may still resolve / scoreboard may prove GG a moment later.
+      GrieferGamesPresence.refreshFromCurrentServer(griefergames);
+      onGrieferGames = griefergames.state().isOnGrieferGames();
     }
+    if (onGrieferGames
+        && !Laby.labyAPI().config().ingame().advancedChat().enabled().get()) {
+      griefergames.displayAddonMessage(Component.text(I18n.translate(griefergames.namespace()+".messages.advancedChatWarning"),
+          Style.builder().color(NamedTextColor.RED).decorate(TextDecoration.BOLD).build()));
+      Laby.labyAPI().notificationController().push(Notification.builder()
+          .title(Component.text("GrieferGames-Addon", NamedTextColor.GOLD))
+          .text(Component.text(I18n.translate(griefergames.namespace()+".notifications.generalError"), NamedTextColor.RED))
+          .icon(Icon.texture(ResourceLocation.create(griefergames.namespace(), "textures/error.png"))).build());
+    }
+    String host = GrieferGamesPresence.hostOf(event.serverData().address());
     PayloadDebug.log(griefergames, onGrieferGames
         ? "joined " + host + ", incoming payloads are accepted"
-        : "joined " + host + ", incoming payloads stay dropped");
+        : "joined " + host + ", waiting for scoreboard/payload proof of GrieferGames");
   }
 }

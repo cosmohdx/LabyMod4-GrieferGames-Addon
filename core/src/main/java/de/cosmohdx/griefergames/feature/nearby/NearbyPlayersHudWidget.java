@@ -76,9 +76,7 @@ public class NearbyPlayersHudWidget extends SimpleHudWidget<HudWidgetConfig> {
 
   @Override
   public boolean isVisibleInGame() {
-    return this.griefergames.state().isOnGrieferGames()
-        && this.griefergames.configuration().enabled().get()
-        && this.service.isActive();
+    return this.griefergames.state().isOnGrieferGames();
   }
 
   private List<NearbyPlayer> rows(boolean editor) {

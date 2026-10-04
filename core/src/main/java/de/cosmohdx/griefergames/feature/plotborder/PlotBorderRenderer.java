@@ -1,77 +1,101 @@
 package de.cosmohdx.griefergames.feature.plotborder;
 
 import java.util.List;
-import net.labymod.api.Laby;
-import net.labymod.api.client.gfx.pipeline.renderer.mesh.MeshRenderer;
+import net.labymod.api.Textures;
 import net.labymod.api.client.render.matrix.Stack;
 import net.labymod.api.laby3d.pipeline.RenderStates;
-import net.labymod.api.laby3d.vertex.VertexDescriptions;
-import net.labymod.api.util.math.vector.DoubleVector3;
-import net.labymod.laby3d.api.buffers.BufferBuilder;
-import net.labymod.laby3d.api.mesh.GeometryData;
-import net.labymod.laby3d.api.pipeline.ComparisonStrategy;
-import net.labymod.laby3d.api.pipeline.DrawingMode;
-import net.labymod.laby3d.api.pipeline.RenderState;
-import net.labymod.laby3d.api.pipeline.blend.DefaultBlendFunctions;
-import net.labymod.laby3d.api.pipeline.shader.ShaderProgramDescription;
-import net.labymod.laby3d.api.resource.AssetId;
+import net.labymod.api.laby3d.pipeline.material.LevelMaterial;
+import net.labymod.api.laby3d.pipeline.material.Material;
+import net.labymod.api.laby3d.render.queue.SubmissionCollector;
+import net.labymod.laby3d.api.vertex.VertexConsumer;
 import org.joml.Matrix4f;
+import org.joml.Vector3f;
 
 /**
- * Draws plot-border lines through the version-independent world renderer.
+ * Submits plot-border lines through the level snapshot pipeline ({@link SubmissionCollector}),
+ * matching how LabyMod draws world debug overlays.
  */
 final class PlotBorderRenderer {
 
-  private static RenderState lines;
+  private static final float HALF_THICKNESS = 0.05F;
 
   private PlotBorderRenderer() {
   }
 
-  static void draw(Stack stack, DoubleVector3 camera, List<Line3d> segments, int argb) {
-    if (segments.isEmpty() || camera == null || stack == null) {
+  static void submit(SubmissionCollector collector, Stack stack, PlotBorderSnapshot snapshot) {
+    if (snapshot.lines().isEmpty()) {
       return;
     }
-    BufferBuilder builder = Laby.references().laby3D().begin(DrawingMode.LINES, VertexDescriptions.POSITION_COLOR);
-    Matrix4f pose = stack.getProvider().getPose();
-    double cameraX = camera.getX();
-    double cameraY = camera.getY();
-    double cameraZ = camera.getZ();
-    for (Line3d segment : segments) {
-      builder.addVertex(pose, (float) (segment.x1() - cameraX), (float) (segment.y1() - cameraY), (float) (segment.z1() - cameraZ))
-          .setColor(argb);
-      builder.addVertex(pose, (float) (segment.x2() - cameraX), (float) (segment.y2() - cameraY), (float) (segment.z2() - cameraZ))
-          .setColor(argb);
-    }
-    GeometryData geometry = builder.build();
-    try {
-      MeshRenderer.drawImmediate(geometry, lineState());
-    } finally {
-      geometry.close();
+    Material material = LevelMaterial.builder(RenderStates.DEBUG_BOXES)
+        .setTexture(0, Textures.WHITE)
+        .build();
+    collector.order(1000).submitCustomGeometry(
+        stack,
+        material,
+        (pose, consumer) -> drawLines(consumer, pose, snapshot));
+  }
+
+  private static void drawLines(VertexConsumer consumer, Matrix4f pose, PlotBorderSnapshot snapshot) {
+    float camX = (float) snapshot.camX();
+    float camY = (float) snapshot.camY();
+    float camZ = (float) snapshot.camZ();
+    int color = snapshot.colorArgb();
+    for (Line3d segment : snapshot.lines()) {
+      addSegmentQuad(consumer, pose, camX, camY, camZ, segment, color);
     }
   }
 
-  private static RenderState lineState() {
-    RenderState current = lines;
-    if (current != null) {
-      return current;
+  private static void addSegmentQuad(
+      VertexConsumer consumer,
+      Matrix4f pose,
+      float camX,
+      float camY,
+      float camZ,
+      Line3d segment,
+      int argb
+  ) {
+    float x1 = (float) segment.x1() - camX;
+    float y1 = (float) segment.y1() - camY;
+    float z1 = (float) segment.z1() - camZ;
+    float x2 = (float) segment.x2() - camX;
+    float y2 = (float) segment.y2() - camY;
+    float z2 = (float) segment.z2() - camZ;
+
+    Vector3f dir = new Vector3f(x2 - x1, y2 - y1, z2 - z1);
+    if (dir.lengthSquared() < 1.0E-8F) {
+      return;
     }
-    AssetId programId = AssetId.of("griefergames", "plot_border_lines");
-    ShaderProgramDescription program = ShaderProgramDescription.builder(RenderStates.DEFAULT_SHADER_SNIPPET)
-        .setId(programId)
-        .setVertexShader(RenderStates.SHADER_RESOLVER.apply("core/position_color.vsh"))
-        .setFragmentShader(RenderStates.SHADER_RESOLVER.apply("core/position_color.fsh"))
-        .build();
-    current = RenderState.builder()
-        .setId(programId)
-        .setVertexDescription(VertexDescriptions.POSITION_COLOR)
-        .setDrawingMode(DrawingMode.LINES)
-        .setBlendFunction(DefaultBlendFunctions.TRANSLUCENT)
-        .setDepthTestStrategy(ComparisonStrategy.ALWAYS)
-        .setWriteDepth(false)
-        .setCull(false)
-        .setShaderProgramDescription(program)
-        .build();
-    lines = current;
-    return current;
+    dir.normalize();
+
+    Vector3f toCam = new Vector3f(-x1, -y1, -z1);
+    if (toCam.lengthSquared() < 1.0E-8F) {
+      toCam.set(0.0F, 1.0F, 0.0F);
+    } else {
+      toCam.normalize();
+    }
+    Vector3f side = dir.cross(toCam, new Vector3f());
+    if (side.lengthSquared() < 1.0E-8F) {
+      side = dir.cross(new Vector3f(0.0F, 1.0F, 0.0F), new Vector3f());
+      if (side.lengthSquared() < 1.0E-8F) {
+        side = dir.cross(new Vector3f(1.0F, 0.0F, 0.0F), new Vector3f());
+      }
+    }
+    side.normalize().mul(HALF_THICKNESS);
+
+    vertex(consumer, pose, x1 - side.x, y1 - side.y, z1 - side.z, argb);
+    vertex(consumer, pose, x1 + side.x, y1 + side.y, z1 + side.z, argb);
+    vertex(consumer, pose, x2 + side.x, y2 + side.y, z2 + side.z, argb);
+    vertex(consumer, pose, x2 - side.x, y2 - side.y, z2 - side.z, argb);
+  }
+
+  private static void vertex(
+      VertexConsumer consumer,
+      Matrix4f pose,
+      float x,
+      float y,
+      float z,
+      int argb
+  ) {
+    consumer.addVertex(pose, x, y, z).setColor(argb);
   }
 }

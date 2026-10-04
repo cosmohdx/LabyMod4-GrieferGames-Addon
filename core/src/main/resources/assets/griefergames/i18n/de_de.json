@@ -469,26 +469,26 @@
       },
       "nearbyPlayers": {
         "name": "Spieler in der Nähe",
-        "description": "Zeigt nahe Spieler im HUD. Standardmäßig aus. Keine Richtung und keine Koordinaten, die Distanz nur grob. Mit den Voreinstellungen nur Spieler, die du direkt sehen kannst, und nur auf Citybuilds. Spieler hinter Wänden erscheinen nur, wenn du die Sichtlinie ausschaltest – das kann gegen §2 Abs. 5 und 8 verstoßen. Erst verwenden, wenn der GrieferGames-Support die Funktion freigegeben hat.",
+        "description": "Liste naher Spieler im HUD. Standardmäßig aus.",
           "enabled": {
             "name": "Spieler in der Nähe",
-            "description": "Schaltet die Liste naher Spieler im HUD ein oder aus. Standardmäßig aus."
+            "description": "Schaltet die Liste naher Spieler im HUD ein oder aus."
           },
         "radius": {
           "name": "Radius",
-          "description": "Nur Spieler innerhalb dieser Blockzahl. Voreinstellung 16, höchstens 32."
+          "description": "Nur Spieler innerhalb dieser Blockzahl. Höchstens 32."
         },
         "limit": {
           "name": "Anzahl",
-          "description": "So viele Spieler zeigt das HUD höchstens an, die nächsten zuerst."
+          "description": "Maximale Anzahl angezeigter Spieler, die nächsten zuerst."
         },
         "onlyLineOfSight": {
-          "name": "Nur Spieler in direkter Sichtlinie",
-          "description": "Zeigt nur Spieler, die du direkt sehen kannst. Ausschalten zeigt auch Spieler hinter Wänden – das kann gegen §2 Abs. 5/8 verstoßen."
+          "name": "Nur Sichtlinie",
+          "description": "Nur Spieler anzeigen, die du direkt sehen kannst."
         },
         "distanceDisplay": {
           "name": "Distanz",
-          "description": "Grobe Stufen wie <10 m, oder gar keine Distanz. Keine Richtung und keine Koordinaten.",
+          "description": "Grobe Stufen wie <10 m, oder keine Distanz.",
           "entries": {
             "hidden": "Ausblenden",
             "coarse": "Grob"

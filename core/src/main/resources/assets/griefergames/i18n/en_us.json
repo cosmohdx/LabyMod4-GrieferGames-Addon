@@ -469,26 +469,26 @@
       },
       "nearbyPlayers": {
         "name": "Nearby players",
-        "description": "Shows nearby players in the HUD. Off by default. No direction and no coordinates, distance only in rough steps. With the defaults, only players you can see directly, and only on citybuilds. Players behind walls appear only if you turn line of sight off – that can violate §2 (5) and (8). Use it only after GrieferGames support has allowed the feature.",
+        "description": "HUD list of nearby players. Off by default.",
           "enabled": {
             "name": "Nearby players",
-            "description": "Turns the HUD list of nearby players on or off. Off by default."
+            "description": "Turns the HUD list of nearby players on or off."
           },
         "radius": {
           "name": "Radius",
-          "description": "Only players within this many blocks. Default 16, maximum 32."
+          "description": "Only players within this many blocks. Maximum 32."
         },
         "limit": {
           "name": "Limit",
-          "description": "How many players the HUD shows at most, closest first."
+          "description": "Maximum number of players shown, closest first."
         },
         "onlyLineOfSight": {
-          "name": "Only players in direct line of sight",
-          "description": "Shows only players you can see directly. Turning this off also shows players behind walls – that can violate §2 (5) and (8)."
+          "name": "Line of sight only",
+          "description": "Only show players you can see directly."
         },
         "distanceDisplay": {
           "name": "Distance",
-          "description": "Rough steps such as <10 m, or no distance at all. No direction and no coordinates.",
+          "description": "Rough steps such as <10 m, or no distance.",
           "entries": {
             "hidden": "Hidden",
             "coarse": "Rough"

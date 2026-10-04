@@ -26,13 +26,18 @@ public class SubServerHUDWidget extends TextHudWidget<TextHudWidgetConfig> {
   @Override
   public void load(TextHudWidgetConfig config) {
     super.load(config);
-    line = createLine(I18n.translate(griefergames.namespace() + ".hudWidget.gg_subserver.name"), griefergames.state().getSubServer().isBlank() ?
-      "CB Jungle" : capitalizedSubserver());
+    line = createLine(
+        I18n.translate(griefergames.namespace() + ".hudWidget.gg_subserver.name"),
+        displayValue());
   }
 
   @Override
   public void onTick(boolean isEditorContext) {
-    line.updateAndFlush(griefergames.state().getSubServer().isBlank() ? "CB Jungle" : capitalizedSubserver());
+    line.updateAndFlush(isEditorContext ? "Nature" : displayValue());
+  }
+
+  private String displayValue() {
+    return griefergames.state().getSubServer().isBlank() ? "…" : capitalizedSubserver();
   }
 
   @Override
