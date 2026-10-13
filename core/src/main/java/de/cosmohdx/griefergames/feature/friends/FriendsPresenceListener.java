@@ -19,6 +19,10 @@ public class FriendsPresenceListener {
 
   @Subscribe
   public void onSubServerChange(GGSubServerChangeEvent event) {
+    if (!griefergames.configuration().enabled().get()
+        || !griefergames.state().isOnGrieferGames()) {
+      return;
+    }
     String formattedServerName = griefergames.helper().formatServerName(event.subServerName());
 
     if (griefergames.configuration().friends().showSubServerInDiscord()) {

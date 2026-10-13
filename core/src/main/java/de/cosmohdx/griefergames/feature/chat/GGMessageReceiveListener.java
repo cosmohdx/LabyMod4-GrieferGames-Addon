@@ -27,7 +27,10 @@ public class GGMessageReceiveListener {
 
   @Subscribe
   public void onMessage(ChatReceiveEvent event) {
-    if(!griefergames.state().isOnGrieferGames()) return;
+    if (!griefergames.configuration().enabled().get()
+        || !griefergames.state().isOnGrieferGames()) {
+      return;
+    }
     //System.out.println(GsonComponentSerializer.gson().serialize(event.message()));
 
     GGChatProcessEvent processEvent = new GGChatProcessEvent(event.chatMessage());
@@ -42,6 +45,10 @@ public class GGMessageReceiveListener {
 
   @Subscribe
   public void onTabMessage(AdvancedChatTabMessageEvent event) {
+    if (!griefergames.configuration().enabled().get()
+        || !griefergames.state().isOnGrieferGames()) {
+      return;
+    }
     if(event.message().metadata().has(CHAT_METADATA_CUSTOM_BACKGROUND)) {
       event.message().metadata().set(IngameChatTab.CUSTOM_BACKGROUND,
         ((Color) event.message().chatMessage().metadata().get(CHAT_METADATA_CUSTOM_BACKGROUND)).get());
@@ -58,6 +65,10 @@ public class GGMessageReceiveListener {
    */
   @Subscribe(Priority.LATEST)
   public void onMessageCheckChat(AdvancedChatTabMessageEvent event) {
+    if (!griefergames.configuration().enabled().get()
+        || !griefergames.state().isOnGrieferGames()) {
+      return;
+    }
     IngameChatTab secondChat = griefergames.state().getSecondChat();
     boolean onSecondChat = secondChat != null && event.tab().equals(secondChat);
     boolean indicators = griefergames.configuration().chat().useChatIndicators();

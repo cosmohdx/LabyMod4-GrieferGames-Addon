@@ -25,13 +25,16 @@ public class GGServerJoinListener {
   @Subscribe
   public void onServerJoin(ServerJoinEvent event) {
     NetworkTypeUpdater.reset(griefergames);
+    // Always clear presence on join so a previous false positive cannot stick across servers.
+    GrieferGamesPresence.reset(griefergames);
     boolean onGrieferGames = GrieferGamesPresence.enterFromServerData(griefergames, event.serverData());
     if (!onGrieferGames) {
-      // Address may still resolve / scoreboard may prove GG a moment later.
+      // Address may still resolve a moment later.
       GrieferGamesPresence.refreshFromCurrentServer(griefergames);
       onGrieferGames = griefergames.state().isOnGrieferGames();
     }
     if (onGrieferGames
+        && griefergames.configuration().enabled().get()
         && !Laby.labyAPI().config().ingame().advancedChat().enabled().get()) {
       griefergames.displayAddonMessage(Component.text(I18n.translate(griefergames.namespace()+".messages.advancedChatWarning"),
           Style.builder().color(NamedTextColor.RED).decorate(TextDecoration.BOLD).build()));
@@ -43,6 +46,6 @@ public class GGServerJoinListener {
     String host = GrieferGamesPresence.hostOf(event.serverData().address());
     PayloadDebug.log(griefergames, onGrieferGames
         ? "joined " + host + ", incoming payloads are accepted"
-        : "joined " + host + ", waiting for scoreboard/payload proof of GrieferGames");
+        : "joined " + host + ", not treated as GrieferGames (host mismatch)");
   }
 }

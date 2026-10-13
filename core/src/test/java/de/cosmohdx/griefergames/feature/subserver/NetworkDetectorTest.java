@@ -92,10 +92,14 @@ class NetworkDetectorTest {
     assertTrue(NetworkDetector.isGrieferGamesHost("mc.griefergames.net"));
     assertTrue(NetworkDetector.isGrieferGamesHost("play.griefergames.net"));
     assertTrue(NetworkDetector.isGrieferGamesHost("cloud.griefergames.net"));
+    assertTrue(NetworkDetector.isGrieferGamesHost("griefergames.net"));
     assertTrue(NetworkDetector.isGrieferGamesHost("GrieferGames.de"));
     assertTrue(NetworkDetector.isGrieferGamesHost("join.griefergames.live"));
     assertTrue(NetworkDetector.isGrieferGamesHost("something.griefergames.cloud"));
     assertTrue(NetworkDetector.isGrieferGamesHost("griefergames"));
+    assertFalse(NetworkDetector.isGrieferGamesHost("griefergames.net.example.com"));
+    assertFalse(NetworkDetector.isGrieferGamesHost("notgriefergames.net"));
+    assertFalse(NetworkDetector.isGrieferGamesHost("My GrieferGames Server"));
     assertFalse(NetworkDetector.isGrieferGamesHost("hypixel.net"));
     assertFalse(NetworkDetector.isGrieferGamesHost("192.168.1.1"));
     assertFalse(NetworkDetector.isGrieferGamesHost(""));
@@ -103,20 +107,7 @@ class NetworkDetectorTest {
   }
 
   @Test
-  void scoreboardTeamsIdentifyGrieferGamesWithoutHost() {
-    assertTrue(NetworkDetector.looksLikeGrieferGamesScoreboard(List.of("server_value", "money_value")));
-    assertTrue(NetworkDetector.looksLikeGrieferGamesScoreboard(List.of("money_value", "online_value")));
-    assertTrue(NetworkDetector.looksLikeGrieferGamesScoreboard(List.of("server_value")));
-    assertTrue(NetworkDetector.looksLikeGrieferGamesScoreboard(List.of("5_10_title", "address_value")));
-    assertFalse(NetworkDetector.looksLikeGrieferGamesScoreboard(List.of("5_10_title", "5_10_value")));
-    assertFalse(NetworkDetector.looksLikeGrieferGamesScoreboard(List.of("money_value")));
-    assertFalse(NetworkDetector.looksLikeGrieferGamesScoreboard(List.of("red", "blue")));
-    assertFalse(NetworkDetector.looksLikeGrieferGamesScoreboard(List.of()));
-    assertFalse(NetworkDetector.looksLikeGrieferGamesScoreboard(null));
-  }
-
-  @Test
-  void pluginChannelsIdentifyGrieferGames() {
+  void pluginChannelsAreRecognizedButDoNotDefinePresence() {
     assertTrue(NetworkDetector.isGrieferGamesPluginChannel("griefergames"));
     assertTrue(NetworkDetector.isGrieferGamesPluginChannel("MysteryMod"));
     assertFalse(NetworkDetector.isGrieferGamesPluginChannel("minecraft"));

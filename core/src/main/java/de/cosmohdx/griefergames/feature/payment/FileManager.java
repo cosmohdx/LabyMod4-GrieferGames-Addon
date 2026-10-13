@@ -1,7 +1,6 @@
 package de.cosmohdx.griefergames.feature.payment;
 
 import de.cosmohdx.griefergames.GrieferGames;
-import de.cosmohdx.griefergames.feature.payment.TransactionType;
 import net.labymod.api.Constants;
 import net.labymod.api.models.OperatingSystem;
 import java.io.BufferedWriter;
@@ -16,7 +15,10 @@ public class FileManager {
   private File transactionsLogFile;
   private BufferedWriter transactionsLogWriter;
 
+  private final GrieferGames griefergames;
+
   public FileManager(GrieferGames griefergames) {
+    this.griefergames = griefergames;
     try {
       dataDirectory = new File(Constants.Files.CONFIGS.toString(), griefergames.addonInfo().getNamespace());
 
@@ -27,7 +29,7 @@ public class FileManager {
 
       transactionsLogWriter = new BufferedWriter(new FileWriter(transactionsLogFile, true));
     } catch (IOException e) {
-      e.printStackTrace();
+      griefergames.logger().error(GrieferGames.LOG_PREFIX + "Failed to open transactions log", e);
     }
   }
 
@@ -49,7 +51,7 @@ public class FileManager {
       }
       transactionsLogWriter.flush();
     } catch (IOException e) {
-      e.printStackTrace();
+      this.griefergames.logger().error(GrieferGames.LOG_PREFIX + "Failed to write transaction", e);
     }
   }
 
@@ -64,7 +66,7 @@ public class FileManager {
     try {
       transactionsLogWriter = new BufferedWriter(new FileWriter(transactionsLogFile, true));
     } catch (IOException e) {
-      e.printStackTrace();
+      this.griefergames.logger().error(GrieferGames.LOG_PREFIX + "Failed to reopen transactions log", e);
     }
   }
 
@@ -75,7 +77,7 @@ public class FileManager {
     try {
       transactionsLogWriter.close();
     } catch (IOException e) {
-      e.printStackTrace();
+      this.griefergames.logger().error(GrieferGames.LOG_PREFIX + "Failed to close transactions log", e);
     } finally {
       transactionsLogWriter = null;
     }

@@ -16,6 +16,10 @@ public class GGSubServerChangeListener {
 
   @Subscribe
   public void onSubServerChange(GGSubServerChangeEvent event) {
+    if (!griefergames.configuration().enabled().get()
+        || !griefergames.state().isOnGrieferGames()) {
+      return;
+    }
     if (!griefergames.helper().isCityBuild(event.subServerName())) return;
     if (!griefergames.configuration().automations().announceSubServer()) return;
 

@@ -1,7 +1,6 @@
 package de.cosmohdx.griefergames.payload;
 
 import de.cosmohdx.griefergames.GrieferGames;
-import de.cosmohdx.griefergames.feature.server.GrieferGamesPresence;
 import de.cosmohdx.griefergames.payload.channel.GrieferGamesPayloadChannel;
 import de.cosmohdx.griefergames.payload.channel.IncomingPayloadChannel;
 import de.cosmohdx.griefergames.payload.channel.MysteryModPayloadChannel;
@@ -73,6 +72,10 @@ public class PayloadReceiver {
     if (event.side() != Side.RECEIVE) {
       return;
     }
+    if (!griefergames.configuration().enabled().get()
+        || !griefergames.state().isOnGrieferGames()) {
+      return;
+    }
     ResourceLocation identifier = event.identifier();
     if (identifier == null) {
       return;
@@ -81,18 +84,7 @@ public class PayloadReceiver {
       if (!sameChannel(channel.identifier(), identifier)) {
         continue;
       }
-      byte[] raw = event.getPayload();
-      // Receiving our plugin channels is itself proof that we are on GrieferGames
-      // (e.g. when the join address was only an IP).
-      GrieferGamesPresence.enterFromPluginChannel(griefergames, identifier.getNamespace());
-      if (!griefergames.state().isOnGrieferGames()) {
-        PayloadDebug.log(griefergames, "dropped " + channelName(channel)
-            + " id=" + PayloadLog.peekId(raw)
-            + " (" + (raw == null ? 0 : raw.length) + " bytes)"
-            + " because the client is not on GrieferGames yet");
-        return;
-      }
-      dispatch(channel, raw);
+      dispatch(channel, event.getPayload());
       return;
     }
   }

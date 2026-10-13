@@ -3,7 +3,6 @@ package de.cosmohdx.griefergames.core;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.TextComponent;
 import org.jetbrains.annotations.NotNull;
-import java.util.Arrays;
 
 public enum CloudRegionType {
   CITYBUILD("cb1-"),
@@ -32,7 +31,15 @@ public enum CloudRegionType {
    * @return contains server prefix
    */
   public static boolean containsServerName(String text) {
-    return Arrays.stream(CloudRegionType.values()).anyMatch(it -> text.contains(it.getPrefix()));
+    if (text == null) {
+      return false;
+    }
+    for (CloudRegionType type : CloudRegionType.values()) {
+      if (text.contains(type.getPrefix())) {
+        return true;
+      }
+    }
+    return false;
   }
 
   /**
@@ -76,7 +83,15 @@ public enum CloudRegionType {
   }
 
   public static CloudRegionType getRegionType(String serverName) {
-    return Arrays.stream(CloudRegionType.values()).filter(it -> serverName.startsWith(it.getPrefix())).findFirst().orElse(null);
+    if (serverName == null) {
+      return null;
+    }
+    for (CloudRegionType type : CloudRegionType.values()) {
+      if (serverName.startsWith(type.getPrefix())) {
+        return type;
+      }
+    }
+    return null;
   }
 
 }

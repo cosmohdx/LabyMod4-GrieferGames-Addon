@@ -1,7 +1,7 @@
 package de.cosmohdx.griefergames.feature.plotborder;
 
 import java.util.List;
-import net.labymod.api.Textures;
+import net.labymod.api.client.gfx.pipeline.texture.TexturesCommon;
 import net.labymod.api.client.render.matrix.Stack;
 import net.labymod.api.laby3d.pipeline.RenderStates;
 import net.labymod.api.laby3d.pipeline.material.LevelMaterial;
@@ -27,7 +27,7 @@ final class PlotBorderRenderer {
       return;
     }
     Material material = LevelMaterial.builder(RenderStates.DEBUG_BOXES)
-        .setTexture(0, Textures.WHITE)
+        .setTexture(0, TexturesCommon.WHITE)
         .build();
     collector.order(1000).submitCustomGeometry(
         stack,

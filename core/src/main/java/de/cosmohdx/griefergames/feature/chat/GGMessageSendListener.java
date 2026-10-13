@@ -22,7 +22,8 @@ public class GGMessageSendListener {
 
     @Subscribe
     public void onSend(ChatMessageSendEvent event) {
-        if (!griefergames.state().isOnGrieferGames()) {
+        if (!griefergames.configuration().enabled().get()
+            || !griefergames.state().isOnGrieferGames()) {
             return;
         }
         String msg = event.getMessage();

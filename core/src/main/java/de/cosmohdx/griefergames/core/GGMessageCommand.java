@@ -39,7 +39,7 @@ public class GGMessageCommand extends Command {
           try {
             griefergames.displayMessage(GsonComponentSerializer.gson().deserialize(message));
           } catch (Exception exception) {
-            exception.printStackTrace();
+            griefergames.logger().error(GrieferGames.LOG_PREFIX + "Failed to parse ggmessage json", exception);
             griefergames.displayAddonMessage(Component.text("Invalide json.", NamedTextColor.RED));
           }
         } else {

@@ -31,7 +31,10 @@ public class BoosterListener {
 
   @Subscribe
   public void onTick(GameTickEvent event) {
-    if (!griefergames.state().isOnGrieferGames()) return;
+    if (!griefergames.configuration().enabled().get()
+        || !griefergames.state().isOnGrieferGames()) {
+      return;
+    }
     if (event.phase() != Phase.POST) return;
     if (this.ticksUntilBoosterMenu > 0) {
       this.ticksUntilBoosterMenu--;
@@ -50,7 +53,10 @@ public class BoosterListener {
 
   @Subscribe
   public void onMessage(ChatReceiveEvent event) {
-    if (!griefergames.state().isOnGrieferGames()) return;
+    if (!griefergames.configuration().enabled().get()
+        || !griefergames.state().isOnGrieferGames()) {
+      return;
+    }
     if (griefergames.state().getSubServerType() != SubServerType.REGULAR) return;
     if (!event.chatMessage().getPlainText().equals("[Switcher] Daten heruntergeladen!")) return;
     if (!griefergames.configuration().booster().loadBoostersOnJoin() || this.boosterPayloadSeen) return;
@@ -59,6 +65,9 @@ public class BoosterListener {
 
   @Subscribe
   public void onSubServerChange(GGSubServerChangeEvent event) {
+    if (!griefergames.configuration().enabled().get()) {
+      return;
+    }
     griefergames.boosterController().resetBoosters();
   }
 
@@ -70,6 +79,7 @@ public class BoosterListener {
   private void openBoosterMenu() {
     this.ticksUntilBoosterMenu = -1;
     if (this.boosterPayloadSeen
+        || !this.griefergames.configuration().enabled().get()
         || !this.griefergames.state().isOnGrieferGames()
         || this.griefergames.state().getSubServerType() != SubServerType.REGULAR
         || !this.griefergames.configuration().booster().loadBoostersOnJoin()) {

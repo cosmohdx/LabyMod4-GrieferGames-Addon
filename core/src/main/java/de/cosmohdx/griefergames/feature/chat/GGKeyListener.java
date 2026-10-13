@@ -25,7 +25,10 @@ public class GGKeyListener {
 
   @Subscribe
   public void onKeyInput(KeyEvent event) {
-    if(!griefergames.state().isOnGrieferGames()) return;
+    if (!griefergames.configuration().enabled().get()
+        || !griefergames.state().isOnGrieferGames()) {
+      return;
+    }
 
     if(griefergames.state().getSubServerType() == SubServerType.REGULAR) {
       if(event.state() == State.PRESS) {

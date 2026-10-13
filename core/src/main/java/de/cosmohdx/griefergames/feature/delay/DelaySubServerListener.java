@@ -15,6 +15,10 @@ public class DelaySubServerListener {
 
   @Subscribe
   public void onSubServerChange(GGSubServerChangeEvent event) {
+    if (!griefergames.configuration().enabled().get()
+        || !griefergames.state().isOnGrieferGames()) {
+      return;
+    }
     String subServerName = event.subServerName();
     if (griefergames.helper().isCityBuild(subServerName)) {
       if (!griefergames.state().isCitybuildDelay()) {

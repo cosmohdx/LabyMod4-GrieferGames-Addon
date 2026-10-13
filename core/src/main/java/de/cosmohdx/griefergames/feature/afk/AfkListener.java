@@ -19,7 +19,10 @@ public class AfkListener {
 
   @Subscribe
   public void onTick(GameTickEvent event) {
-    if (!griefergames.state().isOnGrieferGames()) return;
+    if (!griefergames.configuration().enabled().get()
+        || !griefergames.state().isOnGrieferGames()) {
+      return;
+    }
     if (event.phase() != Phase.POST) return;
     if (!griefergames.state().isNetworkKnown()) {
       return;
@@ -34,7 +37,10 @@ public class AfkListener {
 
   @Subscribe
   public void onKeyInput(KeyEvent event) {
-    if (!griefergames.state().isOnGrieferGames()) return;
+    if (!griefergames.configuration().enabled().get()
+        || !griefergames.state().isOnGrieferGames()) {
+      return;
+    }
     if (!griefergames.state().isNetworkKnown()) {
       return;
     }

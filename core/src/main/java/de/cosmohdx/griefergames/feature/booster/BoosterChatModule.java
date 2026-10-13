@@ -51,7 +51,7 @@ public class BoosterChatModule extends ChatModule {
             Collections.reverse(durations);
             griefergames.boosterController().setBooster(type, count, durations);
           } catch (NumberFormatException e) {
-            e.printStackTrace();
+            griefergames.logger().error(GrieferGames.LOG_PREFIX + "Failed to parse booster info", e);
           }
         } else {
           griefergames.boosterController().resetBooster(type);
@@ -67,7 +67,7 @@ public class BoosterChatModule extends ChatModule {
 
           griefergames.boosterController().addBooster(type, TimeUnit.MINUTES.toMillis(minutes));
         } catch (NumberFormatException e) {
-          e.printStackTrace();
+          griefergames.logger().error(GrieferGames.LOG_PREFIX + "Failed to parse booster start", e);
         }
         return;
       }

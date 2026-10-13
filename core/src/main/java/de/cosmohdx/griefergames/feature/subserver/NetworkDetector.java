@@ -41,6 +41,7 @@ public final class NetworkDetector {
   /**
    * @deprecated use {@link #legacySubServer(String, String, String)}
    */
+  @Deprecated
   public static Optional<String> legacySubServer(String teamName, @Nullable String displayPlainText) {
     return legacySubServer(teamName, displayPlainText, null);
   }
@@ -204,7 +205,9 @@ public final class NetworkDetector {
   }
 
   /**
-   * True when the connected host belongs to GrieferGames (join address or resolved IP host).
+   * True when the connected host belongs to GrieferGames (exact domain or subdomain).
+   * Does not match hosts that merely contain the domain as a prefix of another label
+   * (e.g. {@code griefergames.net.example.com}).
    */
   public static boolean isGrieferGamesHost(@Nullable String host) {
     if (host == null || host.isBlank()) {
@@ -214,54 +217,17 @@ public final class NetworkDetector {
     if (value.startsWith("[") && value.contains("]")) {
       return false;
     }
-    return value.contains("griefergames.net")
-        || value.contains("griefergames.de")
-        || value.contains("griefergames.live")
-        || value.contains("griefergames.cloud")
-        || value.equals("griefergames")
-        || value.endsWith(".griefergames");
+    return matchesDomain(value, "griefergames.net")
+        || matchesDomain(value, "griefergames.de")
+        || matchesDomain(value, "griefergames.live")
+        || matchesDomain(value, "griefergames.cloud")
+        || matchesDomain(value, "griefergames.com")
+        || matchesDomain(value, "griefergam.es")
+        || value.equals("griefergames");
   }
 
-  /**
-   * True when plain tab/scoreboard text clearly belongs to GrieferGames.
-   */
-  public static boolean looksLikeGrieferGamesText(@Nullable String plainText) {
-    if (plainText == null || plainText.isBlank()) {
-      return false;
-    }
-    String text = plainText.toLowerCase(Locale.ROOT);
-    return text.contains("griefergames")
-        || text.contains("aktueller server:")
-        || cloudServer(plainText).isPresent();
-  }
-
-  /**
-   * Classic {@code server_value}/{@code money_value} teams, or the newer title/value rows plus
-   * {@code address_*} teams.
-   */
-  public static boolean looksLikeGrieferGamesScoreboard(@Nullable Iterable<String> teamNames) {
-    if (teamNames == null) {
-      return false;
-    }
-    boolean serverValue = false;
-    boolean moneyValue = false;
-    boolean onlineValue = false;
-    boolean address = false;
-    for (String teamName : teamNames) {
-      if (teamName == null) {
-        continue;
-      }
-      if ("server_value".equals(teamName)) {
-        serverValue = true;
-      } else if ("money_value".equals(teamName)) {
-        moneyValue = true;
-      } else if ("online_value".equals(teamName)) {
-        onlineValue = true;
-      } else if (teamName.startsWith("address_")) {
-        address = true;
-      }
-    }
-    return serverValue || (moneyValue && onlineValue) || address;
+  private static boolean matchesDomain(String host, String domain) {
+    return host.equals(domain) || host.endsWith("." + domain);
   }
 
   public static boolean isGrieferGamesPluginChannel(@Nullable String namespace) {

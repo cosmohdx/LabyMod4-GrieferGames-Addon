@@ -142,7 +142,7 @@ public class Payment extends ChatModule {
     try {
       return Double.parseDouble(message);
     } catch (NumberFormatException e) {
-      e.printStackTrace();
+      griefergames.logger().error(GrieferGames.LOG_PREFIX + "Failed to parse payment amount: " + message, e);
       return -1;
     }
   }

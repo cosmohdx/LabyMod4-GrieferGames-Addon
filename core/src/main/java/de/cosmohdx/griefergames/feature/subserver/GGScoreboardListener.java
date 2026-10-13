@@ -25,11 +25,8 @@ import net.labymod.api.util.I18n;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * Detects the GrieferGames network from scoreboard and tab-list text.
- * Also promotes {@code isOnGrieferGames} from scoreboard / cloud-header signals when the join
- * address alone was not enough. While the network type is unknown (or the name is blank), the
- * loaded scoreboard is polled — prefix, entry and suffix — so features recover without a new
- * update packet.
+ * Detects the GrieferGames sub-server from scoreboard and tab-list text once the host check has
+ * already marked the client as being on GrieferGames.
  */
 public class GGScoreboardListener {
 
@@ -50,11 +47,13 @@ public class GGScoreboardListener {
     if (event.phase() != Phase.POST) {
       return;
     }
+    if (!griefergames.configuration().enabled().get()) {
+      return;
+    }
     if (!griefergames.state().isOnGrieferGames()) {
       if (this.presenceRefreshCooldown-- <= 0) {
         this.presenceRefreshCooldown = 20;
         GrieferGamesPresence.refreshFromCurrentServer(griefergames);
-        recognizePresenceFromWorld();
       }
       if (!griefergames.state().isOnGrieferGames()) {
         return;
@@ -72,21 +71,14 @@ public class GGScoreboardListener {
 
   @Subscribe
   public void onScoreboardTeams(ScoreboardTeamUpdateEvent event) {
+    if (!griefergames.configuration().enabled().get()
+        || !griefergames.state().isOnGrieferGames()) {
+      return;
+    }
     if (event.team().getTeamName() == null) {
       return;
     }
     String teamName = event.team().getTeamName();
-    if ("server_value".equals(teamName)
-        || "money_value".equals(teamName)
-        || "online_value".equals(teamName)
-        || teamName.startsWith("address_")
-        || NetworkDetector.valueBase(teamName).isPresent()
-        || NetworkDetector.titleBase(teamName).isPresent()) {
-      GrieferGamesPresence.enter(griefergames, "scoreboard team " + teamName);
-    }
-    if (!griefergames.state().isOnGrieferGames()) {
-      return;
-    }
 
     Scoreboard scoreboard = Laby.labyAPI().minecraft().getScoreboard();
     if (scoreboard != null && applyLegacyFromScoreboard(scoreboard)) {
@@ -119,35 +111,14 @@ public class GGScoreboardListener {
 
   @Subscribe
   public void onTablistUpdate(PlayerListUpdateEvent event) {
+    if (!griefergames.configuration().enabled().get()
+        || !griefergames.state().isOnGrieferGames()) {
+      return;
+    }
     if (applyLegacyFromTabHeader()) {
       return;
     }
-    TabList tablist = Laby.labyAPI().minecraft().getTabList();
-    if (tablist != null && tablist.header() != null) {
-      String headerText = griefergames.helper().componentToPlainText(tablist.header());
-      GrieferGamesPresence.enterFromCloudHeader(griefergames, headerText);
-    }
-    if (!griefergames.state().isOnGrieferGames()) {
-      return;
-    }
     applyCloudFromTabList();
-  }
-
-  private void recognizePresenceFromWorld() {
-    Scoreboard scoreboard = Laby.labyAPI().minecraft().getScoreboard();
-    if (scoreboard != null) {
-      List<String> teamNames = new ArrayList<>();
-      for (ScoreboardTeam team : scoreboard.getTeams()) {
-        teamNames.add(team.getTeamName());
-      }
-      GrieferGamesPresence.enterFromScoreboardTeams(griefergames, teamNames);
-    }
-    TabList tablist = Laby.labyAPI().minecraft().getTabList();
-    if (tablist != null && tablist.header() != null) {
-      GrieferGamesPresence.enterFromCloudHeader(
-          griefergames,
-          griefergames.helper().componentToPlainText(tablist.header()));
-    }
   }
 
   private void pollWhileUnknown() {
@@ -175,9 +146,6 @@ public class GGScoreboardListener {
       return false;
     }
     String header = plain(tablist.header());
-    if (NetworkDetector.looksLikeGrieferGamesText(header)) {
-      GrieferGamesPresence.enter(griefergames, "tab header");
-    }
     Optional<String> legacy = NetworkDetector.legacyFromTabHeader(header);
     if (legacy.isEmpty()) {
       return false;
@@ -252,7 +220,6 @@ public class GGScoreboardListener {
   }
 
   private void applyLegacy(String subServerName) {
-    GrieferGamesPresence.enter(griefergames, "legacy subserver " + subServerName);
     NetworkTypeUpdater.apply(griefergames, SubServerType.REGULAR);
     if (!griefergames.state().getSubServer().equals(subServerName)) {
       griefergames.state().setSubServer(subServerName);
@@ -298,7 +265,6 @@ public class GGScoreboardListener {
     if (cloudServer.isEmpty()) {
       return;
     }
-    GrieferGamesPresence.enterFromCloudHeader(griefergames, headerText);
     CloudRegionType regionType = cloudServer.get().regionType();
     String serverName = cloudServer.get().serverName();
     NetworkTypeUpdater.apply(griefergames, SubServerType.CLOUD);

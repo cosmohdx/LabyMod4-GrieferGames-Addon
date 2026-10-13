@@ -11,6 +11,7 @@ import net.labymod.api.Laby;
 import net.labymod.api.client.chat.advanced.AdvancedChatController;
 import net.labymod.api.client.chat.advanced.IngameChatTab;
 import net.labymod.api.client.chat.filter.ChatFilter;
+import net.labymod.api.client.gui.screen.widget.widgets.input.TagInputWidget.TagCollection.Tag;
 import net.labymod.api.configuration.exception.ConfigurationSaveException;
 import net.labymod.api.configuration.labymod.chat.ChatTab;
 import net.labymod.api.configuration.labymod.chat.ChatWindow;
@@ -141,8 +142,7 @@ public final class SecondChatTabs {
       return false;
     }
     for (ChatFilter filter : filters) {
-      if (filter.getIncludedTags().getTags().stream()
-          .anyMatch(tag -> LEGACY_FILTER_TAG.equals(tag.getContent()))) {
+      if (isLegacyFilter(filter)) {
         return true;
       }
     }
@@ -277,7 +277,11 @@ public final class SecondChatTabs {
   }
 
   private boolean isLegacyFilter(ChatFilter filter) {
-    return filter.getIncludedTags().getTags().stream()
-        .anyMatch(tag -> LEGACY_FILTER_TAG.equals(tag.getContent()));
+    for (Tag tag : filter.getIncludedTags().getTags()) {
+      if (LEGACY_FILTER_TAG.equals(tag.getContent())) {
+        return true;
+      }
+    }
+    return false;
   }
 }
