@@ -1,7 +1,7 @@
 package de.cosmohdx.griefergames.feature.plotborder;
 
 import java.util.List;
-import net.labymod.api.client.gfx.pipeline.texture.TexturesCommon;
+import net.labymod.api.client.gui.textures.TexturesCommon;
 import net.labymod.api.client.render.matrix.Stack;
 import net.labymod.api.laby3d.pipeline.RenderStates;
 import net.labymod.api.laby3d.pipeline.material.LevelMaterial;
