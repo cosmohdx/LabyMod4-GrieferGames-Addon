@@ -1,0 +1,88 @@
+.chat-search-background {
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.chat-search-title {
+  left: 50%;
+  top: 3%;
+  alignment-x: center;
+  text-color: white;
+  font-size: 1.4;
+}
+
+.chat-search-input {
+  left: 2%;
+  top: 8%;
+  width: 42%;
+  height: 22;
+}
+
+.chat-search-tab {
+  left: 45%;
+  top: 8%;
+  width: 16%;
+  height: 22;
+}
+
+.chat-search-time {
+  left: 62%;
+  top: 8%;
+  width: 18%;
+  height: 22;
+}
+
+.chat-search-regex {
+  left: 82%;
+  top: 8.2%;
+  width: 16;
+  height: 16;
+}
+
+.chat-search-regex-label {
+  left: 84.5%;
+  top: 8.4%;
+  text-color: white;
+  font-size: 0.9;
+}
+
+.chat-search-status {
+  left: 2%;
+  top: 13%;
+  text-color: gray;
+  font-size: 0.85;
+}
+
+.chat-search-scroll {
+  left: 2%;
+  top: 16%;
+  width: 96%;
+  height: 81%;
+  enable-scroll-content: true;
+  background-color: rgba(0, 0, 0, 0.72);
+}
+
+.chat-search-lines {
+  left: 4;
+  top: 4;
+  width: 98%;
+  height: fit-content;
+  space-between-entries: 1;
+}
+
+.chat-line {
+  width: 100%;
+  height: fit-content;
+  force-vanilla-font: true;
+  font-size: 1;
+  overflow-strategy: wrap;
+}
+
+.chat-search-empty {
+  left: 6;
+  top: 6;
+  text-color: gray;
+  force-vanilla-font: true;
+}

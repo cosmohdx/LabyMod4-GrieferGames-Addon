@@ -253,6 +253,40 @@
             "name": "Format",
             "description": "Format, in dem die Chatzeit angezeigt wird."
           }
+        },
+        "chatSearch": {
+          "name": "Chat durchsuchen",
+          "description": "Schreibt den Chat dieser Sitzung mit und öffnet ein Suchfenster.",
+          "enabled": {
+            "name": "Chat durchsuchen",
+            "description": "Zeichnet angezeigte Chatnachrichten auf und stellt sie im Suchfenster bereit."
+          },
+          "retentionMinutes": {
+            "name": "Speicherdauer (Minuten)",
+            "description": "Wie lange Nachrichten behalten werden, von 5 Minuten bis 24 Stunden. Standard ist 30 Minuten."
+          },
+          "maxLines": {
+            "name": "Maximale Zeilen",
+            "description": "Obergrenze an gespeicherten Zeilen. Standard ist 10 000."
+          },
+          "onlyOnGrieferGames": {
+            "name": "Nur auf GrieferGames",
+            "description": "Nur mitschreiben, solange du auf GrieferGames bist."
+          },
+          "key": {
+            "name": "Hotkey",
+            "description": "Öffnet die Suche aus der Spielansicht. Standardmäßig ist keine Taste gesetzt."
+          },
+          "open": {
+            "name": "Chat durchsuchen",
+            "description": "Öffnet das Suchfenster.",
+            "text": "Öffnen"
+          },
+          "deleteNow": {
+            "name": "Verlauf löschen",
+            "description": "Löscht die mitgeschriebenen Nachrichten dieser Sitzung sofort.",
+            "text": "Jetzt löschen"
+          }
         }
       },
       "payment": {
@@ -762,6 +796,29 @@
       },
       "gg_nearby_players": {
         "name": "Spieler in der Nähe"
+      }
+    },
+    "chatsearch": {
+      "title": "Chat durchsuchen",
+      "search": "Chat durchsuchen…",
+      "regex": "Regex",
+      "count": "{count} Nachrichten",
+      "empty": "Noch keine Nachrichten",
+      "noResults": "Keine Treffer",
+      "invalidRegex": "Ungültiger regulärer Ausdruck",
+      "tab": {
+        "all": "Alle",
+        "main": "Hauptchat",
+        "second": "Zweitchat"
+      },
+      "time": {
+        "all": "Gesamter Verlauf",
+        "minutes_5": "5 Minuten",
+        "minutes_15": "15 Minuten",
+        "minutes_30": "30 Minuten",
+        "hours_1": "1 Stunde",
+        "hours_6": "6 Stunden",
+        "hours_24": "24 Stunden"
       }
     },
     "itemlist": {

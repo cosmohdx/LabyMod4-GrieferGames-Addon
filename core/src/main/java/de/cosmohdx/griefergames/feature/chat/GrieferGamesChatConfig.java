@@ -1,6 +1,7 @@
 package de.cosmohdx.griefergames.feature.chat;
 
 import de.cosmohdx.griefergames.core.config.FeatureConfig;
+import de.cosmohdx.griefergames.feature.chat.search.ChatSearchConfig;
 
 public class GrieferGamesChatConfig extends FeatureConfig {
 
@@ -12,6 +13,7 @@ public class GrieferGamesChatConfig extends FeatureConfig {
   private final ChatFiltersConfig filters = new ChatFiltersConfig();
   private final MagicPrefixConfig magic = new MagicPrefixConfig();
   private final ChatTimeConfig chatTime = new ChatTimeConfig();
+  private final ChatSearchConfig chatSearch = new ChatSearchConfig();
 
   public ChatCommandsConfig commands() {
     return this.commands;
@@ -43,6 +45,10 @@ public class GrieferGamesChatConfig extends FeatureConfig {
 
   public ChatTimeConfig chatTime() {
     return this.chatTime;
+  }
+
+  public ChatSearchConfig chatSearch() {
+    return this.chatSearch;
   }
 
   public boolean clickToReply() {
