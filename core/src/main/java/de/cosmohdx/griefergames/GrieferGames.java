@@ -38,6 +38,7 @@ import de.cosmohdx.griefergames.feature.fly.FlyHudWidget;
 import de.cosmohdx.griefergames.feature.friends.FriendsPresenceListener;
 import de.cosmohdx.griefergames.feature.itemlist.ItemListCommand;
 import de.cosmohdx.griefergames.feature.itemlist.ItemListMenuListener;
+import de.cosmohdx.griefergames.feature.kisupport.KiSupport;
 import de.cosmohdx.griefergames.feature.remover.Remover;
 import de.cosmohdx.griefergames.feature.remover.RemoverHudWidget;
 import de.cosmohdx.griefergames.feature.nearby.NearbyPlayersHudWidget;
@@ -167,6 +168,7 @@ public class GrieferGames extends LabyAddon<GrieferGamesConfig> {
     registerListener(new Nickname(this));
     registerListener(new Teleport(this));
     registerListener(new BoosterChatModule(this));
+    registerListener(new KiSupport(this));
     registerListener(new ChatTime(this));
     registerListener(new WaitTime(this));
 

@@ -14,6 +14,7 @@ import net.labymod.api.models.Implements;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.network.protocol.game.ClientboundCustomChatCompletionsPacket;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -98,4 +99,32 @@ public class VersionedGrieferGamesController extends GrieferGamesController {
     return hit.getType() == HitResult.Type.MISS;
   }
 
+
+  @Override
+  public void addCustomChatCompletion(String suggestion) {
+    if (suggestion == null || suggestion.isBlank()) {
+      return;
+    }
+    var connection = Minecraft.getInstance().getConnection();
+    if (connection == null) {
+      return;
+    }
+    connection.getSuggestionsProvider().modifyCustomCompletions(
+        ClientboundCustomChatCompletionsPacket.Action.ADD,
+        List.of(suggestion));
+  }
+
+  @Override
+  public void removeCustomChatCompletion(String suggestion) {
+    if (suggestion == null || suggestion.isBlank()) {
+      return;
+    }
+    var connection = Minecraft.getInstance().getConnection();
+    if (connection == null) {
+      return;
+    }
+    connection.getSuggestionsProvider().modifyCustomCompletions(
+        ClientboundCustomChatCompletionsPacket.Action.REMOVE,
+        List.of(suggestion));
+  }
 }

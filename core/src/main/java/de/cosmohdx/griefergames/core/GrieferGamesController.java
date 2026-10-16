@@ -19,4 +19,16 @@ public abstract class GrieferGamesController {
    * An empty world returns an empty list.
    */
   public abstract List<LoadedPlayerView> loadedPlayersWithin(double radius);
+
+  /**
+   * Adds a custom chat tab-completion entry (1.19.4+). Older versions are a no-op.
+   */
+  public void addCustomChatCompletion(String suggestion) {
+  }
+
+  /**
+   * Removes a custom chat tab-completion entry (1.19.4+). Older versions are a no-op.
+   */
+  public void removeCustomChatCompletion(String suggestion) {
+  }
 }

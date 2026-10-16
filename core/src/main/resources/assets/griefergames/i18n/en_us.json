@@ -499,6 +499,49 @@
           "description": "The list stays hidden on farm worlds, event servers and in minigames."
         }
       },
+      "kiSupport": {
+        "name": "KI-Support",
+        "description": "Display and tab completion for Alfred.",
+        "enabled": {
+          "name": "KI-Support",
+          "description": "Turns the KI-Support features on or off."
+        },
+        "alfredCompletion": {
+          "name": "Add Alfred to completion",
+          "description": "Adds \"Alfred\" as a tab-completable target, like a player. From 1.19.4."
+        },
+        "alfredSubtle": {
+          "name": "Make Alfred less conspicuous",
+          "description": "Removes bold and sets the message text color to the value below."
+        },
+        "alfredColor": {
+          "name": "Alfred font color",
+          "description": "Color for Alfred's message text only. Default §a (green).",
+          "entries": {
+            "none": "None",
+            "aqua": "Aqua",
+            "blue": "Blue",
+            "green": "Green",
+            "red": "Red",
+            "yellow": "Yellow",
+            "gold": "Gold",
+            "purple": "Purple",
+            "gray": "Gray",
+            "darkGray": "Dark gray",
+            "darkBlue": "Dark blue",
+            "darkGreen": "Dark green",
+            "darkAqua": "Dark aqua",
+            "darkRed": "Dark red",
+            "darkPurple": "Dark purple",
+            "black": "Black",
+            "white": "White"
+          }
+        },
+        "hideAlfred": {
+          "name": "Hide Alfred",
+          "description": "Hides Alfred's replies."
+        }
+      },
       "itemList": {
         "name": "Item list",
         "description": "Overview of the GrieferGames items.",

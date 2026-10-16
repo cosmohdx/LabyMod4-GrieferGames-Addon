@@ -9,6 +9,7 @@ import de.cosmohdx.griefergames.feature.friends.GrieferGamesFriendsConfig;
 import de.cosmohdx.griefergames.feature.item.ItemTooltipConfig;
 import de.cosmohdx.griefergames.feature.item.VisualsConfig;
 import de.cosmohdx.griefergames.feature.itemlist.ItemListConfig;
+import de.cosmohdx.griefergames.feature.kisupport.KiSupportConfig;
 import de.cosmohdx.griefergames.feature.nearby.NearbyPlayersConfig;
 import de.cosmohdx.griefergames.feature.remover.RemoverConfig;
 import de.cosmohdx.griefergames.feature.payment.GrieferGamesPaymentsConfig;
@@ -70,6 +71,9 @@ public class GrieferGamesConfig extends AddonConfig {
 
   @SpriteSlot(x = 4, y = 1)
   private final NearbyPlayersConfig nearbyPlayers = new NearbyPlayersConfig();
+
+  @SpriteSlot(x = 7, y = 1)
+  private final KiSupportConfig kiSupport = new KiSupportConfig();
 
   @SettingExperimental
   @SpriteSlot(x = 5, y = 1)
@@ -151,6 +155,10 @@ public class GrieferGamesConfig extends AddonConfig {
 
   public NearbyPlayersConfig nearbyPlayers() {
     return this.nearbyPlayers;
+  }
+
+  public KiSupportConfig kiSupport() {
+    return this.kiSupport;
   }
 
   public ItemListConfig itemList() {

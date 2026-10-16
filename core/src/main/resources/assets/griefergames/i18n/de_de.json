@@ -499,6 +499,49 @@
           "description": "Auf Farmwelt, Event-Server und in Minigames bleibt die Liste aus."
         }
       },
+      "kiSupport": {
+        "name": "KI-Support",
+        "description": "Darstellung und Tab-Vervollständigung für Alfred.",
+        "enabled": {
+          "name": "KI-Support",
+          "description": "Schaltet die KI-Support-Funktionen ein oder aus."
+        },
+        "alfredCompletion": {
+          "name": "Alfred in Completion hinzufügen",
+          "description": "Fügt „Alfred“ als tabbares Ziel hinzu, wie einen Spieler. Ab 1.19.4."
+        },
+        "alfredSubtle": {
+          "name": "Alfred unauffälliger machen",
+          "description": "Entfernt Fett und setzt die Schriftfarbe der Nachricht auf den Wert darunter."
+        },
+        "alfredColor": {
+          "name": "Alfred Schriftfarbe",
+          "description": "Farbe nur für den Nachrichtentext von Alfred. Standard §a (Grün).",
+          "entries": {
+            "none": "Keine",
+            "aqua": "Aqua",
+            "blue": "Blau",
+            "green": "Grün",
+            "red": "Rot",
+            "yellow": "Gelb",
+            "gold": "Gold",
+            "purple": "Violett",
+            "gray": "Grau",
+            "darkGray": "Dunkelgrau",
+            "darkBlue": "Dunkelblau",
+            "darkGreen": "Dunkelgrün",
+            "darkAqua": "Dunkelaqua",
+            "darkRed": "Dunkelrot",
+            "darkPurple": "Dunkellila",
+            "black": "Schwarz",
+            "white": "Weiß"
+          }
+        },
+        "hideAlfred": {
+          "name": "Alfred ausblenden",
+          "description": "Blendet Antworten von Alfred aus."
+        }
+      },
       "itemList": {
         "name": "Itemliste",
         "description": "Übersicht der GrieferGames-Items.",
