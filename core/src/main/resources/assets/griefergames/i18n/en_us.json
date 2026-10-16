@@ -253,6 +253,40 @@
             "name": "Format",
             "description": "Format used for the chat time."
           }
+        },
+        "chatSearch": {
+          "name": "Search chat",
+          "description": "Keeps this session's chat and opens a search window.",
+          "enabled": {
+            "name": "Search chat",
+            "description": "Records displayed chat messages and shows them in the search window."
+          },
+          "retentionMinutes": {
+            "name": "Retention (minutes)",
+            "description": "How long messages are kept, from 5 minutes to 24 hours. The default is 30 minutes."
+          },
+          "maxLines": {
+            "name": "Maximum lines",
+            "description": "Upper limit of stored lines. The default is 10,000."
+          },
+          "onlyOnGrieferGames": {
+            "name": "Only on GrieferGames",
+            "description": "Record only while you are on GrieferGames."
+          },
+          "key": {
+            "name": "Hotkey",
+            "description": "Opens the search from the game view. No key is set by default."
+          },
+          "open": {
+            "name": "Search chat",
+            "description": "Opens the search window.",
+            "text": "Open"
+          },
+          "deleteNow": {
+            "name": "Delete history",
+            "description": "Deletes the recorded messages of this session immediately.",
+            "text": "Delete now"
+          }
         }
       },
       "payment": {
@@ -759,6 +793,29 @@
       },
       "gg_nearby_players": {
         "name": "Nearby players"
+      }
+    },
+    "chatsearch": {
+      "title": "Search chat",
+      "search": "Search chat…",
+      "regex": "Regex",
+      "count": "{count} messages",
+      "empty": "No messages yet",
+      "noResults": "No matches",
+      "invalidRegex": "Invalid regular expression",
+      "tab": {
+        "all": "All",
+        "main": "Main chat",
+        "second": "Second chat"
+      },
+      "time": {
+        "all": "Full history",
+        "minutes_5": "5 minutes",
+        "minutes_15": "15 minutes",
+        "minutes_30": "30 minutes",
+        "hours_1": "1 hour",
+        "hours_6": "6 hours",
+        "hours_24": "24 hours"
       }
     },
     "itemlist": {

@@ -20,6 +20,9 @@ import de.cosmohdx.griefergames.feature.chat.AntiMagicPrefix;
 import de.cosmohdx.griefergames.feature.chat.BetterIgnoreList;
 import de.cosmohdx.griefergames.feature.chat.Blanks;
 import de.cosmohdx.griefergames.feature.chat.ChatTime;
+import de.cosmohdx.griefergames.feature.chat.search.ChatSearch;
+import de.cosmohdx.griefergames.feature.chat.search.ChatSearchCommand;
+import de.cosmohdx.griefergames.feature.chat.search.ChatSearchHotkey;
 import de.cosmohdx.griefergames.feature.chat.GGKeyListener;
 import de.cosmohdx.griefergames.feature.chat.GGMessageReceiveListener;
 import de.cosmohdx.griefergames.feature.chat.GGMessageSendListener;
@@ -98,6 +101,7 @@ public class GrieferGames extends LabyAddon<GrieferGamesConfig> {
   private BalanceTracker balanceTracker;
   private Remover remover;
   private BlockOfTheDay blockOfTheDay;
+  private ChatSearch chatSearch;
   private HudWidgetCategory hudWidgetCategory;
   private final ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor(runnable -> {
     Thread thread = new Thread(runnable, "griefergames-addon");
@@ -171,6 +175,11 @@ public class GrieferGames extends LabyAddon<GrieferGamesConfig> {
     registerListener(new KiSupport(this));
     registerListener(new ChatTime(this));
     registerListener(new WaitTime(this));
+    chatSearch = new ChatSearch(this);
+    registerListener(chatSearch);
+    chatSearch.start();
+    registerListener(new ChatSearchHotkey(this));
+    registerCommand(new ChatSearchCommand());
 
     // Hud widgets
     hudWidgetCategory = new HudWidgetCategory(this, namespace());
@@ -203,6 +212,9 @@ public class GrieferGames extends LabyAddon<GrieferGamesConfig> {
   protected void onDeactivated() {
     if (fileManager != null) {
       fileManager.close();
+    }
+    if (chatSearch != null) {
+      chatSearch.close();
     }
   }
 
@@ -270,6 +282,10 @@ public class GrieferGames extends LabyAddon<GrieferGamesConfig> {
 
   public BlockOfTheDay blockOfTheDay() {
     return blockOfTheDay;
+  }
+
+  public ChatSearch chatSearch() {
+    return chatSearch;
   }
 
   public AddonState state() {

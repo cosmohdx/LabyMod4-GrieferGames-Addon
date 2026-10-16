@@ -30,6 +30,7 @@ Solange das Netz noch nicht erkannt ist (`SubServerType.UNKNOWN`), bleiben Funkt
 | Magic-Prefix ersetzen | ✓ | ✓ |
 | Magic-Clantags ersetzen | ✓ | ✓ |
 | Chat-Zeit | ✓ | ✓ |
+| Chat durchsuchen | ✓ | ✓ |
 | Zahlungen loggen / highlighten / warnen | ✓ | |
 | Bank-Nachrichten / Notify | ✓ | |
 | Income-HUD | ✓ | |
